@@ -1,5 +1,7 @@
 *~
 .classpath
+.factorypath
+.project
 target
 .settings
 .DS_Store
