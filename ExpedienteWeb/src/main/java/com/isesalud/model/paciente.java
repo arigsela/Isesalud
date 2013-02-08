@@ -48,6 +48,7 @@ private String maternalLastName;
 
 @Column(name="dateOfBirth", nullable = false)
 @NotNull
+@Temporal(TemporalType.DATE)
 private Date dateofBirth;
 
 @Column(name="phoneNumber", nullable = true, length = 20)
