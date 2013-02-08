@@ -67,6 +67,7 @@ private String seguroPopular;
 
 @Column(name="dateCreated", nullable=false)
 @NotNull
+@Temporal(TemporalType.DATE)
 private Date dateCreated;
 
 @Column(name="timeCreated",nullable = false)
@@ -100,6 +101,7 @@ private Integer ageMenopauseHormones;
 
 @Column(name = "DateLastMG", nullable = false)
 @NotNull
+@Temporal(TemporalType.DATE)
 private Date dateLastMG;
 
 @Column (name = "observations", nullable = true, length = 300)
