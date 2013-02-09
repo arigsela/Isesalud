@@ -5,9 +5,12 @@ package com.isesalud.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -34,6 +37,10 @@ public class PreviaEnfermedad extends  BaseModel{
 	@Column(name="illness", nullable = false)
 	@NotNull
 	private String illness;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="paciente", nullable = false)
+	private Paciente paciente;
 	
 	public Long getId() {
 		return id;

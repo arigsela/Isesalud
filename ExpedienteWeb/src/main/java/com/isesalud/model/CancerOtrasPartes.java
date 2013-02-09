@@ -5,9 +5,12 @@ package com.isesalud.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -38,6 +41,10 @@ public class CancerOtrasPartes extends BaseModel{
 	@NotNull
 	@Length(max=100)
 	private String parteCuerpo;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="paciente", nullable = false)
+	private Paciente paciente;
 	
 	public CancerOtrasPartes() {
 		this.id = new Long(0l);
