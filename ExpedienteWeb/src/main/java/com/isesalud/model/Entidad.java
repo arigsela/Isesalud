@@ -3,11 +3,16 @@
  */
 package com.isesalud.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -42,6 +47,10 @@ private String name;
 @Column(name="description", nullable = true, length=300)
 @Length(max=300)
 private String description;
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="entidad")
+private List<Paciente> pacientes = new ArrayList<Paciente>();
+
 
 public Entidad() {
 	this.id = new Long(01);

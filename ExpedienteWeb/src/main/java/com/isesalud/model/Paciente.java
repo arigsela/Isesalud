@@ -3,7 +3,10 @@
  */
 package com.isesalud.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -121,20 +125,104 @@ private String observations;
 @JoinColumn(name="personal", nullable=false)
 private Personal personal;
 
+@ManyToOne(fetch=FetchType.LAZY)
+@JoinColumn(name="municipio",nullable=false)
+private Municipio municipio;
+
+@ManyToOne(fetch=FetchType.LAZY)
+@JoinColumn(name="entidad", nullable = false)
+private Entidad entidad;
+
+@ManyToOne(fetch=FetchType.LAZY)
+@JoinColumn(name="unidadmedica", nullable = false)
+private Unidadmedica unidadmedica;
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="paciente")
+private List<ParienteCancerMama> parientescancermama = new ArrayList<ParienteCancerMama>();
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="paciente")
+private List<CancerOtrasPartes> canceresOtraPartes = new ArrayList<CancerOtrasPartes>();
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="paciente")
+private List<PreviaEnfermedad> previasenfermedades = new ArrayList<PreviaEnfermedad>();
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="paciente")
+private List<SintomaCancerMama> SintomasCancerMama = new ArrayList<SintomaCancerMama>();
+ 
+
 public Paciente() {
 	this.id = new Long(01);
 }
 
-public Paciente(String name, String lastname, String maternallastname, Date dateofbirth, String phonenumber,
-		String address, Personal personal) {
-		this.id = new Long(01);
-		this.name = name;
-		this.lastName = lastname;
-		this.maternalLastName = maternallastname;
-		this.dateofBirth = dateofbirth;
-		this.phoneNumber = phonenumber;
-		this.address = address;
-		this.personal = personal;
+public Paciente(String lastName, String maternalLastName, String name,
+		Date dateofBirth, String phoneNumber, String address, char sex,
+		Personal personal, Municipio municipio, Entidad entidad,
+		Unidadmedica unidadmedica) {
+	this.lastName = lastName;
+	this.maternalLastName = maternalLastName;
+	this.name = name;
+	this.dateofBirth = dateofBirth;
+	this.phoneNumber = phoneNumber;
+	this.address = address;
+	this.sex = sex;
+	this.personal = personal;
+	this.municipio = municipio;
+	this.entidad = entidad;
+	this.unidadmedica = unidadmedica;
+}
+
+public List<SintomaCancerMama> getSintomasCancerMama() {
+	return SintomasCancerMama;
+}
+public void setSintomasCancerMama(List<SintomaCancerMama> sintomasCancerMama) {
+	SintomasCancerMama = sintomasCancerMama;
+}
+
+public List<CancerOtrasPartes> getCanceresOtraPartes() {
+	return canceresOtraPartes;
+}
+
+public void setCanceresOtraPartes(List<CancerOtrasPartes> canceresOtraPartes) {
+	this.canceresOtraPartes = canceresOtraPartes;
+}
+
+public List<PreviaEnfermedad> getPreviasenfermedades() {
+	return previasenfermedades;
+}
+
+public void setPreviasenfermedades(List<PreviaEnfermedad> previasenfermedades) {
+	this.previasenfermedades = previasenfermedades;
+}
+
+public Entidad getEntidad() {
+	return entidad;
+}
+
+public void setEntidad(Entidad entidad) {
+	this.entidad = entidad;
+}
+
+public Unidadmedica getUnidadmedica() {
+	return unidadmedica;
+}
+ 
+public void setUnidadmedica(Unidadmedica unidadmedica) {
+	this.unidadmedica = unidadmedica;
+}
+
+public Municipio getMunicipio() {
+	return municipio;
+}
+
+public void setMunicipio(Municipio municipio) {
+	this.municipio = municipio;
+}
+
+public List<ParienteCancerMama> getParientescancermama() {
+	return parientescancermama;
+}
+public void setParientescancermama(List<ParienteCancerMama> parientescancermama) {
+	this.parientescancermama = parientescancermama;
 }
 
 public String getAddress() {
