@@ -3,8 +3,6 @@
  */
 package com.isesalud.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +21,7 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @Table(name="cancerOtrasPartes")
 
-public class cancerOtrasPartes implements Serializable{
+public class CancerOtrasPartes extends BaseModel{
 
 	/**
 	 * 
@@ -40,5 +38,22 @@ public class cancerOtrasPartes implements Serializable{
 	@NotNull
 	@Length(max=100)
 	private String parteCuerpo;
+	
+	public CancerOtrasPartes() {
+		this.id = new Long(0l);
+	}
+	
+	public CancerOtrasPartes(String parteCuerpo){
+		this.id = new Long(0l);
+		this.parteCuerpo = parteCuerpo;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 }

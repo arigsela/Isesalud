@@ -6,7 +6,10 @@ package com.isesalud.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -44,6 +47,10 @@ public class Personal implements Serializable {
 	@Length(max = 100)
 	private String name;
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="puesto", nullable=false)
+	private Puesto puesto;
+	
 	public Long getId() {
 		return id;
 	}
@@ -69,6 +76,14 @@ public class Personal implements Serializable {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Puesto getPuesto() {
+		return puesto;
+	}
+	
+	public void setPuesto(Puesto puesto) {
+		this.puesto = puesto;
 	}
 	
 }
