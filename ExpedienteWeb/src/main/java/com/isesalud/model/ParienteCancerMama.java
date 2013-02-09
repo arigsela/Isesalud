@@ -3,7 +3,6 @@
  */
 package com.isesalud.model;
 
-import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +23,7 @@ import org.hibernate.validator.constraints.Length;
 @Table(name="parienteCancerMama")
 
 
-public class parienteCancerMama implements Serializable{
+public class ParienteCancerMama extends BaseModel {
 
 	/**
 	 * 
@@ -53,5 +52,12 @@ public class parienteCancerMama implements Serializable{
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public ParienteCancerMama() {
+		this.id = new Long(01);
+ 	}	
+	public ParienteCancerMama(String Relative) {
+		this.id = new Long(01);
+		this.relative = Relative;
 	}
 }

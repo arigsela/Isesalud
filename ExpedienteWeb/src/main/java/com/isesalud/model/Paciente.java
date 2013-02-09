@@ -3,13 +3,15 @@
  */
 package com.isesalud.model;
 
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,7 +26,7 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @Table(name="paciente")
 
-public class paciente implements Serializable {
+public class Paciente extends BaseModel {
 
 	/**
 	 * 
@@ -45,6 +47,12 @@ private String lastName;
 @Column(name="maternalLastName", nullable = true, length = 100)
 @Length(max=100)
 private String maternalLastName;
+
+@Column(name="name",nullable = false, length = 100)
+@NotNull
+@Length(max=100)
+private String name;
+
 
 @Column(name="dateOfBirth", nullable = false)
 @NotNull
@@ -108,6 +116,26 @@ private Date dateLastMG;
 @Column (name = "observations", nullable = true, length = 300)
 @Length(max = 300)
 private String observations;
+
+@ManyToOne(fetch=FetchType.LAZY)
+@JoinColumn(name="personal", nullable=false)
+private Personal personal;
+
+public Paciente() {
+	this.id = new Long(01);
+}
+
+public Paciente(String name, String lastname, String maternallastname, Date dateofbirth, String phonenumber,
+		String address, Personal personal) {
+		this.id = new Long(01);
+		this.name = name;
+		this.lastName = lastname;
+		this.maternalLastName = maternallastname;
+		this.dateofBirth = dateofbirth;
+		this.phoneNumber = phonenumber;
+		this.address = address;
+		this.personal = personal;
+}
 
 public String getAddress() {
 	return address;
@@ -218,8 +246,19 @@ public Integer getYearsSinceSurgery() {
 public void setYearsSinceSurgery(Integer yearsSinceSurgery) {
 	this.yearsSinceSurgery = yearsSinceSurgery;
 }
+public String getName() {
+	return name;
 }
-
+public void setName(String name) {
+	this.name = name;
+}
+public Personal getPersonal() {
+	return personal;
+}
+public void setPersonal(Personal personal) {
+	this.personal = personal;
+}
+}
 
 
 

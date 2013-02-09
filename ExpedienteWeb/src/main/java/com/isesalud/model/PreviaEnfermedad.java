@@ -3,8 +3,6 @@
  */
 package com.isesalud.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
- * @author ari
+ * @author Ing. Ari G. Sela M.
  *
  */
 
@@ -22,8 +20,7 @@ import javax.validation.constraints.NotNull;
 @Table(name="previaEnfermedad")
 
 
-public class previaEnfermedad implements Serializable{
-
+public class PreviaEnfermedad extends  BaseModel{
 	/**
 	 * 
 	 */
@@ -52,4 +49,12 @@ public class previaEnfermedad implements Serializable{
 	public void setIllness(String illness) {
 		this.illness = illness;
 	}
+	public PreviaEnfermedad() {
+		this.id = new Long(01);
+	}
+	public PreviaEnfermedad(String Illness) {
+		this.id = new Long(01);
+		this.illness = Illness;
+	}
 }
+
