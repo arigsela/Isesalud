@@ -3,13 +3,16 @@
  */
 package com.isesalud.model;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -21,7 +24,7 @@ import org.hibernate.validator.constraints.Length;
  */
 @Entity
 @Table(name = "puesto")
-public class Puesto implements Serializable {
+public class Puesto extends BaseModel {
 	
 	/**
 	 * 
@@ -38,6 +41,9 @@ public class Puesto implements Serializable {
 	@Length(max = 100)
 	@NotNull
 	private String name;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="puesto")
+	private List<Personal> personales = new ArrayList<Personal>();
 	
 	@Column(name="description", nullable = true)
 	private String description;
@@ -62,6 +68,7 @@ public class Puesto implements Serializable {
 	}
 	
 	public void setId(Long id) {
+		this.isEmpty();
 		this.id = id;
 	}
 	
@@ -73,12 +80,22 @@ public class Puesto implements Serializable {
 		this.name = name;
 	}
 	
-	public String getDescription() {
+	public String getDescription() {		
 		return description;
 	}
 	
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public List<Personal> getPersonales() {
+		return personales;
+	}
+	
+	public void setPersonales(List<Personal> personales) {
+		this.personales = personales;
+	}
+	
+	
 
 }
