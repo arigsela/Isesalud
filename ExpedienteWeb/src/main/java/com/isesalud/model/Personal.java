@@ -3,7 +3,6 @@
  */
 package com.isesalud.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +25,7 @@ import org.hibernate.validator.constraints.Length;
  */
 @Entity
 @Table(name = "personal")
-public class Personal implements Serializable {
+public class Personal extends BaseModel {
 	/**
 	 * 
 	 */

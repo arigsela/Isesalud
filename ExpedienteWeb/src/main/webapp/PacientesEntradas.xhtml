@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<html>
+
+<h:head></h:head> 
+<h:body> 
+	<h1>Captura de paciente</h1>
+	<h:form id="frmPaciente" prependId="false">
+		<p:panelGrid columns="2">
+			<p:outputLabel value="Nombre" for="name"/>
+			<p:inputText id="name" value="#{patientPersistence.paciente.name}"/>
+			<p:outputLabel value="Entidad" for="entidad"/>
+			<p:outputLabel value="Edad de Menopausia" for="meno"/>
+			<p:inputText id="meno" value="#{patientPersistence.paciente.ageMenopause}">
+				<f:convertNumber type="number"/>
+			</p:inputText>
+			
+		</p:panelGrid>
+	</h:form>
+</h:body> 
+</html>
+</f:view> 
