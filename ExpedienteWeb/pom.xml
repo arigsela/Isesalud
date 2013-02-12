@@ -36,6 +36,7 @@
         <!-- maven-compiler-plugin -->
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
+        <seam.version>3.1.0.Final</seam.version>
     </properties>
     
     <repositories>
@@ -151,7 +152,6 @@
         <dependency>
         	<groupId>org.hibernate</groupId>
         	<artifactId>hibernate-validator</artifactId>
-        	<version>4.3.0.Final</version>
         	<scope>provided</scope>
         </dependency>
         <dependency>
@@ -170,6 +170,75 @@
         	<groupId>org.primefaces</groupId>
         	<artifactId>primefaces</artifactId>
         	<version>3.5</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss.solder</groupId>
+        	<artifactId>solder-api</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss.solder</groupId>
+        	<artifactId>solder-impl</artifactId>
+        	<scope>runtime</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss.seam.faces</groupId>
+        	<artifactId>seam-faces</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss.seam.international</groupId>
+        	<artifactId>seam-international</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss.seam.transaction</groupId>
+        	<artifactId>seam-transaction</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss.seam.security</groupId>
+        	<artifactId>seam-security</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss.seam.persistence</groupId>
+        	<artifactId>seam-persistence</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss.seam.persistence</groupId>
+        	<artifactId>seam-persistence-api</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss.solder</groupId>
+        	<artifactId>solder-tooling</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.drools</groupId>
+        	<artifactId>drools-api</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.drools</groupId>
+        	<artifactId>drools-compiler</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.picketlink.idm</groupId>
+        	<artifactId>picketlink-idm-api</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.picketlink.idm</groupId>
+        	<artifactId>picketlink-idm-core</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.picketbox</groupId>
+        	<artifactId>picketbox</artifactId>
+        	<version>4.0.13.Final</version>
+        	<type>pom</type>
+        	<scope>provided</scope>
+        </dependency>
+        <dependency>
+        	<groupId>com.ocpsoft</groupId>
+        	<artifactId>prettyfaces-jsf2</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>joda-time</groupId>
+        	<artifactId>joda-time</artifactId>
+        	<version>2.1</version>
         </dependency>
     </dependencies>
 
@@ -299,6 +368,13 @@
     			<artifactId>jboss-javaee-6.0-with-hibernate</artifactId>
     			<version>${jboss.bom.version}</version>
     			<type>pom</type>
+    		</dependency>
+    		<dependency>
+    			<groupId>org.jboss.seam</groupId>
+    			<artifactId>seam-bom</artifactId>
+    			<version>${seam.version}</version>
+    			<type>pom</type>
+    			<scope>import</scope>
     		</dependency>
     	</dependencies>
     </dependencyManagement>

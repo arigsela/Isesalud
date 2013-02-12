@@ -50,14 +50,21 @@
 			<p:inputText id="ultimacirugia" value="#{patientPersistence.paciente.yearsSinceSurgery}">
 				<f:convertNumber type="number"/>
 			</p:inputText>
-			<h:outputText value="Fecha de ultima Mastografia" for="popupButtonDate"/>
+			<p:outputLabel value="Fecha de ultima Mastografia" for="popupButtonDate"/>
 			<p:calendar value="#{patientPersistence.paciente.dateLastMG}" id="popupButtonDate" showOn="button">  
 				<f:convertDateTime type="date"  dateStyle="short"/>
 			</p:calendar>
-			<h:outputText value="Fecha Nacimiento" for="popupButtonDateNac"/>
+			<p:outputLabel value="Fecha Nacimiento" for="popupButtonDateNac"/>
 			<p:calendar value="#{patientPersistence.paciente.dateofBirth}" id="popupButtonDateNac" showOn="button" required="true"> 
 				<f:convertDateTime type="date"  dateStyle="short"/>
 			</p:calendar>
+			<p:outputLabel value="Municipio" for="muni"/>
+			<p:selectOneMenu id="muni" value="#{patientPersistence.paciente.municipio}"
+				converter="#{municipioConverter}">
+				<f:selectItems value="#{municipioQuery.model}" var="_muni"
+					itemLabel="#{_muni.name}"
+					itemValue="#{_muni}"/>
+			</p:selectOneMenu>
 		</p:panelGrid>
 	</h:form>
 </h:body> 

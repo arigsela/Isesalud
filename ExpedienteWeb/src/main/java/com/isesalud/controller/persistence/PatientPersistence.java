@@ -23,7 +23,7 @@ import java.io.Serializable;
  * @author Haysoos
  *
  */
-@ManagedBean
+@Named
 @ViewScoped
 public class PatientPersistence implements Serializable {
 
