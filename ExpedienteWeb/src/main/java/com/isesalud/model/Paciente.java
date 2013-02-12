@@ -149,6 +149,8 @@ private List<PreviaEnfermedad> previasenfermedades = new ArrayList<PreviaEnferme
 @OneToMany(fetch=FetchType.LAZY, mappedBy="paciente")
 private List<SintomaCancerMama> SintomasCancerMama = new ArrayList<SintomaCancerMama>();
  
+@OneToMany(fetch=FetchType.LAZY,mappedBy="paciente")
+private List<Cita> citas = new ArrayList<Cita>();
 
 public Paciente() {
 	this.id = new Long(01);
@@ -169,6 +171,14 @@ public Paciente(String lastName, String maternalLastName, String name,
 	this.municipio = municipio;
 	this.entidad = entidad;
 	this.unidadmedica = unidadmedica;
+}
+
+public List<Cita> getCitas() {
+	return citas;
+}
+
+public void setCitas(List<Cita> citas) {
+	this.citas = citas;
 }
 
 public List<SintomaCancerMama> getSintomasCancerMama() {
