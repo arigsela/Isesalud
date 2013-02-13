@@ -17,7 +17,7 @@ import com.isesalud.model.Entidad;
 @LocalBean
 public class EntidadEjb extends BaseManagerEJB<Entidad> {
 	
-	public List<Entidad> getEntidades(){
+	public List<Entidad> getAllEntidades(){
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Entidad> query = builder.createQuery(getModelClass());
 		Root<Entidad> root = query.from(getModelClass());

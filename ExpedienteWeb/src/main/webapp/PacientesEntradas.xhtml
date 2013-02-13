@@ -56,7 +56,7 @@
 			</p:calendar>
 			<p:outputLabel value="Fecha Nacimiento" for="popupButtonDateNac"/>
 			<p:calendar value="#{patientPersistence.paciente.dateofBirth}" id="popupButtonDateNac" showOn="button" required="true"> 
-				<f:convertDateTime type="date"  dateStyle="short"/>
+				<f:convertDateTime type="date"   dateStyle="short"/>
 			</p:calendar>
 			<p:outputLabel value="Municipio" for="muni"/>
 			<p:selectOneMenu id="muni" value="#{patientPersistence.paciente.municipio}"
@@ -64,6 +64,27 @@
 				<f:selectItems value="#{municipioQuery.model}" var="_muni"
 					itemLabel="#{_muni.name}"
 					itemValue="#{_muni}"/>
+			</p:selectOneMenu>
+		<p:outputLabel value="Entidad" for="entidad"/>
+			<p:selectOneMenu id="entidad" value="#{patientPersistence.paciente.entidad}"
+				converter="#{EntidadConverter}">
+				<f:selectItems value="#{entidadQuery.model}" var="_entidad"
+					itemLabel="#{_entidad.name}"
+					itemValue="#{_entidad}"/>
+			</p:selectOneMenu>
+		<p:outputLabel value="Unidad Medica" for="unidad"/>
+			<p:selectOneMenu id="unidad" value="#{patientPersistence.paciente.unidadmedica}"
+				converter="#{unidadMedicaConverter}">
+				<f:selectItems value="#{unidadMedicaQuery.model}" var="_unidad"
+					itemLabel="#{_unidad.name}"
+					itemValue="#{_unidad}"/>
+			</p:selectOneMenu>
+		<p:outputLabel value="Personal" for="pers"/>
+			<p:selectOneMenu id="pers" value="#{patientPersistence.paciente.personal}"
+				converter="#{PersonalConverter}">
+				<f:selectItems value="#{personalQuery.model}" var="_pers"
+					itemLabel="#{_pers.name} #{_pers.lastname}" 
+					itemValue="#{_pers}"/>
 			</p:selectOneMenu>
 		</p:panelGrid>
 	</h:form>
