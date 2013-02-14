@@ -10,7 +10,7 @@ import java.util.Map;
 
 
 //import com.ebizlink.pandora2.server.model.mpi.Emptiable;
-import com.isesalud.model.BaseModel;
+import com.isesalud.support.components.BaseModel;
 
 public final class CompareUtil
 {

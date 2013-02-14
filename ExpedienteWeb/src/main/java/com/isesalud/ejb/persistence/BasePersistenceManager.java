@@ -6,7 +6,7 @@ package com.isesalud.ejb.persistence;
 import javax.ejb.EJBException;
 
 import com.isesalud.ejb.query.BaseManager;
-import com.isesalud.model.BaseModel;
+import com.isesalud.support.components.BaseModel;
 
 public interface BasePersistenceManager<T extends BaseModel> extends BaseManager<T>
 {

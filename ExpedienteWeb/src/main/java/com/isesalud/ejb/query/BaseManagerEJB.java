@@ -9,8 +9,9 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
-import com.isesalud.model.BaseModel;
 import com.isesalud.support.QueryHint;
+import com.isesalud.support.components.BaseEJB;
+import com.isesalud.support.components.BaseModel;
 
 public abstract class BaseManagerEJB<T extends BaseModel> extends BaseEJB implements BaseManager<T>
 {

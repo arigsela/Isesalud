@@ -19,6 +19,8 @@ import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+
+import com.isesalud.support.components.BaseModel;
 /**
  * @author Ing. Ari Gerardo Sela M.
  *

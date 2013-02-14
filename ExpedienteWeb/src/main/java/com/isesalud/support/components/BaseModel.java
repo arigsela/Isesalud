@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.isesalud.model;
+package com.isesalud.support.components;
 
 import java.io.Serializable;
 

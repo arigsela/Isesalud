@@ -3,7 +3,7 @@
  */
 package com.isesalud.ejb.query;
 
-import com.isesalud.model.BaseModel;
+import com.isesalud.support.components.BaseModel;
 
 /**
  * @author Haysoos

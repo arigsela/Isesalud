@@ -8,8 +8,8 @@ import javax.ejb.EJBException;
 //import com.ebizlink.pandora2.core.msg.util.PM;
 
 import com.isesalud.ejb.query.BaseManagerEJB;
-import com.isesalud.model.BaseModel;
 import com.isesalud.support.CompareUtil;
+import com.isesalud.support.components.BaseModel;
 
 public abstract class BasePersistenceManagerEJB<T extends BaseModel> extends BaseManagerEJB<T> implements BasePersistenceManager<T>
 {
