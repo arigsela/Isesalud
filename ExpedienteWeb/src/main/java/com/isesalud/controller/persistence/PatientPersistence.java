@@ -40,8 +40,6 @@ public class PatientPersistence implements Serializable {
 	
 	public void savePaciente(ActionEvent e){
 		if(paciente != null){
-			paciente.setDateCreated(new Date());
-			paciente.setTimeCreated(new Date());
 			manager.save(paciente);
 		}
 		
