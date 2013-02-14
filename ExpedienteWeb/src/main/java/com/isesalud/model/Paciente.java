@@ -156,13 +156,14 @@ private List<SintomaCancerMama> SintomasCancerMama = new ArrayList<SintomaCancer
 private List<Cita> citas = new ArrayList<Cita>();
 
 public Paciente() {
-	this.id = new Long(01);
+	this.id = new Long(0l);
 }
 
 public Paciente(String lastName, String maternalLastName, String name,
 		Date dateofBirth, String phoneNumber, String address, char sex,
 		Personal personal, Municipio municipio, Entidad entidad,
 		Unidadmedica unidadmedica) {
+	this.id = new Long(0l);
 	this.lastName = lastName;
 	this.maternalLastName = maternalLastName;
 	this.name = name;

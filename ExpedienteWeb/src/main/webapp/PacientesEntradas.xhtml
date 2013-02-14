@@ -14,103 +14,103 @@
 		<p:messages autoUpdate="true" showDetail="true" showSummary="true"/>
 		<p:panelGrid id="dataPanel" columns="2">
 			<p:outputLabel value="Nombre" for="name" />
-			<p:inputText id="name" value="#{patientPersistence.paciente.name}"
+			<p:inputText id="name" value="#{patientPersistence.model.name}"
 				required="true" />
 			<p:outputLabel value="Apellido paterno" for="appaterno" />
 			<p:inputText id="appaterno"
-				value="#{patientPersistence.paciente.lastName}" required="true" />
+				value="#{patientPersistence.model.lastName}" required="true" />
 			<p:outputLabel value="Apellido Materno" for="apmaterno" />
 			<p:inputText id="apmaterno"
-				value="#{patientPersistence.paciente.maternalLastName}" />
+				value="#{patientPersistence.model.maternalLastName}" />
 			<p:outputLabel value="Sexo" for="sexo" />
-			<p:inputText id="sexo" value="#{patientPersistence.paciente.sex}"
+			<p:inputText id="sexo" value="#{patientPersistence.model.sex}"
 				maxlength="1" required="true" />
 			<p:outputLabel value="Telefono" for="telefono" />
 			<p:inputText id="telefono"
-				value="#{patientPersistence.paciente.phoneNumber}" />
+				value="#{patientPersistence.model.phoneNumber}" />
 			<p:outputLabel value="Domicilio" for="domicilio" />
 			<p:inputText id="domicilio"
-				value="#{patientPersistence.paciente.address}" />
+				value="#{patientPersistence.model.address}" />
 			<p:outputLabel value="Seguro Popular" for="seguro" />
 			<p:inputText id="seguro"
-				value="#{patientPersistence.paciente.seguroPopular}" />
+				value="#{patientPersistence.model.seguroPopular}" />
 			<p:outputLabel value="Observaciones" for="observations" />
 			<p:inputText id="observations"
-				value="#{patientPersistence.paciente.observations}" />
+				value="#{patientPersistence.model.observations}" />
 			<p:outputLabel value="Ha amamantado a su hijo" for="amamantado" />
 			<p:selectBooleanCheckbox id="amamantado"
-				value="#{patientPersistence.paciente.breastFeedChild}" />
+				value="#{patientPersistence.model.breastFeedChild}" />
 			<p:outputLabel value="Edad al tener su primer hijo(a)"
 				for="primerhijo" />
 			<p:inputText id="primerhijo"
-				value="#{patientPersistence.paciente.ageFirstChild}">
+				value="#{patientPersistence.model.ageFirstChild}">
 				<f:convertNumber type="number" />
 			</p:inputText>
 			<p:outputLabel value="Edad de Menopausia" for="meno" />
 			<p:inputText id="meno"
-				value="#{patientPersistence.paciente.ageMenopause}">
+				value="#{patientPersistence.model.ageMenopause}">
 				<f:convertNumber type="number" />
 			</p:inputText>
 			<p:outputLabel
 				value="Edad en que comenzo a tomar Hormonas para la Menopausia"
 				for="hormonas" />
 			<p:inputText id="hormonas"
-				value="#{patientPersistence.paciente.ageMenopauseHormones}">
+				value="#{patientPersistence.model.ageMenopauseHormones}">
 				<f:convertNumber type="number" />
 			</p:inputText>
 			<p:outputLabel value="Edad de Menstruacion" for="menstruacion" />
 			<p:inputText id="menstruacion"
-				value="#{patientPersistence.paciente.ageMenstruation}">
+				value="#{patientPersistence.model.ageMenstruation}">
 				<f:convertNumber type="number" />
 			</p:inputText>
 			<p:outputLabel value="Años desde ultima Cirugia" for="ultimacirugia" />
 			<p:inputText id="ultimacirugia"
-				value="#{patientPersistence.paciente.yearsSinceSurgery}">
+				value="#{patientPersistence.model.yearsSinceSurgery}">
 				<f:convertNumber type="number" />
 			</p:inputText>
 			<p:outputLabel value="Fecha de ultima Mastografia"
 				for="popupButtonDate" />
-			<p:calendar value="#{patientPersistence.paciente.dateLastMG}"
+			<p:calendar value="#{patientPersistence.model.dateLastMG}"
 				id="popupButtonDate" showOn="button">
 				<f:convertDateTime type="date" dateStyle="short" />
 			</p:calendar>
 			<p:outputLabel value="Fecha Nacimiento" for="popupButtonDateNac" />
-			<p:calendar value="#{patientPersistence.paciente.dateofBirth}"
+			<p:calendar value="#{patientPersistence.model.dateofBirth}"
 				id="popupButtonDateNac" showOn="button" required="true">
 				<f:convertDateTime type="date" dateStyle="short" />
 			</p:calendar>
 			<p:outputLabel value="Municipio" for="muni" />
 			<p:selectOneMenu id="muni"
-				value="#{patientPersistence.paciente.municipio}"
+				value="#{patientPersistence.model.municipio}"
 				converter="#{municipioConverter}">
 				<f:selectItems value="#{municipioQuery.model}" var="_muni"
 					itemLabel="#{_muni.name}" itemValue="#{_muni}" ></f:selectItems>
 			</p:selectOneMenu>
 			<p:outputLabel value="Entidad" for="entidad" />
 			<p:selectOneMenu id="entidad"
-				value="#{patientPersistence.paciente.entidad}"
+				value="#{patientPersistence.model.entidad}"
 				converter="#{entidadConverter}">
 				<f:selectItems value="#{entidadQuery.model}" var="_entidad"
 					itemLabel="#{_entidad.name}" itemValue="#{_entidad}" ></f:selectItems>
 			</p:selectOneMenu>
 			<p:outputLabel value="Unidad Medica" for="unidad" />
 			<p:selectOneMenu id="unidad"
-				value="#{patientPersistence.paciente.unidadmedica}"
+				value="#{patientPersistence.model.unidadmedica}"
 				converter="#{unidadMedicaConverter}">
 				<f:selectItems value="#{unidadMedicaQuery.model}" var="_unidad"
 					itemLabel="#{_unidad.name}" itemValue="#{_unidad}" ></f:selectItems>
 			</p:selectOneMenu>
 			<p:outputLabel value="Personal" for="pers" />
 			<p:selectOneMenu id="pers"
-				value="#{patientPersistence.paciente.personal}"
+				value="#{patientPersistence.model.personal}"
 				converter="#{personalConverter}">
 				<f:selectItems value="#{personalQuery.model}" var="_pers"
 					itemLabel="#{_pers.name} #{_pers.lastname}" itemValue="#{_pers}" ></f:selectItems>
 			</p:selectOneMenu>
 		</p:panelGrid>
 
-		<p:commandButton id="btnSave" value="Salvar" actionListener="#{patientPersistence.savePaciente}"
-			update="dataPanel" ajax="true"/>
+		<p:commandButton id="btnSave" value="Salvar" actionListener="#{patientPersistence.save}"
+			update="dataPanel" ajax="true" action="#{patientPersistence.navigate}"/>
 	</h:form>
 </h:body> 
 </html>
