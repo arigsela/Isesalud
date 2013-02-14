@@ -4,7 +4,6 @@
 package com.isesalud.controller.persistence;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
