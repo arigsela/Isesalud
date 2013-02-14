@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.isesalud.support.components;
+package com.isesalud.support.msg;
 
 /**
  * @author Jesus Espinoza Hernandez
