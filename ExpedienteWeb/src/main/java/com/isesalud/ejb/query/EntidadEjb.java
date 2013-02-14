@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import com.isesalud.model.Entidad;
+import com.isesalud.support.components.BaseManagerEJB;
 
 /**
  * Session Bean implementation class EntidadQuery

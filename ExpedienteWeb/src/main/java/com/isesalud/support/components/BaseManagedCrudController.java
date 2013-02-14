@@ -3,7 +3,6 @@
  */
 package com.isesalud.support.components;
 
-import com.isesalud.ejb.persistence.BasePersistenceManager;
 import com.isesalud.support.CompareUtil;
 import com.isesalud.support.exceptions.BaseException;
 import com.isesalud.support.exceptions.ValidationException;
