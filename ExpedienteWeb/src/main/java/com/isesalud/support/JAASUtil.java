@@ -33,4 +33,11 @@ public final class JAASUtil
 		return Boolean.FALSE;
 	}
 	
+	/**
+	 */
+	public static final Boolean isAdmin()
+	{
+		return inRole("ADMIN");
+	}
+	
 }
