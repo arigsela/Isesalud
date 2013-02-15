@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.isesalud.ejb.query;
+package com.isesalud.support.components;
 
 import java.util.List;
 import javax.ejb.EJBException;
@@ -9,7 +9,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
-import com.isesalud.model.BaseModel;
 import com.isesalud.support.QueryHint;
 
 public abstract class BaseManagerEJB<T extends BaseModel> extends BaseEJB implements BaseManager<T>

@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import com.isesalud.model.Unidadmedica;
+import com.isesalud.support.components.BaseManagerEJB;
 
 /**
  * @author Haysoos

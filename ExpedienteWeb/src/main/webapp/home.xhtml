@@ -11,8 +11,11 @@
 <h:body> 
 	<h1>Test page</h1>
 	<h:form id="testForm" prependId="false">
+		<p:messages autoUpdate="true" showDetail="true" showSummary="true"/>
 		<p:commandButton id="btnSearch" value="Buscar" actionListener="#{patientQuery.query}"
 			update="tblResults" ajax="true"/>
+		<p:commandButton id="btnCreate" value="Ingresar Nuevo" actionListener="#{patientPersistence.add}"
+			action="PacientesEntradas" ajax="false"/>
 		<p:dataTable id="tblResults" value="#{patientQuery.model}" var="_stuff">
 			<p:column headerText="Nombre">
 				<h:outputText value="#{_stuff.name}" />

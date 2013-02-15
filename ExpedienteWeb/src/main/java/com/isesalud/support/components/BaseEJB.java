@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.isesalud.ejb.query;
+package com.isesalud.support.components;
 
 import java.security.Principal;
 import javax.annotation.Resource;

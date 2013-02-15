@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.isesalud.support.components.BaseModel;
+
 /**
  * @author Ing. Ari G. Sela M.
  *

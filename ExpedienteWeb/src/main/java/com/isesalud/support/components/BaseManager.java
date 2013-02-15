@@ -1,9 +1,8 @@
 /**
  * 
  */
-package com.isesalud.ejb.query;
+package com.isesalud.support.components;
 
-import com.isesalud.model.BaseModel;
 
 /**
  * @author Haysoos

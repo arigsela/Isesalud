@@ -1,12 +1,10 @@
 /**
  * 
  */
-package com.isesalud.ejb.persistence;
+package com.isesalud.support.components;
 
 import javax.ejb.EJBException;
 
-import com.isesalud.ejb.query.BaseManager;
-import com.isesalud.model.BaseModel;
 
 public interface BasePersistenceManager<T extends BaseModel> extends BaseManager<T>
 {

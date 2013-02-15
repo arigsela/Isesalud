@@ -9,10 +9,10 @@ import javax.faces.convert.Converter;
 
 import org.jboss.solder.logging.Logger;
 
-import com.isesalud.ejb.query.BaseManager;
-import com.isesalud.model.BaseModel;
 import com.isesalud.support.CompareUtil;
 import com.isesalud.support.JSFUtil;
+import com.isesalud.support.components.BaseManager;
+import com.isesalud.support.components.BaseModel;
 
 /**
  * @author Jesus Espinoza Hernandez
