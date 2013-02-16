@@ -58,6 +58,22 @@ public class Personal extends BaseModel {
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="personal")
 	private List<Paciente> pacientes = new ArrayList<Paciente>();
 	
+	public Personal() {
+		this.id = new Long(0L);
+		}
+	
+	
+	public Personal(String lastname, String maternallastname, String name,
+			Puesto puesto, List<Paciente> pacientes) {
+		this.id = new Long(0L);
+		this.lastname = lastname;
+		this.maternallastname = maternallastname;
+		this.name = name;
+		this.puesto = puesto;
+		this.pacientes = pacientes;
+	}
+
+
 	public Long getId() {
 		return id;
 	}

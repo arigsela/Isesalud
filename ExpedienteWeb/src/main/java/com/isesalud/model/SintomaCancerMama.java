@@ -53,6 +53,19 @@ public class SintomaCancerMama extends BaseModel {
 	@JoinColumn(name="paciente", nullable = false)
 	private Paciente paciente;
 	
+	public SintomaCancerMama() {
+		this.id = new Long(0L);
+	}
+	public SintomaCancerMama(String SintomaLado) {
+		this.id = new Long(0L);
+		this.sintomaLado = SintomaLado;
+	}
+	public SintomaCancerMama(String SintomaLado, String SintomaNombre) {
+		this.id = new Long(0L);
+		this.sintomaLado = SintomaLado;
+		this.sintomaNombre = SintomaNombre;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -71,17 +84,4 @@ public class SintomaCancerMama extends BaseModel {
 	public void setSintomaNombre(String sintomaNombre) {
 		this.sintomaNombre = sintomaNombre;
 	}
-	public SintomaCancerMama() {
-		this.id = new Long(01);
-	}
-	public SintomaCancerMama(String SintomaLado) {
-		this.id = new Long(01);
-		this.sintomaLado = SintomaLado;
-	}
-	public SintomaCancerMama(String SintomaLado, String SintomaNombre) {
-		this.id = new Long(01);
-		this.sintomaLado = SintomaLado;
-		this.sintomaNombre = SintomaNombre;
-	}
-	
-	}
+}

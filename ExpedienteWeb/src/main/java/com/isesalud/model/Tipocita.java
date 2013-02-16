@@ -26,34 +26,40 @@ public class Tipocita extends BaseModel {
 	 * 
 	 */
 	private static final long serialVersionUID = -4648741653714278844L;
-	private Long id;
-	private String description;
-	private List<Cita> citas = new ArrayList<Cita>(0);
-
-	public Tipocita() {
-	}
-
-	public Tipocita(String description) {
-		this.description = description;
-	}
-
-	public Tipocita(String description, List<Cita> citas) {
-		this.description = description;
-		this.citas = citas;
-	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public Long getId() {
-		return this.id;
+	private Long id;
+	
+	@Column(name = "description", nullable = false, length = 100)
+	private String description;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipocita")
+	private List<Cita> citas = new ArrayList<Cita>(0);
+	
+	public Tipocita() {
+	this.id = new Long(0L);
 	}
 
+	public Tipocita(String description) {
+		this.id = new Long(0L);
+		this.description = description;
+	}
+
+	public Tipocita(String description, List<Cita> citas) {
+		this.id = new Long(0L);
+		this.description = description;
+		this.citas = citas;
+	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	@Column(name = "description", nullable = false, length = 100)
+	public Long getId() {
+		return this.id;
+	}
 	public String getDescription() {
 		return this.description;
 	}
@@ -61,12 +67,11 @@ public class Tipocita extends BaseModel {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipocita")
+	
 	public List<Cita> getCitas() {
 		return this.citas;
 	}
-
+	
 	public void setCitas(List<Cita> citas) {
 		this.citas = citas;
 	}

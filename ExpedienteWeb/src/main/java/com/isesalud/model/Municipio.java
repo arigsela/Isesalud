@@ -53,14 +53,14 @@ public class Municipio extends BaseModel {
 	private List<Paciente> pacientes = new ArrayList<Paciente>();
 	
 	public Municipio() {
-		this.id = new Long(01);
+		this.id = new Long(0L);
 	}
 	public Municipio(String name) {
-		this.id = new Long(01);
+		this.id = new Long(0L);
 		this.name = name;
 	}
 	public Municipio(String name, String description) {
-		this.id = new Long(01);
+		this.id = new Long(0L);
 		this.name = name;
 		this.description = description;
 	}

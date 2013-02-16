@@ -55,16 +55,16 @@ private List<Paciente> pacientes = new ArrayList<Paciente>();
 
 
 public Entidad() {
-	this.id = new Long(01);
+	this.id = new Long(0L);
 }
 
 public Entidad(String name) {
-	this.id = new Long(01);
+	this.id = new Long(0L);
 	this.name = name;
 }
 
 public Entidad(String name, String description) {
-	this.id = new Long(01);
+	this.id = new Long(0L);
 	this.name = name;
 	this.description = description;
 }

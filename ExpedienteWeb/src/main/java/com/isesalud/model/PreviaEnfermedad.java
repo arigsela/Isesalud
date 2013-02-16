@@ -44,6 +44,14 @@ public class PreviaEnfermedad extends  BaseModel{
 	@JoinColumn(name="paciente", nullable = false)
 	private Paciente paciente;
 	
+	public PreviaEnfermedad() {
+		this.id = new Long(0L);
+	}
+	public PreviaEnfermedad(String Illness) {
+		this.id = new Long(0L);
+		this.illness = Illness;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -57,13 +65,6 @@ public class PreviaEnfermedad extends  BaseModel{
 	}
 	public void setIllness(String illness) {
 		this.illness = illness;
-	}
-	public PreviaEnfermedad() {
-		this.id = new Long(01);
-	}
-	public PreviaEnfermedad(String Illness) {
-		this.id = new Long(01);
-		this.illness = Illness;
 	}
 }
 

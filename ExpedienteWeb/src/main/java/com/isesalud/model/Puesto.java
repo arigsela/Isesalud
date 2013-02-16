@@ -51,16 +51,16 @@ public class Puesto extends BaseModel {
 	private String description;
 	
 	public Puesto(){
-		this.id = new Long(0l);
+		this.id = new Long(0L);
 	}
 	
 	public Puesto(String name){
-		this.id = new Long(0l);
+		this.id = new Long(0L);
 		this.name = name;
 	}
 	
 	public Puesto(String name, String description){
-		this.id = new Long(0l);
+		this.id = new Long(0L);
 		this.name = name;
 		this.description = description;
 	}

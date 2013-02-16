@@ -63,10 +63,10 @@ public class ParienteCancerMama extends BaseModel {
 		this.id = id;
 	}
 	public ParienteCancerMama() {
-		this.id = new Long(01);
+		this.id = new Long(0L);
  	}	
 	public ParienteCancerMama(String Relative) {
-		this.id = new Long(01);
+		this.id = new Long(0L);
 		this.relative = Relative;
 	}
 }

@@ -54,6 +54,21 @@ public class Unidadmedica extends BaseModel{
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="unidadmedica")
 	private List<Paciente> pacientes = new ArrayList<Paciente>();
 	
+	public Unidadmedica() {
+		this.id = new Long(0L);
+	}
+	
+	public Unidadmedica(String name, String description, Integer code,
+		List<Paciente> pacientes) {
+		this.id = new Long(0L);
+		this.name = name;
+		this.description = description;
+		this.code = code;
+		this.pacientes = pacientes;
+	}
+
+
+
 	public Integer getcode() {
 		return code;
 	}

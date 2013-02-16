@@ -30,23 +30,26 @@ public class Statuscita extends BaseModel {
 	private String description;
 	private List<Cita> citas = new ArrayList<Cita>(0);
 
-	public Statuscita() {
-	}
-
-	public Statuscita(String description) {
-		this.description = description;
-	}
-
-	public Statuscita(String description, List<Cita> citas) {
-		this.description = description;
-		this.citas = citas;
-	}
-
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public Long getId() {
 		return this.id;
+	}
+	
+	public Statuscita() {
+		this.id = new Long(0L);
+	}
+
+	public Statuscita(String description) {
+		this.id = new Long(0L);
+		this.description = description;		
+	}
+
+	public Statuscita(String description, List<Cita> citas) {
+		this.id = new Long(0L);
+		this.description = description;
+		this.citas = citas;
 	}
 
 	public void setId(Long id) {

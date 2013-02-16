@@ -49,11 +49,11 @@ public class CancerOtrasPartes extends BaseModel{
 	private Paciente paciente;
 	
 	public CancerOtrasPartes() {
-		this.id = new Long(0l);
+		this.id = new Long(0L);
 	}
 	
 	public CancerOtrasPartes(String parteCuerpo){
-		this.id = new Long(0l);
+		this.id = new Long(0L);
 		this.parteCuerpo = parteCuerpo;
 	}
 	
