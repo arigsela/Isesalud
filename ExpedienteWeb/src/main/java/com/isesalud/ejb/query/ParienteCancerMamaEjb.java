@@ -18,7 +18,6 @@ import com.isesalud.support.components.BaseManagerEJB;
  * @author ari
  *
  */
-
 @Stateless
 @LocalBean
 public class ParienteCancerMamaEjb extends BaseManagerEJB<ParienteCancerMama>{
