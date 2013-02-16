@@ -19,7 +19,6 @@ import com.isesalud.support.components.BaseManagerEJB;
 
 @Stateless
 @LocalBean
-
 public class CancerOtrasPartesEjb extends BaseManagerEJB<CancerOtrasPartes>{
 
 	public List<CancerOtrasPartes> getAllCancerOtrasPartes() {

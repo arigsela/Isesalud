@@ -21,7 +21,6 @@ import com.isesalud.support.components.BaseManagerEJB;
 
 @Stateless
 @LocalBean
-
 public class ParienteCancerMamaEjb extends BaseManagerEJB<ParienteCancerMama>{
 	
 	public List<ParienteCancerMama> getAllParientesCancerMama() {

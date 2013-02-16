@@ -15,7 +15,6 @@ import com.isesalud.support.components.BasePersistenceManagerEJB;
  */
 @Stateless
 @LocalBean
-
 public class PersonalPersistenceEjb extends BasePersistenceManagerEJB<Personal>{
 
 	@Override

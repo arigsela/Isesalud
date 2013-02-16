@@ -12,7 +12,7 @@ import com.isesalud.model.Paciente;
 import com.isesalud.support.components.BaseManagerEJB;
 
 /**
- * Session Bean implementation class PacienteEjb
+ * @author ari
  */
 @Stateless
 @LocalBean

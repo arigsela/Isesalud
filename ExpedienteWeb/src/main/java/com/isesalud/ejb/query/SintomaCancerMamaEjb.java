@@ -33,7 +33,6 @@ public class SintomaCancerMamaEjb extends BaseManagerEJB<SintomaCancerMama>{
 
 	@Override
 	public Class<SintomaCancerMama> getModelClass() {
-		// TODO Auto-generated method stub
 		return SintomaCancerMama.class;
 	}
 

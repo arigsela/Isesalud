@@ -16,7 +16,6 @@ import com.isesalud.support.components.BasePersistenceManagerEJB;
  */
 @Stateless
 @LocalBean
-
 public class SintomaCancerMamaPersistenceEjb extends BasePersistenceManagerEJB<SintomaCancerMama>{
 
 	@Override

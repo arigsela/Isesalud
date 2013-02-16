@@ -13,7 +13,7 @@ import com.isesalud.model.Paciente;
 import com.isesalud.support.components.BasePersistenceManagerEJB;
 
 /**
- * @author Haysoos
+ * @author Jesus Espinoza Hernandez
  *
  */
 @Stateless

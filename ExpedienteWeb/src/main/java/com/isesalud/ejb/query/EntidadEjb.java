@@ -12,7 +12,7 @@ import com.isesalud.model.Entidad;
 import com.isesalud.support.components.BaseManagerEJB;
 
 /**
- * Session Bean implementation class EntidadQuery
+ * @author ari
  */
 @Stateless
 @LocalBean

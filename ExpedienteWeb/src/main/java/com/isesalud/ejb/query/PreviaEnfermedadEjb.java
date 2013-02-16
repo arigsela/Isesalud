@@ -18,10 +18,8 @@ import com.isesalud.support.components.BaseManagerEJB;
  * @author ari
  *
  */
-
 @Stateless
 @LocalBean
-
 public class PreviaEnfermedadEjb extends BaseManagerEJB<PreviaEnfermedad>{
 
 	public List<PreviaEnfermedad> getAllPreviasEnfermedades() {
@@ -34,8 +32,7 @@ public class PreviaEnfermedadEjb extends BaseManagerEJB<PreviaEnfermedad>{
 	
 	@Override
 	public Class<PreviaEnfermedad> getModelClass() {
-		// TODO Auto-generated method stub
-		return null;
+		return PreviaEnfermedad.class;
 	}
 
 }

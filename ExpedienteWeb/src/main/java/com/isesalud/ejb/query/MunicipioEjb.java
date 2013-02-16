@@ -15,7 +15,7 @@ import com.isesalud.model.Municipio;
 import com.isesalud.support.components.BaseManagerEJB;
 
 /**
- * @author Haysoos
+ * @author Jesus Espinoza Hernandez
  *
  */
 @Stateless
