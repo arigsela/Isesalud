@@ -71,12 +71,12 @@
 			<p:outputLabel value="Fecha de ultima Mastografia"
 				for="popupButtonDate" />
 			<p:calendar value="#{patientPersistence.model.dateLastMG}"
-				id="popupButtonDate" showOn="button">
+				id="popupButtonDate" navigator="true">
 				<f:convertDateTime type="date" dateStyle="short" />
 			</p:calendar>
 			<p:outputLabel value="Fecha Nacimiento" for="popupButtonDateNac" />
 			<p:calendar value="#{patientPersistence.model.dateofBirth}"
-				id="popupButtonDateNac" showOn="button" required="true">
+				id="popupButtonDateNac" required="true"	navigator="true">
 				<f:convertDateTime type="date" dateStyle="short" />
 			</p:calendar>
 			<p:outputLabel value="Municipio" for="muni" />
@@ -111,6 +111,8 @@
 
 		<p:commandButton id="btnSave" value="Salvar" actionListener="#{patientPersistence.save}"
 			update="dataPanel" ajax="true" action="#{patientPersistence.navigate}"/>
+		<p:commandButton dir="btnCancel" value="Cancelar" actionListener="#{patientPersistence.cancel}"
+			ajax="false" action="home?faces-redirect=true" immediate="true"/>
 	</h:form>
 </h:body> 
 </html>
