@@ -65,4 +65,12 @@ public class CancerOtrasPartes extends BaseModel{
 		this.id = id;
 	}
 	
+	public String getParteCuerpo() {
+		return parteCuerpo;
+	}
+	
+	public void setParteCuerpo(String parteCuerpo) {
+		this.parteCuerpo = parteCuerpo;
+	}
+	
 }
