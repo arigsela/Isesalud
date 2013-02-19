@@ -29,13 +29,6 @@ public class Statuscita extends BaseModel {
 	private Long id;
 	private String description;
 	private List<Cita> citas = new ArrayList<Cita>(0);
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public Long getId() {
-		return this.id;
-	}
 	
 	public Statuscita() {
 		this.id = new Long(0L);
@@ -52,6 +45,13 @@ public class Statuscita extends BaseModel {
 		this.citas = citas;
 	}
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
+	public Long getId() {
+		return this.id;
+	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}

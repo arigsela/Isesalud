@@ -84,4 +84,10 @@ public class SintomaCancerMama extends BaseModel {
 	public void setSintomaNombre(String sintomaNombre) {
 		this.sintomaNombre = sintomaNombre;
 	}
+	public Paciente getPaciente() {
+		return paciente;
+	}
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
 }

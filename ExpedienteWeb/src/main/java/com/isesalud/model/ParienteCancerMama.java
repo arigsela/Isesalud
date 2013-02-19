@@ -69,4 +69,10 @@ public class ParienteCancerMama extends BaseModel {
 		this.id = new Long(0L);
 		this.relative = Relative;
 	}
+	public Paciente getPaciente() {
+		return paciente;
+	}
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
 }

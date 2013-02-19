@@ -73,4 +73,12 @@ public class CancerOtrasPartes extends BaseModel{
 		this.parteCuerpo = parteCuerpo;
 	}
 	
+	public Paciente getPaciente() {
+		return paciente;
+	}
+	
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+	
 }

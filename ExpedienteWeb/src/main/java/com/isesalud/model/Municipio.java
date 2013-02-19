@@ -85,6 +85,12 @@ public class Municipio extends BaseModel {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public List<Paciente> getPacientes() {
+		return pacientes;
+	}
+	public void setPacientes(List<Paciente> pacientes) {
+		this.pacientes = pacientes;
+	}
 }
 	
 	

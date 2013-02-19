@@ -67,8 +67,6 @@ public class Unidadmedica extends BaseModel{
 		this.pacientes = pacientes;
 	}
 
-
-
 	public Integer getcode() {
 		return code;
 	}
@@ -93,6 +91,22 @@ public class Unidadmedica extends BaseModel{
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Integer getCode() {
+		return code;
+	}
+
+	public void setCode(Integer code) {
+		this.code = code;
+	}
+
+	public List<Paciente> getPacientes() {
+		return pacientes;
+	}
+
+	public void setPacientes(List<Paciente> pacientes) {
+		this.pacientes = pacientes;
 	}
 	
 }

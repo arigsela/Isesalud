@@ -66,5 +66,11 @@ public class PreviaEnfermedad extends  BaseModel{
 	public void setIllness(String illness) {
 		this.illness = illness;
 	}
+	public Paciente getPaciente() {
+		return paciente;
+	}
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
 }
 

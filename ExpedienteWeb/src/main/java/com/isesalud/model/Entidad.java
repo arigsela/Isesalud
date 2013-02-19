@@ -35,60 +35,70 @@ public class Entidad extends BaseModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 4660601128184617946L;
-@Id
-@GeneratedValue(strategy=GenerationType.IDENTITY)
-@NotNull
-@Column(name="id", nullable=false,unique=true)
-private Long id;
+	
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@NotNull
+	@Column(name="id", nullable=false,unique=true)
+	private Long id;
+	
+	@Column(name="name", nullable=false, length = 100)
+	@NotNull
+	@Length(max=100)
+	private String name;
+	
+	@Column(name="description", nullable = true, length=300)
+	@Length(max=300)
+	private String description;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="entidad")
+	private List<Paciente> pacientes = new ArrayList<Paciente>();
+	
+	
+	public Entidad() {
+		this.id = new Long(0L);
+	}
+	
+	public Entidad(String name) {
+		this.id = new Long(0L);
+		this.name = name;
+	}
+	
+	public Entidad(String name, String description) {
+		this.id = new Long(0L);
+		this.name = name;
+		this.description = description;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-@Column(name="name", nullable=false, length = 100)
-@NotNull
-@Length(max=100)
-private String name;
+	public List<Paciente> getPacientes() {
+		return pacientes;
+	}
 
-@Column(name="description", nullable = true, length=300)
-@Length(max=300)
-private String description;
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="entidad")
-private List<Paciente> pacientes = new ArrayList<Paciente>();
-
-
-public Entidad() {
-	this.id = new Long(0L);
-}
-
-public Entidad(String name) {
-	this.id = new Long(0L);
-	this.name = name;
-}
-
-public Entidad(String name, String description) {
-	this.id = new Long(0L);
-	this.name = name;
-	this.description = description;
-}
-
-public Long getId() {
-	return id;
-}
-public void setId(Long id) {
-	this.id = id;
-}
-
-public String getName() {
-	return name;
-}
-
-public void setName(String name) {
-	this.name = name;
-}
-
-public String getDescription() {
-	return description;
-}
-public void setDescription(String description) {
-	this.description = description;
-}
+	public void setPacientes(List<Paciente> pacientes) {
+		this.pacientes = pacientes;
+	}
 
 }

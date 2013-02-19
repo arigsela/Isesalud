@@ -108,5 +108,15 @@ public class Personal extends BaseModel {
 	public void setPuesto(Puesto puesto) {
 		this.puesto = puesto;
 	}
+
+
+	public List<Paciente> getPacientes() {
+		return pacientes;
+	}
+
+
+	public void setPacientes(List<Paciente> pacientes) {
+		this.pacientes = pacientes;
+	}
 	
 }
