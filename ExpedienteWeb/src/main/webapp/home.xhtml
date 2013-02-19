@@ -20,11 +20,26 @@
 			<p:column headerText="Nombre">
 				<h:outputText value="#{_stuff.name}" />
 			</p:column>
-			<p:column headerText="Apellido">
+			<p:column headerText="Apellido Paterno">
 				<h:outputText value="#{_stuff.lastName}" />
 			</p:column>
 			<p:column headerText="Apellido Materno">
 				<h:outputText value="#{_stuff.maternalLastName}" />
+			</p:column>
+			<p:column headerText="Fecha de Nacimiento">
+				<h:outputText value="#{_stuff.dateofBirth}" >
+					<f:convertDateTime type="date" dateStyle="medium" locale="es_ES"/>
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Fecha de creacion">
+				<h:outputText value="#{_stuff.dateCreated}" >
+					<f:convertDateTime dateStyle="medium" type="date" locale="es_ES"/>
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Hora de creacion">
+				<h:outputText value="#{_stuff.timeCreated}" >
+					<f:convertDateTime type="time" timeStyle="medium" locale="es_ES"/>
+				</h:outputText>
 			</p:column>
 		</p:dataTable>
 	</h:form>

@@ -27,8 +27,7 @@
 					value="#{patientPersistence.model.maternalLastName}" />
 				<p:outputLabel value="Fecha Nacimiento" for="popupButtonDateNac" />
 				<p:calendar value="#{patientPersistence.model.dateofBirth}"
-					id="popupButtonDateNac" required="true"	navigator="true"
-					pattern="dd/MM/yyyy">
+					id="popupButtonDateNac" required="true"	navigator="true">
 					<f:convertDateTime type="date" dateStyle="short" />
 				</p:calendar>
 				<h:outputText value="" />
@@ -59,83 +58,149 @@
 		</p:panel>
 		
 		<p:panel header="Datos Extendidos">
-			<p:panelGrid id="dataPanel" columns="2">
-				<p:outputLabel value="Seguro Popular" for="seguro" />
-				<p:inputText id="seguro"
-					value="#{patientPersistence.model.seguroPopular}" />
-				<p:outputLabel value="Observaciones" for="observations" />
-				<p:inputTextarea id="observations" style="width:96%"
-					value="#{patientPersistence.model.observations}" />
-				<p:outputLabel value="Ha amamantado a su hijo" for="amamantado" />
-				<p:selectBooleanCheckbox id="amamantado"
-					value="#{patientPersistence.model.breastFeedChild}" />
-				<p:outputLabel value="Edad al tener su primer hijo(a)"
-					for="primerhijo" />
-				<p:inputText id="primerhijo"
-					value="#{patientPersistence.model.ageFirstChild}">
-					<f:convertNumber type="number" />
-				</p:inputText>
-				<p:outputLabel value="Edad de Menopausia" for="meno" />
-				<p:inputText id="meno"
-					value="#{patientPersistence.model.ageMenopause}">
-					<f:convertNumber type="number" />
-				</p:inputText>
-				<p:outputLabel
-					value="Edad en que comenzo a tomar Hormonas para la Menopausia"
-					for="hormonas" />
-				<p:inputText id="hormonas"
-					value="#{patientPersistence.model.ageMenopauseHormones}">
-					<f:convertNumber type="number" />
-				</p:inputText>
-				<p:outputLabel value="Edad de Menstruacion" for="menstruacion" />
-				<p:inputText id="menstruacion"
-					value="#{patientPersistence.model.ageMenstruation}">
-					<f:convertNumber type="number" />
-				</p:inputText>
-				<p:outputLabel value="Años desde ultima Cirugia" for="ultimacirugia" />
-				<p:inputText id="ultimacirugia"
-					value="#{patientPersistence.model.yearsSinceSurgery}">
-					<f:convertNumber type="number" />
-				</p:inputText>
-				<p:outputLabel value="Fecha de ultima Mastografia"
-					for="popupButtonDate" />
-				<p:calendar value="#{patientPersistence.model.dateLastMG}"
-					id="popupButtonDate" navigator="true" pattern="dd/MM/yyyy">
-					<f:convertDateTime type="date" dateStyle="short" />
-				</p:calendar>
-				<p:outputLabel value="Municipio" for="muni" />
-				<p:selectOneMenu id="muni"
-					value="#{patientPersistence.model.municipio}"
-					converter="#{municipioConverter}"
-					style="width:100%">
-					<f:selectItems value="#{municipioQuery.model}" var="_muni"
-						itemLabel="#{_muni.name}" itemValue="#{_muni}" ></f:selectItems>
-				</p:selectOneMenu>
-				<p:outputLabel value="Entidad" for="entidad" />
-				<p:selectOneMenu id="entidad"
-					value="#{patientPersistence.model.entidad}"
-					converter="#{entidadConverter}"
-					style="width:100%">
-					<f:selectItems value="#{entidadQuery.model}" var="_entidad"
-						itemLabel="#{_entidad.name}" itemValue="#{_entidad}" ></f:selectItems>
-				</p:selectOneMenu>
-				<p:outputLabel value="Unidad Medica" for="unidad" />
-				<p:selectOneMenu id="unidad"
-					value="#{patientPersistence.model.unidadmedica}"
-					converter="#{unidadMedicaConverter}"
-					style="width:100%">
-					<f:selectItems value="#{unidadMedicaQuery.model}" var="_unidad"
-						itemLabel="#{_unidad.name}" itemValue="#{_unidad}" ></f:selectItems>
-				</p:selectOneMenu>
-				<p:outputLabel value="Personal" for="pers" />
-				<p:selectOneMenu id="pers"
-					value="#{patientPersistence.model.personal}"
-					converter="#{personalConverter}"
-					style="width:100%">
-					<f:selectItems value="#{personalQuery.model}" var="_pers"
-						itemLabel="#{_pers.name} #{_pers.lastname}" itemValue="#{_pers}" ></f:selectItems>
-				</p:selectOneMenu>
-			</p:panelGrid>
+			<h:panelGrid columns="2" cellspacing="10">
+				<p:panelGrid id="dataPanel" columns="2">
+					<p:outputLabel value="Seguro Popular" for="seguro" />
+					<p:inputText id="seguro"
+						value="#{patientPersistence.model.seguroPopular}" />
+					<p:outputLabel value="Observaciones" for="observations" />
+					<p:inputTextarea id="observations" style="width:96%"
+						value="#{patientPersistence.model.observations}" />
+					<p:outputLabel value="Ha amamantado a su hijo" for="amamantado" />
+					<p:selectBooleanCheckbox id="amamantado"
+						value="#{patientPersistence.model.breastFeedChild}" />
+					<p:outputLabel value="Edad al tener su primer hijo(a)"
+						for="primerhijo" />
+					<p:inputText id="primerhijo"
+						value="#{patientPersistence.model.ageFirstChild}">
+						<f:convertNumber type="number" />
+					</p:inputText>
+					<p:outputLabel value="Edad de Menopausia" for="meno" />
+					<p:inputText id="meno"
+						value="#{patientPersistence.model.ageMenopause}">
+						<f:convertNumber type="number" />
+					</p:inputText>
+					<p:outputLabel
+						value="Edad en que comenzo a tomar Hormonas para la Menopausia"
+						for="hormonas" />
+					<p:inputText id="hormonas"
+						value="#{patientPersistence.model.ageMenopauseHormones}">
+						<f:convertNumber type="number" />
+					</p:inputText>
+					<p:outputLabel value="Edad de Menstruacion" for="menstruacion" />
+					<p:inputText id="menstruacion"
+						value="#{patientPersistence.model.ageMenstruation}">
+						<f:convertNumber type="number" />
+					</p:inputText>
+					<p:outputLabel value="Años desde ultima Cirugia" for="ultimacirugia" />
+					<p:inputText id="ultimacirugia"
+						value="#{patientPersistence.model.yearsSinceSurgery}">
+						<f:convertNumber type="number" />
+					</p:inputText>
+					<p:outputLabel value="Fecha de ultima Mastografia"
+						for="popupButtonDate" />
+					<p:calendar value="#{patientPersistence.model.dateLastMG}"
+						id="popupButtonDate" navigator="true">
+						<f:convertDateTime type="date" dateStyle="short" />
+					</p:calendar>
+					<p:outputLabel value="Municipio" for="muni" />
+					<p:selectOneMenu id="muni"
+						value="#{patientPersistence.model.municipio}"
+						converter="#{municipioConverter}"
+						style="width:100%">
+						<f:selectItems value="#{municipioQuery.model}" var="_muni"
+							itemLabel="#{_muni.name}" itemValue="#{_muni}" ></f:selectItems>
+					</p:selectOneMenu>
+					<p:outputLabel value="Entidad" for="entidad" />
+					<p:selectOneMenu id="entidad"
+						value="#{patientPersistence.model.entidad}"
+						converter="#{entidadConverter}"
+						style="width:100%">
+						<f:selectItems value="#{entidadQuery.model}" var="_entidad"
+							itemLabel="#{_entidad.name}" itemValue="#{_entidad}" ></f:selectItems>
+					</p:selectOneMenu>
+					<p:outputLabel value="Unidad Medica" for="unidad" />
+					<p:selectOneMenu id="unidad"
+						value="#{patientPersistence.model.unidadmedica}"
+						converter="#{unidadMedicaConverter}"
+						style="width:100%">
+						<f:selectItems value="#{unidadMedicaQuery.model}" var="_unidad"
+							itemLabel="#{_unidad.name}" itemValue="#{_unidad}" ></f:selectItems>
+					</p:selectOneMenu>
+					<p:outputLabel value="Personal" for="pers" />
+					<p:selectOneMenu id="pers"
+						value="#{patientPersistence.model.personal}"
+						converter="#{personalConverter}"
+						style="width:100%">
+						<f:selectItems value="#{personalQuery.model}" var="_pers"
+							itemLabel="#{_pers.name} #{_pers.lastname}" itemValue="#{_pers}" ></f:selectItems>
+					</p:selectOneMenu>
+				</p:panelGrid>
+				
+				<h:panelGroup>
+					<p:panelGrid columns="4">
+						<p:outputLabel id="lblPrevEnf" for="txtPrevEnf" value="Previas Enfermedades"/>
+						<p:inputText id="txtPrevEnf" value="#{patientPersistence.previaEnfermedad.illness}"/>
+						<h:outputText value="" />
+						<p:commandButton id="btnPrevEnf" value="+" actionListener="#{patientPersistence.addPreviaEnfermedad}"
+						update="txtPrevEnf dtaPrevEnf" ajax="true" process="@this,txtPrevEnf"/>
+
+						<p:outputLabel id="lblCancer" for="txtCancer" value="Cancer otras partes"/>
+						<p:inputText id="txtCancer" value="#{patientPersistence.cancerOtrasPartes.parteCuerpo}"/>
+						<h:outputText value="" />
+						<p:commandButton id="btnCancer" value="+" actionListener="#{patientPersistence.addCancerOtrasPartes}"
+						update="txtCancer dtaCancer" process="@this,txtCancer" ajax="true"/>
+						
+						<p:outputLabel id="lblParCancer" for="txtParCancer" value="Parientes con cancer de mama"/>
+						<p:inputText id="txtParCancer" value="#{patientPersistence.parienteCancerMama.relative}"/>
+						<h:outputText value="" />
+						<p:commandButton id="btnParCancer" value="+" actionListener="#{patientPersistence.addParienteCancerMama}"
+						update="txtParCancer dtaPariente" ajax="true" process="@this,txtParCancer"/>
+						
+						<p:outputLabel id="lblSintoma" for="txtSintoma" value="Sintomas de cancer de mama"/>
+						<p:inputText id="txtSintoma" value="#{patientPersistence.sintomaCancerMama.sintomaNombre}"/>
+						<p:selectOneMenu id="slcSintoma" value="#{patientPersistence.sintomaCancerMama.sintomaLado}">
+							<f:selectItem itemLabel="IZQ" itemValue="IZQ"/>
+							<f:selectItem itemLabel="DER" itemValue="DER"/>
+						</p:selectOneMenu>
+						<p:commandButton id="btnSintoma" value="+" actionListener="#{patientPersistence.addSintomaCancerMama}"
+							update="txtSintoma dtaSintomas" ajax="true" process="@this,txtSintoma,slcSintoma"/>
+					</p:panelGrid>
+					
+					<h:panelGrid columns="4">
+						<p:dataList id="dtaPrevEnf" value="#{patientPersistence.prevEnfList}"
+							var="_prevEnf">
+							<f:facet name="header">
+								Previas Enfermedades
+							</f:facet>
+							<h:outputText value="#{_prevEnf.illness}" />
+						</p:dataList>
+						
+						<p:dataList id="dtaCancer" value="#{patientPersistence.cancerList}"
+							var="_cancer">
+							<f:facet name="header">Cancer otras Partes</f:facet>
+							<h:outputText value="#{_cancer.parteCuerpo}" />
+						</p:dataList>
+
+						<p:dataList id="dtaPariente" value="#{patientPersistence.parienteList}"
+							var="_pariente">
+							<f:facet name="header">Parientes con Cancer</f:facet>
+							<h:outputText value="#{_pariente.relative}" />
+						</p:dataList>
+
+						<p:dataList id="dtaSintomas" value="#{patientPersistence.sintomaList}"
+							var="_sint" type="definition" itemType="disc">
+							<f:facet name="header">Sintomas Cancer</f:facet>
+							<h:outputText value="* #{_sint.sintomaNombre}" />
+							<f:facet name="description">
+								<h:outputText value="Lado - #{_sint.sintomaLado}" />
+							</f:facet>
+						</p:dataList>
+					</h:panelGrid>
+				</h:panelGroup>
+				
+			</h:panelGrid>
+			
 		</p:panel>
 		
 		
