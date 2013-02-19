@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import com.isesalud.model.Paciente;
+import com.isesalud.model.Paciente_;
 import com.isesalud.support.components.BaseManagerEJB;
 
 /**
@@ -23,6 +24,10 @@ public class PacienteEjb extends BaseManagerEJB<Paciente> {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Paciente> query = builder.createQuery(Paciente.class);
 		Root<Paciente> root = query.from(Paciente.class);
+		root.fetch(Paciente_.canceresOtraPartes);
+		root.fetch(Paciente_.previasenfermedades);
+		root.fetch(Paciente_.parientescancermama);
+		root.fetch(Paciente_.SintomasCancerMama);
 		query.select(root);
 		
 		model = getList(query);
