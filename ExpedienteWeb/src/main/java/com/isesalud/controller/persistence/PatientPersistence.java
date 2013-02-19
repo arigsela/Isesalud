@@ -146,6 +146,13 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 	}
 	
 	@Override
+	protected void doAfterEdit() throws BaseException {
+		super.doAfterEdit();
+		if(conversation.isTransient())
+			conversation.begin();
+	}
+	
+	@Override
 	protected void doAfterSave() throws BaseException {
 		super.doAfterSave();
 		if(!conversation.isTransient())
@@ -189,6 +196,13 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 			this.sintomaList.add(sintomaCancerMama);
 			this.sintomaCancerMama = new SintomaCancerMama();
 		}
+	}
+	
+	@Override
+	public void edit(ActionEvent actionEvent) {
+		Paciente p = (Paciente) actionEvent.getComponent().getAttributes().get("selected");
+		setModel(p);
+		super.edit(actionEvent);
 	}
 	
 	public String navigate(){
