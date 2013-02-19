@@ -38,6 +38,11 @@ public class PatientQuery implements Serializable {
 		model = pacienteEjb.getAllPatients();
 	}
 	
+	public void showPatientDetails(ActionEvent e){
+		Paciente p = (Paciente) e.getComponent().getAttributes().get("detail");
+		Paciente full = pacienteEjb.getFULL(p.getId());
+		setSelectedPatient(full);
+	}
 	
 	public List<Paciente> getModel() {
 		return model;

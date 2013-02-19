@@ -9,6 +9,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
+import com.isesalud.support.CompareUtil;
 import com.isesalud.support.QueryHint;
 
 public abstract class BaseManagerEJB<T extends BaseModel> extends BaseEJB implements BaseManager<T>
@@ -22,6 +23,26 @@ public abstract class BaseManagerEJB<T extends BaseModel> extends BaseEJB implem
 		try
 		{
 			model = em.find(getModelClass(), modelID);
+		}
+		catch (Throwable t)
+		{
+			throw new EJBException(t.getMessage());
+		}
+		return model;
+	}
+	
+	/**
+	 */
+	@Override
+	public T getFULL(final Long modelID)
+	{
+		T model = null;
+		try
+		{
+			if (!CompareUtil.isEmpty(model = get(modelID)))
+			{
+				model.initLazyElements();
+			}
 		}
 		catch (Throwable t)
 		{
