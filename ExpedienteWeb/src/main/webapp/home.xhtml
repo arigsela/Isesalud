@@ -11,6 +11,23 @@
 <h:body> 
 	<h1>Captura de Pacientes</h1>
 	<h:form id="testForm" prependId="false">
+	
+		<p:dialog header="Detalles del paciente" widgetVar="detailsDlg" resizable="false"
+			id="detailsDialog" showEffect="fade" hideEffect="explode" modal="true">
+			
+			<h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">
+				<f:facet name="header">
+					<h:outputText value="#{patientQuery.selectedPatient.name} #{patientQuery.selectedPatient.lastName} #{patientQuery.selectedPatient.maternalLastName}" />
+				</f:facet>
+				
+				<h:outputLabel value="Direccion:" style="font-weight:bold" />
+				<h:outputText value="#{patientQuery.selectedPatient.address}" />
+				
+				<h:outputLabel value="Municipio:" style="font-weight:bold" />
+				<h:outputText value="#{patientQuery.selectedPatient.municipio.name}" />
+			</h:panelGrid>
+		</p:dialog>
+		
 		<p:messages autoUpdate="true" showDetail="true" showSummary="true"/>
 		<p:commandButton id="btnSearch" value="Buscar" actionListener="#{patientQuery.query}"
 			update="tblResults" ajax="true"/>
@@ -41,7 +58,15 @@
 					<f:convertDateTime type="time" timeStyle="medium" locale="es_ES"/>
 				</h:outputText>
 			</p:column>
+			<p:column style="width:4%">
+				<p:commandButton id="btnSelect" update=":testForm:display" oncomplete="detailsDlg.show()"
+					ajax="true" icon="ui-icon-search" title="Ver detalles">
+					<f:setPropertyActionListener target="#{patientQuery.selectedPatient}" value="#{_stuff}"/>
+				</p:commandButton>
+			</p:column>
 		</p:dataTable>
+		
+		
 	</h:form>
 </h:body> 
 </html>

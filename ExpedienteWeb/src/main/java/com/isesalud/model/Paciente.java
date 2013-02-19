@@ -125,19 +125,19 @@ public class Paciente extends BaseModel {
 	@Length(max = 300)
 	private String observations;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="personal", nullable=false)
 	private Personal personal;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="municipio",nullable=false)
 	private Municipio municipio;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="entidad", nullable = false)
 	private Entidad entidad;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="unidadmedica", nullable = false)
 	private Unidadmedica unidadmedica;
 	
