@@ -22,6 +22,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.Length;
 
 import com.isesalud.support.components.BaseModel;
@@ -360,6 +362,15 @@ public class Paciente extends BaseModel {
 	}
 	public void setPersonal(Personal personal) {
 		this.personal = personal;
+	}
+	
+	
+	@Override
+	public void initLazyElements() {
+		Hibernate.initialize(SintomasCancerMama);
+		Hibernate.initialize(parientescancermama);
+		Hibernate.initialize(previasenfermedades);
+		Hibernate.initialize(canceresOtraPartes);
 	}
 }
 

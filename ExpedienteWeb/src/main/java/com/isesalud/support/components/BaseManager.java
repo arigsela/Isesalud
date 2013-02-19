@@ -17,5 +17,9 @@ public interface BaseManager<T extends BaseModel> {
 	/**
 	 */
 	public abstract T get(final Long modelID);
+	
+	/**
+	 */
+	public abstract T getFULL(final Long modelID);
 
 }

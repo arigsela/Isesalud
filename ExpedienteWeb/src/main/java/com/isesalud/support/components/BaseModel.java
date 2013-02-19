@@ -29,5 +29,9 @@ public abstract class BaseModel implements Serializable {
 	public boolean equals(Object obj) {
 		return getId().equals(((BaseModel)obj).getId());
 	}
+	
+	public void initLazyElements(){
+		
+	}
 
 }
