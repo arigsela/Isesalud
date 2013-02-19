@@ -95,6 +95,7 @@
 				</p:dataList>
 			
 			</h:panelGrid>
+			
 		</p:dialog>
 		<p:messages autoUpdate="true" showDetail="true" showSummary="true"/>
 		<p:commandButton id="btnSearch" value="Buscar" actionListener="#{patientQuery.query}"
@@ -129,7 +130,13 @@
 			<p:column style="width:4%">
 				<p:commandButton id="btnSelect" update=":testForm:display" oncomplete="detailsDlg.show()"
 					ajax="true" icon="ui-icon-search" title="Ver detalles" actionListener="#{patientQuery.showPatientDetails}">
-					<f:attribute name="detail" value="#{_stuff}"></f:attribute>
+					<f:attribute name="detail" value="#{_stuff}"/>
+				</p:commandButton>
+			</p:column>
+			<p:column style="width:4%">
+				<p:commandButton id="btnEdit" actionListener="#{patientPersistence.edit}"
+					action="PacientesEntradas" ajax="true" title="Editar" icon="ui-icon-pencil">
+					<f:attribute name="selected" value="#{_stuff}"/>
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
