@@ -20,11 +20,59 @@
 					<h:outputText value="#{patientQuery.selectedPatient.name} #{patientQuery.selectedPatient.lastName} #{patientQuery.selectedPatient.maternalLastName}" />
 				</f:facet>
 				
-				<h:outputLabel value="Direccion:" style="font-weight:bold" />
-				<h:outputText value="#{patientQuery.selectedPatient.address}" />
+				<h:outputLabel value="Fecha de Nacimiento:" style="font-weight:bold" />
+				<h:outputLabel value="#{patientQuery.selectedPatient.dateofBirth}" />
 				
+				<h:outputLabel value="Telefono:" style="font-weight:bold" />
+				<h:outputText value="#{patientQuery.selectedPatient.phoneNumber}" />
+				
+				<h:outputLabel value="Unidad Medica:" style="font-weight:bold" />
+				<h:outputText value="#{patientQuery.selectedPatient.unidadmedica.name}" />
+								
 				<h:outputLabel value="Municipio:" style="font-weight:bold" />
 				<h:outputText value="#{patientQuery.selectedPatient.municipio.name}" />
+				
+				<h:outputLabel value="Entidad:" style="font-weight:bold" />
+				<h:outputText value="#{patientQuery.selectedPatient.entidad.name}" />
+				
+				<h:outputLabel value="Domicilio:" style="font-weight:bold" />
+				<h:outputText value="#{patientQuery.selectedPatient.address}" />
+								
+				<h:outputLabel value="Seguro Popular:" style="font-weight:bold" />
+				<h:outputText value="#{patientQuery.selectedPatient.seguroPopular}" />
+			
+				<h:outputLabel value="A amamantado a su hijo:" style="font-weight:bold" />
+				<h:outputText value="#{patientQuery.selectedPatient.breastFeedChild}" />
+				
+				<h:outputLabel value="Edad al tener su primer hijo:" style="font-weight:bold" />
+				<h:outputText value="#{patientQuery.selectedPatient.ageFirstChild}" />
+				
+				<h:outputLabel value="Edad de menopausia:" style="font-weight:bold" />
+				<h:outputText value="#{patientQuery.selectedPatient.ageMenopause}" />
+				
+				<h:outputLabel value="Edad de tomar hormonas:" style="font-weight:bold" />
+				<h:outputText value="#{patientQuery.selectedPatient.ageMenopauseHormones}" />
+				
+				<h:outputLabel value="Edad de menstruacion:" style="font-weight:bold" />
+				<h:outputText value="#{patientQuery.selectedPatient.ageMenstruation}" />
+				
+				<h:outputLabel value="Anios de ultima cirugia:" style="font-weight:bold" />
+				<h:outputText value="#{patientQuery.selectedPatient.yearsSinceSurgery}" />
+				
+				<h:outputLabel value="Fecha de ultima MG:" style="font-weight:bold" />
+				<h:outputText value="#{patientQuery.selectedPatient.dateLastMG}" />
+				
+				<p:dataList id="dtaPrevEnf" value="#{patientQuery.selectedPatient.previasenfermedades}"
+							var="_prevEnf">
+							<f:facet name="header">
+								Previas Enfermedades
+							</f:facet>
+							<h:outputText value="#{_prevEnf.illness}" />
+				</p:dataList>
+				
+				
+					
+				
 			</h:panelGrid>
 		</p:dialog>
 		
