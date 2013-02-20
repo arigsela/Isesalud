@@ -58,7 +58,7 @@ public abstract class BaseManagedCrudController<T extends BaseModel, M extends B
 	@Override
 	protected void doEdit() throws BaseException
 	{
-		if (CompareUtil.isEmpty(model = getCrudManager().get(getModel().getId())))
+		if (CompareUtil.isEmpty(model = getCrudManager().getFULL(getModel().getId())))
 		{
 			throw new ValidationException(PM.getMe().getMsg(DbMessages.RECORD_NOT_FOUND));
 		}
