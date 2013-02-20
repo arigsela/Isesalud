@@ -26,15 +26,25 @@
 
 		<p:fieldset id="fldSearchOpts" toggleable="true" toggleSpeed="500"
 			legend="Opciones de busqueda">
-			
+			<h:panelGrid columns="3">
 			<h:panelGrid columns="2">
 				<p:outputLabel value="Nombre:" for="sName"/>
 				<p:inputText id="sName" value="#{patientQuery.searchParams.name}"/>
+				<p:outputLabel value="Fecha de Nacimiento:" for="sDateofBirth"/>
+				<p:calendar id="sDateofBirth" value="#{patientQuery.dateOfBirth}"/>
+			</h:panelGrid>
+			<h:panelGrid columns="2">
 				<p:outputLabel value="Apellido Paterno:" for="sLastName"/>
 				<p:inputText id="sLastName" value="#{patientQuery.searchParams.lastName}"/>
+				<p:outputLabel value="Unidad medica:" for="sUnidadMedica"/>
+				<p:selectOneMenu id="sUnidadMedica" value="#{patientQuery.searchParams.unidadmedica}" converter="#{unidadMedicaConverter}">
+					<f:selectItems value="#{unidadMedicaQuery.model}" var="_unidad" itemLabel="#{_unidad.name}" itemValue="#{_unidad}"></f:selectItems>
+					</p:selectOneMenu>
+			</h:panelGrid>
+				<h:panelGrid columns="2">
 				<p:outputLabel value="Apellido Materno:" for="sMaternalName"/>
 				<p:inputText id="sMaternalName" value="#{patientQuery.searchParams.maternalLastName}"/>
-				
+			</h:panelGrid>
 				<f:facet name="footer">
 					<p:commandButton id="btnSearch" value="Buscar" actionListener="#{patientQuery.query}"
 						update="tblResults" ajax="true"/>
