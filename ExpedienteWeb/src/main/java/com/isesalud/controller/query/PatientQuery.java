@@ -3,7 +3,6 @@
  */
 package com.isesalud.controller.query;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -13,6 +12,8 @@ import javax.inject.Named;
 
 import com.isesalud.ejb.query.PacienteEjb;
 import com.isesalud.model.Paciente;
+import com.isesalud.support.components.BaseQueryController;
+import com.isesalud.support.exceptions.BaseException;
 
 /**
  * @author Jesus Espinoza Hernandez
@@ -20,22 +21,23 @@ import com.isesalud.model.Paciente;
  */
 @Named
 @ViewScoped
-public class PatientQuery implements Serializable {
+public class PatientQuery extends BaseQueryController<Paciente> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8753462146196584925L;
-
-	private List<Paciente> model;
+	
+	private Paciente searchParams;
 	
 	private Paciente selectedPatient;
 	
 	@EJB
 	private PacienteEjb pacienteEjb;
 	
-	public void query(ActionEvent e){
-		model = pacienteEjb.getAllPatients();
+	@Override
+	protected void init() throws BaseException {
+		searchParams = new Paciente();
 	}
 	
 	public void showPatientDetails(ActionEvent e){
@@ -44,20 +46,47 @@ public class PatientQuery implements Serializable {
 		setSelectedPatient(full);
 	}
 	
-	public List<Paciente> getModel() {
-		return model;
-	}
-	
-	public void setModel(List<Paciente> model) {
-		this.model = model;
-	}
-	
 	public Paciente getSelectedPatient() {
 		return selectedPatient;
 	}
 	
+	@Override
+	public void query(ActionEvent e) {
+		if(getSearchParams().getName().isEmpty())
+			getSearchParams().setName("%");
+		if(getSearchParams().getLastName().isEmpty())
+			getSearchParams().setLastName("%");
+		if(getSearchParams().getMaternalLastName().isEmpty())
+			getSearchParams().setMaternalLastName("%");
+		
+		clearSelected();
+		super.query(e);
+	}
+	
+	public void clearSelected(){
+		selectedPatient = null;
+	}
+	
 	public void setSelectedPatient(Paciente selectedPatient) {
 		this.selectedPatient = selectedPatient;
+	}
+	
+	public Paciente getSearchParams() {
+		return searchParams;
+	}
+	
+	public void setSearchParams(Paciente searchParams) {
+		this.searchParams = searchParams;
+	}
+
+	@Override
+	protected List<Paciente> getQueryList() {
+		return pacienteEjb.getPatients(this.searchParams);
+	}
+
+	@Override
+	protected int getQueryRowCount() {
+		return 0;
 	}
 
 }

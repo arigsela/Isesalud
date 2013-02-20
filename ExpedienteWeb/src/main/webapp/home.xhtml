@@ -12,12 +12,40 @@
 	<h1>Captura de Pacientes</h1>
 	<h:form id="testForm" prependId="false">
 	
-		<p:messages autoUpdate="true" showDetail="true" showSummary="true"/>
-		<p:commandButton id="btnSearch" value="Buscar" actionListener="#{patientQuery.query}"
-			update="tblResults" ajax="true"/>
-		<p:commandButton id="btnCreate" value="Ingresar Nuevo" actionListener="#{patientPersistence.add}"
-			action="PacientesEntradas" ajax="false" process="@this"/>
-		<p:dataTable id="tblResults" value="#{patientQuery.model}" var="_stuff"
+		<p:messages autoUpdate="true" showDetail="true" showSummary="true"
+			closable="true"/>
+			
+		<p:menubar>
+			<p:menuitem id="btnCreate" value="Nuevo" actionListener="#{patientPersistence.add}"
+				action="PacientesEntradas" ajax="false" process="@this"
+				icon="ui-icon-person"/>
+		</p:menubar>
+		
+		<br />
+		<br />
+
+		<p:fieldset id="fldSearchOpts" toggleable="true" toggleSpeed="500"
+			legend="Opciones de busqueda">
+			
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Nombre:" for="sName"/>
+				<p:inputText id="sName" value="#{patientQuery.searchParams.name}"/>
+				<p:outputLabel value="Apellido Paterno:" for="sLastName"/>
+				<p:inputText id="sLastName" value="#{patientQuery.searchParams.lastName}"/>
+				<p:outputLabel value="Apellido Materno:" for="sMaternalName"/>
+				<p:inputText id="sMaternalName" value="#{patientQuery.searchParams.maternalLastName}"/>
+				
+				<f:facet name="footer">
+					<p:commandButton id="btnSearch" value="Buscar" actionListener="#{patientQuery.query}"
+						update="tblResults" ajax="true"/>
+				</f:facet>
+			</h:panelGrid>
+		</p:fieldset>
+		
+		<br />
+		<br />
+		
+		<p:dataTable id="tblResults" value="#{patientQuery.queryListDM}" var="_stuff"
 			paginator="true"
 			rows="10"
 			paginatorTemplate="
