@@ -3,6 +3,7 @@
  */
 package com.isesalud.controller.query;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -32,6 +33,8 @@ public class PatientQuery extends BaseQueryController<Paciente> {
 	
 	private Paciente selectedPatient;
 	
+	private Date dateOfBirth;
+	
 	@EJB
 	private PacienteEjb pacienteEjb;
 	
@@ -52,15 +55,26 @@ public class PatientQuery extends BaseQueryController<Paciente> {
 	
 	@Override
 	public void query(ActionEvent e) {
-		if(getSearchParams().getName().isEmpty())
-			getSearchParams().setName("%");
-		if(getSearchParams().getLastName().isEmpty())
-			getSearchParams().setLastName("%");
-		if(getSearchParams().getMaternalLastName().isEmpty())
-			getSearchParams().setMaternalLastName("%");
 		
-		clearSelected();
-		super.query(e);
+		if(getSearchParams() != null){
+			if(getSearchParams().getName().isEmpty())
+				getSearchParams().setName("%");
+			if(getSearchParams().getLastName().isEmpty())
+				getSearchParams().setLastName("%");
+			if(getSearchParams().getMaternalLastName().isEmpty())
+				getSearchParams().setMaternalLastName("%");
+			
+			getSearchParams().setDateofBirth(dateOfBirth);
+			
+			clearSelected();
+			super.query(e);
+		} else{
+			try {
+				init();
+			} catch (BaseException ex) {
+				ex.printStackTrace();
+			}
+		}
 	}
 	
 	public void clearSelected(){
@@ -77,6 +91,14 @@ public class PatientQuery extends BaseQueryController<Paciente> {
 	
 	public void setSearchParams(Paciente searchParams) {
 		this.searchParams = searchParams;
+	}
+	
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+	
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	@Override

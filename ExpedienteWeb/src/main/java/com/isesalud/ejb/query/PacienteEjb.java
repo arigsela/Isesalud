@@ -40,8 +40,14 @@ public class PacienteEjb extends BaseManagerEJB<Paciente> {
 		Predicate likeName = builder.like(root.get(Paciente_.name), params.getName());
 		Predicate likeLastName = builder.like(root.get(Paciente_.lastName), params.getLastName());
 		Predicate likeMaternalName = builder.like(root.get(Paciente_.maternalLastName), params.getMaternalLastName());
+		Predicate date = builder.equal(root.get(Paciente_.dateofBirth), params.getDateofBirth());
+		
 		query.select(root);
-		query.where(builder.and(likeName, likeLastName, likeMaternalName));
+		
+		if(params.getDateofBirth() != null)
+			query.where(builder.and(likeName, likeLastName, likeMaternalName, date));
+		else
+			query.where(builder.and(likeName, likeLastName, likeMaternalName));
 		
 		model = getList(query);
 		
