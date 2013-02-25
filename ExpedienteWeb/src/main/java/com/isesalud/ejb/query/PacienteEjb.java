@@ -39,9 +39,9 @@ public class PacienteEjb extends BaseManagerEJB<Paciente> {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Paciente> query = builder.createQuery(getModelClass());
 		Root<Paciente> root = query.from(getModelClass());
-		Predicate likeName = builder.like(root.get(Paciente_.name), params.getName());
-		Predicate likeLastName = builder.like(root.get(Paciente_.lastName), params.getLastName());
-		Predicate likeMaternalName = builder.like(root.get(Paciente_.maternalLastName), params.getMaternalLastName());
+		Predicate likeName = builder.like(root.get(Paciente_.name), params.getName() + "%");
+		Predicate likeLastName = builder.like(root.get(Paciente_.lastName), params.getLastName() + "%");
+		Predicate likeMaternalName = builder.like(root.get(Paciente_.maternalLastName), params.getMaternalLastName() + "%");
 		Predicate date = builder.equal(root.get(Paciente_.dateofBirth), params.getDateofBirth());
 		Predicate unidad = builder.equal(root.get(Paciente_.unidadmedica), params.getUnidadmedica());
 		
