@@ -57,17 +57,12 @@ public class PatientQuery extends BaseQueryController<Paciente> {
 	public void query(ActionEvent e) {
 		
 		if(getSearchParams() != null){
-			if(getSearchParams().getName().isEmpty())
-				getSearchParams().setName("%");
-			if(getSearchParams().getLastName().isEmpty())
-				getSearchParams().setLastName("%");
-			if(getSearchParams().getMaternalLastName().isEmpty())
-				getSearchParams().setMaternalLastName("%");
 			
 			getSearchParams().setDateofBirth(dateOfBirth);
 			
 			clearSelected();
 			super.query(e);
+			
 		} else{
 			try {
 				init();
