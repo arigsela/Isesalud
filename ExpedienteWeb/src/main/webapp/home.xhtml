@@ -38,7 +38,9 @@
 				<p:inputText id="sLastName" value="#{patientQuery.searchParams.lastName}"/>
 				<p:outputLabel value="Unidad medica:" for="sUnidadMedica"/>
 				<p:selectOneMenu id="sUnidadMedica" value="#{patientQuery.searchParams.unidadmedica}" converter="#{unidadMedicaConverter}">
-					<f:selectItems value="#{unidadMedicaQuery.model}" var="_unidad" itemLabel="#{_unidad.name}" itemValue="#{_unidad}"></f:selectItems>
+					<f:selectItem itemLabel="Seleccione uno" itemValue="#{null}"/>
+					<f:selectItems value="#{unidadMedicaQuery.model}" var="_unidad" itemLabel="#{_unidad.name}" 
+					itemValue="#{_unidad}"></f:selectItems>
 					</p:selectOneMenu>
 			</h:panelGrid>
 				<h:panelGrid columns="2">
