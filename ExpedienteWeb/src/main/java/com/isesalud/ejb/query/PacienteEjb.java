@@ -1,5 +1,6 @@
 package com.isesalud.ejb.query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -34,6 +35,7 @@ public class PacienteEjb extends BaseManagerEJB<Paciente> {
 	
 	public List<Paciente> getPatients(Paciente params){
 		List<Paciente> model = null;
+		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Paciente> query = builder.createQuery(getModelClass());
 		Root<Paciente> root = query.from(getModelClass());
@@ -41,14 +43,22 @@ public class PacienteEjb extends BaseManagerEJB<Paciente> {
 		Predicate likeLastName = builder.like(root.get(Paciente_.lastName), params.getLastName());
 		Predicate likeMaternalName = builder.like(root.get(Paciente_.maternalLastName), params.getMaternalLastName());
 		Predicate date = builder.equal(root.get(Paciente_.dateofBirth), params.getDateofBirth());
+		Predicate unidad = builder.equal(root.get(Paciente_.unidadmedica), params.getUnidadmedica());
 		
-		query.select(root);
+		predicates.add(likeName);
+		predicates.add(likeLastName);
+		predicates.add(likeMaternalName);
 		
 		if(params.getDateofBirth() != null)
-			query.where(builder.and(likeName, likeLastName, likeMaternalName, date));
-		else
-			query.where(builder.and(likeName, likeLastName, likeMaternalName));
+			predicates.add(date);
 		
+		if(params.getUnidadmedica() != null)
+			predicates.add(unidad);
+		
+		Predicate and = builder.and(predicates.toArray(new Predicate[]{}));
+		
+		query.select(root).where(and);
+
 		model = getList(query);
 		
 		return model;
