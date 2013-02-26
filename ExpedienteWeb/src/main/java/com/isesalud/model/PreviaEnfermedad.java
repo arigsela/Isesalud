@@ -23,9 +23,7 @@ import com.isesalud.support.components.BaseModel;
 
 @Entity
 @Table(name="previaEnfermedad")
-
-
-public class PreviaEnfermedad extends  BaseModel{
+public class PreviaEnfermedad extends  BaseModel {
 	/**
 	 * 
 	 */
@@ -72,5 +70,43 @@ public class PreviaEnfermedad extends  BaseModel{
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((illness == null) ? 0 : illness.hashCode());
+		result = prime * result
+				+ ((paciente == null) ? 0 : paciente.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PreviaEnfermedad other = (PreviaEnfermedad) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (illness == null) {
+			if (other.illness != null)
+				return false;
+		} else if (!illness.equals(other.illness))
+			return false;
+		if (paciente == null) {
+			if (other.paciente != null)
+				return false;
+		} else if (!paciente.equals(other.paciente))
+			return false;
+		return true;
+	}
+	
+	
 }
 

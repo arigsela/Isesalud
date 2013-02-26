@@ -173,28 +173,46 @@
 							<f:facet name="header">
 								Previas Enfermedades
 							</f:facet>
+							<p:commandButton id="btnEraseIllnes" title="Borrar" icon="ui-icon-close"
+								actionListener="#{patientPersistence.erasePreviasEnfermedades}"
+								ajax="true" process="@this" update="@parent">
+								<f:attribute name="selectIllnes" value="#{_prevEnf}"/>
+							</p:commandButton>
 							<h:outputText value="#{_prevEnf.illness}" />
+							<br />
 						</p:dataList>
 						
 						<p:dataList id="dtaCancer" value="#{patientPersistence.cancerList}"
 							var="_cancer">
 							<f:facet name="header">Cancer otras Partes</f:facet>
+							<p:commandButton id="btnEraseParteCuerpo" title="Borrar" icon="ui-icon-close">
+								<f:attribute name="selectParteCuerpo" value="#{_cancer}"/>
+							</p:commandButton>
 							<h:outputText value="#{_cancer.parteCuerpo}" />
+							<br />
 						</p:dataList>
 
 						<p:dataList id="dtaPariente" value="#{patientPersistence.parienteList}"
 							var="_pariente">
 							<f:facet name="header">Parientes con Cancer</f:facet>
+							<p:commandButton id="btnRelative" title="Borrar" icon="ui-icon-close">
+								<f:attribute name="selectRelative" value="#{_pariente}"/>
+							</p:commandButton>
 							<h:outputText value="#{_pariente.relative}" />
+							<br />
 						</p:dataList>
 
 						<p:dataList id="dtaSintomas" value="#{patientPersistence.sintomaList}"
 							var="_sint" type="definition" itemType="disc">
 							<f:facet name="header">Sintomas Cancer</f:facet>
+							<p:commandButton id="btnSintomaNombre" title="Borrar" icon="ui-icon-close">
+								<f:attribute name="selectSintoma" value="#{_sint}"/>
+							</p:commandButton>
 							<h:outputText value="* #{_sint.sintomaNombre}" />
 							<f:facet name="description">
 								<h:outputText value="Lado - #{_sint.sintomaLado}" />
 							</f:facet>
+							<br />
 						</p:dataList>
 					</h:panelGrid>
 				</h:panelGroup>

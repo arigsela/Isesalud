@@ -4,6 +4,7 @@
 package com.isesalud.controller.persistence;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,12 +16,14 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.isesalud.ejb.persistence.PatientPersistenceEjb;
+import com.isesalud.ejb.persistence.PreviaEnfermedadPersistenceEjb;
 import com.isesalud.model.CancerOtrasPartes;
 import com.isesalud.model.Paciente;
 import com.isesalud.model.ParienteCancerMama;
 import com.isesalud.model.PreviaEnfermedad;
 import com.isesalud.model.SintomaCancerMama;
 import com.isesalud.support.components.BaseManagedCrudController;
+import com.isesalud.support.components.EditModeEnum;
 import com.isesalud.support.exceptions.BaseException;
 
 /**
@@ -38,6 +41,9 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 	
 	@EJB
 	private PatientPersistenceEjb manager;
+	
+	@EJB
+	private PreviaEnfermedadPersistenceEjb previaEnfermedadPersistenceEjb;
 	
 	@Inject
 	private Conversation conversation;
@@ -150,6 +156,11 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 		super.doAfterEdit();
 		if(conversation.isTransient())
 			conversation.begin();
+		
+		this.cancerList = getModel().getCanceresOtraPartes();
+		this.sintomaList = getModel().getSintomasCancerMama();
+		this.parienteList = getModel().getParientescancermama();
+		this.prevEnfList = getModel().getPreviasenfermedades();
 	}
 	
 	@Override
@@ -203,6 +214,22 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 		Paciente p = (Paciente) actionEvent.getComponent().getAttributes().get("selected");
 		setModel(p);
 		super.edit(actionEvent);
+	}
+	
+	public void erasePreviasEnfermedades(ActionEvent e){
+		PreviaEnfermedad p = (PreviaEnfermedad) e.getComponent().getAttributes().get("selectIllnes");
+		Iterator<PreviaEnfermedad> iter = this.prevEnfList.iterator();
+		while(iter.hasNext()){
+			PreviaEnfermedad i = iter.next();
+			if(p.equals(i)){
+				if(getEditMode() == EditModeEnum.EDITING){
+					this.previaEnfermedadPersistenceEjb.delete(i.getId());
+					iter.remove();
+				} else {
+					iter.remove();
+				}
+			}
+		}
 	}
 	
 	public String navigate(){
