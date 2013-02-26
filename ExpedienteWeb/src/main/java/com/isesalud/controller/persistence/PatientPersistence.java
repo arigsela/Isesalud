@@ -223,7 +223,8 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 			PreviaEnfermedad i = iter.next();
 			if(p.equals(i)){
 				if(getEditMode() == EditModeEnum.EDITING){
-					this.previaEnfermedadPersistenceEjb.delete(i.getId());
+					if(!i.isEmpty())
+						this.previaEnfermedadPersistenceEjb.delete(i.getId());
 					iter.remove();
 				} else {
 					iter.remove();
