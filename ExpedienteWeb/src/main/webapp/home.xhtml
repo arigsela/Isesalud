@@ -1,191 +1,180 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<f:view xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-
-<html>
-
-<h:head></h:head> 
-<h:body> 
-	<h1>Captura de Pacientes</h1>
-	<h:form id="testForm" prependId="false">
-	
-		<p:messages autoUpdate="true" showDetail="true" showSummary="true"
-			closable="true"/>
-			
-		<p:menubar>
-			<p:menuitem id="btnCreate" value="Nuevo" actionListener="#{patientPersistence.add}"
-				action="PacientesEntradas" ajax="false" process="@this"
-				icon="ui-icon-person"/>
-		</p:menubar>
-		
-		<br />
-		<br />
-
-		<p:fieldset id="fldSearchOpts" toggleable="true" toggleSpeed="500"
-			legend="Opciones de busqueda">
-			
-			<h:panelGrid columns="2">
-				<p:outputLabel value="Nombre:" for="sName"/>
-				<p:inputText id="sName" value="#{patientQuery.searchParams.name}"/>
-				<p:outputLabel value="Apellido Paterno:" for="sLastName"/>
-				<p:inputText id="sLastName" value="#{patientQuery.searchParams.lastName}"/>
-				<p:outputLabel value="Apellido Materno:" for="sMaternalName"/>
-				<p:inputText id="sMaternalName" value="#{patientQuery.searchParams.maternalLastName}"/>
-				
-				<f:facet name="footer">
-					<p:commandButton id="btnSearch" value="Buscar" actionListener="#{patientQuery.query}"
-						update="tblResults" ajax="true"/>
-				</f:facet>
-			</h:panelGrid>
-		</p:fieldset>
-		
-		<br />
-		<br />
-		
-		<p:dataTable id="tblResults" value="#{patientQuery.queryListDM}" var="_stuff"
-			paginator="true"
-			rows="10"
-			paginatorTemplate="
-			{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			rowsPerPageTemplate="5,10,15"
-			paginatorAlwaysVisible="false">
-			<p:column headerText="Nombre">
-				<h:outputText value="#{_stuff.name}" />
-			</p:column>
-			<p:column headerText="Apellido Paterno">
-				<h:outputText value="#{_stuff.lastName}" />
-			</p:column>
-			<p:column headerText="Apellido Materno">
-				<h:outputText value="#{_stuff.maternalLastName}" />
-			</p:column>
-			<p:column headerText="Fecha de Nacimiento">
-				<h:outputText value="#{_stuff.dateofBirth}" >
-					<f:convertDateTime type="date" dateStyle="medium" locale="es_ES"/>
-				</h:outputText>
-			</p:column>
-			<p:column headerText="Fecha de creacion">
-				<h:outputText value="#{_stuff.dateCreated}" >
-					<f:convertDateTime dateStyle="medium" type="date" locale="es_ES"/>
-				</h:outputText>
-			</p:column>
-			<p:column headerText="Hora de creacion">
-				<h:outputText value="#{_stuff.timeCreated}" >
-					<f:convertDateTime type="time" timeStyle="medium" locale="es_ES"/>
-				</h:outputText>
-			</p:column>
-			<p:column headerText="Detalles" style="width:4%">
-				<p:commandButton id="btnSelect" 
-					ajax="true" icon="ui-icon-search" title="Ver detalles" actionListener="#{patientQuery.showPatientDetails}">
-					<f:attribute name="detail" value="#{_stuff}"/>
-				</p:commandButton>
-			</p:column>
-			<p:column headerText="Editar" style="width:4%">
-				<p:commandButton id="btnEdit" actionListener="#{patientPersistence.edit}"
-					action="PacientesEntradas" ajax="true" title="Editar" icon="ui-icon-pencil">
-					<f:attribute name="selected" value="#{_stuff}"/>
-				</p:commandButton>
-			</p:column>
-		</p:dataTable>
-		
-		<p:outputPanel id="details" autoUpdate="true">
-			<p:panel header="Detalles del paciente" id="patientDtls"
-				rendered="#{not empty patientQuery.selectedPatient}">
-			
-				<h:panelGrid columns="2" cellpadding="10">
-
-					<p:panelGrid id="display" columns="2" cellpadding="4">
-						<f:facet name="header">
-							<h:outputText value="#{patientQuery.selectedPatient.name} #{patientQuery.selectedPatient.lastName} #{patientQuery.selectedPatient.maternalLastName}" />
-						</f:facet>
-						
-						<h:outputLabel value="Fecha de Nacimiento:" style="font-weight:bold" />
-						<h:outputLabel value="#{patientQuery.selectedPatient.dateofBirth}" />
-						
-						<h:outputLabel value="Telefono:" style="font-weight:bold" />
-						<h:outputText value="#{patientQuery.selectedPatient.phoneNumber}" />
-						
-						<h:outputLabel value="Unidad Medica:" style="font-weight:bold" />
-						<h:outputText value="#{patientQuery.selectedPatient.unidadmedica.name}" />
-										
-						<h:outputLabel value="Municipio:" style="font-weight:bold" />
-						<h:outputText value="#{patientQuery.selectedPatient.municipio.name}" />
-						
-						<h:outputLabel value="Entidad:" style="font-weight:bold" />
-						<h:outputText value="#{patientQuery.selectedPatient.entidad.name}" />
-						
-						<h:outputLabel value="Domicilio:" style="font-weight:bold" />
-						<h:outputText value="#{patientQuery.selectedPatient.address}" />
-										
-						<h:outputLabel value="Seguro Popular:" style="font-weight:bold" />
-						<h:outputText value="#{patientQuery.selectedPatient.seguroPopular}" />
-					
-						<h:outputLabel value="A amamantado a su hijo:" style="font-weight:bold" />
-						<h:outputText value="#{patientQuery.selectedPatient.breastFeedChild}" />
-						
-						<h:outputLabel value="Edad al tener su primer hijo:" style="font-weight:bold" />
-						<h:outputText value="#{patientQuery.selectedPatient.ageFirstChild}" />
-						
-						<h:outputLabel value="Edad de menopausia:" style="font-weight:bold" />
-						<h:outputText value="#{patientQuery.selectedPatient.ageMenopause}" />
-						
-						<h:outputLabel value="Edad de tomar hormonas:" style="font-weight:bold" />
-						<h:outputText value="#{patientQuery.selectedPatient.ageMenopauseHormones}" />
-						
-						<h:outputLabel value="Edad de menstruacion:" style="font-weight:bold" />
-						<h:outputText value="#{patientQuery.selectedPatient.ageMenstruation}" />
-						
-						<h:outputLabel value="Anios de ultima cirugia:" style="font-weight:bold" />
-						<h:outputText value="#{patientQuery.selectedPatient.yearsSinceSurgery}" />
-						
-						<h:outputLabel value="Fecha de ultima MG:" style="font-weight:bold" />
-						<h:outputText value="#{patientQuery.selectedPatient.dateLastMG}" />
-						
-					</p:panelGrid>
+      
+      <ui:composition template="/templates/common.xhtml">
+		<ui:define name="pageTitle">Consulta de pacientes</ui:define>
+		<ui:define name="pageHeader">Busqueda de Pacientes</ui:define>
+		<ui:define name="body">
+			<h:form id="frmSearch" prependId="false">
+				<p:fieldset id="fldSearchOpts" toggleable="true" toggleSpeed="500"
+					legend="Opciones de busqueda">
 					
 					<h:panelGrid columns="2">
-						<p:dataList id="dtaPrevEnf" value="#{patientQuery.selectedPatient.previasenfermedades}"
-							var="_prevEnf">
-							<f:facet name="header">
-								Previas Enfermedades
-							</f:facet>
-							<h:outputText value="#{_prevEnf.illness}" />
-						</p:dataList>
-					
-						<p:dataList id="dtaCancerOtrasPartes" value="#{patientQuery.selectedPatient.canceresOtraPartes}"
-							var="_cancerotraspartes">
-							<f:facet name="header">
-								Cancer en otras partes
-							</f:facet>
-							<h:outputText value="#{_cancerotraspartes.parteCuerpo}" />
-						</p:dataList>
+						<p:outputLabel value="Nombre:" for="sName"/>
+						<p:inputText id="sName" value="#{patientQuery.searchParams.name}"/>
+						<p:outputLabel value="Apellido Paterno:" for="sLastName"/>
+						<p:inputText id="sLastName" value="#{patientQuery.searchParams.lastName}"/>
+						<p:outputLabel value="Apellido Materno:" for="sMaternalName"/>
+						<p:inputText id="sMaternalName" value="#{patientQuery.searchParams.maternalLastName}"/>
 						
-						<p:dataList id="dtaParienteCancer" value="#{patientQuery.selectedPatient.parientescancermama}"
-							var="_ParienteCancer">
-							<f:facet name="header">
-								Parientes con cancer
-							</f:facet>
-							<h:outputText value="#{_ParienteCancer.relative}" />
-						</p:dataList>
-					
-						<p:dataList id="dtaSintomaCancer" value="#{patientQuery.selectedPatient.sintomasCancerMama}"
-							var="_Sintomas">
-							<f:facet name="header">
-								Sintomas de Cancer de Mama
-							</f:facet>
-							<h:outputText value="#{_Sintomas.sintomaLado} #{_Sintomas.sintomaNombre}" />
-						</p:dataList>
+						<f:facet name="footer">
+							<p:commandButton id="btnSearch" value="Buscar" actionListener="#{patientQuery.query}"
+								update="tblResults" ajax="true"/>
+						</f:facet>
 					</h:panelGrid>
+					
+				</p:fieldset>
+			
+			
+				<br />
+				<br />
 				
-				</h:panelGrid>
-
-			</p:panel>
-		</p:outputPanel>
+				<p:dataTable id="tblResults" value="#{patientQuery.queryListDM}" var="_stuff"
+					paginator="true"
+					rows="10"
+					paginatorTemplate="
+					{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					paginatorAlwaysVisible="false">
+					<p:column headerText="Nombre">
+						<h:outputText value="#{_stuff.name}" />
+					</p:column>
+					<p:column headerText="Apellido Paterno">
+						<h:outputText value="#{_stuff.lastName}" />
+					</p:column>
+					<p:column headerText="Apellido Materno">
+						<h:outputText value="#{_stuff.maternalLastName}" />
+					</p:column>
+					<p:column headerText="Fecha de Nacimiento">
+						<h:outputText value="#{_stuff.dateofBirth}" >
+							<f:convertDateTime type="date" dateStyle="medium" locale="es_ES"/>
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Fecha de creacion">
+						<h:outputText value="#{_stuff.dateCreated}" >
+							<f:convertDateTime dateStyle="medium" type="date" locale="es_ES"/>
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Hora de creacion">
+						<h:outputText value="#{_stuff.timeCreated}" >
+							<f:convertDateTime type="time" timeStyle="medium" locale="es_ES"/>
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Detalles" style="width:4%">
+						<p:commandButton id="btnSelect" 
+							ajax="true" icon="ui-icon-search" title="Ver detalles" actionListener="#{patientQuery.showPatientDetails}">
+							<f:attribute name="detail" value="#{_stuff}"/>
+						</p:commandButton>
+					</p:column>
+					<p:column headerText="Editar" style="width:4%">
+						<p:commandButton id="btnEdit" actionListener="#{patientPersistence.edit}"
+							action="PacientesEntradas" ajax="true" title="Editar" icon="ui-icon-pencil">
+							<f:attribute name="selected" value="#{_stuff}"/>
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				
+				<p:outputPanel id="details" autoUpdate="true">
+					<p:panel header="Detalles del paciente" id="patientDtls"
+						rendered="#{not empty patientQuery.selectedPatient}">
+					
+						<h:panelGrid columns="2" cellpadding="10">
 		
-	</h:form>
-</h:body> 
+							<p:panelGrid id="display" columns="2" cellpadding="4">
+								<f:facet name="header">
+									<h:outputText value="#{patientQuery.selectedPatient.name} #{patientQuery.selectedPatient.lastName} #{patientQuery.selectedPatient.maternalLastName}" />
+								</f:facet>
+								
+								<h:outputLabel value="Fecha de Nacimiento:" style="font-weight:bold" />
+								<h:outputLabel value="#{patientQuery.selectedPatient.dateofBirth}" />
+								
+								<h:outputLabel value="Telefono:" style="font-weight:bold" />
+								<h:outputText value="#{patientQuery.selectedPatient.phoneNumber}" />
+								
+								<h:outputLabel value="Unidad Medica:" style="font-weight:bold" />
+								<h:outputText value="#{patientQuery.selectedPatient.unidadmedica.name}" />
+												
+								<h:outputLabel value="Municipio:" style="font-weight:bold" />
+								<h:outputText value="#{patientQuery.selectedPatient.municipio.name}" />
+								
+								<h:outputLabel value="Entidad:" style="font-weight:bold" />
+								<h:outputText value="#{patientQuery.selectedPatient.entidad.name}" />
+								
+								<h:outputLabel value="Domicilio:" style="font-weight:bold" />
+								<h:outputText value="#{patientQuery.selectedPatient.address}" />
+												
+								<h:outputLabel value="Seguro Popular:" style="font-weight:bold" />
+								<h:outputText value="#{patientQuery.selectedPatient.seguroPopular}" />
+							
+								<h:outputLabel value="A amamantado a su hijo:" style="font-weight:bold" />
+								<h:outputText value="#{patientQuery.selectedPatient.breastFeedChild}" />
+								
+								<h:outputLabel value="Edad al tener su primer hijo:" style="font-weight:bold" />
+								<h:outputText value="#{patientQuery.selectedPatient.ageFirstChild}" />
+								
+								<h:outputLabel value="Edad de menopausia:" style="font-weight:bold" />
+								<h:outputText value="#{patientQuery.selectedPatient.ageMenopause}" />
+								
+								<h:outputLabel value="Edad de tomar hormonas:" style="font-weight:bold" />
+								<h:outputText value="#{patientQuery.selectedPatient.ageMenopauseHormones}" />
+								
+								<h:outputLabel value="Edad de menstruacion:" style="font-weight:bold" />
+								<h:outputText value="#{patientQuery.selectedPatient.ageMenstruation}" />
+								
+								<h:outputLabel value="Anios de ultima cirugia:" style="font-weight:bold" />
+								<h:outputText value="#{patientQuery.selectedPatient.yearsSinceSurgery}" />
+								
+								<h:outputLabel value="Fecha de ultima MG:" style="font-weight:bold" />
+								<h:outputText value="#{patientQuery.selectedPatient.dateLastMG}" />
+								
+							</p:panelGrid>
+							
+							<h:panelGrid columns="2">
+								<p:dataList id="dtaPrevEnf" value="#{patientQuery.selectedPatient.previasenfermedades}"
+									var="_prevEnf">
+									<f:facet name="header">
+										Previas Enfermedades
+									</f:facet>
+									<h:outputText value="#{_prevEnf.illness}" />
+								</p:dataList>
+							
+								<p:dataList id="dtaCancerOtrasPartes" value="#{patientQuery.selectedPatient.canceresOtraPartes}"
+									var="_cancerotraspartes">
+									<f:facet name="header">
+										Cancer en otras partes
+									</f:facet>
+									<h:outputText value="#{_cancerotraspartes.parteCuerpo}" />
+								</p:dataList>
+								
+								<p:dataList id="dtaParienteCancer" value="#{patientQuery.selectedPatient.parientescancermama}"
+									var="_ParienteCancer">
+									<f:facet name="header">
+										Parientes con cancer
+									</f:facet>
+									<h:outputText value="#{_ParienteCancer.relative}" />
+								</p:dataList>
+							
+								<p:dataList id="dtaSintomaCancer" value="#{patientQuery.selectedPatient.sintomasCancerMama}"
+									var="_Sintomas">
+									<f:facet name="header">
+										Sintomas de Cancer de Mama
+									</f:facet>
+									<h:outputText value="#{_Sintomas.sintomaLado} #{_Sintomas.sintomaNombre}" />
+								</p:dataList>
+							</h:panelGrid>
+						
+						</h:panelGrid>
+		
+					</p:panel>
+				</p:outputPanel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+	
+	
 </html>
-</f:view> 
 
