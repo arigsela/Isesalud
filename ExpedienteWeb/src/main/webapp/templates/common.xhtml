@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      contentType="text/html">
+
+<html >
+      
+	<h:head>
+		<!-- PATCH FOR IE9 -->
+	    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8"/>
+	    <!-- END OF PATCH -->
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+	    <meta http-equiv="Pragma" content="no-cache"/>
+	    <meta http-equiv="Expires" content="0"/>
+	    <meta http-equiv="refresh" content="#{session.maxInactiveInterval};url=home.xhtml?reason=expired" />
+	    <base href="#{facesContext.externalContext.requestContextPath}"/>
+		<h:outputStylesheet library="css" name="style.css"/>
+		<title><ui:insert name="pageTitle">Page Title</ui:insert></title>
+		<ui:insert name="head"></ui:insert>
+	</h:head>
+
+	<ui:insert name="metadata"></ui:insert>
+
+	<h:body>
+		
+		<ui:insert name="dialogs"></ui:insert>
+
+	<p:layout fullPage="true" id="layout">
+		
+		<p:layoutUnit position="north" size="100" 
+			resizable="false" collapsible="false" 
+			closable="false">
+			
+		</p:layoutUnit>
+		
+		<p:layoutUnit position="west" size="300" closable="false" collapsible="false"
+			resizable="false" header="Menu Principal">
+			<ui:include src="/templates/mainMenu.xhtml" />
+		</p:layoutUnit>
+		
+		<p:layoutUnit position="center">
+			<h3><ui:insert name="pageHeader"/></h3>
+			<p:messages autoUpdate="true" showDetail="true" showSummary="true"
+			closable="true"/>
+			<ui:insert name="body">PageBody</ui:insert>
+		</p:layoutUnit>
+	</p:layout>
+
+</h:body>
+		
+</html>
+</f:view>
