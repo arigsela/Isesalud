@@ -4,6 +4,7 @@
 package com.isesalud.controller.persistence;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,14 +16,19 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.isesalud.ejb.persistence.CancerOtrasPartesPersistenceEjb;
+import com.isesalud.ejb.persistence.ParienteCancerMamaPersistenceEjb;
 import com.isesalud.ejb.persistence.PatientPersistenceEjb;
 import com.isesalud.ejb.persistence.PreviaEnfermedadPersistenceEjb;
+import com.isesalud.ejb.persistence.SintomaCancerMamaPersistenceEjb;
 import com.isesalud.model.CancerOtrasPartes;
 import com.isesalud.model.Paciente;
 import com.isesalud.model.ParienteCancerMama;
 import com.isesalud.model.PreviaEnfermedad;
 import com.isesalud.model.SintomaCancerMama;
 import com.isesalud.support.components.BaseManagedCrudController;
+import com.isesalud.support.components.BaseModel;
+import com.isesalud.support.components.BasePersistenceManager;
 import com.isesalud.support.components.EditModeEnum;
 import com.isesalud.support.exceptions.BaseException;
 
@@ -44,6 +50,12 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 	
 	@EJB
 	private PreviaEnfermedadPersistenceEjb previaEnfermedadPersistenceEjb;
+	@EJB
+	private CancerOtrasPartesPersistenceEjb cancerOtrasPartesPersistenceEjb;
+	@EJB
+	private ParienteCancerMamaPersistenceEjb parienteCancerMamaPersistenceEjb;
+	@EJB
+	private SintomaCancerMamaPersistenceEjb sintomaCancerMamaPersistenceEjb;
 	
 	@Inject
 	private Conversation conversation;
@@ -218,20 +230,42 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 	
 	public void erasePreviasEnfermedades(ActionEvent e){
 		PreviaEnfermedad p = (PreviaEnfermedad) e.getComponent().getAttributes().get("selectIllnes");
-		Iterator<PreviaEnfermedad> iter = this.prevEnfList.iterator();
+		eraseFromList(this.prevEnfList, this.previaEnfermedadPersistenceEjb, p);
+	}
+	
+	public void eraseCancerOtrasPartes(ActionEvent e){
+		CancerOtrasPartes p = (CancerOtrasPartes) e.getComponent().getAttributes().get("selectCancer");
+		eraseFromList(this.cancerList, this.cancerOtrasPartesPersistenceEjb, p);
+	}
+	
+	public void eraseParienteCancer(ActionEvent e){
+		ParienteCancerMama p = (ParienteCancerMama) e.getComponent().getAttributes().get("selectPariente");
+		eraseFromList(this.parienteList, this.parienteCancerMamaPersistenceEjb, p);
+	}
+	
+	public void eraseSintomaCancer(ActionEvent e){
+		SintomaCancerMama p = (SintomaCancerMama) e.getComponent().getAttributes().get("selectSintoma");
+		eraseFromList(this.sintomaList, this.sintomaCancerMamaPersistenceEjb, p);
+	}
+	
+	private <T extends BaseModel> void eraseFromList(Collection<T> list, BasePersistenceManager<T> manager, T entity){
+		if(list == null || manager == null || entity == null)
+			throw new IllegalArgumentException("Input parameters cannot be null");
+		
+		Iterator<T> iter = list.iterator();
 		while(iter.hasNext()){
-			PreviaEnfermedad i = iter.next();
-			if(p.equals(i)){
+			T i = iter.next();
+			if(entity.equals(i))
 				if(getEditMode() == EditModeEnum.EDITING){
 					if(!i.isEmpty())
-						this.previaEnfermedadPersistenceEjb.delete(i.getId());
+						manager.delete(i.getId());
 					iter.remove();
 				} else {
 					iter.remove();
 				}
-			}
 		}
 	}
+	
 	
 	public String navigate(){
 		return "home";
