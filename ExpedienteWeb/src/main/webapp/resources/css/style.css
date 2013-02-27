@@ -3,3 +3,8 @@
 .ui-widget, .ui-widget .ui-widget {
 font-size: 90% !important;
 }
+
+.logo .ui-layout-unit-content {
+	background-image: url("#{resource['img:mama-cablemas-logos.png']}");
+	background-size: 100% 100%;
+}
