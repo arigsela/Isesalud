@@ -6,3 +6,6 @@ insert into personal (id, lastname, maternallastname, name, puesto) values (1, '
 insert into unidadmedica (id, name, description, code) values (1, 'Hosptial General', 'Some place', 0);
 insert into unidadmedica (id, name, description, code) values (2, 'Centro', 'Some place', 1);
 insert into paciente (id, lastName, maternalLastName, name, dateofBirth, phoneNumber, address, sex, seguroPopular, dateCreated, timeCreated, ageMenstruation, ageFirstChild, BreastFeedChild, yearsSinceSurgery, ageMenopause, ageMenopauseHormones, dateLastMG, observations, personal, municipio, entidad, unidadmedica) values (1, 'Perez', 'Mendoza', 'Ari', '1980-02-16', '123456', 'Calle bleh', 'M', '0', '2013-02-11', '12:00:00', 0, 0, 0, 0, 0, 0, '2012-01-01', 'None', 1, 1, 1, 1);
+insert into tipocita (id,descripcion) values (1,'Radiologia')
+insert into statuscita (id,descripcion) values (1,'Pendiente')
+insert into cita (id,fecha,hora,status,tipo,personal,paciente) values (1,'2012-02-28','12:00:00',1,1,1)

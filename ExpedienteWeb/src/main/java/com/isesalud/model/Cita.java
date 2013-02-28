@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.Hibernate;
+
 import com.isesalud.support.components.BaseModel;
 
 /**
@@ -62,7 +64,7 @@ public class Cita extends BaseModel{
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "tipoCita", nullable = false)
 	public Tipocita getTipocita() {
 		return this.tipocita;
@@ -72,7 +74,7 @@ public class Cita extends BaseModel{
 		this.tipocita = tipocita;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "statusCita", nullable = false)
 	public Statuscita getStatuscita() {
 		return this.statuscita;
@@ -102,7 +104,7 @@ public class Cita extends BaseModel{
 		this.time = time;
 	}
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "personal", nullable = false)
 	public Personal getPersonal() {
 		return this.personal;
@@ -112,7 +114,7 @@ public class Cita extends BaseModel{
 		this.personal = personal;
 	}
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "paciente", nullable = false)
 	public Paciente getPaciente() {
 		return this.paciente;
@@ -121,5 +123,6 @@ public class Cita extends BaseModel{
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
-
+	
+		
 }

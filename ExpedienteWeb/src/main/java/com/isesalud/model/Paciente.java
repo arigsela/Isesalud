@@ -24,6 +24,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.Hibernate;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
 import com.isesalud.support.components.BaseModel;
@@ -72,6 +73,11 @@ public class Paciente extends BaseModel {
 	@Column(name="phoneNumber", nullable = true, length = 20)
 	@Length(max=20)
 	private String phoneNumber;
+	
+	@Column(name="email", nullable = true, length = 300)
+	@Length(max=300)
+	@Email
+	private String email;
 	
 	@Column(name="address", nullable = true, length = 300)
 	@Length(max=300)
@@ -163,7 +169,7 @@ public class Paciente extends BaseModel {
 	}
 	
 	public Paciente(String lastName, String maternalLastName, String name,
-			Date dateofBirth, String phoneNumber, String address, char sex,
+			Date dateofBirth, String phoneNumber,String email, String address, char sex,
 			Personal personal, Municipio municipio, Entidad entidad,
 			Unidadmedica unidadmedica) {
 		this.id = new Long(0L);
@@ -178,6 +184,7 @@ public class Paciente extends BaseModel {
 		this.municipio = municipio;
 		this.entidad = entidad;
 		this.unidadmedica = unidadmedica;
+		this.email = email;
 	}
 	
 	public List<Cita> getCitas() {
@@ -364,6 +371,13 @@ public class Paciente extends BaseModel {
 		this.personal = personal;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	
 	@Override
 	public void initLazyElements() {
