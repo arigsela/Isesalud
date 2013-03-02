@@ -38,6 +38,10 @@ public class Tipocita extends BaseModel {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipocita")
 	private List<Cita> citas = new ArrayList<Cita>(0);
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipocita")
+	private List<TipoEstudioCita> tipoEstudioCitas = new ArrayList<TipoEstudioCita>(0);
+	
+	
 	public Tipocita() {
 	this.id = new Long(0L);
 	}
@@ -76,4 +80,12 @@ public class Tipocita extends BaseModel {
 		this.citas = citas;
 	}
 
+	public List<TipoEstudioCita> getTipoEstudioCitas() {
+		return tipoEstudioCitas;
+	}
+
+	public void setTipoEstudioCitas(List<TipoEstudioCita> tipoEstudioCitas) {
+		this.tipoEstudioCitas = tipoEstudioCitas;
+	}
+	
 }
