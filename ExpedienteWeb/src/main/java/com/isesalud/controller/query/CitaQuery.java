@@ -92,7 +92,8 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 				
 				if(datasource.size() > 0){
 					for(Cita c : datasource){
-						String title = c.getId().toString();
+						String title = c.getPaciente().getName() + " " +
+								c.getPaciente().getLastName();
 						
 						Date date = c.getDate();
 						Date time = c.getTime();
@@ -109,7 +110,7 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 						calDT.set(Calendar.MILLISECOND, calT.get(Calendar.MILLISECOND));
 						
 						Date result = calDT.getTime();
-						calDT.add(Calendar.MINUTE, 30);
+						calDT.add(Calendar.MINUTE, 10);
 						Date result2 = calDT.getTime();
 						
 						event = new DefaultScheduleEvent(title, 
