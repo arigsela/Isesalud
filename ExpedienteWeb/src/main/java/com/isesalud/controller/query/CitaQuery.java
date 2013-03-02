@@ -3,11 +3,19 @@
  */
 package com.isesalud.controller.query;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
+
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.LazyScheduleModel;
+import org.primefaces.model.ScheduleModel;
 
 import com.isesalud.ejb.query.CitaEjb;
 import com.isesalud.model.Cita;
@@ -33,6 +41,8 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 	
 	private Cita selectedCita;
 	
+	private ScheduleModel model;
+	
 	@EJB
 	private CitaEjb citaEjb;
 	
@@ -50,21 +60,74 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 	public Cita getSelectedCita() {
 		return selectedCita;
 	}
+	
+	public ScheduleModel getModel() {
+		return model;
+	}
+	
+	public void setModel(ScheduleModel model) {
+		this.model = model;
+	}
+	
+	@PostConstruct
+	public void loadData(){
+		model = new LazyScheduleModel(){
+			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void loadEvents(Date start, Date end) {
+				List<Cita> datasource = null;
+				DefaultScheduleEvent event = null;
+				
+				clear();
+				
+				searchParams.setStartDate(start);
+				searchParams.setEndDate(end);
+				
+				datasource = citaEjb.getCitasByDateRange(searchParams);
+				
+				if(datasource.size() > 0){
+					for(Cita c : datasource){
+						String title = c.getId().toString();
+						
+						Date date = c.getDate();
+						Date time = c.getTime();
+						
+						Calendar calDT = Calendar.getInstance();
+						calDT.setTime(date);
+						
+						Calendar calT = Calendar.getInstance();
+						calT.setTime(time);
+						
+						calDT.set(Calendar.HOUR_OF_DAY, calT.get(Calendar.HOUR_OF_DAY));
+						calDT.set(Calendar.MINUTE, calT.get(Calendar.MINUTE));
+						calDT.set(Calendar.SECOND, calT.get(Calendar.SECOND));
+						calDT.set(Calendar.MILLISECOND, calT.get(Calendar.MILLISECOND));
+						
+						Date result = calDT.getTime();
+						calDT.add(Calendar.MINUTE, 30);
+						Date result2 = calDT.getTime();
+						
+						event = new DefaultScheduleEvent(title, 
+								result, result2);
+						
+						event.setData(c);
+						
+						addEvent(event);
+						
+					}
+				}
+			};
+		};
+	}
 		
 	@Override
 	public void query(ActionEvent e) {
-		
-		if(getSearchParams() != null){
-			clearSelected();
-			super.query(e);
-			
-		} else{
-			try {
-				init();
-			} catch (BaseException ex) {
-				ex.printStackTrace();
-			}
-		}
+		loadData();
 	}
 	
 	public void clearSelected(){
@@ -85,7 +148,7 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 			
 	@Override
 	protected List<Cita> getQueryList() {
-		return citaEjb.getAllCita();
+		return null;
 	}
 
 	@Override

@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.Hibernate;
 
@@ -37,6 +38,8 @@ public class Cita extends BaseModel{
 	private Date time;
 	private Personal personal;
 	private Paciente paciente;
+	private Date startDate;
+	private Date endDate;
 
 	public Cita() {
 		this.id = new Long(0L);
@@ -124,5 +127,22 @@ public class Cita extends BaseModel{
 		this.paciente = paciente;
 	}
 	
+	@Transient
+	public Date getStartDate() {
+		return startDate;
+	}
+	
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+	
+	@Transient
+	public Date getEndDate() {
+		return endDate;
+	}
+	
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 		
 }
