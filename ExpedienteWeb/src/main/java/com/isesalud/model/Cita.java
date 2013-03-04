@@ -15,9 +15,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-
-import org.hibernate.Hibernate;
-
 import com.isesalud.support.components.BaseModel;
 
 /**
@@ -32,7 +29,7 @@ public class Cita extends BaseModel{
 	 */
 	private static final long serialVersionUID = -7318268764455653312L;
 	private Long id;
-	private Tipocita tipocita;
+	private TipoEstudioCita tipoestudiocita;
 	private Statuscita statuscita;
 	private Date date;
 	private Date time;
@@ -45,10 +42,10 @@ public class Cita extends BaseModel{
 		this.id = new Long(0L);
 	}
 
-	public Cita(Tipocita tipocita, Statuscita statuscita, Date date, Date time,
+	public Cita(TipoEstudioCita tipoestudiocita, Statuscita statuscita, Date date, Date time,
 			Personal personal, Paciente paciente) {
 		this.id = new Long(0L);
-		this.tipocita = tipocita;
+		this.tipoestudiocita = tipoestudiocita;
 		this.statuscita = statuscita;
 		this.date = date;
 		this.time = time;
@@ -68,14 +65,17 @@ public class Cita extends BaseModel{
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "tipoCita", nullable = false)
-	public Tipocita getTipocita() {
-		return this.tipocita;
+	@JoinColumn(name = "tipoEstudioCita", nullable = false)
+	public TipoEstudioCita getTipoestudiocita() {
+		return this.tipoestudiocita;
 	}
 
-	public void setTipocita(Tipocita tipocita) {
-		this.tipocita = tipocita;
+
+	public void setTipoestudiocita(TipoEstudioCita tipoestudiocita) {
+		this.tipoestudiocita = tipoestudiocita;
 	}
+	
+
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "statusCita", nullable = false)
@@ -144,5 +144,4 @@ public class Cita extends BaseModel{
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-		
 }

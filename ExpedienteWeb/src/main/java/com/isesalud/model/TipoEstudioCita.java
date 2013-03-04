@@ -28,7 +28,6 @@ public class TipoEstudioCita extends BaseModel{
 	 * 
 	 */
 	private static final long serialVersionUID = 3888649985277635855L;
-	private Tipocita tipocita;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id", unique=true, nullable=false)
@@ -39,11 +38,17 @@ public class TipoEstudioCita extends BaseModel{
 	private String description;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "tipoCita", nullable = false)
+	@JoinColumn(name = "tipocita", nullable = false)
+	private Tipocita tipocita;
+	
 	public Tipocita getTipocita() {
-		return this.tipocita;
+			return this.tipocita;
 	}
 
+	public void setTipocita(Tipocita tipocita) {
+		this.tipocita = tipocita;
+	}
+	
 	public TipoEstudioCita() {
 		this.id = new Long(0L);
 	}
