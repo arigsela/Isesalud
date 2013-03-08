@@ -132,16 +132,7 @@
 								<f:selectItems value="#{unidadMedicaQuery.model}" var="_unidad"
 									itemLabel="#{_unidad.name}" itemValue="#{_unidad}" ></f:selectItems>
 							</p:selectOneMenu>
-							<p:outputLabel value="Personal" for="pers" />
-							<p:selectOneMenu id="pers"
-								value="#{patientPersistence.model.personal}"
-								converter="#{personalConverter}"
-								style="width:100%">
-								<f:selectItems value="#{personalQuery.model}" var="_pers"
-									itemLabel="#{_pers.name} #{_pers.lastname}" itemValue="#{_pers}" ></f:selectItems>
-							</p:selectOneMenu>
 						</p:panelGrid>
-						
 						<h:panelGroup>
 							<p:panelGrid columns="4">
 								<p:outputLabel id="lblPrevEnf" for="txtPrevEnf" value="Previas Enfermedades"/>

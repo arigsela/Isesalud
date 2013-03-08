@@ -3,15 +3,12 @@
  */
 package com.isesalud.model;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -55,12 +52,9 @@ public class Personal extends BaseModel {
 	@JoinColumn(name="puesto", nullable=false)
 	private Puesto puesto;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="personal")
-	private List<Paciente> pacientes = new ArrayList<Paciente>();
-	
 	public Personal() {
 		this.id = new Long(0L);
-		}
+	}
 	
 	
 	public Personal(String lastname, String maternallastname, String name,
@@ -70,7 +64,6 @@ public class Personal extends BaseModel {
 		this.maternallastname = maternallastname;
 		this.name = name;
 		this.puesto = puesto;
-		this.pacientes = pacientes;
 	}
 
 
@@ -108,15 +101,4 @@ public class Personal extends BaseModel {
 	public void setPuesto(Puesto puesto) {
 		this.puesto = puesto;
 	}
-
-
-	public List<Paciente> getPacientes() {
-		return pacientes;
-	}
-
-
-	public void setPacientes(List<Paciente> pacientes) {
-		this.pacientes = pacientes;
-	}
-	
 }

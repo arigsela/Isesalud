@@ -7,11 +7,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.event.Observes;
-import javax.enterprise.event.Reception;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
-
 import com.isesalud.ejb.query.TipoEstudioCitaEjb;
 import com.isesalud.model.TipoEstudioCita;
 import com.isesalud.model.Tipocita;
