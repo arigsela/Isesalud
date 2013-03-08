@@ -16,17 +16,20 @@ import com.isesalud.support.components.BaseManagerEJB;
  * @author Ing. Ari G. Sela M.
  *
  */
-
 @Stateless
 @LocalBean
 public class StatusCitaEjb extends BaseManagerEJB<Statuscita>{
 
 	public List<Statuscita> getAllStatusCita(){
+		List<Statuscita> model = null;
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Statuscita> query = builder.createQuery(getModelClass());
 		Root<Statuscita> root = query.from(getModelClass());
 		query.select(root);
-		return getList(query);
+		
+		model = getList(query);
+		
+		return model;
 	}
 	
 	@Override
@@ -34,5 +37,4 @@ public class StatusCitaEjb extends BaseManagerEJB<Statuscita>{
 		return Statuscita.class;
 	}
 	
-
 }

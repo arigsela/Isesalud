@@ -64,12 +64,12 @@ public class Tipocita extends BaseModel {
 		this.description = description;
 	}
 	
-	/*public List<TipoEstudioCita> getTipoEstudioCitas() {
+	public List<TipoEstudioCita> getTipoEstudioCitas() {
 		return tipoEstudioCitas;
 	}
 
 	public void setTipoEstudioCitas(List<TipoEstudioCita> tipoEstudioCitas) {
 		this.tipoEstudioCitas = tipoEstudioCitas;
-	}*/
+	}
 	
 }

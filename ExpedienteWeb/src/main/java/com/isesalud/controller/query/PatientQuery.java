@@ -9,8 +9,12 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.SelectEvent;
+
+import com.isesalud.controller.persistence.PatientPersistence;
 import com.isesalud.ejb.query.PacienteEjb;
 import com.isesalud.model.Paciente;
 import com.isesalud.support.components.BaseQueryController;
@@ -31,26 +35,20 @@ public class PatientQuery extends BaseQueryController<Paciente> {
 	
 	private Paciente searchParams;
 	
-	private Paciente selectedPatient;
-	
 	private Date dateOfBirth;
+	
+	@Inject
+	private PatientPersistence patientPersistence;
+	
+	private Paciente detailsPaciente;
 	
 	@EJB
 	private PacienteEjb pacienteEjb;
 	
+	
 	@Override
 	protected void init() throws BaseException {
 		searchParams = new Paciente();
-	}
-	
-	public void showPatientDetails(ActionEvent e){
-		Paciente p = (Paciente) e.getComponent().getAttributes().get("detail");
-		Paciente full = pacienteEjb.getFULL(p.getId());
-		setSelectedPatient(full);
-	}
-	
-	public Paciente getSelectedPatient() {
-		return selectedPatient;
 	}
 	
 	@Override
@@ -60,7 +58,6 @@ public class PatientQuery extends BaseQueryController<Paciente> {
 			
 			getSearchParams().setDateofBirth(dateOfBirth);
 			
-			clearSelected();
 			super.query(e);
 			
 		} else{
@@ -72,12 +69,8 @@ public class PatientQuery extends BaseQueryController<Paciente> {
 		}
 	}
 	
-	public void clearSelected(){
-		selectedPatient = null;
-	}
-	
-	public void setSelectedPatient(Paciente selectedPatient) {
-		this.selectedPatient = selectedPatient;
+	public void onSelectedRow(SelectEvent e){
+		detailsPaciente = pacienteEjb.getFULL(patientPersistence.getModel().getId());
 	}
 	
 	public Paciente getSearchParams() {
@@ -94,6 +87,14 @@ public class PatientQuery extends BaseQueryController<Paciente> {
 	
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+	
+	public Paciente getDetailsPaciente() {
+		return detailsPaciente;
+	}
+	
+	public void setDetailsPaciente(Paciente detailsPaciente) {
+		this.detailsPaciente = detailsPaciente;
 	}
 
 	@Override

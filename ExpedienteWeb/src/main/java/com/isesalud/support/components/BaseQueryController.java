@@ -20,7 +20,7 @@ import com.isesalud.support.exceptions.BaseException;
 @SuppressWarnings("serial")
 public abstract class BaseQueryController<T> extends BaseComponent {
 
-	private Logger log = Logger.getLogger(getClass());
+	protected Logger log = Logger.getLogger(getClass());
 	
 	private List<T> queryListDM;
 	

@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/templates/common.xhtml">
+			<ui:define name="pageTitle">Citas</ui:define>
+			<ui:define name="pageHeader">Registro de cita</ui:define>
+			<ui:define name="body">
+				<h:form id="frmCreateCita" prependId="false">
+					
+					<p:panel header="Datos de la cita">
+						<h:panelGrid columns="6">
+							<p:outputLabel id="lblName" value="Nombre:" for="outName"/>
+							<h:outputText id="outName" value="#{citaPersistence.model.paciente.name}" />
+							<p:outputLabel id="lblLast" value="Apellido Paterno:" for="outLast"/>
+							<h:outputText id="outLast" value="#{citaPersistence.model.paciente.lastName}" />
+							<p:outputLabel id="lblMother" value="Apellido Materno:" for="outMother"/>
+							<h:outputText id="outMother" value="#{citaPersistence.model.paciente.maternalLastName}" />
+							<p:outputLabel id="lblDate" value="Fecha programada:" for="dteFecha"/>
+							<p:calendar id="dteFecha" value="#{citaPersistence.model.date}">
+								<f:convertDateTime type="date" dateStyle="short"/>
+							</p:calendar>
+							<p:outputLabel id="lblHora" value="Hora:" for="dteHora"/>
+							<p:calendar id="dteHora" value="#{citaPersistence.model.time}" timeOnly="true"
+								pattern="hh:mm a">
+								<f:convertDateTime type="time" timeStyle="short"/>
+							</p:calendar>
+							<p:outputLabel id="lblStatus" value="Status:" for="cbxStatus"/>
+							<p:selectOneMenu id="cbxStatus" value="#{citaPersistence.model.statuscita}"
+								converter="#{statusCitaConverter}">
+								<f:selectItems value="#{statusCitaQuery.queryListDM}" var="_status"
+									itemLabel="#{_status.description}" itemValue="#{_status}"></f:selectItems>
+							</p:selectOneMenu>
+						</h:panelGrid>
+					</p:panel>
+					
+					<br />
+					<br />
+					
+					<h3>Agregar estudio</h3>
+					<h:panelGrid columns="2" cellpadding="100" width="%100">
+						<h:panelGroup layout="block">
+							<h:panelGrid columns="2" cellpadding="10" cellspacing="10">
+								<p:outputLabel id="lblStudyType" value="Tipo" for="cbxType"/>
+								<p:selectOneMenu id="cbxType" value="#{tipoCitaQuery.selectedTipoCita}"
+									converter="#{tipoCitaConverter}"
+									valueChangeListener="#{tipoCitaQuery.onTipocitaValueChanged}">
+									<f:selectItems value="#{tipoCitaQuery.queryListDM}" var="tipo"
+										itemLabel="#{tipo.description}" itemValue="#{tipo}"></f:selectItems>
+									<p:ajax event="change" update="cbxStudy"/>
+								</p:selectOneMenu>
+								<p:outputLabel id="lblStudy" value="Estudio" for="cbxStudy"/>
+								<p:selectOneMenu id="cbxStudy" value="#{citaPersistence.selectedStudy}"
+									converter="#{tipoEstudioCitaConverter}">
+									<f:selectItems value="#{tipoEstudioCitaQuery.queryListDM}" var="_study"
+										itemLabel="#{_study.name}" itemValue="#{_study}"></f:selectItems>
+								</p:selectOneMenu>
+							</h:panelGrid>
+							
+							<p:outputPanel layout="block" autoUpdate="true">
+								<p:commandButton id="btnAddStudy" ajax="true" actionListener="#{citaPersistence.onAddStudy}"
+									process="@this, cbxStudy" disabled="#{citaPersistence.studySelected}"
+									value="Agregar"/>
+								<p:commandButton id="btnDeleteStudy" ajax="true" actionListener="#{citaPersistence.onDeleteStudy}"
+									process="@this" disabled="#{not citaPersistence.studySelected}"
+									value="borrar"/>
+							</p:outputPanel>
+							
+						</h:panelGroup>
+						<h:panelGroup layout="block">
+							<p:outputPanel layout="block" autoUpdate="true">
+								<p:panel header="EStudio Seleccionado">
+									<h:outputText value="* #{citaPersistence.model.tipoestudiocita.name}" />
+									<br />
+									<p:separator />
+									<h3>Notas</h3>
+									<h:outputText value="#{citaPersistence.model.tipoestudiocita.notes}" />
+								</p:panel>
+							</p:outputPanel>
+						</h:panelGroup>
+					</h:panelGrid>
+					
+					<p:commandButton id="btnSave" ajax="false" actionListener="#{citaPersistence.save}"
+						action="/citas/Citas?faces-redirect=true" value="Salvar"/>
+					<p:commandButton id="btnCancel" ajax="false" actionListener="#{citaPersistence.cancel}"
+						action="/citas/Citas?faces-redirect=true" value="Cancelar"/>
+				</h:form>
+			</ui:define>
+	</ui:composition>
+
+</html>

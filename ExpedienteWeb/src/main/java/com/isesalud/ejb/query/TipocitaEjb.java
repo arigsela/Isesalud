@@ -19,7 +19,6 @@ import com.isesalud.support.components.BaseManagerEJB;
  */
 @Stateless
 @LocalBean
-
 public class TipocitaEjb extends BaseManagerEJB<Tipocita>{
 
 	public List<Tipocita> getAllTipoCita(){

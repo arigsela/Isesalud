@@ -9,9 +9,9 @@
 		<h:form id="frmMainMenu" prependId="false">
 			<p:panelMenu>
 				<p:submenu label="Pacientes">
-					<p:menuitem value="Buscar" action="home?faces-redirect=true"
-						ajax="false" icon="ui-icon-search"/>
-					<p:menuitem value="Crear Nuevo" action="PacientesEntradas"
+					<p:menuitem value="Buscar" action="/home?faces-redirect=true"
+						ajax="false" icon="ui-icon-search" process="@this"/>
+					<p:menuitem value="Crear Nuevo" action="/PacientesEntradas"
 						actionListener="#{patientPersistence.add}"
 						ajax="false" process="@this"
 						icon="ui-icon-document"/>

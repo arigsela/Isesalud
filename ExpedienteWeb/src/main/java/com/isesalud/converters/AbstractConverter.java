@@ -21,7 +21,7 @@ import com.isesalud.support.components.BaseModel;
  */
 public abstract class AbstractConverter<T extends BaseModel, M extends BaseManager<T>> implements Converter {
 	
-	private Logger log = Logger.getLogger(getClass());
+	protected Logger log = Logger.getLogger(getClass());
 
 	@Override
 	public Object getAsObject(FacesContext ctx, UIComponent uic, String modelID) {
@@ -48,7 +48,8 @@ public abstract class AbstractConverter<T extends BaseModel, M extends BaseManag
 	@SuppressWarnings("unchecked")
 	@Override
 	public String getAsString(FacesContext ctx, UIComponent uic, Object model) {
-		return !CompareUtil.isEmpty(model) ? ((T) model).getId().toString() : null;
+		String result = !CompareUtil.isEmpty(model) ? ((T) model).getId().toString() : null;
+		return result;
 	}
 	
 	/**

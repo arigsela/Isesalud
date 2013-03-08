@@ -19,7 +19,6 @@ import com.isesalud.model.Tipocita;
 @Named
 @FacesConverter("TipoCitaConverter")
 @RequestScoped
-
 public class TipoCitaConverter extends AbstractConverter<Tipocita, TipocitaEjb>{
 
 	@EJB

@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
 
 import com.isesalud.ejb.query.StatusCitaEjb;
 import com.isesalud.model.Statuscita;
@@ -16,6 +18,8 @@ import com.isesalud.support.components.BaseQueryController;
  * @author Ing. Ari G. Sela M.
  *
  */
+@Named
+@ViewScoped
 public class StatusCitaQuery extends BaseQueryController<Statuscita>{
 
 	/**
@@ -27,13 +31,14 @@ public class StatusCitaQuery extends BaseQueryController<Statuscita>{
 	private StatusCitaEjb ejb;
 	
 	@PostConstruct
-	public void init(){
+	public void loadData(){
 		setQueryListDM(getQueryList());
 	}
 	
 	@Override
 	protected List<Statuscita> getQueryList() {
-		return ejb.getAllStatusCita();
+		List<Statuscita> model = ejb.getAllStatusCita();
+		return model;
 	}
 
 	@Override

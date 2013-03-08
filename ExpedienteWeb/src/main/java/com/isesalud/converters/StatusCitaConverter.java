@@ -19,6 +19,7 @@ import com.isesalud.model.Statuscita;
 @FacesConverter("StatusCitaConverter")
 @RequestScoped
 public class StatusCitaConverter extends AbstractConverter<Statuscita, StatusCitaEjb>{
+	
 	@EJB
 	private StatusCitaEjb manager;
 

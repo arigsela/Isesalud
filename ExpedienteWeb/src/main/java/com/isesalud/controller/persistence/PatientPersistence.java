@@ -4,8 +4,6 @@
 package com.isesalud.controller.persistence;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -27,9 +25,6 @@ import com.isesalud.model.ParienteCancerMama;
 import com.isesalud.model.PreviaEnfermedad;
 import com.isesalud.model.SintomaCancerMama;
 import com.isesalud.support.components.BaseManagedCrudController;
-import com.isesalud.support.components.BaseModel;
-import com.isesalud.support.components.BasePersistenceManager;
-import com.isesalud.support.components.EditModeEnum;
 import com.isesalud.support.exceptions.BaseException;
 
 /**
@@ -138,7 +133,7 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 	
 	
 	@PostConstruct
-	public void init(){
+	public void initialize(){
 		if(conversation != null && conversation.isTransient()){
 			this.parienteCancerMama = new ParienteCancerMama();
 			this.cancerOtrasPartes = new CancerOtrasPartes();
@@ -164,10 +159,15 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 	}
 	
 	@Override
-	protected void doAfterEdit() throws BaseException {
-		super.doAfterEdit();
+	protected void doBeforeEdit() throws BaseException {
+		super.doBeforeEdit();
 		if(conversation.isTransient())
 			conversation.begin();
+	}
+	
+	@Override
+	protected void doAfterEdit() throws BaseException {
+		super.doAfterEdit();
 		
 		this.cancerList = getModel().getCanceresOtraPartes();
 		this.sintomaList = getModel().getSintomasCancerMama();
@@ -221,13 +221,6 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 		}
 	}
 	
-	@Override
-	public void edit(ActionEvent actionEvent) {
-		Paciente p = (Paciente) actionEvent.getComponent().getAttributes().get("selected");
-		setModel(p);
-		super.edit(actionEvent);
-	}
-	
 	public void erasePreviasEnfermedades(ActionEvent e){
 		PreviaEnfermedad p = (PreviaEnfermedad) e.getComponent().getAttributes().get("selectIllnes");
 		eraseFromList(this.prevEnfList, this.previaEnfermedadPersistenceEjb, p);
@@ -246,29 +239,6 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 	public void eraseSintomaCancer(ActionEvent e){
 		SintomaCancerMama p = (SintomaCancerMama) e.getComponent().getAttributes().get("selectSintoma");
 		eraseFromList(this.sintomaList, this.sintomaCancerMamaPersistenceEjb, p);
-	}
-	
-	private <T extends BaseModel> void eraseFromList(Collection<T> list, BasePersistenceManager<T> manager, T entity){
-		if(list == null || manager == null || entity == null)
-			throw new IllegalArgumentException("Input parameters cannot be null");
-		
-		Iterator<T> iter = list.iterator();
-		while(iter.hasNext()){
-			T i = iter.next();
-			if(entity.equals(i))
-				if(getEditMode() == EditModeEnum.EDITING){
-					if(!i.isEmpty())
-						manager.delete(i.getId());
-					iter.remove();
-				} else {
-					iter.remove();
-				}
-		}
-	}
-	
-	
-	public String navigate(){
-		return "home";
 	}
 
 	@Override

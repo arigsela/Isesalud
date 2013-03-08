@@ -234,7 +234,7 @@
 				
 				
 				<p:commandButton id="btnSave" value="Salvar" actionListener="#{patientPersistence.save}"
-					update="dataPanel" ajax="true" action="#{patientPersistence.navigate}"/>
+					update="dataPanel" ajax="true" action="/home?faces-redirect=true"/>
 				<p:commandButton dir="btnCancel" value="Cancelar" actionListener="#{patientPersistence.cancel}"
 					ajax="false" action="home?faces-redirect=true" immediate="true"/>
 			</h:form>

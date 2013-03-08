@@ -7,6 +7,6 @@ insert into unidadmedica (id, name, description, code) values (1, 'Hosptial Gene
 insert into unidadmedica (id, name, description, code) values (2, 'Centro', 'Some place', 1);
 insert into paciente (id, lastName, maternalLastName, name, dateofBirth, phoneNumber, address, sex, seguroPopular, dateCreated, timeCreated, ageMenstruation, ageFirstChild, BreastFeedChild, yearsSinceSurgery, ageMenopause, ageMenopauseHormones, dateLastMG, observations, personal, municipio, entidad, unidadmedica) values (1, 'Perez', 'Mendoza', 'Ari', '1980-02-16', '123456', 'Calle bleh', 'M', '0', '2013-02-11', '12:00:00', 0, 0, 0, 0, 0, 0, '2012-01-01', 'None', 1, 1, 1, 1);
 insert into tipocita (id,description) values (1,'Radiologia')
-insert into tipoestudiocita (id,descripcion,tipocita) value (1,'mastografia tipo a',1)
+insert into tipoestudiocita (id,name,notes,tipocita) value (1,'mastografia tipo a','Tiene que llevar su comprobante',1)
 insert into statuscita (id,description) values (1,'Pendiente')
-insert into cita (id,date,time,personal,statusCita,tipoestudiocita,paciente) values (1,'2013-02-28','12:00:00',1,1,1,1)
+insert into cita (id,date,time,personal,statusCita,tipoEstudioCita,paciente) values (1,'2013-02-28','12:00:00',1,1,1,1)
