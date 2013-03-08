@@ -67,10 +67,4 @@ public class TipoEstudioCitaQuery extends BaseQueryController<TipoEstudioCita> {
 	public void setTipoEstudioCita(TipoEstudioCita tipoEstudioCita) {
 		this.tipoEstudioCita = tipoEstudioCita;
 	}
-	
-	@SuppressWarnings("cdi-observer")
-	public void refreshTipoEstudioCita(@Observes(notifyObserver = Reception.IF_EXISTS)Tipocita tipoCita){
-		getTipoEstudioCita().setTipocita(tipoCita);
-		loadData();
-	}
 }
