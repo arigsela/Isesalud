@@ -134,10 +134,6 @@ public class Paciente extends BaseModel {
 	private String observations;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="personal", nullable=false)
-	private Personal personal;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="municipio",nullable=false)
 	private Municipio municipio;
 	
@@ -180,7 +176,6 @@ public class Paciente extends BaseModel {
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.sex = sex;
-		this.personal = personal;
 		this.municipio = municipio;
 		this.entidad = entidad;
 		this.unidadmedica = unidadmedica;
@@ -363,12 +358,6 @@ public class Paciente extends BaseModel {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public Personal getPersonal() {
-		return personal;
-	}
-	public void setPersonal(Personal personal) {
-		this.personal = personal;
 	}
 	
 	public String getEmail() {

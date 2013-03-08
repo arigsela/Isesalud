@@ -36,7 +36,6 @@ public class Cita extends BaseModel{
 	private Statuscita statuscita;
 	private Date date;
 	private Date time;
-	private Personal personal;
 	private Paciente paciente;
 	private Date startDate;
 	private Date endDate;
@@ -52,7 +51,6 @@ public class Cita extends BaseModel{
 		this.statuscita = statuscita;
 		this.date = date;
 		this.time = time;
-		this.personal = personal;
 		this.paciente = paciente;
 	}
 
@@ -78,7 +76,6 @@ public class Cita extends BaseModel{
 		this.tipoestudiocita = tipoestudiocita;
 	}
 	
-
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "statusCita", nullable = false)
@@ -108,16 +105,6 @@ public class Cita extends BaseModel{
 
 	public void setTime(Date time) {
 		this.time = time;
-	}
-
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "personal", nullable = false)
-	public Personal getPersonal() {
-		return this.personal;
-	}
-
-	public void setPersonal(Personal personal) {
-		this.personal = personal;
 	}
 
 	@ManyToOne(fetch=FetchType.EAGER)
