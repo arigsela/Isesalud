@@ -74,6 +74,11 @@ public class Paciente extends BaseModel {
 	@Length(max=20)
 	private String phoneNumber;
 	
+	@Column(name="phoneNumberMovil", nullable = true, length = 20)
+	@Length(max=20)
+	private String phoneNumberMovil;
+	
+	
 	@Column(name="email", nullable = true, length = 300)
 	@Length(max=300)
 	@Email
@@ -165,7 +170,7 @@ public class Paciente extends BaseModel {
 	}
 	
 	public Paciente(String lastName, String maternalLastName, String name,
-			Date dateofBirth, String phoneNumber,String email, String address, char sex,
+			Date dateofBirth, String phoneNumber, String phoneNumberMovil,String email, String address, char sex,
 			Personal personal, Municipio municipio, Entidad entidad,
 			Unidadmedica unidadmedica) {
 		this.id = new Long(0L);
@@ -174,6 +179,7 @@ public class Paciente extends BaseModel {
 		this.name = name;
 		this.dateofBirth = dateofBirth;
 		this.phoneNumber = phoneNumber;
+		this.phoneNumberMovil = phoneNumberMovil;
 		this.address = address;
 		this.sex = sex;
 		this.municipio = municipio;
@@ -329,6 +335,15 @@ public class Paciente extends BaseModel {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	
+	public String getPhoneNumberMovil() {
+		return phoneNumberMovil;
+	}
+	
+	public void setPhoneNumberMovil(String phoneNumberMovil) {
+		this.phoneNumberMovil = phoneNumberMovil;
+	}
+	
 	public String getSeguroPopular() {
 		return seguroPopular;
 	}
