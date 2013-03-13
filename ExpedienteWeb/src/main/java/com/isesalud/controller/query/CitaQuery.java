@@ -69,6 +69,18 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 		this.model = model;
 	}
 	
+	private Date dstDate(Date date){
+		//Calendar c = Calendar.getInstance(TimeZone.getTimeZone("America/Tijuana"));
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		int offset = c.get(Calendar.DST_OFFSET);
+		if(offset != 0){
+			c.add(Calendar.HOUR_OF_DAY, 1);
+		}
+		
+		return c.getTime();
+	}
+	
 	@PostConstruct
 	public void loadData(){
 		model = new LazyScheduleModel(){
@@ -114,7 +126,7 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 						Date result2 = calDT.getTime();
 						
 						event = new DefaultScheduleEvent(title, 
-								result, result2);
+								dstDate(result), dstDate(result2));
 						
 						event.setData(c);
 						
@@ -155,5 +167,11 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 	@Override
 	protected int getQueryRowCount() {
 		return 0;
+	}
+	
+	public static void main(String[] args){
+		CitaQuery query = new CitaQuery();
+		Date test = query.dstDate(new Date());
+		System.out.println(test.toString());
 	}
 }
