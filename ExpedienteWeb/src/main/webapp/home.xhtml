@@ -11,17 +11,26 @@
 	<ui:define name="body">
 		<p:growl autoUpdate="true" showDetail="true" showSummary="true"/>
 		<h:form id="frmSearch" prependId="false">
-			<p:menubar>
-				<p:menuitem actionListener="#{patientPersistence.edit}"
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton actionListener="#{patientPersistence.edit}"
 						action="PacientesEntradas" ajax="false" title="Editar"
 						value="Editar"
 						icon="ui-icon-pencil"/>
-				<p:menuitem id="btnCita"
+					
+					<p:commandButton value="Imprimir" type="button" icon="ui-icon-print">
+						<p:printer target="details"/>
+					</p:commandButton>
+					
+					<p:commandButton id="btnCita"
 						actionListener="#{citaPersistence.add}" ajax="false"
 						value="Crear cita"
 						action="/citas/CapturaCita" title="Cita" 
 						icon="ui-icon-clipboard"/>
-			</p:menubar>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<br />
+			<br />
 			<p:fieldset id="fldSearchOpts" toggleable="true" toggleSpeed="500"
 				legend="Opciones de busqueda">
 				<h:panelGrid columns="3">
@@ -56,7 +65,6 @@
 					</f:facet>
 				</h:panelGrid>
 			</p:fieldset>
-
 
 			<br />
 			<br />
