@@ -43,12 +43,15 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 	
 	private ScheduleModel model;
 	
+	private Date initialDate;
+	
 	@EJB
 	private CitaEjb citaEjb;
 	
 	@Override
 	protected void init() throws BaseException {
 		searchParams = new Cita();
+		initialDate = new Date();
 	}
 	
 	public void showCitaDetails(ActionEvent e){
@@ -69,8 +72,15 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 		this.model = model;
 	}
 	
+	public Date getInitialDate() {
+		return initialDate;
+	}
+	
+	public void setInitialDate(Date initialDate) {
+		this.initialDate = initialDate;
+	}
+	
 	private Date dstDate(Date date){
-		//Calendar c = Calendar.getInstance(TimeZone.getTimeZone("America/Tijuana"));
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		int offset = c.get(Calendar.DST_OFFSET);

@@ -13,9 +13,19 @@
 				<h:outputScript library="js" name="translations.js"/>
 			</ui:define>
 			<ui:define name="body">
-				<p:schedule value="#{citaQuery.model}" allDaySlot="false" 
-					slotMinutes="5" view="agendaWeek" draggable="false"
-					resizable="false" locale="es"/>
+				<h:form id="frmCalendar" prependId="false">
+					<p:outputLabel id="lblDateSearch" value="Ir a fecha: "/>
+					<p:calendar id="cldDateSearch" value="#{citaQuery.initialDate}"
+						mode="popup" readonlyInput="true">
+						<p:ajax event="dateSelect" update="shlCal"/>
+					</p:calendar>
+					<br />
+					<br />
+					<p:schedule id="shlCal" value="#{citaQuery.model}" allDaySlot="false" 
+						slotMinutes="5" view="agendaDay" draggable="false"
+						resizable="false" locale="es" widgetVar="cal"
+						initialDate="#{citaQuery.initialDate}"/>
+				</h:form>
 			</ui:define>
 	</ui:composition>
 
