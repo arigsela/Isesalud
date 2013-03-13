@@ -27,31 +27,18 @@
 							id="popupButtonDateNac" required="true"	navigator="true">
 							<f:convertDateTime type="date" dateStyle="short" />
 						</p:calendar>
-						<h:outputText value="" />
-						<h:outputText value="" />
-						<h:outputText value="" />
-						<h:outputText value="" />
 						<p:outputLabel value="Telefono" for="telefono" />
 						<p:inputText id="telefono"
 							value="#{patientPersistence.model.phoneNumber}" />
-						<h:outputText value="" />
-						<h:outputText value="" />
-						<h:outputText value="" />
-						<h:outputText value="" />
+						<p:outputLabel value="Telefono Movil" for="telefonomovil" />
+						<p:inputText id="telefonomovil"
+							value="#{patientPersistence.model.phoneNumberMovil}" />
 						<p:outputLabel value="Email" for= "email" />
 						<p:inputText id="email"
 							value="#{patientPersistence.model.email}" />
-						<h:outputText value="" />
-						<h:outputText value="" />
-						<h:outputText value="" />
-						<h:outputText value="" />
 						<p:outputLabel value="Domicilio" for="domicilio" />
 						<p:inputText id="domicilio"
 							value="#{patientPersistence.model.address}" />
-						<h:outputText value="" />
-						<h:outputText value="" />
-						<h:outputText value="" />
-						<h:outputText value="" />
 						<p:outputLabel value="Sexo" for="sexo" />
 						<p:selectOneMenu id="sexo" value="#{patientPersistence.model.sex}"
 							style="width:100%">
