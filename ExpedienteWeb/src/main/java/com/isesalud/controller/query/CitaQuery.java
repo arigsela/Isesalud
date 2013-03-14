@@ -115,7 +115,8 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 				if(datasource.size() > 0){
 					for(Cita c : datasource){
 						String title = c.getPaciente().getName() + " " +
-								c.getPaciente().getLastName();
+								c.getPaciente().getLastName() + " - " +
+								c.getTipoestudiocita().getName();
 						
 						Date date = c.getDate();
 						Date time = c.getTime();
