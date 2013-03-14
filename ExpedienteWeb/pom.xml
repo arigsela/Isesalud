@@ -251,6 +251,11 @@
         	<artifactId>hibernate-core</artifactId>
         	<scope>provided</scope>
         </dependency>
+        <dependency>
+        	<groupId>org.omnifaces</groupId>
+        	<artifactId>omnifaces</artifactId>
+        	<version>1.4.1</version>
+        </dependency>
     </dependencies>
 
     <build>

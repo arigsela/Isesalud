@@ -21,7 +21,6 @@ import com.isesalud.support.components.BaseManagerEJB;
 
 @Stateless
 @LocalBean
-
 public class CitaEjb extends BaseManagerEJB<Cita>{
 
 	public List<Cita> getAllCita() {
@@ -42,6 +41,18 @@ public class CitaEjb extends BaseManagerEJB<Cita>{
 		Predicate endDateP = builder.lessThanOrEqualTo(root.get(Cita_.date), params.getEndDate());
 		
 		query.select(root).where(builder.and(startDateP, endDateP));
+		
+		model = getList(query);
+		
+		return model;
+	}
+	
+	public List<Cita> getCitasByDate(Cita params){
+		List<Cita> model = null;
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Cita> query = builder.createQuery(getModelClass());
+		Root<Cita> root = query.from(getModelClass());
+		query.select(root).where(builder.equal(root.get(Cita_.date), params.getDate()));
 		
 		model = getList(query);
 		

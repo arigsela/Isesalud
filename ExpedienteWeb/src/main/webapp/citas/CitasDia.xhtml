@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:s="http://jboss.org/seam/faces"
+      xmlns:p="http://primefaces.org/ui">
+
+
+	<ui:composition template="/templates/common.xhtml">
+			<ui:define name="pageTitle">Citas</ui:define>
+			<ui:define name="pageHeader">Citas del dia</ui:define>
+			<ui:define name="metadata">
+				<f:metadata>
+					<f:viewParam id="vpFecha" name="fecha" value="#{citaDayReportQuery.day}">
+						<f:convertDateTime type="date" dateStyle="short"/>
+					</f:viewParam>
+					<s:viewAction action="#{citaDayReportQuery.loadData}" onPostback="true"/>
+				</f:metadata>
+			</ui:define>
+			<ui:define name="body">
+				<h:form id="frmReport" prependId="false">
+					<p:toolbar>
+						<p:toolbarGroup align="left">
+							<p:commandButton type="button" value="Imprimir" icon="ui-icon-print">
+								<p:printer target="pnlCitas"/>
+							</p:commandButton>
+						</p:toolbarGroup>
+					</p:toolbar>
+					<br />
+					<br />
+					<p:panel id="pnlCitas" header="Listado de citas">
+						<p:dataTable id="tblCitas" value="#{citaDayReportQuery.queryListDM}"
+							var="_citas">
+							<p:column headerText="Paciente">
+								<h:outputText value="#{_citas.paciente.name} #{_citas.paciente.lastName} #{_citas.paciente.maternalLastName}" />
+							</p:column>
+							<p:column headerText="Status">
+								<h:outputText value="#{_citas.statuscita.description}" />
+							</p:column>
+							<p:column headerText="Fecha">
+								<h:outputText value="#{_citas.date}" >
+									<f:convertDateTime type="date" dateStyle="short"/>
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Hora">
+								<h:outputText value="#{_citas.time}" >
+									<f:convertDateTime type="time" timeStyle="short"/>
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Estudio">
+								<h:outputText value="#{_citas.tipoestudiocita.name}" />
+							</p:column>
+						</p:dataTable>
+					</p:panel>
+				</h:form>
+			</ui:define>
+	</ui:composition>
+
+</html>

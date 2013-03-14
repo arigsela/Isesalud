@@ -3,7 +3,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
 
 
 	<ui:composition template="/templates/common.xhtml">
@@ -19,6 +20,12 @@
 						mode="popup" readonlyInput="true">
 						<p:ajax event="dateSelect" update="shlCal"/>
 					</p:calendar>
+					<p:button id="btnReport" value="Reporte" 
+						outcome="/citas/CitasDia?faces-redirect=true" includeViewParams="true">
+						<o:param name="fecha" value="#{citaQuery.initialDate}">
+							<f:convertDateTime type="date" dateStyle="short"/>
+						</o:param>
+					</p:button>
 					<br />
 					<br />
 					<p:schedule id="shlCal" value="#{citaQuery.model}" allDaySlot="false" 
