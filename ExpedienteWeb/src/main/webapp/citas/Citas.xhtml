@@ -1,39 +1,33 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:o="http://omnifaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 
 
-	<ui:composition template="/templates/common.xhtml">
-			<ui:define name="pageTitle">Citas</ui:define>
-			<ui:define name="pageHeader">Consulta de citas</ui:define>
-			<ui:define name="head">
-				<h:outputScript library="js" name="translations.js"/>
-			</ui:define>
-			<ui:define name="body">
-				<h:form id="frmCalendar" prependId="false">
-					<p:outputLabel id="lblDateSearch" value="Ir a fecha: "/>
-					<p:calendar id="cldDateSearch" value="#{citaQuery.initialDate}"
-						mode="popup" readonlyInput="true">
-						<p:ajax event="dateSelect" update="shlCal"/>
-					</p:calendar>
-					<p:button id="btnReport" value="Reporte" 
-						outcome="/citas/CitasDia?faces-redirect=true" includeViewParams="true">
-						<o:param name="fecha" value="#{citaQuery.initialDate}">
-							<f:convertDateTime type="date" dateStyle="short"/>
-						</o:param>
-					</p:button>
-					<br />
-					<br />
-					<p:schedule id="shlCal" value="#{citaQuery.model}" allDaySlot="false" 
-						slotMinutes="5" view="agendaDay" draggable="false"
-						resizable="false" locale="es" widgetVar="cal"
-						initialDate="#{citaQuery.initialDate}"/>
-				</h:form>
-			</ui:define>
-	</ui:composition>
+<ui:composition template="/templates/common.xhtml">
+	<ui:define name="pageTitle">Citas</ui:define>
+	<ui:define name="pageHeader">Consulta de citas</ui:define>
+	<ui:define name="head">
+		<h:outputScript library="js" name="translations.js" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="frmCalendar" prependId="false">
+			<p:outputLabel id="lblDateSearch" value="Ir a fecha: " />
+			<p:calendar id="cldDateSearch" value="#{citaQuery.initialDate}"
+				mode="popup">
+				<p:ajax event="dateSelect" update="shlCal" />
+			</p:calendar>
+
+			<p:spacer height="30" />
+
+			<p:schedule id="shlCal" value="#{citaQuery.model}" allDaySlot="false"
+				slotMinutes="5" view="agendaDay" draggable="false" resizable="false"
+				locale="es" widgetVar="cal" initialDate="#{citaQuery.initialDate}" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
 
 </html>

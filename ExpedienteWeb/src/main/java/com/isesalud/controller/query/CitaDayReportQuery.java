@@ -8,7 +8,10 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
+
+import org.primefaces.context.RequestContext;
 
 import com.isesalud.ejb.query.CitaEjb;
 import com.isesalud.model.Cita;
@@ -40,10 +43,6 @@ public class CitaDayReportQuery extends BaseQueryController<Cita>{
 	
 	public void setDay(Date day) {
 		this.day = day;
-	}
-	
-	public void loadData(){
-		setQueryListDM(getQueryList());
 	}
 
 	@Override

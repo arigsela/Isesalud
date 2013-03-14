@@ -9,10 +9,10 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
+import org.jboss.seam.faces.context.RenderScoped;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleModel;
@@ -28,7 +28,7 @@ import com.isesalud.support.exceptions.BaseException;
  */
 
 @Named
-@ViewScoped
+@RenderScoped
 public class CitaQuery extends  BaseQueryController<Cita>{
 
 	/**
