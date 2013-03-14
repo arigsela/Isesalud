@@ -8,10 +8,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ViewScoped;
-import javax.faces.event.ActionEvent;
 import javax.inject.Named;
-
-import org.primefaces.context.RequestContext;
 
 import com.isesalud.ejb.query.CitaEjb;
 import com.isesalud.model.Cita;
