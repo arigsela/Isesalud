@@ -144,14 +144,20 @@
 								<p:commandButton id="btnParCancer" value="+" actionListener="#{patientPersistence.addParienteCancerMama}"
 								update="txtParCancer dtaPariente" ajax="true" process="@this,txtParCancer"/>
 								
-								<p:outputLabel id="lblSintoma" for="txtSintoma" value="Sintomas de cancer de mama"/>
-								<p:inputText id="txtSintoma" value="#{patientPersistence.sintomaCancerMama.sintomaNombre}"/>
+								<p:outputLabel id="lblSintoma" for="sintoma" value="Sintomas de cancer de mama"/>
+								<p:selectOneMenu id="sintoma" value="#{patientPersistence.sintomaCancerMama.sintomaNombre}">
+									<f:selectItem itemLabel="Sintoma 1" itemValue = "Sintoma 1"/>
+									<f:selectItem itemLabel="Sintoma 2" itemValue = "Sintoma 2"/>
+									<f:selectItem itemLabel="Sintoma 3" itemValue = "Sintoma 3"/>
+									<f:selectItem itemLabel="Sintoma 4" itemValue = "Sintoma 4"/>
+								</p:selectOneMenu>
+								
 								<p:selectOneMenu id="slcSintoma" value="#{patientPersistence.sintomaCancerMama.sintomaLado}">
 									<f:selectItem itemLabel="IZQ" itemValue="IZQ"/>
 									<f:selectItem itemLabel="DER" itemValue="DER"/>
 								</p:selectOneMenu>
 								<p:commandButton id="btnSintoma" value="+" actionListener="#{patientPersistence.addSintomaCancerMama}"
-									update="txtSintoma dtaSintomas" ajax="true" process="@this,txtSintoma,slcSintoma"/>
+									update="sintoma dtaSintomas" ajax="true" process="@this,sintoma,slcSintoma"/>
 							</p:panelGrid>
 							
 							<h:panelGrid columns="4">
