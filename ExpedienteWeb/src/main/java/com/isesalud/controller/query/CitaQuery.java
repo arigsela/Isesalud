@@ -13,6 +13,7 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
 import org.jboss.seam.faces.context.RenderScoped;
+import org.joda.time.DateTime;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleModel;
@@ -114,10 +115,12 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 				
 				if(datasource.size() > 0){
 					for(Cita c : datasource){
+						DateTime fechanacimiento = new DateTime(c.getPaciente().getDateofBirth().getYear(),c.getPaciente().getDateofBirth().getMonth(),c.getPaciente().getDateofBirth().getDay(),0,0,0,0);
 						String title = c.getPaciente().getName() + " " +
 								c.getPaciente().getLastName() + " - " +
+								c.getPaciente().getAge() + " - " +
 								c.getTipoestudiocita().getName();
-						
+								
 						Date date = c.getDate();
 						Date time = c.getTime();
 						

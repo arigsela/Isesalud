@@ -21,11 +21,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.joda.time.DateMidnight;
+import org.joda.time.DateTime;
+import org.joda.time.Years;
 
 import com.isesalud.support.components.BaseModel;
 
@@ -42,6 +46,8 @@ public class Paciente extends BaseModel {
 	/**
 	 * 
 	 */
+	
+	
 	private static final long serialVersionUID = 2325369627028054544L;
 	
 	@Id
@@ -381,6 +387,20 @@ public class Paciente extends BaseModel {
 	
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	@Transient
+	public Integer getAge() {
+		if (dateofBirth != null) {
+			DateTime birthdate = new DateTime(dateofBirth);
+			DateTime now = new DateTime();
+			System.out.println(now.getYear() + "// " + birthdate.getYear());
+			Years age = Years.yearsBetween(birthdate, now);
+			return age.getYears();
+		}
+		else {
+			return 0;				
+		}
 	}
 	
 	@Override
