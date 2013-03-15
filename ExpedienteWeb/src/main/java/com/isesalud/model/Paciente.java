@@ -394,7 +394,6 @@ public class Paciente extends BaseModel {
 		if (dateofBirth != null) {
 			DateTime birthdate = new DateTime(dateofBirth);
 			DateTime now = new DateTime();
-			System.out.println(now.getYear() + "// " + birthdate.getYear());
 			Years age = Years.yearsBetween(birthdate, now);
 			return age.getYears();
 		}
