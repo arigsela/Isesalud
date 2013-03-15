@@ -21,11 +21,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.joda.time.DateTime;
+import org.joda.time.Years;
 
 import com.isesalud.support.components.BaseModel;
 
@@ -42,6 +45,8 @@ public class Paciente extends BaseModel {
 	/**
 	 * 
 	 */
+	
+	
 	private static final long serialVersionUID = 2325369627028054544L;
 	
 	@Id
@@ -78,6 +83,8 @@ public class Paciente extends BaseModel {
 	@Length(max=20)
 	private String phoneNumberMovil;
 	
+	@Column (name="aceptamensajes", nullable = false)
+	private Boolean aceptarmensajes;
 	
 	@Column(name="email", nullable = true, length = 300)
 	@Length(max=300)
@@ -120,6 +127,9 @@ public class Paciente extends BaseModel {
 	@Column (name="yearsSinceSurgery", nullable = false)
 	@NotNull
 	private Integer yearsSinceSurgery;
+	
+	@Column (name="typeofsurgery", nullable = true)
+	private String typeofsurgery;
 	
 	@Column (name = "ageMenopause",nullable = false)
 	@NotNull
@@ -170,7 +180,7 @@ public class Paciente extends BaseModel {
 	}
 	
 	public Paciente(String lastName, String maternalLastName, String name,
-			Date dateofBirth, String phoneNumber, String phoneNumberMovil,String email, String address, char sex,
+			Date dateofBirth, String phoneNumber, String phoneNumberMovil,Boolean aceptarmensajes, String email, String address, char sex,
 			Personal personal, Municipio municipio, Entidad entidad,
 			Unidadmedica unidadmedica) {
 		this.id = new Long(0L);
@@ -180,6 +190,7 @@ public class Paciente extends BaseModel {
 		this.dateofBirth = dateofBirth;
 		this.phoneNumber = phoneNumber;
 		this.phoneNumberMovil = phoneNumberMovil;
+		this.aceptarmensajes = aceptarmensajes;
 		this.address = address;
 		this.sex = sex;
 		this.municipio = municipio;
@@ -344,6 +355,14 @@ public class Paciente extends BaseModel {
 		this.phoneNumberMovil = phoneNumberMovil;
 	}
 	
+	public Boolean getAceptarmensajes() {
+		return aceptarmensajes;
+	}
+	
+	public void setAceptarmensajes(Boolean aceptarmensajes) {
+		this.aceptarmensajes = aceptarmensajes;
+	}
+		
 	public String getSeguroPopular() {
 		return seguroPopular;
 	}
@@ -368,6 +387,15 @@ public class Paciente extends BaseModel {
 	public void setYearsSinceSurgery(Integer yearsSinceSurgery) {
 		this.yearsSinceSurgery = yearsSinceSurgery;
 	}
+	
+	public String getTypeofsurgery() {
+		return typeofsurgery;
+	}
+	
+	public void setTypeofsurgery(String typeofsurgery) {
+		this.typeofsurgery = typeofsurgery;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -381,6 +409,19 @@ public class Paciente extends BaseModel {
 	
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	@Transient
+	public Integer getAge() {
+		if (dateofBirth != null) {
+			DateTime birthdate = new DateTime(dateofBirth);
+			DateTime now = new DateTime();
+			Years age = Years.yearsBetween(birthdate, now);
+			return age.getYears();
+		}
+		else {
+			return 0;				
+		}
 	}
 	
 	@Override

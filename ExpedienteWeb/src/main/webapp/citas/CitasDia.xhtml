@@ -45,28 +45,44 @@
 					<f:facet name="header">Citas</f:facet>
 					<p:column>
 						<f:facet name="header">Paciente</f:facet>
+						<div style="text-align:center">
 						<h:outputText
 							value="#{_citas.paciente.name} #{_citas.paciente.lastName} #{_citas.paciente.maternalLastName}" />
+						</div>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Edad</f:facet>
+						<div style="text-align:center">
+							<h:outputText value="#{_citas.paciente.age}"/>
+						</div>
 					</p:column>
 					<p:column>
 						<f:facet name="header">Status</f:facet>
-						<h:outputText value="#{_citas.statuscita.description}" />
+						<div style="text-align:center">
+							<h:outputText value="#{_citas.statuscita.description}"/>
+						</div>
 					</p:column>
 					<p:column>
 						<f:facet name="header">Fecha</f:facet>
+						<div style="text-align:center">
 						<h:outputText value="#{_citas.date}">
-							<f:convertDateTime type="date" dateStyle="short" />
+							<f:convertDateTime type="date" dateStyle="short"/>
 						</h:outputText>
+					</div>
 					</p:column>
 					<p:column>
 						<f:facet name="header">Hora</f:facet>
+						<div style="text-align:center">
 						<h:outputText value="#{_citas.time}">
 							<f:convertDateTime type="time" timeStyle="short" />
 						</h:outputText>
+						</div>
 					</p:column>
 					<p:column>
 						<f:facet name="header">Estudio</f:facet>
-						<h:outputText value="#{_citas.tipoestudiocita.name}" />
+						<div style="text-align:center">
+						<h:outputText value="#{_citas.tipoestudiocita.name}" style="text-align:center" />
+						</div>
 					</p:column>
 				</p:dataTable>
 			</p:panel>
