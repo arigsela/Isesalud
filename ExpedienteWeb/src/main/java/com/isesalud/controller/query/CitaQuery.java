@@ -164,6 +164,8 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 						
 						event.setData(c);
 						
+						event.setStyleClass(c.getStatuscita().getDescription());
+						
 						addEvent(event);
 						
 					}
