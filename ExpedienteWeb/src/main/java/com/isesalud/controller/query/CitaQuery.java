@@ -9,12 +9,17 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.event.Event;
+import javax.enterprise.inject.Any;
+import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.jboss.seam.faces.context.RenderScoped;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.LazyScheduleModel;
+import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 import com.isesalud.ejb.query.CitaEjb;
@@ -28,7 +33,7 @@ import com.isesalud.support.exceptions.BaseException;
  */
 
 @Named
-@RenderScoped
+@ViewScoped
 public class CitaQuery extends  BaseQueryController<Cita>{
 
 	/**
@@ -43,10 +48,15 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 	
 	private ScheduleModel model;
 	
+	private ScheduleEvent event = new DefaultScheduleEvent();
+	
 	private Date initialDate;
 	
 	@EJB
 	private CitaEjb citaEjb;
+	
+	@Inject @Any
+	private Event<Cita> statusChangedEvent;
 	
 	@Override
 	protected void init() throws BaseException {
@@ -64,6 +74,10 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 		return selectedCita;
 	}
 	
+	public void setSelectedCita(Cita selectedCita) {
+		this.selectedCita = selectedCita;
+	}
+	
 	public ScheduleModel getModel() {
 		return model;
 	}
@@ -78,6 +92,14 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 	
 	public void setInitialDate(Date initialDate) {
 		this.initialDate = initialDate;
+	}
+	
+	public ScheduleEvent getEvent() {
+		return event;
+	}
+	
+	public void setEvent(ScheduleEvent event) {
+		this.event = event;
 	}
 	
 	private Date dstDate(Date date){
@@ -154,12 +176,17 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 		loadData();
 	}
 	
-	public void clearSelected(){
-		selectedCita = null;
+	public void onEventSelect(SelectEvent e){
+		event = (ScheduleEvent) e.getObject();
+		selectedCita = (Cita) event.getData();
 	}
 	
-	public void setSelectedCita(Cita selectedCita) {
-		this.selectedCita = selectedCita;
+	public void onStatusChanged(ActionEvent e){
+		statusChangedEvent.fire(selectedCita);
+	}
+	
+	public void clearSelected(){
+		selectedCita = null;
 	}
 	
 	public Cita getSearchParams() {
@@ -178,11 +205,5 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 	@Override
 	protected int getQueryRowCount() {
 		return 0;
-	}
-	
-	public static void main(String[] args){
-		CitaQuery query = new CitaQuery();
-		Date test = query.dstDate(new Date());
-		System.out.println(test.toString());
 	}
 }

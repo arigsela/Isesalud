@@ -12,7 +12,34 @@
 	<ui:define name="head">
 		<h:outputScript library="js" name="translations.js" />
 	</ui:define>
+	
+	<ui:define name="dialogs">
+		<p:dialog id="diag" widgetVar="citaDiag" appendToBody="true"
+			closable="true" modal="true" position="center"
+			showEffect="clip" hideEffect="clip" dynamic="true"
+			header="Detalles de la cita">
+			<h:form id="frmDiag" prependId="false">
+				<p:panelGrid columns="2">
+					<p:outputLabel id="lblPatient" value="Paciente"/>
+					<h:outputText value="#{citaQuery.selectedCita.paciente.name} #{citaQuery.selectedCita.paciente.lastName} #{citaQuery.selectedCita.paciente.maternalLastName}" />
+					<p:outputLabel id="lblStudy" value="Estudio"/>
+					<h:outputText value="#{citaQuery.selectedCita.tipoestudiocita.name}" />
+					<p:outputLabel id="lblStatus" value="Status"/>
+					<p:selectOneMenu id="cmbStatus" value="#{citaQuery.selectedCita.statuscita}" converter="#{statusCitaConverter}">
+						<f:selectItems value="#{statusCitaQuery.queryListDM}" var="_status"
+							itemLabel="#{_status.description}" itemValue="#{_status}"></f:selectItems>
+					</p:selectOneMenu>
+					<f:facet name="footer">
+						<p:commandButton id="btnSave" value="Cambiar Status" actionListener="#{citaQuery.onStatusChanged}"
+							oncomplete="cal.update();citaDiag.hide();"/>
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+
 	<ui:define name="body">
+		
 		<h:form id="frmCalendar" prependId="false">
 			<p:outputLabel id="lblDateSearch" value="Ir a fecha: " />
 			<p:calendar id="cldDateSearch" value="#{citaQuery.initialDate}"
@@ -25,10 +52,16 @@
 			<p:schedule id="shlCal" value="#{citaQuery.model}" allDaySlot="false"
 				slotMinutes="10" view="agendaDay" draggable="false" resizable="false"
 				locale="es" widgetVar="cal" initialDate="#{citaQuery.initialDate}" 
-				minTime="6:00" maxTime="20:00"/>
+				minTime="6:00" maxTime="20:00">
+				<p:ajax event="eventSelect" listener="#{citaQuery.onEventSelect}"
+					oncomplete="citaDiag.show()"/>
+			</p:schedule>
 
 		</h:form>
+
 	</ui:define>
+	
+	
 </ui:composition>
 
 </html>
