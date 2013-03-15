@@ -52,8 +52,10 @@
 			<p:schedule id="shlCal" value="#{citaQuery.model}" allDaySlot="false"
 				slotMinutes="10" view="agendaDay" draggable="false" resizable="false"
 				locale="es" widgetVar="cal" initialDate="#{citaQuery.initialDate}" 
-				minTime="8:00" maxTime="17:00"/>
-
+				minTime="8:00" maxTime="17:00">
+				<p:ajax event="eventSelect" listener="#{citaQuery.onEventSelect}"
+					update=":diag" oncomplete="citaDiag.show()"/>
+			</p:schedule>
 		</h:form>
 
 	</ui:define>
