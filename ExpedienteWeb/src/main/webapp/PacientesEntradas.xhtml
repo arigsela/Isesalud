@@ -91,10 +91,12 @@
 								value="#{patientPersistence.model.yearsSinceSurgery}">
 								<f:convertNumber type="number" />
 							</p:inputText>
+							<p:outputLabel value="Tipo de cirugia de mama" for="tipocirugia" />
+							<p:inputText id="tipocirugia" value="#{patientPersistence.model.typeofsurgery}" />
 							<p:outputLabel value="Fecha de ultima Mastografia"
 								for="popupButtonDate" />
 							<p:calendar value="#{patientPersistence.model.dateLastMG}"
-								id="popupButtonDate" navigator="true">
+								id="popupButtonDate" navigator="true" >
 								<f:convertDateTime type="date" dateStyle="short" />
 							</p:calendar>
 							<p:outputLabel value="Municipio" for="muni" />

@@ -128,6 +128,9 @@ public class Paciente extends BaseModel {
 	@NotNull
 	private Integer yearsSinceSurgery;
 	
+	@Column (name="typeofsurgery", nullable = true)
+	private String typeofsurgery;
+	
 	@Column (name = "ageMenopause",nullable = false)
 	@NotNull
 	private Integer ageMenopause;
@@ -384,6 +387,15 @@ public class Paciente extends BaseModel {
 	public void setYearsSinceSurgery(Integer yearsSinceSurgery) {
 		this.yearsSinceSurgery = yearsSinceSurgery;
 	}
+	
+	public String getTypeofsurgery() {
+		return typeofsurgery;
+	}
+	
+	public void setTypeofsurgery(String typeofsurgery) {
+		this.typeofsurgery = typeofsurgery;
+	}
+	
 	public String getName() {
 		return name;
 	}
