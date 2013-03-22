@@ -54,7 +54,7 @@
 								value="#{patientQuery.searchParams.unidadmedica}"
 								converter="#{unidadMedicaConverter}">
 								<f:selectItem itemLabel="Seleccione uno" itemValue="#{null}" />
-								<f:selectItems value="#{unidadMedicaQuery.model}" var="_unidad"
+								<f:selectItems value="#{unidadMedicaQuery.queryListDM}" var="_unidad"
 									itemLabel="#{_unidad.name}" itemValue="#{_unidad}"></f:selectItems>
 							</p:selectOneMenu>
 						</h:panelGrid>

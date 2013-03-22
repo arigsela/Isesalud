@@ -3,7 +3,6 @@
  */
 package com.isesalud.controller.query;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +12,7 @@ import javax.inject.Named;
 
 import com.isesalud.ejb.query.PersonalEjb;
 import com.isesalud.model.Personal;
+import com.isesalud.support.components.BaseQueryController;
 
 /**
  * @author ari
@@ -21,27 +21,29 @@ import com.isesalud.model.Personal;
 
 @Named
 @ViewScoped
-
-public class PersonalQuery implements Serializable{
+public class PersonalQuery extends BaseQueryController<Personal>{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5912437410895342130L;
+	
 	@EJB
-	
-	private PersonalEjb ejb;
-	private List<Personal> model;
-	
-	public List<Personal> getModel() {
-		return model;
-	}
-	public void setModel(List<Personal> model) {
-		this.model = model;
-	}
+	private PersonalEjb personalEjb;
+
 	@PostConstruct
-	public void init(){
-		model = ejb.getAll();
+	public void loadData(){
+		setQueryListDM(getQueryList());
+	}
+
+	@Override
+	protected List<Personal> getQueryList() {
+		return personalEjb.getAll();
+	}
+
+	@Override
+	protected int getQueryRowCount() {
+		return 0;
 	}
 	
 }

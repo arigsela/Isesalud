@@ -100,19 +100,13 @@
 								<f:convertDateTime type="date" dateStyle="short" />
 							</p:calendar>
 							<p:outputLabel value="Municipio" for="muni" />
-							<p:selectOneMenu id="muni"
-								value="#{patientPersistence.model.municipio}"
-								converter="#{municipioConverter}"
-								style="width:100%">
-								<f:selectItems value="#{municipioQuery.model}" var="_muni"
-									itemLabel="#{_muni.name}" itemValue="#{_muni}" ></f:selectItems>
-							</p:selectOneMenu>
+							<h:outputText id="muni" value="#{patientPersistence.model.municipio.name}" />
 							<p:outputLabel value="Entidad" for="entidad" />
 							<p:selectOneMenu id="entidad"
 								value="#{patientPersistence.model.entidad}"
 								converter="#{entidadConverter}"
 								style="width:100%">
-								<f:selectItems value="#{entidadQuery.model}" var="_entidad"
+								<f:selectItems value="#{entidadQuery.queryListDM}" var="_entidad"
 									itemLabel="#{_entidad.name}" itemValue="#{_entidad}" ></f:selectItems>
 							</p:selectOneMenu>
 							<p:outputLabel value="Unidad Medica" for="unidad" />
@@ -120,7 +114,7 @@
 								value="#{patientPersistence.model.unidadmedica}"
 								converter="#{unidadMedicaConverter}"
 								style="width:100%">
-								<f:selectItems value="#{unidadMedicaQuery.model}" var="_unidad"
+								<f:selectItems value="#{unidadMedicaQuery.queryListDM}" var="_unidad"
 									itemLabel="#{_unidad.name}" itemValue="#{_unidad}" ></f:selectItems>
 							</p:selectOneMenu>
 						</p:panelGrid>

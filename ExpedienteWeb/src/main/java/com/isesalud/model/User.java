@@ -72,8 +72,7 @@ public class User extends BaseModel {
 
 	public void setId(Long id) {
 		this.id = id;
-	}   
-	
+	}
 	
 	public String getUsername() {
 		return this.username;

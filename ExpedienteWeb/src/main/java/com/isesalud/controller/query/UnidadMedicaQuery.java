@@ -3,16 +3,18 @@
  */
 package com.isesalud.controller.query;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.isesalud.controller.security.SecurityComponent;
 import com.isesalud.ejb.query.UnidadMedicaEjb;
 import com.isesalud.model.Unidadmedica;
+import com.isesalud.support.components.BaseQueryController;
 
 /**
  * @author ari
@@ -21,8 +23,7 @@ import com.isesalud.model.Unidadmedica;
 
 @Named
 @ViewScoped
-
-public class UnidadMedicaQuery implements Serializable{
+public class UnidadMedicaQuery extends BaseQueryController<Unidadmedica>{
 
 	/**
 	 * 
@@ -31,16 +32,24 @@ public class UnidadMedicaQuery implements Serializable{
 	
 	@EJB
 	private UnidadMedicaEjb ejb;
-	private List<Unidadmedica> model;
 	
-	public List<Unidadmedica> getModel() {
-		return model;
-	}
-	public void setModel(List<Unidadmedica> model) {
-		this.model = model;
-	}
+	@Inject
+	private SecurityComponent securityComponent;
+	
 	@PostConstruct
-	public void init(){
-		model = ejb.getAllUnidadesMedicas();
+	public void loadData(){
+		setQueryListDM(getQueryList());
+	}
+
+	@Override
+	protected List<Unidadmedica> getQueryList() {
+		Unidadmedica params = new Unidadmedica();
+		params.setMunicipio(securityComponent.getCurrentUser().getMunicipio());
+		return ejb.getUnidadMedicaByMunicipio(params);
+	}
+
+	@Override
+	protected int getQueryRowCount() {
+		return 0;
 	}
 }

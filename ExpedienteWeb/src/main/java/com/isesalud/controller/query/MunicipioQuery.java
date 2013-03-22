@@ -3,7 +3,6 @@
  */
 package com.isesalud.controller.query;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -13,14 +12,15 @@ import javax.inject.Named;
 
 import com.isesalud.ejb.query.MunicipioEjb;
 import com.isesalud.model.Municipio;
+import com.isesalud.support.components.BaseQueryController;
 
 /**
- * @author Haysoos
+ * @author Jesus Espinoza Hernandez
  *
  */
 @Named
 @ViewScoped
-public class MunicipioQuery implements Serializable {
+public class MunicipioQuery extends BaseQueryController<Municipio> {
 
 	/**
 	 * 
@@ -30,19 +30,19 @@ public class MunicipioQuery implements Serializable {
 	@EJB
 	private MunicipioEjb ejb;
 	
-	private List<Municipio> model;
-	
-	public List<Municipio> getModel() {
-		return model;
-	}
-	
-	public void setModel(List<Municipio> model) {
-		this.model = model;
-	}
-	
 	@PostConstruct
-	public void init(){
-		model = ejb.getAllMunicipios();
+	public void loadData(){
+		setQueryListDM(getQueryList());
+	}
+
+	@Override
+	protected List<Municipio> getQueryList() {
+		return ejb.getAllMunicipios();
+	}
+
+	@Override
+	protected int getQueryRowCount() {
+		return 0;
 	}
 	
 }

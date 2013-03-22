@@ -14,6 +14,7 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.isesalud.controller.security.SecurityComponent;
 import com.isesalud.ejb.persistence.CancerOtrasPartesPersistenceEjb;
 import com.isesalud.ejb.persistence.ParienteCancerMamaPersistenceEjb;
 import com.isesalud.ejb.persistence.PatientPersistenceEjb;
@@ -54,6 +55,9 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 	
 	@Inject
 	private Conversation conversation;
+	
+	@Inject
+	private SecurityComponent securityComponent;
 	
 	/**************CHILD LIST*******************************************/
 	private PreviaEnfermedad previaEnfermedad;
@@ -155,6 +159,8 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 	protected void doAfterAdd() throws BaseException {
 		if(conversation.isTransient())
 			conversation.begin();
+		
+		getModel().setMunicipio(securityComponent.getCurrentUser().getMunicipio());
 		super.doAfterAdd();
 	}
 	

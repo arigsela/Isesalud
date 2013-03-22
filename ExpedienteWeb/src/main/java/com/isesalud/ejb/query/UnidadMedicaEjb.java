@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import com.isesalud.model.Unidadmedica;
+import com.isesalud.model.Unidadmedica_;
 import com.isesalud.support.components.BaseManagerEJB;
 
 /**
@@ -27,6 +28,15 @@ public class UnidadMedicaEjb extends BaseManagerEJB<Unidadmedica> {
 		CriteriaQuery<Unidadmedica> query = builder.createQuery(getModelClass());
 		Root<Unidadmedica> root = query.from(getModelClass());
 		query.select(root);
+		
+		return getList(query);
+	}
+	
+	public List<Unidadmedica> getUnidadMedicaByMunicipio(Unidadmedica params){
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Unidadmedica> query = builder.createQuery(getModelClass());
+		Root<Unidadmedica> root = query.from(getModelClass());
+		query.select(root).where(builder.equal(root.get(Unidadmedica_.municipio), params.getMunicipio()));
 		
 		return getList(query);
 	}
