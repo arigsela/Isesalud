@@ -46,8 +46,8 @@ public class UserEjb extends BaseManagerEJB<User> {
 		query.select(root);
 		
 		Predicate likeNameRestriction = builder.like(root.get(User_.name), params.getName() + "%");
-		Predicate likeFNameRestriction = builder.like(root.get(User_.fName), params.getFName() + "%");
-		Predicate likeMNameRestriction = builder.like(root.get(User_.mName), params.getMName() + "%");
+		Predicate likeFNameRestriction = builder.like(root.get(User_.fName), params.getfName() + "%");
+		Predicate likeMNameRestriction = builder.like(root.get(User_.mName), params.getmName() + "%");
 		
 		query.where(builder.and(likeNameRestriction, likeFNameRestriction, likeMNameRestriction));
 		
