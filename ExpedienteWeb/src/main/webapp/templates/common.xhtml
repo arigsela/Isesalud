@@ -45,8 +45,9 @@
 			<p:spacer height="50"/>
 			<center>
 				<h:form>
-					<p:commandLink id="lnkLogout" value="Salir del sistema" action="#{securityComponent.logout()}"
-						rendered="#{securityComponent.logged}" ajax="false"/>
+					<p:commandButton id="lnkLogout" value="Salir del sistema" action="#{securityComponent.logout}"
+						rendered="#{securityComponent.logged}" ajax="false"
+						icon="ui-icon-key"/>
 				</h:form>
 			</center>
 		</p:layoutUnit>
