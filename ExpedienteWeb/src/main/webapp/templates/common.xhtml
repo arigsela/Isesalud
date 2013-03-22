@@ -41,6 +41,14 @@
 		<p:layoutUnit position="west" size="300" closable="false" collapsible="false"
 			resizable="false" header="Menu Principal">
 			<ui:include src="/templates/mainMenu.xhtml" />
+			
+			<p:spacer height="50"/>
+			<center>
+				<h:form>
+					<p:commandLink id="lnkLogout" value="Salir del sistema" action="#{securityComponent.logout()}"
+						rendered="#{securityComponent.logged}" ajax="false"/>
+				</h:form>
+			</center>
 		</p:layoutUnit>
 		
 		<p:layoutUnit position="center">

@@ -228,8 +228,7 @@
         <dependency>
         	<groupId>org.picketbox</groupId>
         	<artifactId>picketbox</artifactId>
-        	<version>4.0.13.Final</version>
-        	<type>pom</type>
+        	<version>4.0.5.Final</version>
         	<scope>provided</scope>
         </dependency>
         <dependency>
@@ -394,11 +393,19 @@
     			<artifactId>jboss-javaee-6.0-with-hibernate</artifactId>
     			<version>${jboss.bom.version}</version>
     			<type>pom</type>
+    			<scope>import</scope>
     		</dependency>
     		<dependency>
     			<groupId>org.jboss.seam</groupId>
     			<artifactId>seam-bom</artifactId>
     			<version>${seam.version}</version>
+    			<type>pom</type>
+    			<scope>import</scope>
+    		</dependency>
+    		<dependency>
+    			<groupId>org.jboss.bom</groupId>
+    			<artifactId>jboss-javaee-6.0-with-security</artifactId>
+    			<version>${jboss.bom.version}</version>
     			<type>pom</type>
     			<scope>import</scope>
     		</dependency>

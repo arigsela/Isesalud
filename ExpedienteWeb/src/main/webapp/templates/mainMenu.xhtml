@@ -9,12 +9,8 @@
 		<h:form id="frmMainMenu" prependId="false">
 			<p:panelMenu>
 				<p:submenu label="Pacientes">
-					<p:menuitem value="Buscar" action="/home?faces-redirect=true"
+					<p:menuitem value="Buscar" action="/pacientes/busqueda?faces-redirect=true"
 						ajax="false" icon="ui-icon-search" process="@this"/>
-					<p:menuitem value="Crear Nuevo" action="/PacientesEntradas"
-						actionListener="#{patientPersistence.add}"
-						ajax="false" process="@this"
-						icon="ui-icon-document"/>
 				</p:submenu>
 				<p:submenu label="Citas">
 					<p:menuitem value="Consulta de citas" action="/citas/Citas?faces-redirect=true"
@@ -23,6 +19,7 @@
 						ajax="false" icon="ui-icon-note" process="@this"/>
 				</p:submenu>
 			</p:panelMenu>
+			
 		</h:form>
 	</ui:composition>
 </html>
