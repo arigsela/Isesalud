@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -53,6 +55,10 @@ public class Unidadmedica extends BaseModel{
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="unidadmedica")
 	private List<Paciente> pacientes = new ArrayList<Paciente>();
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="municipio", nullable=false)
+	private Municipio municipio;
 	
 	public Unidadmedica() {
 		this.id = new Long(0L);
@@ -109,4 +115,11 @@ public class Unidadmedica extends BaseModel{
 		this.pacientes = pacientes;
 	}
 	
+	public Municipio getMunicipio() {
+		return municipio;
+	}
+	
+	public void setMunicipio(Municipio municipio) {
+		this.municipio = municipio;
+	}
 }

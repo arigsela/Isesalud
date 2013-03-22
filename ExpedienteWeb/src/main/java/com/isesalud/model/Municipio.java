@@ -52,6 +52,10 @@ public class Municipio extends BaseModel {
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="municipio")
 	private List<Paciente> pacientes = new ArrayList<Paciente>();
 	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="municipio")
+	private List<Unidadmedica> unidadesmedicas = new ArrayList<Unidadmedica>();
+	
+	
 	public Municipio() {
 		this.id = new Long(0L);
 	}
@@ -91,7 +95,16 @@ public class Municipio extends BaseModel {
 	public void setPacientes(List<Paciente> pacientes) {
 		this.pacientes = pacientes;
 	}
+	
+	public List<Unidadmedica> getUnidades() {
+		return unidadesmedicas;
+	}
+	
+	public void setUnidades(List<Unidadmedica> unidadesmedicas) {
+		this.unidadesmedicas = unidadesmedicas;
+	}
 }
+
 	
 	
 
