@@ -119,7 +119,7 @@ public class SecurityComponent extends BaseComponent {
 			currentUser = userEjb.getUserByUsername(getUser());
 			logged = true;
 			
-			log.infov("{0} logged in at {1}", user.getName(), new Date());
+			log.infov("{0} logged in at {1}", currentUser.getName(), new Date());
 			return "/pacientes/busqueda?faces-redirect=true";
 		}catch (ServletException e){
 			logged = false;
