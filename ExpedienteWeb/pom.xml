@@ -52,6 +52,10 @@
 			<url>http://repository.primefaces.org</url>
 			<layout>default</layout>
 		</repository>
+		<repository>
+		  <id>project</id>
+		  <url>file://${project.basedir}/repo</url>
+		</repository>
     </repositories>
     
     <dependencies>
@@ -129,7 +133,6 @@
         <dependency>
         	<groupId>org.hibernate</groupId>
         	<artifactId>hibernate-jpamodelgen</artifactId>
-        	<version>1.2.0.Final</version>
         	<scope>provided</scope>
         </dependency>
         <dependency>
@@ -264,6 +267,11 @@
         	<groupId>org.apache.poi</groupId>
         	<artifactId>poi</artifactId>
         	<version>3.7</version>
+        </dependency>
+        <dependency>
+        	<groupId>nexmo</groupId>
+        	<artifactId>nexmo-sdk</artifactId>
+        	<version>1.4</version>
         </dependency>
     </dependencies>
 
