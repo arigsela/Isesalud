@@ -39,7 +39,7 @@ public class CitaPersistenceEjb extends BasePersistenceManagerEJB<Cita> {
 	protected void doAfterAdd(Cita model) throws EJBException {
 		SMSParams params = new SMSParams();
 		params.setCita(model);
-		request.sendMessage(params);
+		//request.sendMessage(params);
 		super.doAfterAdd(model);
 	}
 	
