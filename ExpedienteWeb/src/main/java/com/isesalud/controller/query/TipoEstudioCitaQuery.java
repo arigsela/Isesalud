@@ -67,7 +67,6 @@ public class TipoEstudioCitaQuery extends BaseQueryController<TipoEstudioCita> {
 		this.tipoEstudioCita = tipoEstudioCita;
 	}
 	
-	@SuppressWarnings("cdi-observer")
 	public void updateSelectMenu(@Observes(notifyObserver=Reception.IF_EXISTS) Tipocita tc){
 		this.tipoEstudioCita.setTipocita(tc);
 		loadData();

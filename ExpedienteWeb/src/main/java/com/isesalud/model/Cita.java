@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import com.isesalud.support.components.BaseModel;
 
@@ -39,19 +40,21 @@ public class Cita extends BaseModel{
 	private Paciente paciente;
 	private Date startDate;
 	private Date endDate;
-
+	private Boolean enviadosms;
+	
 	public Cita() {
 		this.id = new Long(0L);
 	}
 
 	public Cita(TipoEstudioCita tipoestudiocita, Statuscita statuscita, Date date, Date time,
-			Personal personal, Paciente paciente) {
+			Personal personal, Paciente paciente, Boolean enviadosms) {
 		this.id = new Long(0L);
 		this.tipoestudiocita = tipoestudiocita;
 		this.statuscita = statuscita;
 		this.date = date;
 		this.time = time;
 		this.paciente = paciente;
+		this.enviadosms = enviadosms;
 	}
 
 	@Id
@@ -107,6 +110,17 @@ public class Cita extends BaseModel{
 		this.time = time;
 	}
 
+	@Column(name="enviadosms", nullable=false)
+	@NotNull
+	public Boolean getEnviadosms() {
+		return enviadosms;
+	}
+	
+	public void setEnviadosms(Boolean enviadosms) {
+		this.enviadosms = enviadosms;
+	}
+	
+	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "paciente", nullable = false)
 	public Paciente getPaciente() {

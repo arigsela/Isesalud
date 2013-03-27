@@ -37,6 +37,7 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 	 */
 	private static final long serialVersionUID = -8179534442377180931L;
 	
+	
 	private Logger log = Logger.getLogger(getClass());
 	
 	@EJB
@@ -85,7 +86,7 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 	protected void doAfterAdd() throws BaseException {
 		if(conversation.isTransient())
 			conversation.begin();
-		
+		getModel().setEnviadosms(false);
 		getModel().setDate(new Date());
 		getModel().setTime(new Date());
 		getModel().setPaciente(this.patientPersistence.getModel());
