@@ -96,7 +96,7 @@ public class SMSService implements MessageListener {
     	
     	Date result = DateUtil.combineDateTime(date, time);
     	
-    	String msg = "Su cita a sido programada para el " +
+    	String msg = "La cita para su mastografia ha sido programada para el " + 
     				df.format(result);
     	params.setMsg(msg);
     }
