@@ -37,7 +37,7 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 	 */
 	private static final long serialVersionUID = -8179534442377180931L;
 	
-	@SuppressWarnings("unused")
+	
 	private Logger log = Logger.getLogger(getClass());
 	
 	@EJB
