@@ -24,6 +24,7 @@ import org.primefaces.model.ScheduleModel;
 
 import com.isesalud.ejb.query.CitaEjb;
 import com.isesalud.model.Cita;
+import com.isesalud.support.DateUtil;
 import com.isesalud.support.components.BaseQueryController;
 import com.isesalud.support.exceptions.BaseException;
 
@@ -31,7 +32,6 @@ import com.isesalud.support.exceptions.BaseException;
  * @author Ing. Ari G. Sela M.
  *
  */
-
 @Named
 @ViewScoped
 public class CitaQuery extends  BaseQueryController<Cita>{
@@ -143,21 +143,9 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 								
 						Date date = c.getDate();
 						Date time = c.getTime();
-						
-						Calendar calDT = Calendar.getInstance();
-						calDT.setTime(date);
-						
-						Calendar calT = Calendar.getInstance();
-						calT.setTime(time);
-						
-						calDT.set(Calendar.HOUR_OF_DAY, calT.get(Calendar.HOUR_OF_DAY));
-						calDT.set(Calendar.MINUTE, calT.get(Calendar.MINUTE));
-						calDT.set(Calendar.SECOND, calT.get(Calendar.SECOND));
-						calDT.set(Calendar.MILLISECOND, calT.get(Calendar.MILLISECOND));
-						
-						Date result = calDT.getTime();
-						calDT.add(Calendar.MINUTE, 10);
-						Date result2 = calDT.getTime();
+
+						Date result = DateUtil.combineDateTime(date, time);
+						Date result2 = DateUtil.addMinutes(result, 10);
 						
 						event = new DefaultScheduleEvent(title, 
 								dstDate(result), dstDate(result2));

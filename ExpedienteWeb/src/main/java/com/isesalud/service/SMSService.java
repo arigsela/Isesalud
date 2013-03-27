@@ -1,5 +1,10 @@
 package com.isesalud.service;
 
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.EJB;
@@ -14,6 +19,7 @@ import org.jboss.solder.logging.Logger;
 import com.isesalud.ejb.query.PacienteEjb;
 import com.isesalud.service.support.SMSParams;
 import com.isesalud.support.CompareUtil;
+import com.isesalud.support.DateUtil;
 import com.nexmo.messaging.sdk.NexmoSmsClient;
 import com.nexmo.messaging.sdk.SmsSubmissionResult;
 import com.nexmo.messaging.sdk.messages.TextMessage;
@@ -73,21 +79,34 @@ public class SMSService implements MessageListener {
 			try {
 				if(msg.getObject() instanceof SMSParams){
 					params = (SMSParams) msg.getObject();
-					sendSMS(params.getMsg(), params.getPaciente().getPhoneNumberMovil());
+					constructMessage(params);
+					sendSMS(params);
 				}
 			} catch (JMSException e) {
 				log.error(e.getMessage());
 			}
     	}
-    	
     }
     
-    private void sendSMS(String msg, String phone){
+    private void constructMessage(SMSParams params){
+    	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm a");
+    	
+    	Date date = params.getCita().getDate();
+    	Date time = params.getCita().getTime();
+    	
+    	Date result = DateUtil.combineDateTime(date, time);
+    	
+    	String msg = "Su cita a sido programada para el " +
+    				df.format(result);
+    	params.setMsg(msg);
+    }
+    
+    private void sendSMS(SMSParams params){
     	try{
     		SmsSubmissionResult[] results = null;
-        	if(!CompareUtil.isEmpty(msg) && !CompareUtil.isEmpty(phone)){
-        		String to = "52" + phone;
-        		TextMessage message = new TextMessage(SMS_FROM, to, msg);
+        	if(!CompareUtil.isEmpty(params.getMsg()) && !CompareUtil.isEmpty(params.getCita().getPaciente().getPhoneNumberMovil())){
+        		String to = "52" + params.getCita().getPaciente().getPhoneNumberMovil();
+        		TextMessage message = new TextMessage(SMS_FROM, to, params.getMsg());
         		results = client.submitMessage(message);
         		printSMSResults(results);
         	}

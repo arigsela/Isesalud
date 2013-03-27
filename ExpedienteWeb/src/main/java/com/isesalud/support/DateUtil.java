@@ -130,6 +130,13 @@ public class DateUtil
 		c.add(Calendar.YEAR, years);
 		return c.getTime();
 	}
+	
+	public static Date addMinutes(final Date date, final int minutes){
+		final Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.MINUTE, minutes);
+		return c.getTime();
+	}
 
 	/**
 	 */
@@ -150,5 +157,22 @@ public class DateUtil
 	public static long getDiffTime(final Date date1, final Date date2)
 	{
 		return date1.getTime() - date2.getTime();
+	}
+	
+	public static Date combineDateTime(Date date, Date time){
+		Calendar calDT = Calendar.getInstance();
+		calDT.setTime(date);
+		
+		Calendar calT = Calendar.getInstance();
+		calT.setTime(time);
+		
+		calDT.set(Calendar.HOUR_OF_DAY, calT.get(Calendar.HOUR_OF_DAY));
+		calDT.set(Calendar.MINUTE, calT.get(Calendar.MINUTE));
+		calDT.set(Calendar.SECOND, calT.get(Calendar.SECOND));
+		calDT.set(Calendar.MILLISECOND, calT.get(Calendar.MILLISECOND));
+		
+		Date result = calDT.getTime();
+		
+		return result;
 	}
 }
