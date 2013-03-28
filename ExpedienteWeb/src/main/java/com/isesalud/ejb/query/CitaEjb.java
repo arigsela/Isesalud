@@ -59,6 +59,22 @@ public class CitaEjb extends BaseManagerEJB<Cita>{
 		return model;
 	}
 	
+	public List<Cita> getCitasByDateAndStatus(Cita params){
+		List<Cita> model = null;
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Cita> query = builder.createQuery(getModelClass());
+		Root<Cita> root = query.from(getModelClass());
+		
+		Predicate date = builder.equal(root.get(Cita_.date), params.getDate());
+		Predicate status = builder.equal(root.get(Cita_.statuscita), params.getStatuscita());
+		
+		query.select(root).where(builder.and(date, status));
+		
+		model = getList(query);
+		
+		return model;
+	}
+	
 	@Override
 	public Class<Cita> getModelClass() {
 		return Cita.class;

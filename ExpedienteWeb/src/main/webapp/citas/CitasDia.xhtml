@@ -29,11 +29,21 @@
 			</p:toolbar>
 
 			<p:spacer height="30" />
-
-			<p:outputLabel id="lblCal" value="Seleccione una fecha: "/>
-			<p:calendar id="cldDateSearch" value="#{citaDayReportQuery.day}" readonlyInput="true"
-				mode="popup">
-			</p:calendar>
+			
+			<h:panelGrid columns="3">
+				<p:outputLabel id="lblCal" value="Seleccione una fecha: "/>
+				<p:calendar id="cldDateSearch" value="#{citaDayReportQuery.cita.date}" readonlyInput="true"
+					mode="popup">
+				</p:calendar>
+				<p:selectOneMenu id="cmbStatusCita" value="#{citaDayReportQuery.cita.statuscita}"
+					converter="#{statusCitaConverter}">
+					<f:selectItems value="#{statusCitaQuery.queryListDM}"
+						var="_status"
+						itemLabel="#{_status.description}"
+						itemValue="#{_status}"></f:selectItems>
+				</p:selectOneMenu>
+			</h:panelGrid>
+			
 			<p:commandButton id="btnReport" value="Generar Reporte" ajax="true"
 				actionListener="#{citaDayReportQuery.query}" update="pnlCitas"/>
 			<p:spacer height="30"/>

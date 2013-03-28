@@ -33,26 +33,25 @@ public class CitaDayReportQuery extends BaseQueryController<Cita>{
 	@EJB
 	private CitaEjb query;
 	
-	private Date day;
+	private Cita cita;
 	
-	public Date getDay() {
-		return day;
+	public Cita getCita() {
+		return cita;
+	}
+	
+	public void setCita(Cita cita) {
+		this.cita = cita;
 	}
 	
 	@Override
 	protected void init() throws BaseException {
-		day = new Date();
-	}
-	
-	public void setDay(Date day) {
-		this.day = day;
+		cita = new Cita();
+		cita.setDate(new Date());
 	}
 
 	@Override
 	protected List<Cita> getQueryList() {
-		Cita params = new Cita();
-		params.setDate(day);
-		return query.getCitasByDate(params);
+		return query.getCitasByDateAndStatus(cita);
 	}
 
 	@Override
