@@ -13,6 +13,7 @@ import javax.inject.Named;
 import com.isesalud.ejb.query.CitaEjb;
 import com.isesalud.model.Cita;
 import com.isesalud.support.components.BaseQueryController;
+import com.isesalud.support.exceptions.BaseException;
 
 /**
  * @author Jesus Espinoza Hernandez
@@ -36,6 +37,11 @@ public class CitaDayReportQuery extends BaseQueryController<Cita>{
 	
 	public Date getDay() {
 		return day;
+	}
+	
+	@Override
+	protected void init() throws BaseException {
+		day = new Date();
 	}
 	
 	public void setDay(Date day) {
