@@ -4,7 +4,6 @@
 package com.isesalud.service.support;
 
 import com.isesalud.model.Cita;
-import com.isesalud.model.Paciente;
 import com.isesalud.support.components.BaseComponent;
 
 /**
