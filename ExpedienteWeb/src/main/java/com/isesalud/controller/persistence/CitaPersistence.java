@@ -13,8 +13,6 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.jboss.solder.logging.Logger;
-
 import com.isesalud.ejb.persistence.CitaPersistenceEjb;
 import com.isesalud.ejb.persistence.TipoEstudioCitaPersistenceEjb;
 import com.isesalud.model.Cita;
@@ -36,9 +34,6 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 	 * 
 	 */
 	private static final long serialVersionUID = -8179534442377180931L;
-	
-	
-	private Logger log = Logger.getLogger(getClass());
 	
 	@EJB
 	private CitaPersistenceEjb manager;
