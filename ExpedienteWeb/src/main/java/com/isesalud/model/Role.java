@@ -9,8 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -38,8 +36,7 @@ public class Role extends BaseModel {
 	@Column(name="description")
 	private String description;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name = "user_has_role", joinColumns = { @JoinColumn(name = "Role_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "User_id", nullable = false, updatable = false) })
+	@ManyToMany(fetch=FetchType.LAZY, mappedBy="roles")
 	private Set<User> users = new HashSet<User>(0);
 	
 	

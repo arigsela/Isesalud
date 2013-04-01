@@ -56,7 +56,7 @@ public class User extends BaseModel {
 	@JoinTable(name = "user_has_role", joinColumns = { @JoinColumn(name = "User_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "Role_id", nullable = false, updatable = false) })
 	private Set<Role> roles = new HashSet<Role>(0);
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="municipio", nullable=false)
 	private Municipio municipio;
 	

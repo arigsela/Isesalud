@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/templates/common.xhtml">
+			<ui:define name="pageTitle">Administracion</ui:define>
+			<ui:define name="pageHeader">Ajustes del sistema</ui:define>
+			
+			<ui:define name="dialogs">
+				<p:dialog id="dlgNewUser" widgetVar="NewUserDialog" header="Nuevo Usuario"
+					appendToBody="true" modal="true" showEffect="clip" hideEffect="clip" 
+					dynamic="true" closable="false">
+					<h:form id="frmNewUser" prependId="false">
+						<p:messages autoUpdate="true" showDetail="true" showSummary="true"/>
+						<h:panelGrid columns="2">
+							<p:outputLabel id="lblName" for="txtName" value="Nombre"/>
+							<p:inputText id="txtName" value="#{userPersistence.model.name}" required="true"/>
+							<p:outputLabel id="lblFName" for="txtFName" value="Apellido Paterno"/>
+							<p:inputText id="txtFName" value="#{userPersistence.model.fName}" required="true"/>
+							<p:outputLabel id="lblMName" for="txtMName" value="Apellido Materno"/>
+							<p:inputText id="txtMName" value="#{userPersistence.model.mName}"/>
+							<p:outputLabel id="lblUserName" for="txtUserName" value="Usuario"/>
+							<p:inputText id="txtUserName" value="#{userPersistence.model.username}" required="true"/>
+							<p:outputLabel id="lblPassword" for="txtPassword1" value="Contraseña"/>
+							<p:password id="txtPassword1" value="#{userPersistence.model.password}" 
+								goodLabel="Bueno" weakLabel="Debil" strongLabel="Fuerte" promptLabel="Escriba su clave"
+								feedback="true" match="txtPassword2" label="Contraseña 1"/>
+							<p:outputLabel id="lblConfirmPass" for="txtPassword2" value="Confirme contraseña"/>
+							<p:password id="txtPassword2" value="#{userPersistence.model.password}"
+								goodLabel="Bueno" weakLabel="Debil" strongLabel="Fuerte" promptLabel="Escriba su clave" 
+								feedback="false" label="Contraseña 2"/>
+							<p:outputLabel id="lblMunicipio" for="cmbMunicipio" value="Municipio"/>
+							<p:selectOneMenu id="cmbMunicipio" value="#{userPersistence.model.municipio}"
+								converter="#{municipioConverter}">
+								<f:selectItems value="#{municipioQuery.queryListDM}" var="_muni"
+									itemLabel="#{_muni.name}"
+									itemValue="#{_muni}"></f:selectItems>
+							</p:selectOneMenu>
+						</h:panelGrid>
+						
+						<h3>Seleccione los roles del usuario</h3>
+						
+						<p:pickList id="pckRoles" value="#{userPersistence.roles}" var="_roles"
+							itemLabel="#{_roles.role}" itemValue="#{_roles}" converter="#{roleConverter}"
+							effect="bounce">
+						</p:pickList>
+						
+						<p:commandButton id="btnSaveUser" value="Salvar" actionListener="#{userPersistence.save}"
+							ajax="true" oncomplete="NewUserDialog.hide()"/>
+						<p:commandButton id="btnCancelUser" value="Cancelar" actionListener="#{userPersistence.cancel}"
+							ajax="true" oncomplete="NewUserDialog.hide()"
+							immediate="true"/>
+					</h:form>
+				</p:dialog>
+			</ui:define>
+			
+			<ui:define name="body">
+				
+				<p:tabView id="adminView" effect="blind">
+					
+					<p:tab id="UsersTab" title="Usuarios">
+						<h:form id="frmUserSearch" prependId="false">
+							<p:commandButton id="btnNewUser" value="Nuevo Usuario"
+								ajax="true" actionListener="#{userPersistence.add}"
+								update=":frmNewUser" oncomplete="NewUserDialog.show()"
+								icon="ui-icon-plusthick"/>
+									
+							<br />
+							<br />
+							<p:fieldset legend="Criterios de busqueda">
+								<h:panelGrid columns="6">
+									<p:outputLabel id="lblName" for="txtname" value="Nombre"/>
+									<p:inputText id="txtname" value="#{usersQuery.user.name}"/>
+									<p:outputLabel id="lblFName" for="txtfname" value="Apellido Paterno"/>
+									<p:inputText id="txtfname" value="#{usersQuery.user.fName}"/>
+									<p:outputLabel id="lblMName" for="txtmname" value="Apellido Materno"/>
+									<p:inputText id="txtmname" value="#{usersQuery.user.mName}"/>
+								</h:panelGrid>
+								<br />
+								<p:commandButton id="btnSearch" value="Buscar"
+									actionListener="#{usersQuery.query}"
+									ajax="true"
+									update="tblUsers"
+									icon="ui-icon-search"/>
+								
+							</p:fieldset>
+							
+							<p:spacer height="10"/>
+							
+							<p:dataTable id="tblUsers" value="#{usersQuery.queryListDM}"
+								var="_users" emptyMessage="No hay usuarios"
+								rowKey="#{_users.id}"
+								selectionMode="single" selection="#{userPersistence.model}">
+							
+								<p:column headerText="Nombre">
+									<h:outputText value="#{_users.name}" />
+								</p:column>
+								<p:column headerText="Apellido Paterno">
+									<h:outputText value="#{_users.fName}" />
+								</p:column>
+								<p:column headerText="Apellido Materno">
+									<h:outputText value="#{_users.mName}" />
+								</p:column>
+							
+								<f:facet name="footer">
+									<p:commandButton id="btnDeleteUser" value="Borrar Usuario"
+										actionListener="#{userPersistence.delete}" ajax="true"
+										update="tblUsers"/>
+								</f:facet>	
+							</p:dataTable>
+						</h:form>
+					</p:tab>
+					
+				</p:tabView>
+								
+			</ui:define>
+	</ui:composition>
+
+</html>
