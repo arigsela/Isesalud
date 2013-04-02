@@ -12,9 +12,11 @@ import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.Any;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.model.DualListModel;
 
 import com.isesalud.ejb.persistence.UserPersistenceEjb;
@@ -22,6 +24,7 @@ import com.isesalud.ejb.query.RoleEjb;
 import com.isesalud.ejb.query.UserEjb;
 import com.isesalud.model.Role;
 import com.isesalud.model.User;
+import com.isesalud.support.JSFUtil;
 import com.isesalud.support.components.BaseManagedCrudController;
 import com.isesalud.support.components.EditModeEnum;
 import com.isesalud.support.exceptions.BaseException;
@@ -40,6 +43,11 @@ public class UserPersistence extends BaseManagedCrudController<User, UserPersist
 	 * 
 	 */
 	private static final long serialVersionUID = -3690853095759147481L;
+	
+	private boolean hashPassword;
+	
+	private final String editUserDlg = "NewUserDialog.show()";
+	private final String editPassDlg = "PasswordChangeDlg.show()";
 	
 	private List<Role> roleList;
 	private List<Role> selectedRoleList;
@@ -89,18 +97,17 @@ public class UserPersistence extends BaseManagedCrudController<User, UserPersist
 		
 		loadDataIntoPickList(false);
 		
+		getModel().setEnabled(true);
+		
 		super.doAfterAdd();
 	}
 	
 	@Override
 	protected void doAfterEdit() throws BaseException {
-		if(conversation.isTransient()){
-			conversation.begin();
-		}
+		
+		getModel().setHashPassword(hashPassword);
 		
 		loadDataIntoPickList(true);
-		
-		getModel().setPassword("");
 		
 		super.doAfterEdit();
 	}
@@ -156,6 +163,51 @@ public class UserPersistence extends BaseManagedCrudController<User, UserPersist
 		if(!conversation.isTransient()){
 			conversation.end();
 		}
+	}
+	
+	public boolean isEditMode(){
+		return (getEditMode() == EditModeEnum.EDITING) ? true : false;
+	}
+	
+	private void setHashParam(ActionEvent e){
+		String hashPass = (String) e.getComponent().getAttributes().get("hashPass");
+		if(hashPass.equals("true"))
+			this.hashPassword = true;
+		else if (hashPass.equals("false"))
+			this.hashPassword = false;
+	}
+	
+	@Override
+	public void add(ActionEvent actionEvent) {
+		if(conversation.isTransient()){
+			conversation.begin();
+		}
+		
+		super.add(actionEvent);
+	}
+	
+	@Override
+	public void edit(ActionEvent actionEvent) {
+		
+		if(getModel().isEmpty()){
+			JSFUtil.error("Seleccione a un usuario primero de la tabla");
+			return;
+		}
+		
+		if(conversation.isTransient()){
+			conversation.begin();
+		}
+		
+		setHashParam(actionEvent);
+		
+		super.edit(actionEvent);
+		
+		RequestContext ctx = RequestContext.getCurrentInstance();
+		
+		if(hashPassword)
+			ctx.execute(editPassDlg);
+		else
+			ctx.execute(editUserDlg);
 	}
 
 	@Override

@@ -1,13 +1,12 @@
 /**
  * 
  */
-package com.isesalud.controller.persistence;
+package com.isesalud.support.exceptions;
 
 import java.util.List;
 
 import javax.ejb.ApplicationException;
 
-import com.isesalud.support.exceptions.BaseException;
 
 /**
  * @author Jesus Espinoza Hernandez

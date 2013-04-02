@@ -10,38 +10,53 @@
 			<ui:define name="pageHeader">Ajustes del sistema</ui:define>
 			
 			<ui:define name="dialogs">
-				<p:dialog id="dlgNewUser" widgetVar="NewUserDialog" header="Nuevo Usuario"
+				
+				<p:dialog id="dlgNewUser" widgetVar="NewUserDialog" 
+					header="Detalles del usuario"
 					appendToBody="true" modal="true" showEffect="clip" hideEffect="clip" 
 					closable="false">
 					<h:form id="frmNewUser" prependId="false">
-						<p:messages autoUpdate="true" showDetail="true" showSummary="true"/>
-						<h:panelGrid columns="2">
-							<p:outputLabel id="lblName" for="txtName" value="Nombre"/>
-							<p:inputText id="txtName" value="#{userPersistence.model.name}" required="true"/>
-							<p:outputLabel id="lblFName" for="txtFName" value="Apellido Paterno"/>
-							<p:inputText id="txtFName" value="#{userPersistence.model.fName}" required="true"/>
-							<p:outputLabel id="lblMName" for="txtMName" value="Apellido Materno"/>
-							<p:inputText id="txtMName" value="#{userPersistence.model.mName}"/>
-							<p:outputLabel id="lblUserName" for="txtUserName" value="Usuario"/>
-							<p:inputText id="txtUserName" value="#{userPersistence.model.username}" required="true"/>
-							<p:outputLabel id="lblPassword" for="txtPassword1" value="Contraseña"/>
-							<p:password id="txtPassword1" value="#{userPersistence.model.password}" 
-								goodLabel="Bueno" weakLabel="Debil" strongLabel="Fuerte" promptLabel="Escriba su clave"
-								feedback="true" match="txtPassword2" label="Contraseña 1"/>
-							<p:outputLabel id="lblConfirmPass" for="txtPassword2" value="Confirme contraseña"/>
-							<p:password id="txtPassword2" value="#{userPersistence.model.password}"
-								goodLabel="Bueno" weakLabel="Debil" strongLabel="Fuerte" promptLabel="Escriba su clave" 
-								feedback="false" label="Contraseña 2"/>
-							<p:outputLabel id="lblMunicipio" for="cmbMunicipio" value="Municipio"/>
-							<p:selectOneMenu id="cmbMunicipio" value="#{userPersistence.model.municipio}"
-								converter="#{municipioConverter}">
-								<f:selectItems value="#{municipioQuery.queryListDM}" var="_muni"
-									itemLabel="#{_muni.name}"
-									itemValue="#{_muni}"></f:selectItems>
-							</p:selectOneMenu>
-							<p:outputLabel id="lblEnabled" for="chkEnabled" value="Habilitado"/>
-							<p:selectBooleanCheckbox id="chkEnabled" value="#{userPersistence.model.enabled}"/>
+						<h:panelGrid columns="1">
+
+							<h:panelGrid columns="2">
+								<p:outputLabel id="lblName" for="txtName" value="Nombre"/>
+								<p:inputText id="txtName" value="#{userPersistence.model.name}" required="true"/>
+								<p:outputLabel id="lblFName" for="txtFName" value="Apellido Paterno"/>
+								<p:inputText id="txtFName" value="#{userPersistence.model.fName}" required="true"/>
+								<p:outputLabel id="lblMName" for="txtMName" value="Apellido Materno"/>
+								<p:inputText id="txtMName" value="#{userPersistence.model.mName}"/>
+								<p:outputLabel id="lblUserName" for="txtUserName" value="Usuario"/>
+								<p:inputText id="txtUserName" value="#{userPersistence.model.username}" required="true"/>
+								<p:outputLabel id="lblMunicipio" for="cmbMunicipio" value="Municipio"/>
+								<p:selectOneMenu id="cmbMunicipio" value="#{userPersistence.model.municipio}"
+									converter="#{municipioConverter}">
+									<f:selectItems value="#{municipioQuery.queryListDM}" var="_muni"
+										itemLabel="#{_muni.name}"
+										itemValue="#{_muni}"></f:selectItems>
+								</p:selectOneMenu>
+								<p:outputLabel id="lblEnabled" for="chkEnabled" value="Habilitado"/>
+								<p:selectBooleanCheckbox id="chkEnabled" value="#{userPersistence.model.enabled}"/>
+							</h:panelGrid>
+							
+							<p:separator rendered="#{not userPersistence.editMode}"/>
+							
+							<p:outputPanel autoUpdate="true" layout="block">
+								<h:panelGrid rendered="#{not userPersistence.editMode}" columns="2">
+									<p:outputLabel id="lblPassword" for="txtPassword1" value="Contraseña" 
+										rendered="#{not userPersistence.editEnabled}"/>
+									<p:password id="txtPassword1" value="#{userPersistence.model.password}" 
+										goodLabel="Bueno" weakLabel="Debil" strongLabel="Fuerte" promptLabel="Escriba su clave"
+										feedback="true" match="txtPassword2" label="Contraseña 1"/>
+									<p:outputLabel id="lblConfirmPass" for="txtPassword2" value="Confirme contraseña"
+										rendered="#{not userPersistence.editEnabled}"/>
+									<p:password id="txtPassword2" value="#{userPersistence.model.password}"
+										goodLabel="Bueno" weakLabel="Debil" strongLabel="Fuerte" promptLabel="Escriba su clave" 
+										feedback="false" label="Contraseña 2"/>
+								</h:panelGrid>
+							</p:outputPanel>
+						
 						</h:panelGrid>
+						
 						
 						<h3>Seleccione los roles del usuario</h3>
 						
@@ -54,6 +69,40 @@
 						<p:commandButton id="btnCancelUser" value="Cancelar" actionListener="#{userPersistence.cancel}"
 							ajax="true" oncomplete="NewUserDialog.hide()"
 							immediate="true"/>
+					</h:form>
+				</p:dialog>
+				
+				<p:dialog id="dlgPassword" widgetVar="PasswordChangeDlg" appendToBody="true"
+					modal="true" closable="false" showEffect="clip" hideEffect="clip"
+					header="Cambio de clave">
+					<h:form id="frmPassword" prependId="false">
+						<p:panel header="Usuario">
+							<h:panelGrid columns="2">
+								<p:outputLabel for="txtDefinedUserName" value="Nombre: "/>
+								<h:outputText id="txtDefinedUserName" value="#{userPersistence.model.name} #{userPersistence.model.fName} #{userPersistence.model.mName}" />
+							</h:panelGrid>
+							
+							<p:separator/>
+							
+							<h3>Escriba una nueva clave</h3>
+							
+							<h:panelGrid columns="2">
+								<p:outputLabel for="txtUserPass" value="Contraseña"/>
+								<p:password id="txtUserPass" feedback="true" weakLabel="Debil"
+									goodLabel="Bueno" strongLabel="Fuerte" match="txtUserPass2"
+									value="#{userPersistence.model.password}"/>
+								<p:outputLabel for="txtUserPass2" value="Confirme contraseña"/>
+								<p:password id="txtUserPass2" feedback="false" 
+									value="#{userPersistence.model.password}"/>
+							</h:panelGrid>
+							
+							<p:commandButton id="btnSavePass" value="Salvar" 
+								actionListener="#{userPersistence.save}" ajax="true"
+								oncomplete="PasswordChangeDlg.hide()"/>
+							<p:commandButton id="btnCancelPass" value="Cancelar"
+								actionListener="#{userPersistence.cancel}" ajax="true"
+								immediate="true" oncomplete="PasswordChangeDlg.hide()"/>
+						</p:panel>
 					</h:form>
 				</p:dialog>
 			</ui:define>
@@ -107,13 +156,22 @@
 										<h:outputText value="#{_users.mName}" />
 									</p:column>
 									<p:column headerText="Habilitado">
-										<p:selectBooleanCheckbox value="#{_users.enabled}" disabled="true"/>
+										<p:graphicImage library="img" 
+											name="#{_users.enabled ? 'ok.png' : 'cancel.png'}"
+											width="20px" height="20px"/>
 									</p:column>
 								
 									<f:facet name="footer">
 										<p:commandButton id="btnEditUser" value="Editar Usuario"
 											actionListener="#{userPersistence.edit}" ajax="true"
-											update=":frmNewUser" oncomplete="NewUserDialog.show()"/>
+											update=":frmNewUser">
+											<f:attribute name="hashPass" value="false"/>
+										</p:commandButton>
+										<p:commandButton id="btnChangePassUser" value="Cambiar Clave"
+											actionListener="#{userPersistence.edit}" ajax="true"
+											update=":frmPassword">
+											<f:attribute name="hashPass" value="true"/>
+										</p:commandButton>
 										<p:commandButton id="btnDeleteUser" value="Borrar Usuario"
 											actionListener="#{userPersistence.delete}" ajax="true"/>
 									</f:facet>	

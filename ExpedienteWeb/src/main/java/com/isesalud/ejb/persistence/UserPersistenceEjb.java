@@ -42,7 +42,9 @@ public class UserPersistenceEjb extends BasePersistenceManagerEJB<User> {
 	
 	@Override
 	protected void doBeforeUpdate(User model) throws EJBException {
-		HashUserPassword(model);
+		if(model.isHashPassword())
+			HashUserPassword(model);
+		
 		super.doBeforeUpdate(model);
 	}
 
