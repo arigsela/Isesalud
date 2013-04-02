@@ -39,6 +39,8 @@
 									itemLabel="#{_muni.name}"
 									itemValue="#{_muni}"></f:selectItems>
 							</p:selectOneMenu>
+							<p:outputLabel id="lblEnabled" for="chkEnabled" value="Habilitado"/>
+							<p:selectBooleanCheckbox id="chkEnabled" value="#{userPersistence.model.enabled}"/>
 						</h:panelGrid>
 						
 						<h3>Seleccione los roles del usuario</h3>
@@ -103,6 +105,9 @@
 									</p:column>
 									<p:column headerText="Apellido Materno">
 										<h:outputText value="#{_users.mName}" />
+									</p:column>
+									<p:column headerText="Habilitado">
+										<p:selectBooleanCheckbox value="#{_users.enabled}" disabled="true"/>
 									</p:column>
 								
 									<f:facet name="footer">

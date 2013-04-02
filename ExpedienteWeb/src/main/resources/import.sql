@@ -19,8 +19,8 @@ insert into tipoestudiocita (id,name,notes,tipocita) value (7,'oncologia tipo A'
 insert into statuscita (id,description) values (1,'Pendiente');
 insert into statuscita (id,description) values (2,'Atendida');
 insert into cita (id,date,time,statusCita,tipoEstudioCita,paciente,enviadosms) values (1,'2013-03-22','12:10:00',1,1,1,0);
-insert into user (username, password, name, fName, mName, municipio) values ('test', 'YEr9AHbeWymox3oz/OKqOhjkzOr75H2sQz/ZQ2OwhRc=', 'John', 'Marston', '', 1);
-insert into user (username, password, name, fName, mName, municipio) values ('test2', 'YEr9AHbeWymox3oz/OKqOhjkzOr75H2sQz/ZQ2OwhRc=', 'Tifa', 'Lockheart', '', 2);
+insert into user (username, password, name, fName, mName, municipio, enabled) values ('test', 'YEr9AHbeWymox3oz/OKqOhjkzOr75H2sQz/ZQ2OwhRc=', 'John', 'Marston', '', 1, 1);
+insert into user (username, password, name, fName, mName, municipio, enabled) values ('test2', 'YEr9AHbeWymox3oz/OKqOhjkzOr75H2sQz/ZQ2OwhRc=', 'Tifa', 'Lockheart', '', 2, 1);
 insert into role (role, description) values ('Admin', 'Administrador');
 insert into role (role, description) values ('Tech', 'Tecnico');
 insert into role (role, description) values ('Doctor', 'Doctor');

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import org.jboss.security.auth.spi.Util;
 
+import com.isesalud.controller.persistence.UserDisabledException;
 import com.isesalud.ejb.query.UserEjb;
 import com.isesalud.model.User;
 import com.isesalud.support.JSFUtil;
@@ -117,6 +118,11 @@ public class SecurityComponent extends BaseComponent {
 			//Get the user from the database
 			user.setUsername(principal.getName());
 			currentUser = userEjb.getUserByUsername(getUser());
+			
+			if(!currentUser.isEnabled()){
+				throw new UserDisabledException("User is disabled. Cannot log in");
+			}
+			
 			logged = true;
 			
 			log.infov("{0} logged in at {1}", currentUser.getName(), new Date());
@@ -125,7 +131,13 @@ public class SecurityComponent extends BaseComponent {
 			logged = false;
 			JSFUtil.error("No se logro verificar su identidad");
 			log.error(e.getMessage());
+		}catch (UserDisabledException e){
+			logged = false;
+			JSFUtil.error("El usuario esta deshabilitado");
+			logout();
+			log.error(e.getMessage());
 		}
+		
 		return null;
 	}
 	

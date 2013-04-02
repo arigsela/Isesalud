@@ -28,12 +28,22 @@ public class UserPersistenceEjb extends BasePersistenceManagerEJB<User> {
 		return User.class;
 	}
 	
-	@Override
-	protected void doBeforeAdd(User model) throws EJBException {
+	private void HashUserPassword(User model){
 		log.info("Applying hash alorithm to password");
 		String hash = Util.createPasswordHash("SHA-256", Util.BASE64_ENCODING, null, null, model.getPassword());
 		model.setPassword(hash);
+	}
+	
+	@Override
+	protected void doBeforeAdd(User model) throws EJBException {
+		HashUserPassword(model);
 		super.doBeforeAdd(model);
+	}
+	
+	@Override
+	protected void doBeforeUpdate(User model) throws EJBException {
+		HashUserPassword(model);
+		super.doBeforeUpdate(model);
 	}
 
 }
