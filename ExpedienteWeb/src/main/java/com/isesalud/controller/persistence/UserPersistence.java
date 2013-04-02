@@ -10,6 +10,8 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.event.Event;
+import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -21,6 +23,7 @@ import com.isesalud.ejb.query.UserEjb;
 import com.isesalud.model.Role;
 import com.isesalud.model.User;
 import com.isesalud.support.components.BaseManagedCrudController;
+import com.isesalud.support.components.EditModeEnum;
 import com.isesalud.support.exceptions.BaseException;
 import com.isesalud.support.exceptions.OperationException;
 
@@ -55,6 +58,9 @@ public class UserPersistence extends BaseManagedCrudController<User, UserPersist
 	@Inject
 	private Conversation conversation;
 	
+	@Inject @Any
+	private Event<User> userEvent;
+	
 	public DualListModel<Role> getRoles() {
 		return roles;
 	}
@@ -63,16 +69,25 @@ public class UserPersistence extends BaseManagedCrudController<User, UserPersist
 		this.roles = roles;
 	}
 	
+	private void loadDataIntoPickList(boolean edit){
+		
+		roleList = roleManager.getRoles();
+		selectedRoleList = new ArrayList<Role>(getModel().getRoles());
+		
+		if(edit){
+			roleList.removeAll(selectedRoleList);
+		}
+		
+		setRoles(new DualListModel<Role>(roleList, selectedRoleList));
+	}
+	
 	@Override
 	protected void doAfterAdd() throws BaseException {
 		if(conversation.isTransient()){
 			conversation.begin();
 		}
 		
-		roleList = roleManager.getRoles();
-		selectedRoleList = new ArrayList<Role>();
-		
-		setRoles(new DualListModel<Role>(roleList, selectedRoleList));
+		loadDataIntoPickList(false);
 		
 		super.doAfterAdd();
 	}
@@ -83,10 +98,9 @@ public class UserPersistence extends BaseManagedCrudController<User, UserPersist
 			conversation.begin();
 		}
 		
-		roleList = roleManager.getRoles();
-		selectedRoleList = new ArrayList<Role>(getModel().getRoles());
+		loadDataIntoPickList(true);
 		
-		setRoles(new DualListModel<Role>(roleList, selectedRoleList));
+		getModel().setPassword("");
 		
 		super.doAfterEdit();
 	}
@@ -97,9 +111,11 @@ public class UserPersistence extends BaseManagedCrudController<User, UserPersist
 			throw new OperationException("No se especifico ningun rol para el usuario");
 		}
 		
-		User user = userManager.getUserByUsername(getModel());
-		if(user != null){
-			throw new OperationException("El usuario ya existe.");
+		if(getEditMode() == EditModeEnum.ADDING){
+			User user = userManager.getUserByUsername(getModel());
+			if(user != null){
+				throw new OperationException("El usuario ya existe.");
+			}
 		}
 		
 		log.infov("Saving user {0} {1} {2}", getModel().getName(),
@@ -117,9 +133,17 @@ public class UserPersistence extends BaseManagedCrudController<User, UserPersist
 		roleList = null;
 		selectedRoleList = null;
 		
+		userEvent.fire(getModel());
+		
 		if(!conversation.isTransient()){
 			conversation.end();
 		}
+	}
+	
+	@Override
+	protected void doAfterDelete() throws BaseException {
+		userEvent.fire(getModel());
+		super.doAfterDelete();
 	}
 	
 	@Override

@@ -6,11 +6,13 @@ package com.isesalud.controller.query;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.enterprise.event.Observes;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 
 import com.isesalud.ejb.query.UserEjb;
 import com.isesalud.model.User;
+import com.isesalud.support.JSFUtil;
 import com.isesalud.support.components.BaseQueryController;
 import com.isesalud.support.exceptions.BaseException;
 
@@ -56,6 +58,14 @@ public class UsersQuery extends BaseQueryController<User> {
 	@Override
 	protected int getQueryRowCount() {
 		return 0;
+	}
+	
+	public void OnUserCreatedOrUpdated(@Observes User user) {
+		try {
+			clear();
+		} catch (BaseException e) {
+			JSFUtil.error(e.getMessages());
+		}
 	}
 
 }

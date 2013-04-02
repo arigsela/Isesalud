@@ -12,7 +12,7 @@
 			<ui:define name="dialogs">
 				<p:dialog id="dlgNewUser" widgetVar="NewUserDialog" header="Nuevo Usuario"
 					appendToBody="true" modal="true" showEffect="clip" hideEffect="clip" 
-					dynamic="true" closable="false">
+					closable="false">
 					<h:form id="frmNewUser" prependId="false">
 						<p:messages autoUpdate="true" showDetail="true" showSummary="true"/>
 						<h:panelGrid columns="2">
@@ -44,8 +44,7 @@
 						<h3>Seleccione los roles del usuario</h3>
 						
 						<p:pickList id="pckRoles" value="#{userPersistence.roles}" var="_roles"
-							itemLabel="#{_roles.role}" itemValue="#{_roles}" converter="#{roleConverter}"
-							effect="bounce">
+							itemLabel="#{_roles.role}" itemValue="#{_roles}" converter="#{roleConverter}">
 						</p:pickList>
 						
 						<p:commandButton id="btnSaveUser" value="Salvar" actionListener="#{userPersistence.save}"
@@ -83,34 +82,39 @@
 								<p:commandButton id="btnSearch" value="Buscar"
 									actionListener="#{usersQuery.query}"
 									ajax="true"
-									update="tblUsers"
 									icon="ui-icon-search"/>
 								
 							</p:fieldset>
 							
 							<p:spacer height="10"/>
 							
-							<p:dataTable id="tblUsers" value="#{usersQuery.queryListDM}"
-								var="_users" emptyMessage="No hay usuarios"
-								rowKey="#{_users.id}"
-								selectionMode="single" selection="#{userPersistence.model}">
+							<p:outputPanel autoUpdate="true" layout="block">
 							
-								<p:column headerText="Nombre">
-									<h:outputText value="#{_users.name}" />
-								</p:column>
-								<p:column headerText="Apellido Paterno">
-									<h:outputText value="#{_users.fName}" />
-								</p:column>
-								<p:column headerText="Apellido Materno">
-									<h:outputText value="#{_users.mName}" />
-								</p:column>
+								<p:dataTable id="tblUsers" value="#{usersQuery.queryListDM}"
+									var="_users" emptyMessage="No hay usuarios"
+									rowKey="#{_users.id}"
+									selectionMode="single" selection="#{userPersistence.model}">
+								
+									<p:column headerText="Nombre">
+										<h:outputText value="#{_users.name}" />
+									</p:column>
+									<p:column headerText="Apellido Paterno">
+										<h:outputText value="#{_users.fName}" />
+									</p:column>
+									<p:column headerText="Apellido Materno">
+										<h:outputText value="#{_users.mName}" />
+									</p:column>
+								
+									<f:facet name="footer">
+										<p:commandButton id="btnEditUser" value="Editar Usuario"
+											actionListener="#{userPersistence.edit}" ajax="true"
+											update=":frmNewUser" oncomplete="NewUserDialog.show()"/>
+										<p:commandButton id="btnDeleteUser" value="Borrar Usuario"
+											actionListener="#{userPersistence.delete}" ajax="true"/>
+									</f:facet>	
+								</p:dataTable>
 							
-								<f:facet name="footer">
-									<p:commandButton id="btnDeleteUser" value="Borrar Usuario"
-										actionListener="#{userPersistence.delete}" ajax="true"
-										update="tblUsers"/>
-								</f:facet>	
-							</p:dataTable>
+							</p:outputPanel>
 						</h:form>
 					</p:tab>
 					
