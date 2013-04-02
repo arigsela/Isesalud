@@ -10,30 +10,34 @@ import javax.ejb.Stateless;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import com.isesalud.model.Gabinete;
+
+import com.isesalud.model.Role;
 import com.isesalud.support.components.BaseManagerEJB;
 
 /**
- * @author ari
+ * @author Jesus Espinoza Hernandez
  *
  */
 @Stateless
 @LocalBean
-public class GabineteEjb extends BaseManagerEJB<Gabinete> {
+public class RoleEjb extends BaseManagerEJB<Role> {
+
+	@Override
+	public Class<Role> getModelClass() {
+		return Role.class;
+	}
 	
-	public List<Gabinete> getAllGabinetes(){
-		List<Gabinete> model = null;
+	public List<Role> getRoles(){
+		List<Role> model = null;
 		CriteriaBuilder builder = em.getCriteriaBuilder();
-		CriteriaQuery<Gabinete> query = builder.createQuery(getModelClass());
-		Root<Gabinete> root = query.from(getModelClass());
-		query.select(root);
+		CriteriaQuery<Role> query = builder.createQuery(getModelClass());
+		Root<Role> role = query.from(getModelClass());
+		
+		query.select(role);
+		
 		model = getList(query);
+		
 		return model;
 	}
 
-	@Override
-	public Class<Gabinete> getModelClass() {
-		return Gabinete.class;
-	}
-	
 }

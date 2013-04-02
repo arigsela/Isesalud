@@ -13,7 +13,6 @@ import javax.enterprise.context.ConversationScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import com.isesalud.controller.security.SecurityComponent;
 import com.isesalud.ejb.persistence.CancerOtrasPartesPersistenceEjb;
 import com.isesalud.ejb.persistence.ParienteCancerMamaPersistenceEjb;

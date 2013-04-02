@@ -3,7 +3,6 @@ package com.isesalud.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -52,11 +51,14 @@ public class User extends BaseModel {
 	@Column(name="mName", length=45)
 	private String mName;
 	
+	@Column(name="enabled")
+	private boolean enabled;
+	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_has_role", joinColumns = { @JoinColumn(name = "User_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "Role_id", nullable = false, updatable = false) })
 	private Set<Role> roles = new HashSet<Role>(0);
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="municipio", nullable=false)
 	private Municipio municipio;
 	
@@ -110,6 +112,14 @@ public class User extends BaseModel {
 	
 	public void setmName(String mName) {
 		this.mName = mName;
+	}
+	
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	
 	public Set<Role> getRoles() {

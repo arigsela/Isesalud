@@ -32,6 +32,12 @@
 							actionListener="#{citaPersistence.add}" ajax="false"
 							value="Crear cita" action="/citas/CapturaCita" title="Cita"
 							icon="ui-icon-clipboard" />
+						
+						<p:commandButton value="Ingresar Resultado" action="/radiologia/RadiologiaEntradas"
+							actionListener="#{resultadoImagenPersistence.add}"
+							ajax="false" process="@this"
+							icon="ui-icon-document"/>
+					
 					</p:toolbarGroup>
 				</p:toolbar>
 				<br />

@@ -19,8 +19,8 @@ insert into tipoestudiocita (id,name,notes,tipocita) value (7,'oncologia tipo A'
 insert into statuscita (id,description) values (1,'Pendiente');
 insert into statuscita (id,description) values (2,'Atendida');
 insert into cita (id,date,time,statusCita,tipoEstudioCita,paciente,enviadosms) values (1,'2013-03-22','12:10:00',1,1,1,0);
-insert into user (username, password, name, fName, municipio) values ('test', 'YEr9AHbeWymox3oz/OKqOhjkzOr75H2sQz/ZQ2OwhRc=', 'John', 'Marston', 1);
-insert into user (username, password, name, fName, municipio) values ('test2', 'YEr9AHbeWymox3oz/OKqOhjkzOr75H2sQz/ZQ2OwhRc=', 'Tifa', 'Lockheart', 2);
+insert into user (username, password, name, fName, mName, municipio, enabled) values ('test', 'YEr9AHbeWymox3oz/OKqOhjkzOr75H2sQz/ZQ2OwhRc=', 'John', 'Marston', '', 1, 1);
+insert into user (username, password, name, fName, mName, municipio, enabled) values ('test2', 'YEr9AHbeWymox3oz/OKqOhjkzOr75H2sQz/ZQ2OwhRc=', 'Tifa', 'Lockheart', '', 2, 1);
 insert into role (role, description) values ('Admin', 'Administrador');
 insert into role (role, description) values ('Tech', 'Tecnico');
 insert into role (role, description) values ('Doctor', 'Doctor');
@@ -31,4 +31,5 @@ insert into tiporesultado (id,description,name) values (1,'BIRADS 0 INSEGURO','B
 insert into motivoInadecuada (id,description,name) values (1,'TOMADA ADECUADAMENTE','ADECUADA')
 insert into resultadoImagen (id,adequate,dateNotified,dateInterpreted,daterealized,signs,gabinete,MotivoInadecuada,paciente,personal,TipoEstudioCita,TipoResultado) values (1,1,'2013-03-31','2013-03-31','2013-03-29','Ninguna',1,1,1,1,1,1)
 insert into hallazgos (id,name,side,resultadoImagen) values (1,'nada','IZQ',1)
+insert into user_has_role (User_id, Role_id) values (2,3);
 CREATE OR REPLACE VIEW v_user_role AS select user.username as username, user.password as password, role.role as role from ((user_has_role join user on ((user_has_role.User_id = user.id))) join role on ((role.id = user_has_role.Role_id)));
