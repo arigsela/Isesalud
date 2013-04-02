@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import com.isesalud.support.components.BaseModel;
@@ -61,6 +62,9 @@ public class User extends BaseModel {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="municipio", nullable=false)
 	private Municipio municipio;
+	
+	@Transient
+	private boolean hashPassword;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -136,6 +140,14 @@ public class User extends BaseModel {
 	
 	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
+	}
+	
+	public boolean isHashPassword() {
+		return hashPassword;
+	}
+	
+	public void setHashPassword(boolean hashPassword) {
+		this.hashPassword = hashPassword;
 	}
    
 }

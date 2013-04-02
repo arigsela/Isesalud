@@ -16,12 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import org.jboss.security.auth.spi.Util;
 
-import com.isesalud.controller.persistence.UserDisabledException;
 import com.isesalud.ejb.query.UserEjb;
 import com.isesalud.model.User;
 import com.isesalud.support.JSFUtil;
 import com.isesalud.support.components.BaseComponent;
 import com.isesalud.support.exceptions.BaseException;
+import com.isesalud.support.exceptions.UserDisabledException;
 
 /**
  * @author Jesus Espinoza Hernandez

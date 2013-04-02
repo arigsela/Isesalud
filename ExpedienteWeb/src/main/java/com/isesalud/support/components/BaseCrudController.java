@@ -160,14 +160,14 @@ public abstract class BaseCrudController extends BaseController
 	 */
 	public Boolean getAddEnabled()
 	{
-		return getEditMode().equals(EditModeEnum.NONE) && (JAASUtil.isAdmin() || JAASUtil.inRole(getAddRole()));
+		return getEditMode().equals(EditModeEnum.ADDING) && (JAASUtil.isAdmin() || JAASUtil.inRole(getAddRole()));
 	}
 
 	/**
 	 */
 	public Boolean getEditEnabled()
 	{
-		return getEditMode().equals(EditModeEnum.NONE) && (JAASUtil.isAdmin() || JAASUtil.inRole(getEditRole()));
+		return getEditMode().equals(EditModeEnum.EDITING) && (JAASUtil.isAdmin() || JAASUtil.inRole(getEditRole()));
 	}
 
 	/**
