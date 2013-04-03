@@ -8,17 +8,17 @@ import java.util.Date;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.event.Observes;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.isesalud.controller.support.PatientSelection;
 import com.isesalud.ejb.persistence.CitaPersistenceEjb;
 import com.isesalud.ejb.persistence.TipoEstudioCitaPersistenceEjb;
 import com.isesalud.model.Cita;
-import com.isesalud.model.Paciente;
 import com.isesalud.model.TipoEstudioCita;
 import com.isesalud.model.Tipocita;
+import com.isesalud.support.JSFUtil;
 import com.isesalud.support.components.BaseManagedCrudController;
 import com.isesalud.support.exceptions.BaseException;
 
@@ -45,7 +45,7 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 	private Conversation conversation;
 	
 	@Inject
-	private PatientPersistence patientPersistence;
+	private PatientSelection patientSelection;
 	
 	private Tipocita selectedTipocita = new Tipocita();
 	
@@ -84,7 +84,7 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 		getModel().setEnviadosms(false);
 		getModel().setDate(new Date());
 		getModel().setTime(new Date());
-		getModel().setPaciente(this.patientPersistence.getModel());
+		getModel().setPaciente(this.patientSelection.getPaciente());
 		super.doAfterAdd();
 	}
 	
@@ -115,6 +115,18 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 			conversation.end();
 	}
 	
+	@Override
+	public void add(ActionEvent actionEvent) {
+		if(patientSelection.getPaciente() == null){
+			JSFUtil.warn("Seleccione a un paciente primero");
+			setOutcome(null);
+			return;
+		} 
+		
+		setOutcome("/citas/CapturaCita");
+		super.add(actionEvent);
+	}
+	
 	public boolean isStudySelected(){
 		return (getModel().getTipoestudiocita() == null) ? false : true;
 	}
@@ -125,10 +137,6 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 	
 	public void onDeleteStudy(ActionEvent e){
 		getModel().setTipoestudiocita(null);
-	}
-	
-	public void onPatientSelected(@Observes Paciente p){
-		getModel().setPaciente(p);
 	}
 
 	@Override

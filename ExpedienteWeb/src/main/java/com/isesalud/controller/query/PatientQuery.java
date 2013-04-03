@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.enterprise.event.Event;
+import javax.enterprise.inject.Any;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
@@ -14,7 +16,7 @@ import javax.inject.Named;
 
 import org.primefaces.event.SelectEvent;
 
-import com.isesalud.controller.persistence.PatientPersistence;
+import com.isesalud.controller.support.PatientSelection;
 import com.isesalud.ejb.query.PacienteEjb;
 import com.isesalud.model.Paciente;
 import com.isesalud.support.components.BaseQueryController;
@@ -35,10 +37,15 @@ public class PatientQuery extends BaseQueryController<Paciente> {
 	
 	private Paciente searchParams;
 	
+	private Paciente selectedPatient;
+	
 	private Date dateOfBirth;
 	
 	@Inject
-	private PatientPersistence patientPersistence;
+	private PatientSelection patientSelection;
+	
+	@Inject @Any
+	private Event<Paciente> patientSelectedEvent;
 	
 	private Paciente detailsPaciente;
 	
@@ -70,7 +77,8 @@ public class PatientQuery extends BaseQueryController<Paciente> {
 	}
 	
 	public void onSelectedRow(SelectEvent e){
-		detailsPaciente = pacienteEjb.getFULL(patientPersistence.getModel().getId());
+		detailsPaciente = pacienteEjb.getFULL(getSelectedPatient().getId());
+		patientSelectedEvent.fire(detailsPaciente);
 	}
 	
 	public Paciente getSearchParams() {
@@ -79,6 +87,14 @@ public class PatientQuery extends BaseQueryController<Paciente> {
 	
 	public void setSearchParams(Paciente searchParams) {
 		this.searchParams = searchParams;
+	}
+	
+	public Paciente getSelectedPatient() {
+		return selectedPatient;
+	}
+	
+	public void setSelectedPatient(Paciente selectedPatient) {
+		this.selectedPatient = selectedPatient;
 	}
 	
 	public Date getDateOfBirth() {

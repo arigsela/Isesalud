@@ -8,20 +8,24 @@
 
 	<ui:composition template="/templates/common.xhtml">
 		<ui:define name="pageTitle">Consulta de pacientes</ui:define>
-		<ui:define name="pageHeader">Busqueda de Pacientes</ui:define>
+		<ui:define name="pageHeader">Seleccion de Pacientes</ui:define>
 		<ui:define name="body">
-			<p:growl autoUpdate="true" showDetail="true" showSummary="true" />
 			<h:form id="frmSearch" prependId="false">
 				<p:toolbar>
 					<p:toolbarGroup align="left">
-						<p:commandButton value="Crear Nuevo" action="/pacientes/PacientesEntradas"
+						<p:commandButton value="Crear Nuevo" 
+							action="#{patientPersistence.navigate}"
 							actionListener="#{patientPersistence.add}"
 							ajax="false" process="@this"
-							icon="ui-icon-document"/>
+							icon="ui-icon-document">
+						</p:commandButton>
 					
 						<p:commandButton actionListener="#{patientPersistence.edit}"
-							action="PacientesEntradas" ajax="false" title="Editar"
-							value="Editar" icon="ui-icon-pencil" />
+							action="#{patientPersistence.navigate}" 
+							ajax="false" title="Editar"
+							value="Editar" icon="ui-icon-pencil" 
+							process="@this">
+						</p:commandButton>
 	
 						<p:commandButton value="Imprimir" type="button"
 							icon="ui-icon-print">
@@ -29,8 +33,11 @@
 						</p:commandButton>
 	
 						<p:commandButton id="btnCita"
-							actionListener="#{citaPersistence.add}" ajax="false"
-							value="Crear cita" action="/citas/CapturaCita" title="Cita"
+							actionListener="#{citaPersistence.add}" 
+							ajax="false"
+							value="Crear cita" 
+							action="#{citaPersistence.navigate}" 
+							title="Cita"
 							icon="ui-icon-clipboard" />
 					</p:toolbarGroup>
 				</p:toolbar>
@@ -79,7 +86,7 @@
 					paginatorTemplate="
 						{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15" paginatorAlwaysVisible="false"
-					selectionMode="single" selection="#{patientPersistence.model}"
+					selectionMode="single" selection="#{patientQuery.selectedPatient}"
 					rowKey="#{_stuff.id}">
 					<p:ajax event="rowSelect" listener="#{patientQuery.onSelectedRow}" />
 					<p:column headerText="Nombre">

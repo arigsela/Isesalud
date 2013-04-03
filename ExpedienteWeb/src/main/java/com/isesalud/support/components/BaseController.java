@@ -16,6 +16,17 @@ import com.isesalud.support.JSFContextUtil;
 @SuppressWarnings("serial")
 public abstract class BaseController extends BaseComponent
 {
+	
+	private String outcome;
+	
+	public void setOutcome(String outcome) {
+		this.outcome = outcome;
+	}
+	
+	public String navigate(){
+		return outcome;
+	}
+	
 	/**
 	 */
 	@Override
