@@ -17,7 +17,7 @@
 	    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 	    <meta http-equiv="Pragma" content="no-cache"/>
 	    <meta http-equiv="Expires" content="0"/>
-	    <meta http-equiv="refresh" content="#{session.maxInactiveInterval};url=/home.xhtml?reason=expired" />
+	    <meta http-equiv="refresh" content="#{session.maxInactiveInterval};url=/ExpedienteWeb/home.xhtml?reason=expired" />
 	    <base href="#{facesContext.externalContext.requestContextPath}"/>
 		<h:outputStylesheet library="css" name="style.css"/>
 		<title><ui:insert name="pageTitle">Page Title</ui:insert></title>
@@ -32,23 +32,39 @@
 		
 		<p:layoutUnit position="north" size="100" 
 			resizable="false" collapsible="false" 
-			closable="false"
-			styleClass="logo">
-			
+			closable="false">
+			<h:panelGrid columns="4" columnClasses="logoAlign,selectedPatientAlign,userAlign,logoutAlign">
+				<p:graphicImage library="img" name="mama-cablemas-logos.png"
+					width="70%" height="35%"/>
+					
+				<p:outputPanel autoUpdate="true" layout="block">
+					<h:panelGrid columns="2">
+						<p:outputLabel for="lblSelPatient" value="Paciente seleccionado: " rendered="#{securityComponent.logged}"/>
+						<h:outputText id="lblSelPatient" value="#{patientSelection.paciente.name} #{patientSelection.paciente.lastName} #{patientSelection.paciente.maternalLastName}"
+							rendered="#{securityComponent.logged}"/>
+					</h:panelGrid>
+				</p:outputPanel>
+				
+				<h:panelGroup>
+					<h:panelGrid columns="2">
+						<p:outputLabel for="lblUser" value="Usuario: " rendered="#{securityComponent.logged}"/>
+						<h:outputText id="lblUser" value="#{securityComponent.currentUser.name} #{securityComponent.currentUser.fName} #{securityComponent.currentUser.mName}"  rendered="#{securityComponent.logged}"/>
+						<p:outputLabel for="lblMunicipio" value="Municipio: " rendered="#{securityComponent.logged}"/>
+						<h:outputText id="lblMunicipio" value="#{securityComponent.currentUser.municipio.name}" rendered="#{securityComponent.isLogged}" />
+					</h:panelGrid>
+				</h:panelGroup>
+				
+				<h:form>
+					<p:commandButton id="lnkLogout" value="Salir" action="#{securityComponent.logout}"
+						rendered="#{securityComponent.logged}" ajax="false"
+						icon="ui-icon-key"/>
+				</h:form>
+			</h:panelGrid>
 		</p:layoutUnit>
 		
 		<p:layoutUnit position="west" size="300" closable="false" collapsible="false"
 			resizable="false" header="Menu Principal">
 			<ui:include src="/templates/mainMenu.xhtml" />
-			
-			<p:spacer height="50"/>
-			<center>
-				<h:form>
-					<p:commandButton id="lnkLogout" value="Salir del sistema" action="#{securityComponent.logout}"
-						rendered="#{securityComponent.logged}" ajax="false"
-						icon="ui-icon-key"/>
-				</h:form>
-			</center>
 		</p:layoutUnit>
 		
 		<p:layoutUnit position="center">

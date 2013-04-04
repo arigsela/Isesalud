@@ -16,3 +16,22 @@ font-size: 90% !important;
 .Atendida, .Atendida .fc-event-skin {
 	background-color: green;
 }
+
+.logoAlign {
+	width: 50%;
+	text-align: left;
+}
+
+.selectedPatientAlign {
+	width: 30%;
+	text-align: left;
+}
+
+.userAlign {
+	width: 30%;
+	text-align: left;
+}
+
+.logoutAlign {
+	text-align: center;
+}

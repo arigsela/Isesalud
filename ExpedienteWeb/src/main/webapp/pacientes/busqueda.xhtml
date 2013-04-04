@@ -13,38 +13,11 @@
 			<h:form id="frmSearch" prependId="false">
 				<p:toolbar>
 					<p:toolbarGroup align="left">
-						<p:commandButton value="Crear Nuevo" 
-							action="#{patientPersistence.navigate}"
-							actionListener="#{patientPersistence.add}"
-							ajax="false" process="@this"
-							icon="ui-icon-document">
-						</p:commandButton>
-					
-						<p:commandButton actionListener="#{patientPersistence.edit}"
-							action="#{patientPersistence.navigate}" 
-							ajax="false" title="Editar"
-							value="Editar" icon="ui-icon-pencil" 
-							process="@this">
-						</p:commandButton>
-	
 						<p:commandButton value="Imprimir" type="button"
 							icon="ui-icon-print">
 							<p:printer target="details" />
 						</p:commandButton>
 	
-						<p:commandButton id="btnCita"
-							actionListener="#{citaPersistence.add}" 
-							ajax="false"
-							value="Crear cita" 
-							action="#{citaPersistence.navigate}" 
-							title="Cita"
-							icon="ui-icon-clipboard" />
-						
-						<p:commandButton value="Ingresar Resultado" action="/radiologia/RadiologiaEntradas"
-							actionListener="#{resultadoImagenPersistence.add}"
-							ajax="false" process="@this"
-							icon="ui-icon-document"/>
-					
 					</p:toolbarGroup>
 				</p:toolbar>
 				<br />
