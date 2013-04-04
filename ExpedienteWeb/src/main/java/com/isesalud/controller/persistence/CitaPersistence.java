@@ -21,6 +21,7 @@ import com.isesalud.model.Tipocita;
 import com.isesalud.support.JSFUtil;
 import com.isesalud.support.components.BaseManagedCrudController;
 import com.isesalud.support.exceptions.BaseException;
+import com.isesalud.support.exceptions.OperationException;
 
 /**
  * @author ari, Jesus Espinoza Hernandez
@@ -97,8 +98,11 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 	
 	@Override
 	protected void doBeforeSave() throws BaseException {
+		if(!isStudySelected()){
+			setOutcome(null);
+			throw new OperationException("No se selecciono un estudio para la cita");
+		}
 		super.doBeforeSave();
-		
 	}
 	
 	@Override
@@ -106,6 +110,7 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 		super.doAfterSave();
 		if(!conversation.isTransient())
 			conversation.end();
+		setOutcome("/citas/Citas?faces-redirect=true");
 	}
 	
 	@Override
@@ -113,6 +118,7 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 		super.doAfterCancel();
 		if(!conversation.isTransient())
 			conversation.end();
+		setOutcome("/citas/Citas?faces-redirect=true");
 	}
 	
 	@Override
