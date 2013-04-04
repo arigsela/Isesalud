@@ -49,8 +49,8 @@
 					<h:panelGrid columns="2">
 						<p:outputLabel for="lblUser" value="Usuario: " rendered="#{securityComponent.logged}"/>
 						<h:outputText id="lblUser" value="#{securityComponent.currentUser.name} #{securityComponent.currentUser.fName} #{securityComponent.currentUser.mName}"  rendered="#{securityComponent.logged}"/>
-						<p:outputLabel for="lblMunicipio" value="Municipio: " rendered="#{securityComponent.logged}"/>
-						<h:outputText id="lblMunicipio" value="#{securityComponent.currentUser.municipio.name}" rendered="#{securityComponent.isLogged}" />
+						<p:outputLabel for="lblUserMunicipio" value="Municipio: " rendered="#{securityComponent.logged}"/>
+						<h:outputText id="lblUserMunicipio" value="#{securityComponent.currentUser.municipio.name}" rendered="#{securityComponent.isLogged}" />
 					</h:panelGrid>
 				</h:panelGroup>
 				
