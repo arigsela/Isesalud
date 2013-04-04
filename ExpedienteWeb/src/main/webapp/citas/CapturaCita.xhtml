@@ -85,9 +85,9 @@
 					<br />
 					
 					<p:commandButton id="btnSave" ajax="false" actionListener="#{citaPersistence.save}"
-						action="/citas/Citas?faces-redirect=true" value="Salvar"/>
+						action="#{citaPersistence.navigate}" value="Salvar"/>
 					<p:commandButton id="btnCancel" ajax="false" actionListener="#{citaPersistence.cancel}"
-						action="/citas/Citas?faces-redirect=true" value="Cancelar"/>
+						action="#{citaPersistence.navigate}" value="Cancelar"/>
 				</h:form>
 			</ui:define>
 	</ui:composition>

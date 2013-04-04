@@ -6,12 +6,19 @@ package com.isesalud.ejb.query;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+
+import com.isesalud.controller.security.SecurityComponent;
 import com.isesalud.model.Cita;
 import com.isesalud.model.Cita_;
+import com.isesalud.model.Paciente;
+import com.isesalud.model.Paciente_;
 import com.isesalud.support.components.BaseManagerEJB;
 
 /**
@@ -22,6 +29,9 @@ import com.isesalud.support.components.BaseManagerEJB;
 @Stateless
 @LocalBean
 public class CitaEjb extends BaseManagerEJB<Cita>{
+	
+	@Inject
+	private SecurityComponent securityComponent;
 
 	public List<Cita> getAllCita() {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
@@ -36,11 +46,13 @@ public class CitaEjb extends BaseManagerEJB<Cita>{
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Cita> query = builder.createQuery(getModelClass());
 		Root<Cita> root = query.from(getModelClass());
+		Join<Cita, Paciente> pat = root.join(Cita_.paciente, JoinType.LEFT);
 		
 		Predicate startDateP = builder.greaterThanOrEqualTo(root.get(Cita_.date), params.getStartDate());
 		Predicate endDateP = builder.lessThanOrEqualTo(root.get(Cita_.date), params.getEndDate());
+		Predicate municipio = builder.equal(pat.get(Paciente_.municipio), securityComponent.getCurrentUser().getMunicipio());
 		
-		query.select(root).where(builder.and(startDateP, endDateP));
+		query.select(root).where(builder.and(startDateP, endDateP, municipio));
 		
 		model = getList(query);
 		
