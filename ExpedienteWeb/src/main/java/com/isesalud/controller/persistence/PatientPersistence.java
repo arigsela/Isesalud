@@ -15,7 +15,6 @@ import javax.enterprise.inject.Any;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import com.isesalud.controller.security.SecurityComponent;
 import com.isesalud.controller.support.PatientSelection;
 import com.isesalud.ejb.persistence.CancerOtrasPartesPersistenceEjb;

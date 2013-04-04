@@ -17,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.isesalud.support.components.BaseModel;
@@ -40,13 +42,16 @@ public class resultadoImagen extends BaseModel {
 	@Column(name="id",nullable = false,unique=true)
 	private Long id;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="dateInterpreted",nullable = false)
 	@NotNull
 	private Date dateinterpreted;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="dateNotified",nullable = true)
 	private Date dateNotified;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="daterealized",nullable = false)
 	@NotNull
 	private Date daterealized;
