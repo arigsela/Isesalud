@@ -39,8 +39,8 @@
 					
 				<p:outputPanel autoUpdate="true" layout="block">
 					<h:panelGrid columns="2">
-						<p:outputLabel for="lblPatient" value="Paciente seleccionado: " rendered="#{securityComponent.logged}"/>
-						<h:outputText id="lblPatient" value="#{patientSelection.paciente.name} #{patientSelection.paciente.lastName} #{patientSelection.paciente.maternalLastName}"
+						<p:outputLabel for="lblSelPatient" value="Paciente seleccionado: " rendered="#{securityComponent.logged}"/>
+						<h:outputText id="lblSelPatient" value="#{patientSelection.paciente.name} #{patientSelection.paciente.lastName} #{patientSelection.paciente.maternalLastName}"
 							rendered="#{securityComponent.logged}"/>
 					</h:panelGrid>
 				</p:outputPanel>
