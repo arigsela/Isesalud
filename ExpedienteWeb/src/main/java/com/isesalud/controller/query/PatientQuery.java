@@ -19,8 +19,11 @@ import org.primefaces.event.SelectEvent;
 import com.isesalud.controller.support.PatientSelection;
 import com.isesalud.ejb.query.PacienteEjb;
 import com.isesalud.model.Paciente;
+import com.isesalud.support.CompareUtil;
+import com.isesalud.support.JSFUtil;
 import com.isesalud.support.components.BaseQueryController;
 import com.isesalud.support.exceptions.BaseException;
+import com.isesalud.support.exceptions.OperationException;
 
 /**
  * @author Jesus Espinoza Hernandez
@@ -62,16 +65,26 @@ public class PatientQuery extends BaseQueryController<Paciente> {
 	public void query(ActionEvent e) {
 		
 		if(getSearchParams() != null){
-			
-			getSearchParams().setDateofBirth(dateOfBirth);
-			
-			super.query(e);
-			
+			try{
+				if(CompareUtil.isEmpty(getSearchParams().getName()) &&
+				   CompareUtil.isEmpty(getSearchParams().getLastName()) &&
+				   CompareUtil.isEmpty(getSearchParams().getMaternalLastName()) &&
+				   CompareUtil.isEmpty(getSearchParams().getUnidadmedica()) &&
+				   CompareUtil.isEmpty(getSearchParams().getDateofBirth())){
+							
+					throw new OperationException("Seleccione por lo menos un campo de busqueda");
+				} else {
+					getSearchParams().setDateofBirth(dateOfBirth);
+					super.query(e);
+				}
+			}catch (BaseException ex){
+				JSFUtil.error(ex.getMessages());
+			}
 		} else{
 			try {
 				init();
 			} catch (BaseException ex) {
-				ex.printStackTrace();
+				log.error(ex.getMessage());
 			}
 		}
 	}
