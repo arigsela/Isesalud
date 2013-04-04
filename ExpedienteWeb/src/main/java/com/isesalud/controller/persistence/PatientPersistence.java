@@ -10,10 +10,13 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.event.Event;
+import javax.enterprise.inject.Any;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import com.isesalud.controller.security.SecurityComponent;
+import com.isesalud.controller.support.PatientSelection;
 import com.isesalud.ejb.persistence.CancerOtrasPartesPersistenceEjb;
 import com.isesalud.ejb.persistence.ParienteCancerMamaPersistenceEjb;
 import com.isesalud.ejb.persistence.PatientPersistenceEjb;
@@ -24,6 +27,7 @@ import com.isesalud.model.Paciente;
 import com.isesalud.model.ParienteCancerMama;
 import com.isesalud.model.PreviaEnfermedad;
 import com.isesalud.model.SintomaCancerMama;
+import com.isesalud.support.JSFUtil;
 import com.isesalud.support.components.BaseManagedCrudController;
 import com.isesalud.support.exceptions.BaseException;
 
@@ -57,6 +61,12 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 	
 	@Inject
 	private SecurityComponent securityComponent;
+	
+	@Inject
+	private PatientSelection patientSelection;
+	
+	@Inject @Any
+	private Event<Paciente> patientEditedEvent;
 	
 	/**************CHILD LIST*******************************************/
 	private PreviaEnfermedad previaEnfermedad;
@@ -143,6 +153,8 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 			this.previaEnfermedad = new PreviaEnfermedad();
 			this.sintomaCancerMama = new SintomaCancerMama();
 		}
+		
+		setModel(patientSelection.getPaciente());
 	}
 	
 	@Override
@@ -158,8 +170,8 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 	protected void doAfterAdd() throws BaseException {
 		if(conversation.isTransient())
 			conversation.begin();
-		
 		getModel().setMunicipio(securityComponent.getCurrentUser().getMunicipio());
+		setOutcome("/pacientes/PacientesEntradas");
 		super.doAfterAdd();
 	}
 	
@@ -183,6 +195,9 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 	@Override
 	protected void doAfterSave() throws BaseException {
 		super.doAfterSave();
+		
+		patientEditedEvent.fire(getModel());
+		
 		if(!conversation.isTransient())
 			conversation.end();
 	}
@@ -192,6 +207,20 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 		super.doAfterCancel();
 		if(!conversation.isTransient())
 			conversation.end();
+	}
+	
+	@Override
+	public void edit(ActionEvent actionEvent) {
+		if(patientSelection.getPaciente() == null){
+			JSFUtil.warn("Seleccione a un paciente primero");
+			setOutcome(null);
+			return;
+		} else {
+			setModel(patientSelection.getPaciente());
+		}
+		
+		setOutcome("/pacientes/PacientesEntradas");
+		super.edit(actionEvent);
 	}
 	
 	public void addCancerOtrasPartes(ActionEvent e){

@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.isesalud.controller.security.SecurityComponent;
 import com.isesalud.model.Paciente;
 import com.isesalud.model.Paciente_;
 import com.isesalud.support.components.BaseManagerEJB;
@@ -20,6 +22,9 @@ import com.isesalud.support.components.BaseManagerEJB;
 @Stateless
 @LocalBean
 public class PacienteEjb extends BaseManagerEJB<Paciente> {
+	
+	@Inject
+	private SecurityComponent securityComponent;
 	
 	public List<Paciente> getAllPatients(){
 		List<Paciente> model = null;
@@ -44,10 +49,12 @@ public class PacienteEjb extends BaseManagerEJB<Paciente> {
 		Predicate likeMaternalName = builder.like(root.get(Paciente_.maternalLastName), params.getMaternalLastName() + "%");
 		Predicate date = builder.equal(root.get(Paciente_.dateofBirth), params.getDateofBirth());
 		Predicate unidad = builder.equal(root.get(Paciente_.unidadmedica), params.getUnidadmedica());
+		Predicate municipio = builder.equal(root.get(Paciente_.municipio), securityComponent.getCurrentUser().getMunicipio());
 		
 		predicates.add(likeName);
 		predicates.add(likeLastName);
 		predicates.add(likeMaternalName);
+		predicates.add(municipio);
 		
 		if(params.getDateofBirth() != null)
 			predicates.add(date);
