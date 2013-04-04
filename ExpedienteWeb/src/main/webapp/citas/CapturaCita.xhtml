@@ -20,13 +20,9 @@
 							<p:outputLabel id="lblMother" value="Apellido Materno:" for="outMother"/>
 							<h:outputText id="outMother" value="#{citaPersistence.model.paciente.maternalLastName}" />
 							<p:outputLabel id="lblDate" value="Fecha programada:" for="dteFecha"/>
-							<p:calendar id="dteFecha" value="#{citaPersistence.model.date}">
-								<f:convertDateTime type="date" dateStyle="short"/>
-							</p:calendar>
-							<p:outputLabel id="lblHora" value="Hora:" for="dteHora"/>
-							<p:calendar id="dteHora" value="#{citaPersistence.model.time}" timeOnly="true"
-								pattern="hh:mm a">
-								<f:convertDateTime type="time" timeStyle="short"/>
+							<p:calendar id="dteFecha" value="#{citaPersistence.citaDate}" pattern="MM/dd/yyyy hh:mm a"
+								validator="WorkHoursValidator" locale="es">
+								<f:convertDateTime pattern="MM/dd/yyyy hh:mm a"/>
 							</p:calendar>
 							<p:outputLabel id="lblStatus" value="Status:" for="cbxStatus"/>
 							<p:selectOneMenu id="cbxStatus" value="#{citaPersistence.model.statuscita}"
@@ -87,7 +83,7 @@
 					<p:commandButton id="btnSave" ajax="false" actionListener="#{citaPersistence.save}"
 						action="#{citaPersistence.navigate}" value="Salvar"/>
 					<p:commandButton id="btnCancel" ajax="false" actionListener="#{citaPersistence.cancel}"
-						action="#{citaPersistence.navigate}" value="Cancelar"/>
+						action="#{citaPersistence.navigate}" value="Cancelar" immediate="true"/>
 				</h:form>
 			</ui:define>
 	</ui:composition>

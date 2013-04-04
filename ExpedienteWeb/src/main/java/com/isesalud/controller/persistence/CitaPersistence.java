@@ -18,6 +18,7 @@ import com.isesalud.ejb.persistence.TipoEstudioCitaPersistenceEjb;
 import com.isesalud.model.Cita;
 import com.isesalud.model.TipoEstudioCita;
 import com.isesalud.model.Tipocita;
+import com.isesalud.support.DateUtil;
 import com.isesalud.support.JSFUtil;
 import com.isesalud.support.components.BaseManagedCrudController;
 import com.isesalud.support.exceptions.BaseException;
@@ -52,6 +53,8 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 	
 	private TipoEstudioCita selectedStudy = new TipoEstudioCita();
 	
+	private Date citaDate;
+	
 	public TipoEstudioCita getSelectedStudy() {
 		return selectedStudy;
 	}
@@ -67,6 +70,14 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 	public void setSelectedTipocita(Tipocita selectedTipocita) {
 		this.selectedTipocita = selectedTipocita;
 	}
+	
+	public Date getCitaDate() {
+		return citaDate;
+	}
+	
+	public void setCitaDate(Date citaDate) {
+		this.citaDate = citaDate;
+	}
 
 	@Override
 	protected CitaPersistenceEjb getCrudManager() {
@@ -76,6 +87,13 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 	@Override
 	protected Cita getNewModel() {
 		return new Cita();
+	}
+	
+	@Override
+	protected void init() {
+		Date date = new Date();
+		this.citaDate = DateUtil.addMinutes(date, 1);
+		super.init();
 	}
 	
 	@Override
@@ -102,6 +120,9 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 			setOutcome(null);
 			throw new OperationException("No se selecciono un estudio para la cita");
 		}
+		
+		getModel().setDate(getCitaDate());
+		getModel().setTime(getCitaDate());
 		super.doBeforeSave();
 	}
 	
