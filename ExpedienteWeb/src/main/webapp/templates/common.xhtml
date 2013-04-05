@@ -20,6 +20,7 @@
 	    <meta http-equiv="refresh" content="#{session.maxInactiveInterval};url=/ExpedienteWeb" />
 	    <base href="#{facesContext.externalContext.requestContextPath}"/>
 		<h:outputStylesheet library="css" name="style.css"/>
+		<h:outputStylesheet library="css" name="animate-custom.css"/>
 		<title><ui:insert name="pageTitle">Page Title</ui:insert></title>
 		<ui:insert name="head"></ui:insert>
 	</h:head>
@@ -73,6 +74,7 @@
 			<p:ajaxStatus styleClass="loading">
 				<f:facet name="start">
 					<p:graphicImage library="img" name="loading.gif"/>
+					<h:outputText value="Procesando..." styleClass="animated flash processing"/>
 				</f:facet>
 				
 				<f:facet name="complete">

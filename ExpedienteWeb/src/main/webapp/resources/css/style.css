@@ -44,3 +44,8 @@ font-size: 90% !important;
 	margin-left:-100px;
 	z-index: 9999;
 }
+
+.processing {
+	font-size: 200%;
+	font-weight: bolder;
+}
