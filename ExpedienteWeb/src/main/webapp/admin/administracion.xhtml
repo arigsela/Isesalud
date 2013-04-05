@@ -181,6 +181,20 @@
 						</h:form>
 					</p:tab>
 					
+					<p:tab id="GlobalSettingsTab" title="Ajustes Globales">
+						<h:form id="frmGlobalSettings" prependId="false">
+							<p:panel header="Sistema de SMS">
+								<h:panelGrid columns="2">
+									<p:outputLabel for="chkSMSEnable" value="Habilitar? "/>
+									<p:selectBooleanCheckbox id="chkSMSEnable" value="#{applicationSettings.model.messagesenabled}"/>
+								</h:panelGrid>
+							</p:panel>
+							
+							<p:commandButton id="btnSaveGlobalSettings" actionListener="#{applicationSettings.save}" ajax="true"
+								value="Salvar"/>
+						</h:form>
+					</p:tab>
+					
 				</p:tabView>
 								
 			</ui:define>
