@@ -35,3 +35,12 @@ font-size: 90% !important;
 .logoutAlign {
 	text-align: center;
 }
+
+.loading {
+	position:fixed;
+	left: 50%;
+	top: 50%;
+	margin-top:-50px;
+	margin-left:-100px;
+	z-index: 9999;
+}
