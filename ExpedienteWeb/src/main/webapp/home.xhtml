@@ -7,13 +7,13 @@
 
 <ui:composition template="/templates/common.xhtml">
 	<ui:define name="pageTitle">Bienvenido</ui:define>
-	<ui:define name="pageHeader">Ingrese al sistema</ui:define>
+	<ui:define name="pageHeader"></ui:define>
 	<ui:define name="body">
-		<h:form>
+		<h:form rendered="#{!securityComponent.logged}">
 			<center>
 				<p:focus />
-				<h:outputText value="Su sesion ha terminado"
-					rendered="#{param.reason == 'expired'}" />
+				
+				<h:outputText value="Ingrese al Sistema" style="font-weigth:bold;font-size:200%"/>
 				<p:panelGrid columns="2">
 					<f:facet name="header">Datos del usuario</f:facet>
 					<h:outputLabel value="Usuario" />
