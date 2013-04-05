@@ -15,7 +15,7 @@ import com.isesalud.support.components.BasePersistenceManagerEJB;
  */
 @Stateless
 @LocalBean
-public class resultadoImagenPersistenceEjb extends BasePersistenceManagerEJB<resultadoImagen>{
+public class ResultadoImagenPersistenceEjb extends BasePersistenceManagerEJB<resultadoImagen>{
 
 	@Override
 	public Class<resultadoImagen> getModelClass() {
