@@ -1,7 +1,7 @@
 package com.isesalud.converters;
 
 import javax.ejb.EJB;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
 
