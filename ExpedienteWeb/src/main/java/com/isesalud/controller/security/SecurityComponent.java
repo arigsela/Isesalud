@@ -132,7 +132,7 @@ public class SecurityComponent extends BaseComponent {
 			logged = true;
 			
 			log.infov("{0} logged in at {1}", currentUser.getName(), new Date());
-			return "/pacientes/busqueda?faces-redirect=true";
+			return "/home?faces-redirect=true";
 		}catch (ServletException e){
 			logged = false;
 			JSFUtil.error("No se logro verificar su identidad");
