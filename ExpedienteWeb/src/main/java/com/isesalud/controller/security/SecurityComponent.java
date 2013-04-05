@@ -109,6 +109,12 @@ public class SecurityComponent extends BaseComponent {
 	 */
 	public String login(){
 		try{
+			
+			if(this.logged){
+				JSFUtil.warn("Ya esta un usuario actualmente usuando el sistema");
+				return null;
+			}
+			
 			//Login via Servlet Context
 			httpRequest.login(username, password);
 			

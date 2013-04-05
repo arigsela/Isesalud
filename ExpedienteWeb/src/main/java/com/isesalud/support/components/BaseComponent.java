@@ -18,6 +18,16 @@ import com.isesalud.support.exceptions.BaseException;
 public abstract class BaseComponent implements Serializable
 {
 	protected final Logger log = Logger.getLogger(getClass());
+	
+	private String outcome;
+	
+	public void setOutcome(String outcome) {
+		this.outcome = outcome;
+	}
+	
+	public String navigate(){
+		return outcome;
+	}
 
 	/**
 	 */
