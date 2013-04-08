@@ -9,20 +9,23 @@ import javax.ejb.Stateless;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+import com.isesalud.controller.application.ApplicationSettings;
 import com.isesalud.model.Cita;
 import com.isesalud.service.dispatchers.SMSRequest;
 import com.isesalud.service.support.SMSParams;
 import com.isesalud.support.components.BasePersistenceManagerEJB;
 
 /**
- * @author ari
+ * @author ari, Jesus Espinoza Hernandez
  *
  */
-
 @Stateless
 @LocalBean
 public class CitaPersistenceEjb extends BasePersistenceManagerEJB<Cita> {
 
+	@Inject
+	private ApplicationSettings settings;
+	
 	@Inject
 	private SMSRequest request;
 	
@@ -37,10 +40,14 @@ public class CitaPersistenceEjb extends BasePersistenceManagerEJB<Cita> {
 	
 	@Override
 	protected void doAfterAdd(Cita model) throws EJBException {
-		SMSParams params = new SMSParams();
-		params.setCita(model);
-		//request.sendMessage(params);
-		super.doAfterAdd(model);
+		if(settings.getModel().getMessagesenabled()){
+			if(model.getPaciente().getAceptarmensajes()){
+				SMSParams params = new SMSParams();
+				params.setCita(model);
+				request.sendMessage(params);
+				super.doAfterAdd(model);
+			}
+		}
 	}
 	
 }
