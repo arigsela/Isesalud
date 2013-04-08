@@ -37,6 +37,8 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 	 */
 	private static final long serialVersionUID = -8179534442377180931L;
 	
+	private int citaMinutesOffset;
+	
 	@EJB
 	private CitaPersistenceEjb manager;
 	
@@ -78,6 +80,14 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 	public void setCitaDate(Date citaDate) {
 		this.citaDate = citaDate;
 	}
+	
+	public int getCitaMinutesOffset() {
+		return citaMinutesOffset;
+	}
+	
+	public void setCitaMinutesOffset(int citaMinutesOffset) {
+		this.citaMinutesOffset = citaMinutesOffset;
+	}
 
 	@Override
 	protected CitaPersistenceEjb getCrudManager() {
@@ -91,8 +101,6 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 	
 	@Override
 	protected void init() {
-		Date date = new Date();
-		this.citaDate = DateUtil.addMinutes(date, 1);
 		super.init();
 	}
 	
@@ -100,6 +108,9 @@ public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersist
 	protected void doAfterAdd() throws BaseException {
 		if(conversation.isTransient())
 			conversation.begin();
+		
+		Date date = new Date();
+		this.citaDate = DateUtil.addMinutes(date, citaMinutesOffset);
 		getModel().setEnviadosms(false);
 		getModel().setDate(new Date());
 		getModel().setTime(new Date());
