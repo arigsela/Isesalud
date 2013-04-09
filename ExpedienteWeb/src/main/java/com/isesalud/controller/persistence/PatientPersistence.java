@@ -4,6 +4,7 @@
 package com.isesalud.controller.persistence;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +16,7 @@ import javax.enterprise.inject.Any;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import com.isesalud.controller.security.SecurityComponent;
 import com.isesalud.controller.support.PatientSelection;
 import com.isesalud.ejb.persistence.CancerOtrasPartesPersistenceEjb;
@@ -171,6 +173,7 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 		if(conversation.isTransient())
 			conversation.begin();
 		getModel().setMunicipio(securityComponent.getCurrentUser().getMunicipio());
+		getModel().setDateLastMG(new Date());
 		setOutcome("/pacientes/PacientesEntradas");
 		super.doAfterAdd();
 	}
