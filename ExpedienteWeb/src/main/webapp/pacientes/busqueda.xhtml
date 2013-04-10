@@ -17,7 +17,6 @@
 							icon="ui-icon-print">
 							<p:printer target="details" />
 						</p:commandButton>
-	
 					</p:toolbarGroup>
 				</p:toolbar>
 				<br />
@@ -36,13 +35,15 @@
 							<p:inputText id="sLastName"
 								value="#{patientQuery.searchParams.lastName}" />
 							<p:outputLabel value="Unidad medica:" for="sUnidadMedica" />
-							<p:selectOneMenu id="sUnidadMedica"
+							<p:autoComplete id="sUnidadMedica" 
 								value="#{patientQuery.searchParams.unidadmedica}"
-								converter="#{unidadMedicaConverter}">
-								<f:selectItem itemLabel="Seleccione uno" itemValue="#{null}" />
-								<f:selectItems value="#{unidadMedicaQuery.queryListDM}" var="_unidad"
-									itemLabel="#{_unidad.name}" itemValue="#{_unidad}"></f:selectItems>
-							</p:selectOneMenu>
+								converter="#{unidadMedicaConverter}"
+								var="_unidad"
+								completeMethod="#{unidadMedicaAutoComplete.complete}"
+								itemLabel="#{_unidad.name}"
+								itemValue="#{_unidad}"
+								dropdown="true"
+								forceSelection="true"/>
 						</h:panelGrid>
 						<h:panelGrid columns="2">
 							<p:outputLabel value="Apellido Materno:" for="sMaternalName" />

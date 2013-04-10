@@ -16,7 +16,7 @@ import com.isesalud.model.Unidadmedica_;
 import com.isesalud.support.components.BaseManagerEJB;
 
 /**
- * @author Haysoos
+ * @author Jesus Espinoza Hernandez
  *
  */
 @Stateless
@@ -36,7 +36,9 @@ public class UnidadMedicaEjb extends BaseManagerEJB<Unidadmedica> {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Unidadmedica> query = builder.createQuery(getModelClass());
 		Root<Unidadmedica> root = query.from(getModelClass());
-		query.select(root).where(builder.equal(root.get(Unidadmedica_.municipio), params.getMunicipio()));
+		query.select(root).where(builder.and(
+				builder.equal(root.get(Unidadmedica_.municipio), params.getMunicipio())),
+				builder.like(root.get(Unidadmedica_.name), params.getName() + "%"));
 		
 		return getList(query);
 	}

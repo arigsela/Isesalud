@@ -39,7 +39,7 @@ public class UnidadMedicaQuery extends BaseQueryController<Unidadmedica>{
 	@PostConstruct
 	public void loadData(){
 		setQueryListDM(getQueryList());
-	}
+	}	
 
 	@Override
 	protected List<Unidadmedica> getQueryList() {
