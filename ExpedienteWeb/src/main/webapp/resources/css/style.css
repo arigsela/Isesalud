@@ -14,6 +14,11 @@ font-size: 90% !important;
 	background-size: 100% 100%;
 }
 
+.nousermain .ui-layout-unit-content {
+	background-image: url("#{resource['img:welcome.png']}");
+	background-size: 100% 100%;
+}
+
 .Pendiente, .Pendiente .fc-event-skin {
 	background-color: blue;
 }
