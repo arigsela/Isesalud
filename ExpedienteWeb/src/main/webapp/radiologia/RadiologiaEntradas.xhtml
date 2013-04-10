@@ -28,9 +28,10 @@
 				</h:panelGrid>
 
 				<p:separator />
+
 			</p:panel>
 			<p:panel header="Ingreso de Resultado">
-				<h:panelGrid columns="4" cellspacing="0" cellpadding="5">
+				<h:panelGrid columns="8" cellspacing="0" cellpadding="5">
 					<p:outputLabel value="Gabinete: " for="gabinete" />
 					<p:selectOneMenu id="gabinete"
 						value="#{radiologyPersistence.model.gabinete}"
@@ -67,10 +68,29 @@
 						id="popupButtonDateNoti" required="true" navigator="true" size="10">
 						<f:convertDateTime type="date" dateStyle="short" />
 					</p:calendar>
-					<p:outputLabel value="Signos:" for="signos"/>
+					<h:outputText value="Signos:"/>
 					<p:inputTextarea id="signos" 
 						value="#{radiologyPersistence.model.signs}" />
+					<h:outputText value="Inadecuado:"/>  
+        			<p:selectBooleanCheckbox value="#{radiologyPersistence.model.adequate}"/>  
+					<p:outputLabel value="Motivo de inadecuado: " for="motivo" />
+					<p:selectOneMenu id="motivo"
+						value="#{radiologyPersistence.model.motivoinadecuada}"
+						converter="#{motivoInadecuadaConverter}">
+						<f:selectItems value="#{motivoInadecuadaQuery.queryListDM}"
+							var="_motivoInadecuada" itemLabel="#{_motivoInadecuada.name}"
+							itemValue="#{_motivoInadecuada}"></f:selectItems>
+					</p:selectOneMenu>
+					<p:outputLabel value="Medico que interpreto estudio: " for="medico" />
+					<p:selectOneMenu id="medico"
+						value="#{radiologyPersistence.model.personal}"
+						converter="#{personalConverter}">
+						<f:selectItems value="#{personalQuery.queryListDM}"
+							var="_personal" itemLabel="#{_personal.name}"
+							itemValue="#{_personal}"></f:selectItems>
+					</p:selectOneMenu>
 				</h:panelGrid>
+				<br></br>
 				<h:panelGroup>
 					<p:panelGrid columns="4">
 						<p:outputLabel id="lblHallazgo" for="hallazgo" value="Hallazgos"/>
