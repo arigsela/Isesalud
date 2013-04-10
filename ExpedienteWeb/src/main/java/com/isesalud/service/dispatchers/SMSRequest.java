@@ -4,7 +4,7 @@
 package com.isesalud.service.dispatchers;
 
 import javax.annotation.Resource;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -22,7 +22,7 @@ import com.isesalud.support.components.BaseComponent;
  *
  */
 @Named
-@SessionScoped
+@ApplicationScoped
 public class SMSRequest extends BaseComponent {
 
 	/**

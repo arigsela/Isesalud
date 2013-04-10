@@ -3,6 +3,7 @@
  */
 package com.isesalud.ejb.query;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -65,6 +66,20 @@ public class CitaEjb extends BaseManagerEJB<Cita>{
 		CriteriaQuery<Cita> query = builder.createQuery(getModelClass());
 		Root<Cita> root = query.from(getModelClass());
 		query.select(root).where(builder.equal(root.get(Cita_.date), params.getDate()));
+		
+		model = getList(query);
+		
+		return model;
+	}
+	
+	public List<Cita> getFutureCitasForSms(){
+		List<Cita> model = null;
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Cita> query = builder.createQuery(getModelClass());
+		Root<Cita> root = query.from(getModelClass());
+		query.select(root)
+			.where(builder.and(builder.greaterThan(root.get(Cita_.date), new Date()),
+					builder.equal(root.get(Cita_.enviadosms), false)));
 		
 		model = getList(query);
 		

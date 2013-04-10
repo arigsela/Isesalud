@@ -44,6 +44,7 @@ public class CitaPersistenceEjb extends BasePersistenceManagerEJB<Cita> {
 			if(model.getPaciente().getAceptarmensajes()){
 				SMSParams params = new SMSParams();
 				params.setCita(model);
+				params.setNextDayMsg(false);
 				request.sendMessage(params);
 				super.doAfterAdd(model);
 			}
