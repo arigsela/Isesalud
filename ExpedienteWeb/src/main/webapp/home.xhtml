@@ -9,10 +9,14 @@
 	<ui:define name="pageTitle">Bienvenido</ui:define>
 	<ui:define name="pageHeader"></ui:define>
 	<ui:define name="body">
-		<h:form rendered="#{!securityComponent.logged}">
+	
+		<p:graphicImage library="img" name="welcome2.png"
+			rendered="#{securityComponent.logged}"
+			styleClass="welcome"/>
+		
+		<h:form rendered="#{!securityComponent.logged}" styleClass="loginform">
 			<center>
 				<p:focus />
-				
 				<h:outputText value="Ingrese al Sistema" style="font-weigth:bold;font-size:200%"/>
 				<p:panelGrid columns="2">
 					<f:facet name="header">Datos del usuario</f:facet>
