@@ -37,10 +37,19 @@
 					<p:menuitem value="Reporte de citas" action="/citas/CitasDia?faces-redirect=true"
 						ajax="false" icon="ui-icon-note" process="@this"/>
 				</p:submenu>
+				<p:submenu label="Radiologia">
+					<p:menuitem value="Agregar Resultado" 
+						action="#{radiologyPersistence.navigate}"
+						actionListener="#{radiologyPersistence.add}"
+						ajax="false" process="@this"
+						icon="ui-icon-document">
+					</p:menuitem>
+				</p:submenu>
 				<p:submenu label="Administracion">
 					<p:menuitem value="Ajustes" action="/admin/administracion?faces-redirect=true"
 						ajax="false" icon="ui-icon-gear" process="@this"/>
 				</p:submenu>
+				
 			</p:panelMenu>
 			
 		</h:form>
