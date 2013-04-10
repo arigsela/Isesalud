@@ -62,9 +62,10 @@ public class SMSReminderService {
      */
 	@Schedule(hour="8-15", month="*")
     private void scheduledTimeout(final Timer t) {
-        log.info("Scanning scheduled citas for sending sms.");
-        
-        processReminders();
+		if(settings.getModel().getMessagesenabled()){
+			log.info("Scanning scheduled citas for sending sms.");
+	        processReminders();
+		}
     }
 	
 	/**
@@ -80,7 +81,6 @@ public class SMSReminderService {
 				DateTime day = new DateTime(c.getDate());
 				if(isCitaNextDay(day) && 
 						c.getPaciente().getAceptarmensajes() &&
-						settings.getModel().getMessagesenabled() &&
 						!c.getEnviadosms()){
 					
 					SMSParams params = new SMSParams();
