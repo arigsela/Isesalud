@@ -30,5 +30,4 @@ insert into tiporesultado (id,description,name) values (1,'BIRADS 0 INSEGURO','B
 insert into motivoInadecuada (id,description,name) values (1,'TOMADA ADECUADAMENTE','ADECUADA');
 insert into resultadoImagen (id,adequate,dateNotified,dateInterpreted,daterealized,signs,gabinete,MotivoInadecuada,paciente,personal,TipoEstudioCita,TipoResultado) values (1,1,'2013-03-31','2013-03-31','2013-03-29','Ninguna',1,1,1,1,1,1);
 insert into hallazgos (id,name,side,resultadoImagen) values (1,'nada','IZQ',1);
-insert into user_has_role (User_id, Role_id) values (2,3);
 CREATE OR REPLACE VIEW v_user_role AS select user.username as username, user.password as password, role.role as role from ((user_has_role join user on ((user_has_role.User_id = user.id))) join role on ((role.id = user_has_role.Role_id)));
