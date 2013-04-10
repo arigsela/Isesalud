@@ -39,6 +39,7 @@
 								value="#{patientQuery.searchParams.unidadmedica}"
 								converter="#{unidadMedicaConverter}"
 								var="_unidad"
+								maxResults="5"
 								completeMethod="#{unidadMedicaAutoComplete.complete}"
 								itemLabel="#{_unidad.name}"
 								itemValue="#{_unidad}"

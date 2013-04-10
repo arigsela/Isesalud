@@ -44,7 +44,7 @@ public class UnidadMedicaAutoComplete extends BaseAutoCompleteComponent<Unidadme
 		Unidadmedica params = new Unidadmedica();
 		params.setName(description);
 		params.setMunicipio(securityComponent.getCurrentUser().getMunicipio());
-		return manager.getUnidadMedicaByMunicipio(params);
+		return manager.getUnidadMedicaByMunicipioForAutoComplete(params);
 	}
 
 }
