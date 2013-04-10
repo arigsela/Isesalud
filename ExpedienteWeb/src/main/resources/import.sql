@@ -25,7 +25,6 @@ insert into role (role, description) values ('Admin', 'Administrador');
 insert into role (role, description) values ('Tech', 'Tecnico');
 insert into role (role, description) values ('Doctor', 'Doctor');
 insert into user_has_role (User_id, Role_id) values (1,1);
-insert into user_has_role (User_id, Role_id) values (2,1);
 insert into gabinete (id,description,name) values (1,'ATRAS DEL HOSPITAL EXCEL','RDD');
 insert into tiporesultado (id,description,name) values (1,'BIRADS 0 INSEGURO','B0');
 insert into motivoInadecuada (id,description,name) values (1,'TOMADA ADECUADAMENTE','ADECUADA');
