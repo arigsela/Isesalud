@@ -72,25 +72,46 @@
 						value="#{radiologyPersistence.model.signs}" />
 				</h:panelGrid>
 				<h:panelGroup>
-					<p:panelGrid>
-						<p:outputLabel id="lblHallazgos" for="Hallazgos" value="Hallazgos"/>
-								<p:selectOneMenu id="Hallazgos: " value="#{patientPersistence.sintomaCancerMama.sintomaNombre}">
+					<p:panelGrid columns="4">
+						<p:outputLabel id="lblHallazgo" for="hallazgo" value="Hallazgos"/>
+								<p:selectOneMenu id="hallazgo" value="#{radiologyPersistence.hallazgos.name}">
 									<f:selectItem itemLabel="Hallazgo1" itemValue = "Hallazgo 1"/>
 									<f:selectItem itemLabel="Hallazgo2" itemValue = "Hallazgo 2"/>
-									<f:selectItem itemLabel="Hallazgo3" itemValue = "Sintoma 3"/>
-									<f:selectItem itemLabel="Hallazgo4" itemValue = "Sintoma 4"/>
+									<f:selectItem itemLabel="Hallazgo3" itemValue = "Hallazgo 3"/>
+									<f:selectItem itemLabel="Hallazgo4" itemValue = "Hallazgo 4"/>
 								</p:selectOneMenu>
 								
-								<p:selectOneMenu id="slcSintoma" value="#{patientPersistence.sintomaCancerMama.sintomaLado}">
+								<p:selectOneMenu id="slcHallazgo" value="#{radiologyPersistence.hallazgos.side}">
 									<f:selectItem itemLabel="IZQ" itemValue="IZQ"/>
 									<f:selectItem itemLabel="DER" itemValue="DER"/>
 								</p:selectOneMenu>
-								<p:commandButton id="btnSintoma" value="+" actionListener="#{patientPersistence.addSintomaCancerMama}"
-									update="sintoma dtaSintomas" ajax="true" process="@this,sintoma,slcSintoma"/>
+								<p:commandButton id="btnHallazgo" value="+" actionListener="#{radiologyPersistence.addHallazgos}"
+									update="hallazgo dtaHallazgos" ajax="true" process="@this,hallazgo,slcHallazgo"/>
 					</p:panelGrid>
+					<h:panelGrid columns="4">
+						<p:dataList id="dtaHallazgos" value="#{radiologyPersistence.hallazgosList}"
+									var="_hall" type="definition" itemType="disc">
+									<f:facet name="header">Sintomas Cancer</f:facet>
+									<p:commandButton id="btnHallazgoName" title="Borrar" icon="ui-icon-close"
+										actionListener="#{radiologyPersistence.eraseHallazgo}"
+										ajax="true" process="@this" update="@parent">
+										<f:attribute name="selectHallazgo" value="#{_hall}"/>
+									</p:commandButton>
+									<h:outputText value="* #{_hall.name}" />
+									<f:facet name="description">
+										<h:outputText value="Lado - #{_hall.side}" />
+									</f:facet>
+									<br />
+								</p:dataList>
+					</h:panelGrid>
 				</h:panelGroup>
 			</p:panel>
 		</h:form>
 	</ui:define>
 </ui:composition>
 </html>
+
+
+
+
+
