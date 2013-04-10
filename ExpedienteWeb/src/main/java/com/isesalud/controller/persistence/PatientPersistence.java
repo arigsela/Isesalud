@@ -71,10 +71,10 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 	private Event<Paciente> patientEditedEvent;
 	
 	/**************CHILD LIST*******************************************/
-	private PreviaEnfermedad previaEnfermedad;
-	private CancerOtrasPartes cancerOtrasPartes;
-	private ParienteCancerMama parienteCancerMama;
-	private SintomaCancerMama sintomaCancerMama;
+	private PreviaEnfermedad previaEnfermedad = new PreviaEnfermedad();
+	private CancerOtrasPartes cancerOtrasPartes = new CancerOtrasPartes();
+	private ParienteCancerMama parienteCancerMama = new ParienteCancerMama();
+	private SintomaCancerMama sintomaCancerMama = new SintomaCancerMama();
 	
 	private List<PreviaEnfermedad> prevEnfList = new ArrayList<PreviaEnfermedad>();
 	private List<CancerOtrasPartes> cancerList = new ArrayList<CancerOtrasPartes>();
@@ -148,14 +148,7 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 	
 	
 	@PostConstruct
-	public void initialize(){
-		if(conversation != null && conversation.isTransient()){
-			this.parienteCancerMama = new ParienteCancerMama();
-			this.cancerOtrasPartes = new CancerOtrasPartes();
-			this.previaEnfermedad = new PreviaEnfermedad();
-			this.sintomaCancerMama = new SintomaCancerMama();
-		}
-		
+	public void initialize(){		
 		setModel(patientSelection.getPaciente());
 	}
 	
