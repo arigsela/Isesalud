@@ -33,7 +33,7 @@
 			<h:panelGrid columns="3">
 				<p:outputLabel id="lblCal" value="Seleccione una fecha: "/>
 				<p:calendar id="cldDateSearch" value="#{citaDayReportQuery.cita.date}" readonlyInput="true"
-					mode="popup">
+					mode="popup" locale="es">
 				</p:calendar>
 				<p:selectOneMenu id="cmbStatusCita" value="#{citaDayReportQuery.cita.statuscita}"
 					converter="#{statusCitaConverter}">

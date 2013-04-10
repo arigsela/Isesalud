@@ -24,7 +24,7 @@
 							value="#{patientPersistence.model.maternalLastName}" />
 						<p:outputLabel value="Fecha Nacimiento" for="popupButtonDateNac" />
 						<p:calendar value="#{patientPersistence.model.dateofBirth}"
-							id="popupButtonDateNac" required="true"	navigator="true">
+							id="popupButtonDateNac" required="true"	navigator="true" locale="es">
 							<f:convertDateTime type="date" dateStyle="short" />
 						</p:calendar>
 						<p:outputLabel value="Telefono" for="telefono" />
@@ -96,7 +96,7 @@
 							<p:outputLabel value="Fecha de ultima Mastografia"
 								for="popupButtonDate" />
 							<p:calendar value="#{patientPersistence.model.dateLastMG}"
-								id="popupButtonDate" navigator="true" >
+								id="popupButtonDate" navigator="true" locale="es">
 								<f:convertDateTime type="date" dateStyle="short" />
 							</p:calendar>
 							<p:outputLabel value="Municipio" for="muni" />
