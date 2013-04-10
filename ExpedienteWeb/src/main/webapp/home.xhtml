@@ -9,8 +9,6 @@
 	<ui:define name="pageTitle">Bienvenido</ui:define>
 	<ui:define name="pageHeader"></ui:define>
 	<ui:define name="body">
-		<p:graphicImage library="img" name="logged.png" styleClass="welcome"
-			rendered="#{securityComponent.logged}"/>
 		<h:form rendered="#{!securityComponent.logged}">
 			<center>
 				<p:focus />

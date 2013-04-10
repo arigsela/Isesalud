@@ -35,7 +35,7 @@
 		
 		<p:layoutUnit position="north" size="100" 
 			resizable="false" collapsible="false" 
-			closable="false">
+			closable="false" rendered="#{securityComponent.logged}">
 			<h:panelGrid columns="4" columnClasses="logoAlign,selectedPatientAlign,userAlign,logoutAlign">
 				<p:graphicImage library="img" name="mama-cablemas-logos.png"
 					width="70%" height="35%"/>
@@ -66,11 +66,12 @@
 		</p:layoutUnit>
 		
 		<p:layoutUnit position="west" size="300" closable="false" collapsible="false"
-			resizable="false" header="Menu Principal">
+			resizable="false" header="Menu Principal" rendered="#{securityComponent.logged}"
+			styleClass="main">
 			<ui:include src="/templates/mainMenu.xhtml" />
 		</p:layoutUnit>
 		
-		<p:layoutUnit id="layCenter" position="center" styleClass="main">
+		<p:layoutUnit id="layCenter" position="center" styleClass="#{securityComponent.logged ? 'main' : 'nousermain'}">
 			<p:ajaxStatus styleClass="loading">
 				<f:facet name="start">
 					<p:graphicImage library="img" name="loading.gif"/>
