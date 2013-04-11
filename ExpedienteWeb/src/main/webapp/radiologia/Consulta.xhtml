@@ -38,16 +38,62 @@
 				</p:column>
 
 			</p:dataTable>
+			<br />
+			<br />
 			<p:outputPanel id="details" autoUpdate="true">
 				<p:panel header="Detalles del resultado" id="resultadoDtls"
 					rendered="#{not empty resultadoImagenQuery.detallesresultado}">
-					<h:panelGrid columns="2" cellpadding="10">
-							<p:panelGrid id="display" columns="2" cellpadding="4">
-								<f:facet name="header">
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:panelGrid id="display" columns="2" cellpadding="4">
+							<f:facet name="header">
+								<h:outputText
+									value="#{resultadoImagenQuery.detallesresultado.paciente.name} #{resultadoImagenQuery.detallesresultado.paciente.maternalLastName} #{resultadoImagenQuery.detallesresultado.paciente.lastName}" />
+							</f:facet>
+							<h:outputLabel value="Tipo de Estudio:" style="font-weight:bold" />
+							<h:outputLabel
+								value="#{resultadoImagenQuery.detallesresultado.tipoestudiocita.name}" />
+							<h:outputLabel value="Gabinete:" style="font-weight:bold" />
+							<h:outputLabel
+								value="#{resultadoImagenQuery.detallesresultado.gabinete.name}" />
+							<h:outputLabel value="Fecha Realizado:" style="font-weight:bold" />
+							<h:outputLabel
+								value="#{resultadoImagenQuery.detallesresultado.daterealized}">
+								<f:convertDateTime dateStyle="medium" type="date" locale="es_ES" />
+							</h:outputLabel>
+							<h:outputLabel value="Adecuada:" style="font-weight:bold" />
+							<h:outputLabel
+								value="#{resultadoImagenQuery.detallesresultado.adequate}" />
+							<h:outputLabel value="Motivo Inadecuada:"
+								style="font-weight:bold" />
+							<h:outputLabel
+								value="#{resultadoImagenQuery.detallesresultado.motivoinadecuada.name}" />
+							<h:outputLabel value="Fecha Interpretado:"
+								style="font-weight:bold" />
+							<h:outputLabel
+								value="#{resultadoImagenQuery.detallesresultado.dateinterpreted}">
+								<f:convertDateTime dateStyle="medium" type="date" locale="es_ES" />
+							</h:outputLabel>
+							<h:outputLabel value="Interpretado por:" style="font-weight:bold" />
+							<h:outputLabel
+								value="#{resultadoImagenQuery.detallesresultado.personal.name}" />
+							<h:outputLabel value="Resultado:" style="font-weight:bold" />
+							<h:outputLabel
+								value="#{resultadoImagenQuery.detallesresultado.tiporesultado.name}" />
+						<h:outputLabel value="Signos:" style="font-weight:bold" />
+							<p:outputLabel 
+								value="#{resultadoImagenQuery.detallesresultado.signs}" />
+						</p:panelGrid>
+						<h:panelGrid columns="2">
+						<p:dataList id="dtaHallazgos"
+									value="#{resultadoImagenQuery.detallesresultado.hallazgos}"
+									var="_Hallazgos">
+									<f:facet name="header">
+											Hallazgos
+										</f:facet>
 									<h:outputText
-										value="#{resultadoImagenQuery.detallesresultado.tipoestudiocita.name} #{patientQuery.detailsPaciente.lastName} #{patientQuery.detailsPaciente.maternalLastName}" />
-								</f:facet>
-							</p:panelGrid>
+										value="#{_Hallazgos.side} #{_Hallazgos.name}" />
+								</p:dataList>
+						</h:panelGrid>
 					</h:panelGrid>
 				</p:panel>
 			</p:outputPanel>
