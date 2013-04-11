@@ -9,6 +9,15 @@
 <ui:composition template="/templates/common.xhtml">
 	<ui:define name="pageTitle">Citas</ui:define>
 	<ui:define name="pageHeader">Consulta de citas</ui:define>
+	<ui:define name="head">
+		<script type="text/javascript">
+		    function handleScheduleValidation(xhr, status, args) {
+		     	var isValid = args.isValid;
+		     	if(!isValid)
+		     		cal.update();
+		    }
+		</script>
+	</ui:define>
 	<ui:define name="dialogs">
 		<p:dialog id="diag" widgetVar="citaDiag" appendToBody="true"
 			closable="true" modal="true" position="center"
@@ -48,11 +57,13 @@
 			<p:spacer height="30" />
 
 			<p:schedule id="shlCal" value="#{citaQuery.model}" allDaySlot="false"
-				slotMinutes="10" view="agendaDay" draggable="false" resizable="false"
+				slotMinutes="10" view="agendaDay" draggable="true" resizable="false"
 				locale="es" widgetVar="cal" initialDate="#{citaQuery.initialDate}" 
 				minTime="8:00" maxTime="17:00">
 				<p:ajax event="eventSelect" listener="#{citaQuery.onEventSelect}"
 					update=":diag" oncomplete="citaDiag.show()"/>
+				<p:ajax event="eventMove" listener="#{citaQuery.onEventMove}"
+					oncomplete="handleScheduleValidation(xhr, status, args)"/>
 			</p:schedule>
 		</h:form>
 

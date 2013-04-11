@@ -16,6 +16,9 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.joda.time.DateTime;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.LazyScheduleModel;
@@ -170,6 +173,22 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 	public void onEventSelect(SelectEvent e){
 		event = (ScheduleEvent) e.getObject();
 		selectedCita = (Cita) event.getData();
+	}
+	
+	public void onEventMove(ScheduleEntryMoveEvent e){
+		Cita cita = (Cita) e.getScheduleEvent().getData();
+		Date newDay = DateUtil.addDays(cita.getDate(), e.getDayDelta());
+		Date newTime = DateUtil.addMinutes(cita.getTime(), e.getMinuteDelta());
+		RequestContext ctx = RequestContext.getCurrentInstance();
+		if(DateUtil.isDateInThePast(new DateTime(DateUtil.combineDateTime(newDay, newTime)))){
+			ctx.addCallbackParam("isValid", false);
+			return;
+		} else {
+			ctx.addCallbackParam("isValid", true);
+		}
+		cita.setDate(newDay);
+		cita.setTime(newTime);
+		statusChangedEvent.fire(cita);
 	}
 	
 	public void onStatusChanged(ActionEvent e){

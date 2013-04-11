@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.joda.time.DateTime;
+
 /**
  * @author Jesus Espinoza Hernandez
  *
@@ -174,5 +176,14 @@ public class DateUtil
 		Date result = calDT.getTime();
 		
 		return result;
+	}
+	
+	/**
+	 * Checks if date is in the past from now.
+	 * @param evalDate: Date to be evaluated
+	 * @return true if date is in the past, false otherwise
+	 */
+	public static boolean isDateInThePast(DateTime evalDate){
+		return evalDate.isBefore(DateTime.now());
 	}
 }
