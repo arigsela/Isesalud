@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/common.xhtml">
+	<ui:define name="pageTitle">Consulta de resultados</ui:define>
+	<ui:define name="pageHeader">Seleccion de Resultados</ui:define>
+	<ui:define name="body">
+		<h:form id="frmConsulta" prependId="false">
+			<p:dataTable id="tblResults"
+				value="#{resultadoImagenQuery.queryListDM}" var="_stuff"
+				paginator="true" rows="10"
+				paginatorTemplate="
+						{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15" paginatorAlwaysVisible="false"
+				selectionMode="single"
+				selection="#{resultadoImagenQuery.selectedResultado}"
+				rowKey="#{_stuff.id}">
+				<p:ajax event="rowSelect"
+					listener="#{resultadoImagenQuery.onSelectedRow}" />
+				<p:column headerText="Fecha Realizado">
+					<h:outputText value="#{_stuff.daterealized}">
+						<f:convertDateTime dateStyle="medium" type="date" locale="es_ES" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Fecha Interpretado">
+					<h:outputText value="#{_stuff.dateinterpreted}">
+						<f:convertDateTime dateStyle="medium" type="date" locale="es_ES" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Tipo de Estudio">
+					<h:outputText value="#{_stuff.tipoestudiocita.name}" />
+				</p:column>
+				<p:column headerText="Resultado">
+					<h:outputText value="#{_stuff.tiporesultado.name}" />
+				</p:column>
+
+			</p:dataTable>
+			<p:outputPanel id="details" autoUpdate="true">
+				<p:panel header="Detalles del resultado" id="resultadoDtls"
+					rendered="#{not empty resultadoImagenQuery.detallesresultado}">
+					<h:panelGrid columns="2" cellpadding="10">
+							<p:panelGrid id="display" columns="2" cellpadding="4">
+								<f:facet name="header">
+									<h:outputText
+										value="#{resultadoImagenQuery.detallesresultado.tipoestudiocita.name} #{patientQuery.detailsPaciente.lastName} #{patientQuery.detailsPaciente.maternalLastName}" />
+								</f:facet>
+							</p:panelGrid>
+					</h:panelGrid>
+				</p:panel>
+			</p:outputPanel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+
+
+</html>
