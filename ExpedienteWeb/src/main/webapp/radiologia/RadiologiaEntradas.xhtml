@@ -56,25 +56,33 @@
 							var="_tiporesultado" itemLabel="#{_tiporesultado.name}"
 							itemValue="#{_tiporesultado}"></f:selectItems>
 					</p:selectOneMenu>
+					<p:outputLabel value="Fecha de Realizacion: "
+						for="popupButtonDateReal" />
+					<p:calendar value="#{radiologyPersistence.model.daterealized}" locale="es"
+						id="popupButtonDateReal" required="true" navigator="true" size="24">
+						<f:convertDateTime type="date" dateStyle="short" />
+					</p:calendar>
 					<p:outputLabel value="Fecha de Interpretacion: "
 						for="popupButtonDateInter" />
-					<p:calendar value="#{radiologyPersistence.model.dateinterpreted}"
+					<p:calendar value="#{radiologyPersistence.model.dateinterpreted}" locale="es"
 						id="popupButtonDateInter" required="true" navigator="true" size="24">
 						<f:convertDateTime type="date" dateStyle="short" />
 					</p:calendar>
 					<p:outputLabel value="Fecha de Notificacion:  "
 						for="popupButtonDateNoti" />
-					<p:calendar value="#{radiologyPersistence.model.dateNotified}"
+					<p:calendar value="#{radiologyPersistence.model.dateNotified}" locale="es"
 						id="popupButtonDateNoti" required="true" navigator="true" size="10">
 						<f:convertDateTime type="date" dateStyle="short" />
 					</p:calendar>
 					<h:outputText value="Signos:"/>
 					<p:inputTextarea id="signos" 
 						value="#{radiologyPersistence.model.signs}" />
-					<h:outputText value="Inadecuado:"/>  
-        			<p:selectBooleanCheckbox value="#{radiologyPersistence.model.adequate}"/>  
+					<h:outputText value="Adecuado:"/>  
+        			<p:selectBooleanCheckbox id="chkadecuada" value="#{radiologyPersistence.model.adequate}" 
+        			immediate="true" />
+        			  <p:ajax event="click" update="motivo" process="chkadecuada" global="false"/>
 					<p:outputLabel value="Motivo de inadecuado: " for="motivo" />
-					<p:selectOneMenu id="motivo"
+					<p:selectOneMenu id="motivo" disabled="#{radiologyPersistence.model.adequate}"
 						value="#{radiologyPersistence.model.motivoinadecuada}"
 						converter="#{motivoInadecuadaConverter}">
 						<f:selectItems value="#{motivoInadecuadaQuery.queryListDM}"
@@ -111,7 +119,7 @@
 					<h:panelGrid columns="4">
 						<p:dataList id="dtaHallazgos" value="#{radiologyPersistence.hallazgosList}"
 									var="_hall" type="definition" itemType="disc">
-									<f:facet name="header">Sintomas Cancer</f:facet>
+									<f:facet name="header">Hallazgos</f:facet>
 									<p:commandButton id="btnHallazgoName" title="Borrar" icon="ui-icon-close"
 										actionListener="#{radiologyPersistence.eraseHallazgo}"
 										ajax="true" process="@this" update="@parent">
@@ -126,6 +134,10 @@
 					</h:panelGrid>
 				</h:panelGroup>
 			</p:panel>
+		<p:commandButton id="btnSave" value="Salvar" actionListener="#{radiologyPersistence.save}"
+					ajax="true" action="/pacientes/busqueda?faces-redirect=true"/>
+				<p:commandButton dir="btnCancel" value="Cancelar" actionListener="#{radiologyPersistence.cancel}"
+					ajax="false" action="/radiologia/RadiologiaEntradas?faces-redirect=true" immediate="true"/>
 		</h:form>
 	</ui:define>
 </ui:composition>

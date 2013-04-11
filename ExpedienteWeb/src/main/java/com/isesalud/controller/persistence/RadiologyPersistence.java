@@ -87,10 +87,28 @@ public class RadiologyPersistence extends BaseManagedCrudController<resultadoIma
 		if(conversation.isTransient())
 			conversation.begin();
 		getModel().setPaciente(this.patientSelection.getPaciente());
+		getModel().setAdequate(true);
 		setOutcome("/radiologia/RadiologiaEntradas?faces-redirect=true");
 		super.doAfterAdd();
 	}
-		
+	
+	@Override
+	protected void doBeforeSave() throws BaseException {
+		super.doBeforeSave();
+		if (getModel().getAdequate()== true){ 
+			getModel().setMotivoinadecuada(null);
+		}
+		getModel().setHallazgos(hallazgosList);
+	}
+	
+	@Override
+	protected void doAfterSave() throws BaseException {
+		super.doAfterSave();
+		if(!conversation.isTransient())
+			conversation.end();
+		setOutcome("/radiologia/RadiologiaEntradas?faces-redirect=true");	
+	}
+
 	@Override
 	protected resultadoImagen getNewModel() {
 		return new resultadoImagen();

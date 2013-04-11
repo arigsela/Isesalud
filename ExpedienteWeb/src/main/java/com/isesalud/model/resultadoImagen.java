@@ -84,7 +84,7 @@ public class resultadoImagen extends BaseModel {
 	private TipoResultado tiporesultado;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="MotivoInadecuada", nullable = false)
+	@JoinColumn(name="MotivoInadecuada")
 	private MotivoInadecuada motivoinadecuada;
 
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="resultadoimagen")
