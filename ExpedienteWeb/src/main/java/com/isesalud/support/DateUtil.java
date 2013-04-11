@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 import org.joda.time.DateTime;
 
 /**
@@ -185,5 +184,6 @@ public class DateUtil
 	 */
 	public static boolean isDateInThePast(DateTime evalDate){
 		return evalDate.isBefore(DateTime.now());
+
 	}
 }

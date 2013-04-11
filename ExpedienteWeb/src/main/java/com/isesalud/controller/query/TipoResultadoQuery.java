@@ -6,6 +6,7 @@ package com.isesalud.controller.query;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import com.isesalud.ejb.query.TipoResultadoEjb;
@@ -22,8 +23,11 @@ public class TipoResultadoQuery extends BaseQueryController<TipoResultado>{
 /**
 	 * 
 	 */
-	private static final long serialVersionUID = -6505106688573876092L;
+private static final long serialVersionUID = -6505106688573876092L;
+
+@EJB
 private TipoResultadoEjb ejb;
+
 @PostConstruct
 public void loadData(){
 	setQueryListDM(getQueryList());

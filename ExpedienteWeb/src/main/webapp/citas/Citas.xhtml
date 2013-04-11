@@ -5,11 +5,11 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 
-
 <ui:composition template="/templates/common.xhtml">
 	<ui:define name="pageTitle">Citas</ui:define>
 	<ui:define name="pageHeader">Consulta de citas</ui:define>
 	<ui:define name="head">
+
 		<script type="text/javascript">
 		    function handleScheduleValidation(xhr, status, args) {
 		     	var isValid = args.isValid;
@@ -64,6 +64,7 @@
 					update=":diag" oncomplete="citaDiag.show()"/>
 				<p:ajax event="eventMove" listener="#{citaQuery.onEventMove}"
 					oncomplete="handleScheduleValidation(xhr, status, args)"/>
+
 			</p:schedule>
 		</h:form>
 
