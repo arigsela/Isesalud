@@ -15,6 +15,8 @@ import javax.faces.validator.ValidatorException;
 
 import org.joda.time.DateTime;
 
+import com.isesalud.support.DateUtil;
+
 /**
  * @author Jesus Espinoza Hernandez
  *
@@ -31,20 +33,11 @@ public class WorkHoursValidator implements Validator {
 		Date date = (Date)value;
 		DateTime evalDate = new DateTime(date);
 		
-		if(isDateInThePast(evalDate)){
+		if(DateUtil.isDateInThePast(evalDate)){
 			FacesMessage msg = new FacesMessage("Atencion:", "No se puede agendar la cita en el pasado");
 			throw new ValidatorException(msg);
 		}
 		
-	}
-	
-	/**
-	 * Checks if date is in the past from now.
-	 * @param evalDate: Date to be evaluated
-	 * @return true if date is in the past, false otherwise
-	 */
-	public boolean isDateInThePast(DateTime evalDate){
-		return evalDate.isBefore(DateTime.now());
 	}
 
 }
