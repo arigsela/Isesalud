@@ -7,7 +7,7 @@
 
 	<ui:composition>
 		<h:form id="frmMainMenu" prependId="false">
-			<p:panelMenu>
+			<p:menu style="width:auto">
 				<p:submenu label="Pacientes">
 					<p:menuitem value="Seleccionar paciente" action="/pacientes/busqueda?faces-redirect=true"
 						ajax="false" icon="ui-icon-search" process="@this"/>
@@ -41,7 +41,7 @@
 					<p:menuitem value="Ajustes" action="/admin/administracion?faces-redirect=true"
 						ajax="false" icon="ui-icon-gear" process="@this"/>
 				</p:submenu>
-			</p:panelMenu>
+			</p:menu>
 			
 		</h:form>
 	</ui:composition>

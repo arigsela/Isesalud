@@ -58,6 +58,39 @@
 		</repository>
     </repositories>
     
+    <dependencyManagement>
+    	<dependencies>
+    		<dependency>
+    			<groupId>org.jboss.bom</groupId>
+    			<artifactId>jboss-javaee-6.0-with-tools</artifactId>
+    			<version>${jboss.bom.version}</version>
+    			<type>pom</type>
+    			<scope>import</scope>
+    		</dependency>
+    		<dependency>
+    			<groupId>org.jboss.bom</groupId>
+    			<artifactId>jboss-javaee-6.0-with-hibernate</artifactId>
+    			<version>${jboss.bom.version}</version>
+    			<type>pom</type>
+    			<scope>import</scope>
+    		</dependency>
+    		<dependency>
+    			<groupId>org.jboss.seam</groupId>
+    			<artifactId>seam-bom</artifactId>
+    			<version>${seam.version}</version>
+    			<type>pom</type>
+    			<scope>import</scope>
+    		</dependency>
+    		<dependency>
+    			<groupId>org.jboss.bom</groupId>
+    			<artifactId>jboss-javaee-6.0-with-security</artifactId>
+    			<version>${jboss.bom.version}</version>
+    			<type>pom</type>
+    			<scope>import</scope>
+    		</dependency>
+    	</dependencies>
+    </dependencyManagement>
+    
     <dependencies>
 
         <!-- First declare the APIs we depend on and need for compilation. 
@@ -140,7 +173,6 @@
         	<artifactId>
         		hibernate-validator-annotation-processor
         	</artifactId>
-        	<version>4.3.0.Final</version>
         	<scope>provided</scope>
         </dependency>
         <dependency>
@@ -404,36 +436,5 @@
         </profile>
 
     </profiles>
-    <dependencyManagement>
-    	<dependencies>
-    		<dependency>
-    			<groupId>org.jboss.bom</groupId>
-    			<artifactId>jboss-javaee-6.0-with-tools</artifactId>
-    			<version>${jboss.bom.version}</version>
-    			<type>pom</type>
-    			<scope>import</scope>
-    		</dependency>
-    		<dependency>
-    			<groupId>org.jboss.bom</groupId>
-    			<artifactId>jboss-javaee-6.0-with-hibernate</artifactId>
-    			<version>${jboss.bom.version}</version>
-    			<type>pom</type>
-    			<scope>import</scope>
-    		</dependency>
-    		<dependency>
-    			<groupId>org.jboss.seam</groupId>
-    			<artifactId>seam-bom</artifactId>
-    			<version>${seam.version}</version>
-    			<type>pom</type>
-    			<scope>import</scope>
-    		</dependency>
-    		<dependency>
-    			<groupId>org.jboss.bom</groupId>
-    			<artifactId>jboss-javaee-6.0-with-security</artifactId>
-    			<version>${jboss.bom.version}</version>
-    			<type>pom</type>
-    			<scope>import</scope>
-    		</dependency>
-    	</dependencies>
-    </dependencyManagement>
+    
 </project>
