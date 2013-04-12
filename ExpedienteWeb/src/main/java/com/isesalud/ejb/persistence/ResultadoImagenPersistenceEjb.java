@@ -6,7 +6,7 @@ package com.isesalud.ejb.persistence;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import com.isesalud.model.resultadoImagen;
+import com.isesalud.model.ResultadoImagen;
 import com.isesalud.support.components.BasePersistenceManagerEJB;
 
 /**
@@ -15,11 +15,11 @@ import com.isesalud.support.components.BasePersistenceManagerEJB;
  */
 @Stateless
 @LocalBean
-public class ResultadoImagenPersistenceEjb extends BasePersistenceManagerEJB<resultadoImagen>{
+public class ResultadoImagenPersistenceEjb extends BasePersistenceManagerEJB<ResultadoImagen>{
 
 	@Override
-	public Class<resultadoImagen> getModelClass() {
-		return resultadoImagen.class;
+	public Class<ResultadoImagen> getModelClass() {
+		return ResultadoImagen.class;
 	}
 
 }

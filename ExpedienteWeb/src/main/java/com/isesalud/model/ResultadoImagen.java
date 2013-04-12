@@ -29,7 +29,7 @@ import com.isesalud.support.components.BaseModel;
  */
 @Entity
 @Table(name="resultadoImagen")
-public class resultadoImagen extends BaseModel {
+public class ResultadoImagen extends BaseModel {
 
 	/**
 	 * 
@@ -99,11 +99,11 @@ public class resultadoImagen extends BaseModel {
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="resultadoimagen")
 	private List<Hallazgos> hallazgos = new ArrayList<Hallazgos>();
 	
-	public resultadoImagen() {
+	public ResultadoImagen() {
 		this.id = new Long(0L);
 	}
 
-	public resultadoImagen(Date dateinterpreted, Date dateNotified,
+	public ResultadoImagen(Date dateinterpreted, Date dateNotified,
 			Date daterealized, String signs, Boolean adequate,
 			Paciente paciente, TipoEstudioCita tipoestudiocita,
 			Personal personalrealizado,Personal personalinter, Gabinete gabineterealizado, 

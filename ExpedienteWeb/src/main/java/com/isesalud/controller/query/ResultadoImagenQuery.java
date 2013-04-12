@@ -4,53 +4,51 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.inject.Any;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import org.primefaces.event.SelectEvent;
+
 import com.isesalud.controller.support.PatientSelection;
-import com.isesalud.ejb.query.resultadoImagenEjb;
-import com.isesalud.model.resultadoImagen;
+import com.isesalud.ejb.query.ResultadoImagenEjb;
+import com.isesalud.model.ResultadoImagen;
 import com.isesalud.support.components.BaseQueryController;
 import com.isesalud.support.exceptions.BaseException;
 
 @Named
 @ViewScoped
-public class ResultadoImagenQuery extends BaseQueryController<resultadoImagen>{
-/**
+public class ResultadoImagenQuery extends BaseQueryController<ResultadoImagen> {
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 392196039034549417L;
 
-	private resultadoImagen searchParams;
-	
-	private resultadoImagen selectedResultado;
-	
+	private ResultadoImagen searchParams;
+
+	private ResultadoImagen selectedResultado;
+
 	@Inject
 	private PatientSelection patientSelection;
-	
-	@Inject @Any
-	private javax.enterprise.event.Event<resultadoImagen> resultadoSelectedEvent;
-	
-	private resultadoImagen detallesresultado;
-	
+
+	private ResultadoImagen detallesresultado;
+
 	@EJB
-	private resultadoImagenEjb resultadoImagenEjb;
-	
+	private ResultadoImagenEjb resultadoImagenEjb;
+
 	@Override
 	protected void init() throws BaseException {
-		searchParams = new resultadoImagen();
+		searchParams = new ResultadoImagen();
 	}
-	
+
 	@PostConstruct
-	public void loadData(){
+	public void loadData() {
 		setQueryListDM(getQueryList());
 	}
 
 	@Override
-	protected List<resultadoImagen> getQueryList() {
-		resultadoImagen search = new resultadoImagen();
+	protected List<ResultadoImagen> getQueryList() {
+		ResultadoImagen search = new ResultadoImagen();
 		search.setPaciente(this.patientSelection.getPaciente());
 		return resultadoImagenEjb.getResultado(search);
 	}
@@ -60,33 +58,33 @@ public class ResultadoImagenQuery extends BaseQueryController<resultadoImagen>{
 		return 0;
 	}
 
-	public void onSelectedRow(SelectEvent e){
-		detallesresultado = resultadoImagenEjb.getFULL(getSelectedResultado().getId());
-		resultadoSelectedEvent.fire(detallesresultado);
+	public void onSelectedRow(SelectEvent e) {
+		detallesresultado = resultadoImagenEjb.getFULL(getSelectedResultado()
+				.getId());
 	}
-	
-	public resultadoImagen getSearchParams() {
-	return searchParams;
-}
 
-public void setSearchParams(resultadoImagen searchParams) {
-	this.searchParams = searchParams;
-}
+	public ResultadoImagen getSearchParams() {
+		return searchParams;
+	}
 
-public resultadoImagen getSelectedResultado() {
-	return selectedResultado;
-}
+	public void setSearchParams(ResultadoImagen searchParams) {
+		this.searchParams = searchParams;
+	}
 
-public void setSelectedResultado(resultadoImagen selectedResultado) {
-	this.selectedResultado = selectedResultado;
-}
+	public ResultadoImagen getSelectedResultado() {
+		return selectedResultado;
+	}
 
-public resultadoImagen getDetallesresultado() {
-	return detallesresultado;
-}
+	public void setSelectedResultado(ResultadoImagen selectedResultado) {
+		this.selectedResultado = selectedResultado;
+	}
 
-public void setDetallesresultado(resultadoImagen detallesresultado) {
-	this.detallesresultado = detallesresultado;
-}
+	public ResultadoImagen getDetallesresultado() {
+		return detallesresultado;
+	}
+
+	public void setDetallesresultado(ResultadoImagen detallesresultado) {
+		this.detallesresultado = detallesresultado;
+	}
 
 }

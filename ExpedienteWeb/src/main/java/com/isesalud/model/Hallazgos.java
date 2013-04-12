@@ -45,7 +45,7 @@ public class Hallazgos extends BaseModel{
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="resultadoImagen", nullable = false)
-	private resultadoImagen resultadoimagen;
+	private ResultadoImagen resultadoimagen;
 	
 	public Hallazgos() {
 		this.id = new Long(0L);
@@ -81,11 +81,11 @@ public class Hallazgos extends BaseModel{
 		this.side = side;
 	}
 
-	public resultadoImagen getResultadoimagen() {
+	public ResultadoImagen getResultadoimagen() {
 		return resultadoimagen;
 	}
 	
-	public void setResultadoimagen(resultadoImagen resultadoimagen) {
+	public void setResultadoimagen(ResultadoImagen resultadoimagen) {
 		this.resultadoimagen = resultadoimagen;
 	}
 

@@ -13,8 +13,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import com.isesalud.model.resultadoImagen;
-import com.isesalud.model.resultadoImagen_;
+import com.isesalud.model.ResultadoImagen;
+import com.isesalud.model.ResultadoImagen_;
 import com.isesalud.support.components.BaseManagerEJB;
 
 /**
@@ -23,23 +23,23 @@ import com.isesalud.support.components.BaseManagerEJB;
  */
 @Stateless
 @LocalBean
-public class resultadoImagenEjb extends BaseManagerEJB<resultadoImagen>{
+public class ResultadoImagenEjb extends BaseManagerEJB<ResultadoImagen>{
 	
-	public List<resultadoImagen> getAllResultados(){
+	public List<ResultadoImagen> getAllResultados(){
 		CriteriaBuilder builder = em.getCriteriaBuilder();
-		CriteriaQuery<resultadoImagen> query = builder.createQuery(getModelClass());
-		Root<resultadoImagen> root = query.from(getModelClass());
+		CriteriaQuery<ResultadoImagen> query = builder.createQuery(getModelClass());
+		Root<ResultadoImagen> root = query.from(getModelClass());
 		query.select(root);
 		return getList(query);
 	}
 
-	public List<resultadoImagen> getResultado(resultadoImagen params){
-		List<resultadoImagen> model =null;
+	public List<ResultadoImagen> getResultado(ResultadoImagen params){
+		List<ResultadoImagen> model =null;
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder builder = em.getCriteriaBuilder();
-		CriteriaQuery<resultadoImagen> query = builder.createQuery(getModelClass());
-		Root<resultadoImagen> root = query.from(getModelClass());
-		Predicate paciente = builder.equal(root.get(resultadoImagen_.paciente), params.getPaciente());
+		CriteriaQuery<ResultadoImagen> query = builder.createQuery(getModelClass());
+		Root<ResultadoImagen> root = query.from(getModelClass());
+		Predicate paciente = builder.equal(root.get(ResultadoImagen_.paciente), params.getPaciente());
 		predicates.add(paciente);
 		Predicate and = builder.and(predicates.toArray(new Predicate[]{}));
 		query.select(root).where(and);
@@ -50,8 +50,8 @@ public class resultadoImagenEjb extends BaseManagerEJB<resultadoImagen>{
 	}
 
 	@Override
-	public Class<resultadoImagen> getModelClass() {
-		return resultadoImagen.class;
+	public Class<ResultadoImagen> getModelClass() {
+		return ResultadoImagen.class;
 	}
 	
 }

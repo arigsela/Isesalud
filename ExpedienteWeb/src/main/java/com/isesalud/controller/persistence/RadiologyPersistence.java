@@ -16,7 +16,7 @@ import com.isesalud.controller.support.PatientSelection;
 import com.isesalud.ejb.persistence.HallazgosPersistenceEjb;
 import com.isesalud.ejb.persistence.ResultadoImagenPersistenceEjb;
 import com.isesalud.model.Hallazgos;
-import com.isesalud.model.resultadoImagen;
+import com.isesalud.model.ResultadoImagen;
 import com.isesalud.support.components.BaseManagedCrudController;
 import com.isesalud.support.exceptions.BaseException;
 
@@ -26,7 +26,7 @@ import com.isesalud.support.exceptions.BaseException;
  */
 @Named
 @ConversationScoped
-public class RadiologyPersistence extends BaseManagedCrudController<resultadoImagen, ResultadoImagenPersistenceEjb>{
+public class RadiologyPersistence extends BaseManagedCrudController<ResultadoImagen, ResultadoImagenPersistenceEjb>{
 
 	/**
 	 * 
@@ -110,31 +110,27 @@ public class RadiologyPersistence extends BaseManagedCrudController<resultadoIma
 	}
 
 	@Override
-	protected resultadoImagen getNewModel() {
-		return new resultadoImagen();
+	protected ResultadoImagen getNewModel() {
+		return new ResultadoImagen();
 	}
 
 	@Override
 	protected String getAddRole() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	protected String getEditRole() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	protected String getDeleteRole() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	protected String getViewRole() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
