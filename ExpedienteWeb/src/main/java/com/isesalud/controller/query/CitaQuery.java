@@ -136,7 +136,7 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 				searchParams.setStartDate(start);
 				searchParams.setEndDate(end);
 				
-				datasource = citaEjb.getCitasByDateRange(searchParams);
+				datasource = getQueryList();
 				
 				if(datasource.size() > 0){
 					for(Cita c : datasource){
@@ -210,7 +210,7 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 			
 	@Override
 	protected List<Cita> getQueryList() {
-		return null;
+		return citaEjb.getCitasByDateRange(searchParams);
 	}
 
 	@Override

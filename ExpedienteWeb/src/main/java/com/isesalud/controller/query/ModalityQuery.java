@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
+
 import com.isesalud.ejb.query.ModalityEjb;
 import com.isesalud.model.Modality;
 import com.isesalud.support.components.BaseQueryController;
@@ -35,7 +36,7 @@ public class ModalityQuery extends BaseQueryController<Modality>{
 	
 	@Override
 	protected List<Modality> getQueryList() {
-	return ejb.getAllModalities();
+		return ejb.getAllModalities();
 	}
 	
 	@Override
