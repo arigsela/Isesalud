@@ -10,8 +10,6 @@ import javax.ejb.Stateless;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
-import com.isesalud.model.Gabinete;
 import com.isesalud.model.Hallazgos;
 import com.isesalud.support.components.BaseManagerEJB;
 
