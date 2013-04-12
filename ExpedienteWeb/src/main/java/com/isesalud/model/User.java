@@ -63,6 +63,10 @@ public class User extends BaseModel {
 	@JoinColumn(name="municipio", nullable=false)
 	private Municipio municipio;
 	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="gabinete", nullable=false)
+	private Gabinete gabinete;
+	
 	@Transient
 	private boolean hashPassword;
 	
@@ -140,6 +144,14 @@ public class User extends BaseModel {
 	
 	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
+	}
+	
+	public Gabinete getGabinete() {
+		return gabinete;
+	}
+	
+	public void setGabinete(Gabinete gabinete) {
+		this.gabinete = gabinete;
 	}
 	
 	public boolean isHashPassword() {
