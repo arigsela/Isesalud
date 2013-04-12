@@ -72,19 +72,28 @@ public class resultadoImagen extends BaseModel {
 	private TipoEstudioCita tipoestudiocita;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="personal", nullable = false)
-	private Personal personal;
+	@JoinColumn(name="personalrealizado", nullable = false)
+	private Personal personalrealizado;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="gabinete", nullable = false)
-	private Gabinete gabinete;
+	@JoinColumn(name="gabineterealizado", nullable = false)
+	private Gabinete gabineterealizado;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="personalinter", nullable = false)
+	private Personal personalinter;
+		
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="gabineteinter", nullable = false)
+	private Gabinete gabineteinter;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="TipoResultado", nullable = false)
 	private TipoResultado tiporesultado;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="MotivoInadecuada", nullable = false)
+
+	@JoinColumn(name="MotivoInadecuada")
 	private MotivoInadecuada motivoinadecuada;
 
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="resultadoimagen")
@@ -97,8 +106,9 @@ public class resultadoImagen extends BaseModel {
 	public resultadoImagen(Date dateinterpreted, Date dateNotified,
 			Date daterealized, String signs, Boolean adequate,
 			Paciente paciente, TipoEstudioCita tipoestudiocita,
-			Personal personal, Gabinete gabinete, TipoResultado tiporesultado,
-			MotivoInadecuada motivoinadecuada, List<Hallazgos> hallazgos) {
+			Personal personalrealizado,Personal personalinter, Gabinete gabineterealizado, 
+			Gabinete gabineteinter, TipoResultado tiporesultado, MotivoInadecuada motivoinadecuada, 
+			List<Hallazgos> hallazgos) {
 		this.id = new Long(0L);
 		this.dateinterpreted = dateinterpreted;
 		this.dateNotified = dateNotified;
@@ -107,8 +117,10 @@ public class resultadoImagen extends BaseModel {
 		this.adequate = adequate;
 		this.paciente = paciente;
 		this.tipoestudiocita = tipoestudiocita;
-		this.personal = personal;
-		this.gabinete = gabinete;
+		this.personalrealizado = personalrealizado;
+		this.gabineterealizado = gabineterealizado;
+		this.personalinter = personalinter;
+		this.gabineteinter = gabineteinter;
 		this.tiporesultado = tiporesultado;
 		this.motivoinadecuada = motivoinadecuada;
 		this.hallazgos = hallazgos;
@@ -153,14 +165,22 @@ public class resultadoImagen extends BaseModel {
 	public void setDaterealized(Date daterealized) {
 		this.daterealized = daterealized;
 	}
-	
-	public Gabinete getGabinete() {
-		return gabinete;
-	}
-	
-	public void setGabinete(Gabinete gabinete) {
-		this.gabinete = gabinete;
-	}
+public Gabinete getGabineteinter() {
+	return gabineteinter;
+}
+
+public void setGabineteinter(Gabinete gabineteinter) {
+	this.gabineteinter = gabineteinter;
+}
+
+public Gabinete getGabineterealizado() {
+	return gabineterealizado;
+}
+
+public void setGabineterealizado(Gabinete gabineterealizado) {
+	this.gabineterealizado = gabineterealizado;
+}
+
 	
 	public List<Hallazgos> getHallazgos() {
 		return hallazgos;
@@ -186,12 +206,20 @@ public class resultadoImagen extends BaseModel {
 		this.paciente = paciente;
 	}
 	
-	public Personal getPersonal() {
-		return personal;
+	public Personal getPersonalinter() {
+		return personalinter;
 	}
 	
-	public void setPersonal(Personal personal) {
-		this.personal = personal;
+	public void setPersonalinter(Personal personalinter) {
+		this.personalinter = personalinter;
+	}
+	
+	public Personal getPersonalrealizado() {
+		return personalrealizado;
+	}
+	
+	public void setPersonalrealizado(Personal personalrealizado) {
+		this.personalrealizado = personalrealizado;
 	}
 	
 	public String getSigns() {

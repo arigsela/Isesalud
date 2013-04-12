@@ -48,7 +48,6 @@ public class UnidadMedicaEjb extends BaseManagerEJB<Unidadmedica> {
 		query.select(root).where(builder.and(
 				builder.equal(root.get(Unidadmedica_.municipio), params.getMunicipio())),
 				builder.like(root.get(Unidadmedica_.name),"%" + params.getName() + "%"));
-		
 		return getList(query);
 	}
 	

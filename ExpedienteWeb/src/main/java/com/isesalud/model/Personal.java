@@ -52,6 +52,10 @@ public class Personal extends BaseModel {
 	@JoinColumn(name="puesto", nullable=false)
 	private Puesto puesto;
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="gabinete",nullable=false)
+	private Gabinete gabinete;
+	
 	public Personal() {
 		this.id = new Long(0L);
 	}
@@ -100,5 +104,13 @@ public class Personal extends BaseModel {
 	
 	public void setPuesto(Puesto puesto) {
 		this.puesto = puesto;
+	}
+	
+	public Gabinete getGabinete() {
+		return gabinete;
+	}
+	
+	public void setGabinete(Gabinete gabinete) {
+		this.gabinete = gabinete;
 	}
 }

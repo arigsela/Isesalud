@@ -51,6 +51,10 @@ public class TipoEstudioCita extends BaseModel{
 	@JoinColumn(name = "tipocita", nullable = false)
 	private Tipocita tipocita;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="modality", nullable=false)
+	private Modality modality;
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tipoestudiocita")
 	private List<Cita> citas = new ArrayList<Cita>();
 	
