@@ -9,16 +9,21 @@ insert into personal (id, lastname, maternallastname, name, puesto,gabinete) val
 insert into unidadmedica (id, name, description, municipio, code) values (1, 'Hospital General', 'Hospital General de Tijuana',1, 0);
 insert into unidadmedica (id, name, description,municipio, code) values (2, 'PACS 1', 'Unidad movil de Tijuana 1',2, 1);
 insert into paciente (id, lastName, maternalLastName, name, dateofBirth, phoneNumber,phoneNumberMovil, aceptamensajes,address, sex, seguroPopular, dateCreated, timeCreated, ageMenstruation, ageFirstChild, BreastFeedChild, yearsSinceSurgery, typeofsurgery, ageMenopause, ageMenopauseHormones, dateLastMG, observations, municipio, entidad, unidadmedica) values (1, 'Perez', 'Mendoza', 'Ari', '1980-02-16', '123456','6642865641','1', 'Calle del rosario #13190', 'M', '0', '2013-02-11', '12:00:00', 0, 0, 0, 0,'ninguna', 0, 0, '2012-01-01', 'None', 1, 1, 1);
-insert into modality (id,description,name) values (1,"MASTOGRAFIAS","MM")
 insert into department (id,description) values (1,'Radiologia');
 insert into department (id,description) values (2,'Oncologia');
-insert into study (id,name,notes,department,modality) value (1,'TAM. INVITACION ORGANIZADA','Tiene que llevar su comprobante',1,1);
-insert into study (id,name,notes,department,modality) value (2,'TAM. DERIVADA POR PERSONAL DE SALUD','Vengase bien preparada por favor',1,1);
-insert into study (id,name,notes,department,modality) value (3,'TAM. ESPONTANEA (DE LA MUJER)','Vengase bien preparada por favor',1,1);
-insert into study (id,name,notes,department,modality) value (4,'DIAG. SINTOMATOLOGIA CLINICA','Tiene que llevar su comprobante',1,1);
-insert into study (id,name,notes,department,modality) value (5,'DIAG. CONTROL PATOLOGIA BENIGNA','Vengase bien preparada por favor',1,1);
-insert into study (id,name,notes,department,modality) value (6,'DIAG. CONTROL PATOLOGIA MALIGNA','Vengase bien preparada por favor',1,1);
-insert into study (id,name,notes,department,modality) value (7,'oncologia tipo A','favor de tomar agua',2,1);
+insert into modality (id,description,name,department) values (1,"MASTOGRAFIAS","MM",1)
+insert into modality (id,description,name,department) values (2,"ULTRASONIDO", "US",1)
+insert into modality (id,description,name,department) values (3,"MODALIDAD ONCO 1","ONCO1",2)
+insert into modality (id,description,name,department) values (4,"MODALIDAD ONCO 2", "ONCO2",2)
+insert into study (id,name,notes,modality) value (1,'TAM. INVITACION ORGANIZADA','Tiene que llevar su comprobante',1);
+insert into study (id,name,notes,modality) value (2,'TAM. DERIVADA POR PERSONAL DE SALUD','Vengase bien preparada por favor',1);
+insert into study (id,name,notes,modality) value (3,'TAM. ESPONTANEA (DE LA MUJER)','Vengase bien preparada por favor',1);
+insert into study (id,name,notes,modality) value (4,'DIAG. SINTOMATOLOGIA CLINICA','Tiene que llevar su comprobante',1);
+insert into study (id,name,notes,modality) value (5,'DIAG. CONTROL PATOLOGIA BENIGNA','Vengase bien preparada por favor',1);
+insert into study (id,name,notes,modality) value (6,'DIAG. CONTROL PATOLOGIA MALIGNA','Vengase bien preparada por favor',1);
+insert into study (id,name,notes,modality) value (7,'ULTRASONIDO RADIO','favor de tomar agua',2);
+insert into study (id,name,notes,modality) value (9,'oncologia tipo A','favor de tomar agua',3);
+insert into study (id,name,notes,modality) value (8,'oncologia tipo B','favor de tomar agua',4);
 insert into statuscita (id,description) values (1,'Pendiente');
 insert into statuscita (id,description) values (2,'Atendida');
 insert into cita (id,date,time,statusCita,study,paciente,enviadosms) values (1,'2013-03-22','12:10:00',1,1,1,0);

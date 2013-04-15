@@ -36,12 +36,12 @@ public class StudyEjb extends BaseManagerEJB<Study> {
 		return model;
 	}
 	
-	public List<Study> getStudiesbyType(Study params){
+	public List<Study> getStudiesbyModality(Study params){
 		List<Study> model = null;
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Study> query = builder.createQuery(getModelClass());
 		Root<Study> root = query.from(getModelClass());
-		query.select(root).where(builder.equal(root.get(Study_.department), params.getDepartment()));
+		query.select(root).where(builder.equal(root.get(Study_.modality), params.getModality()));
 		model = getList(query);
 		return model;
 	}

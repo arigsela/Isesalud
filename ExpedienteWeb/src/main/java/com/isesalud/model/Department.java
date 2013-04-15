@@ -36,7 +36,7 @@ public class Department extends BaseModel {
 	private String description;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
-	private List<Study> studies = new ArrayList<Study>(0);
+	private List<Modality> modalities = new ArrayList<Modality>(0);
 	
 	
 	public Department() {
@@ -63,13 +63,13 @@ public class Department extends BaseModel {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public List<Study> getStudies() {
-		return studies;
+
+	public List<Modality> getModalities() {
+		return modalities;
 	}
 	
-	public void setStudies(List<Study> studies) {
-		this.studies = studies;
+	public void setModalities(List<Modality> modalities) {
+		this.modalities = modalities;
 	}
 	
 }

@@ -48,10 +48,6 @@ public class Study extends BaseModel {
 	private String notes;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "department", nullable = false)
-	private Department department;
-
-	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "modality", nullable = false)
 	private Modality modality;
 
@@ -102,12 +98,13 @@ public class Study extends BaseModel {
 		this.citas = citas;
 	}
 
-	public Department getDepartment() {
-		return department;
+	public Modality getModality() {
+		return modality;
+	}
+	
+	public void setModality(Modality modality) {
+		this.modality = modality;
 	}
 
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
 
 }

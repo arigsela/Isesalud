@@ -13,7 +13,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 
 import com.isesalud.ejb.query.StudyEjb;
-import com.isesalud.model.Department;
+import com.isesalud.model.Modality;
 import com.isesalud.model.Study;
 import com.isesalud.support.components.BaseQueryController;
 import com.isesalud.support.exceptions.BaseException;
@@ -38,15 +38,15 @@ public class StudyQuery extends BaseQueryController<Study> {
 
 	@Override
 	protected List<Study> getQueryList() {
-		return manager.getStudiesbyType(study);
+		return manager.getStudiesbyModality(study);
 	}
 	
 	@Override
 	protected void initComponents() throws BaseException {
 		setStudy(new Study());
-		Department department = new Department();
-		department.setId(1L);
-		getStudy().setDepartment(department);
+		Modality modality = new Modality();
+		modality.setId(1L);
+		getStudy().setModality(modality);
 		super.initComponents();
 	}
 	
@@ -69,8 +69,8 @@ public class StudyQuery extends BaseQueryController<Study> {
 	}
 	
 	@SuppressWarnings("cdi-observer")
-	public void updateSelectMenu(@Observes(notifyObserver=Reception.IF_EXISTS) Department dept){
-		this.study.setDepartment(dept);
+	public void updateSelectMenu(@Observes(notifyObserver=Reception.IF_EXISTS) Modality modality){
+		this.study.setModality(modality);
 		loadData();
 	}
 }

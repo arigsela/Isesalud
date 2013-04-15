@@ -37,17 +37,17 @@
 						
 						<h:panelGrid columns="6" cellspacing="10">
 							<p:outputLabel id="lblStudyType" value="Tipo" for="cbxType"/>
-							<p:selectOneMenu id="cbxType" value="#{tipoCitaQuery.selectedTipoCita}"
-								converter="#{tipoCitaConverter}"
-								valueChangeListener="#{tipoCitaQuery.onTipocitaValueChanged}">
-								<f:selectItems value="#{tipoCitaQuery.queryListDM}" var="tipo"
-									itemLabel="#{tipo.description}" itemValue="#{tipo}"></f:selectItems>
+							<p:selectOneMenu id="cbxType" value="#{modalityQuery.selectedmodality}"
+								converter="#{modalityConverter}"
+								valueChangeListener="#{modalityQuery.onModalityValueChanged}">
+								<f:selectItems value="#{modalityQuery.queryListDM}" var="modality"
+									itemLabel="#{modality.name}" itemValue="#{modality}"></f:selectItems>
 								<p:ajax event="change" update="cbxStudy"/>
 							</p:selectOneMenu>
 							<p:outputLabel id="lblStudy" value="Estudio" for="cbxStudy"/>
 							<p:selectOneMenu id="cbxStudy" value="#{citaPersistence.selectedStudy}"
-								converter="#{tipoEstudioCitaConverter}">
-								<f:selectItems value="#{tipoEstudioCitaQuery.queryListDM}" var="_study"
+								converter="#{studyConverter}">
+								<f:selectItems value="#{studyQuery.queryListDM}" var="_study"
 									itemLabel="#{_study.name}" itemValue="#{_study}"></f:selectItems>
 							</p:selectOneMenu>
 						</h:panelGrid>
@@ -69,11 +69,11 @@
 					<h:panelGroup layout="block">
 						<p:outputPanel layout="block" autoUpdate="true">
 							<p:panel header="EStudio Seleccionado">
-								<h:outputText value="* #{citaPersistence.model.tipoestudiocita.name}" />
+								<h:outputText value="* #{citaPersistence.model.study.name}" />
 								<br />
 								<p:separator />
 								<h3>Notas</h3>
-								<h:outputText value="#{citaPersistence.model.tipoestudiocita.notes}" />
+								<h:outputText value="#{citaPersistence.model.study.notes}" />
 							</p:panel>
 						</p:outputPanel>
 					</h:panelGroup>
