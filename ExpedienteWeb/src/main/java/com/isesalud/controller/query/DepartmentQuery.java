@@ -12,8 +12,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import com.isesalud.ejb.query.TipocitaEjb;
-import com.isesalud.model.Tipocita;
+import com.isesalud.ejb.query.DepartmentEjb;
+import com.isesalud.model.Department;
 import com.isesalud.support.components.BaseQueryController;
 
 /**
@@ -23,7 +23,7 @@ import com.isesalud.support.components.BaseQueryController;
 
 @Named
 @ViewScoped
-public class TipoCitaQuery extends BaseQueryController<Tipocita>{
+public class DepartmentQuery extends BaseQueryController<Department>{
 
 	/**
 	 * 
@@ -31,20 +31,20 @@ public class TipoCitaQuery extends BaseQueryController<Tipocita>{
 	private static final long serialVersionUID = -898892696853006426L;
 	
 	@EJB
-	private TipocitaEjb ejb;
+	private DepartmentEjb ejb;
 	
-	private Tipocita selectedTipoCita;
-	
-	public Tipocita getSelectedTipoCita() {
-		return selectedTipoCita;
+	private Department selectedDepartment;
+
+	public Department getSelectedDepartment() {
+		return selectedDepartment;
 	}
 	
-	public void setSelectedTipoCita(Tipocita selectedTipoCita) {
-		this.selectedTipoCita = selectedTipoCita;
+	public void setSelectedDepartment(Department selectedDepartment) {
+		this.selectedDepartment = selectedDepartment;
 	}
 	
 	@Inject @Any
-	private Event<Tipocita> tipoCitaChanged;
+	private Event<Department> departmentChanged;
 
 	@PostConstruct
 	public void loadData(){
@@ -52,8 +52,8 @@ public class TipoCitaQuery extends BaseQueryController<Tipocita>{
 	}
 
 	@Override
-	protected List<Tipocita> getQueryList() {
-		return ejb.getAllTipoCita();
+	protected List<Department> getQueryList() {
+		return ejb.getAllDepartments();
 	}
 
 	@Override
@@ -61,9 +61,9 @@ public class TipoCitaQuery extends BaseQueryController<Tipocita>{
 		return 0;
 	}
 	
-	public void onTipocitaValueChanged(ValueChangeEvent e){
-		if(e.getNewValue() != null && e.getNewValue().getClass() == Tipocita.class){
-			tipoCitaChanged.fire((Tipocita)e.getNewValue());
+	public void onDepartmentValueChanged(ValueChangeEvent e){
+		if(e.getNewValue() != null && e.getNewValue().getClass() == Department.class){
+			departmentChanged.fire((Department)e.getNewValue());
 		}
 	}
 }

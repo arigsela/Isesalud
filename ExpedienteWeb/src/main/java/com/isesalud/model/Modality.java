@@ -47,7 +47,7 @@ private String name;
 private String description;
 
 @OneToMany(fetch = FetchType.LAZY, mappedBy = "modality")
-private List<TipoEstudioCita> tipoEstudioCitas = new ArrayList<TipoEstudioCita>(0);
+private List<Study> studies = new ArrayList<Study>(0);
 
 public Modality() {
 	this.id = new Long(0L);

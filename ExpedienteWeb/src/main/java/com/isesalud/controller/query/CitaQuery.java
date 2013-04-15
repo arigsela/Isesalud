@@ -143,7 +143,7 @@ public class CitaQuery extends  BaseQueryController<Cita>{
 						String title = c.getPaciente().getName() + " " +
 								c.getPaciente().getLastName() + " - Edad: " +
 								c.getPaciente().getAge() + " - Tipo de estudio: " +
-								c.getTipoestudiocita().getName();
+								c.getStudy().getName();
 								
 						Date date = c.getDate();
 						Date time = c.getTime();

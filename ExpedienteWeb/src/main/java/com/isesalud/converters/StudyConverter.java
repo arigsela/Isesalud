@@ -10,23 +10,23 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
 
 import com.isesalud.converters.AbstractConverter;
-import com.isesalud.ejb.query.TipoEstudioCitaEjb;
-import com.isesalud.model.TipoEstudioCita;
+import com.isesalud.ejb.query.StudyEjb;
+import com.isesalud.model.Study;
 
 /**
  * @author Jesus Espinoza Hernandez
  *
  */
 @Named
-@FacesConverter("TipoEstudioCitaConverter")
+@FacesConverter("StudyConverter")
 @RequestScoped
-public class TipoEstudioCitaConverter extends AbstractConverter<TipoEstudioCita, TipoEstudioCitaEjb> {
+public class StudyConverter extends AbstractConverter<Study, StudyEjb> {
 
 	@EJB
-	private TipoEstudioCitaEjb manager;
+	private StudyEjb manager;
 	
 	@Override
-	protected TipoEstudioCitaEjb getCManager() {
+	protected StudyEjb getCManager() {
 		return this.manager;
 	}
 
