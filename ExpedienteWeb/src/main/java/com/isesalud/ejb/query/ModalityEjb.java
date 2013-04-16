@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import com.isesalud.model.Modality;
+import com.isesalud.model.Modality_;
 import com.isesalud.support.components.BaseManagerEJB;
 
 /**
@@ -33,6 +34,17 @@ public class ModalityEjb extends BaseManagerEJB<Modality>{
 		return model;
 	}
 
+	public List<Modality> getModalitiesByDepartment(Modality params) {
+		List<Modality> model = null;
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Modality> query = builder.createQuery(getModelClass());
+		Root<Modality> root = query.from(getModelClass());
+		query.select(root).where(builder.equal(root.get(Modality_.department), params.getDepartment()));
+		model = getList(query);
+		return model;
+		
+	}
+	
 	public Class<Modality> getModelClass(){
 		return Modality.class;
 	}

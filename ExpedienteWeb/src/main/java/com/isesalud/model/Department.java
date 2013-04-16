@@ -71,5 +71,7 @@ public class Department extends BaseModel {
 	public void setModalities(List<Modality> modalities) {
 		this.modalities = modalities;
 	}
+
+	
 	
 }

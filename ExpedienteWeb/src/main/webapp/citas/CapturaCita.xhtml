@@ -36,8 +36,17 @@
 						<p:separator/>
 						
 						<h:panelGrid columns="6" cellspacing="10">
-							<p:outputLabel id="lblStudyType" value="Tipo" for="cbxType"/>
-							<p:selectOneMenu id="cbxType" value="#{modalityQuery.selectedmodality}"
+							<p:outputLabel id="lblStudyDept" value="Departamento: " for="cbxDept"/>
+							<p:selectOneMenu id="cbxDept" value="#{departmentQuery.selectedDepartment}"
+								converter="#{departmentConverter}"
+								valueChangeListener="#{departmentQuery.onDepartmentValueChanged}">
+								<f:selectItems value="#{departmentQuery.queryListDM}" var="department"
+									itemLabel="#{department.description}" itemValue="#{department}"></f:selectItems>
+								<p:ajax event="change" update="cbxModality cbxStudy" process="cbxDept cbxModality"/>
+							</p:selectOneMenu>
+							
+							<p:outputLabel id="lblStudyModality" value="Modalidad: " for="cbxModality"/>
+							<p:selectOneMenu id="cbxModality" value="#{modalityQuery.selectedmodality}"
 								converter="#{modalityConverter}"
 								valueChangeListener="#{modalityQuery.onModalityValueChanged}">
 								<f:selectItems value="#{modalityQuery.queryListDM}" var="modality"
