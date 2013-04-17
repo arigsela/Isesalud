@@ -93,7 +93,8 @@ public class ModalityQuery extends BaseQueryController<Modality>{
 	public void updateSelectMenu(@Observes(notifyObserver=Reception.IF_EXISTS) Department department){
 		this.modality.setDepartment(department);
 		loadData();
-		
+		setModality(getQueryListDM().get(0));
+		modalityChanged.fire(getModality());
 	}
 
 	

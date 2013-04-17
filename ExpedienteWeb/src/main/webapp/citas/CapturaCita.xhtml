@@ -42,7 +42,7 @@
 								valueChangeListener="#{departmentQuery.onDepartmentValueChanged}">
 								<f:selectItems value="#{departmentQuery.queryListDM}" var="department"
 									itemLabel="#{department.description}" itemValue="#{department}"></f:selectItems>
-								<p:ajax event="change" update="cbxModality"/>
+								<p:ajax event="change" update="cbxModality cbxStudy"/>
 								
 							</p:selectOneMenu>
 							
