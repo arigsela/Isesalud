@@ -38,20 +38,23 @@
 						<h:panelGrid columns="6" cellspacing="10">
 							<p:outputLabel id="lblStudyDept" value="Departamento: " for="cbxDept"/>
 							<p:selectOneMenu id="cbxDept" value="#{departmentQuery.selectedDepartment}"
-								converter="#{departmentConverter}"
+								converter="#{departmentConverter}" 
 								valueChangeListener="#{departmentQuery.onDepartmentValueChanged}">
 								<f:selectItems value="#{departmentQuery.queryListDM}" var="department"
 									itemLabel="#{department.description}" itemValue="#{department}"></f:selectItems>
-								<p:ajax event="change" update="cbxModality cbxStudy" process="cbxDept cbxModality"/>
+								<p:ajax event="change" update="cbxModality"/>
+								
 							</p:selectOneMenu>
 							
 							<p:outputLabel id="lblStudyModality" value="Modalidad: " for="cbxModality"/>
 							<p:selectOneMenu id="cbxModality" value="#{modalityQuery.selectedmodality}"
-								converter="#{modalityConverter}"
+								converter="#{modalityConverter}" 
 								valueChangeListener="#{modalityQuery.onModalityValueChanged}">
+								
 								<f:selectItems value="#{modalityQuery.queryListDM}" var="modality"
 									itemLabel="#{modality.name}" itemValue="#{modality}"></f:selectItems>
 								<p:ajax event="change" update="cbxStudy"/>
+								
 							</p:selectOneMenu>
 							<p:outputLabel id="lblStudy" value="Estudio" for="cbxStudy"/>
 							<p:selectOneMenu id="cbxStudy" value="#{citaPersistence.selectedStudy}"
