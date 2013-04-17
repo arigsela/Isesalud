@@ -8,8 +8,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
 
-import com.isesalud.ejb.query.TipocitaEjb;
-import com.isesalud.model.Tipocita;
+import com.isesalud.ejb.query.DepartmentEjb;
+import com.isesalud.model.Department;
 
 /**
  * @author Ing. Ari G. Sela M.
@@ -19,13 +19,13 @@ import com.isesalud.model.Tipocita;
 @Named
 @FacesConverter("TipoCitaConverter")
 @RequestScoped
-public class TipoCitaConverter extends AbstractConverter<Tipocita, TipocitaEjb>{
+public class DepartmentConverter extends AbstractConverter<Department, DepartmentEjb>{
 
 	@EJB
-	private TipocitaEjb manager;
+	private DepartmentEjb manager;
 	
 	@Override
-	protected TipocitaEjb getCManager() {
+	protected DepartmentEjb getCManager() {
 		return this.manager;
 	}
 

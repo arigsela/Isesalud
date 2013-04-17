@@ -33,7 +33,7 @@ public class Cita extends BaseModel{
 	 */
 	private static final long serialVersionUID = -7318268764455653312L;
 	private Long id;
-	private TipoEstudioCita tipoestudiocita;
+	private Study study;
 	private Statuscita statuscita;
 	private Date date;
 	private Date time;
@@ -46,10 +46,10 @@ public class Cita extends BaseModel{
 		this.id = new Long(0L);
 	}
 
-	public Cita(TipoEstudioCita tipoestudiocita, Statuscita statuscita, Date date, Date time,
+	public Cita(Study study, Statuscita statuscita, Date date, Date time,
 			Personal personal, Paciente paciente, Boolean enviadosms) {
 		this.id = new Long(0L);
-		this.tipoestudiocita = tipoestudiocita;
+		this.study = study;
 		this.statuscita = statuscita;
 		this.date = date;
 		this.time = time;
@@ -69,14 +69,14 @@ public class Cita extends BaseModel{
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "tipoEstudioCita", nullable = false)
-	public TipoEstudioCita getTipoestudiocita() {
-		return this.tipoestudiocita;
+	@JoinColumn(name = "study", nullable = false)
+	public Study getStudy() {
+		return this.study;
 	}
 
 
-	public void setTipoestudiocita(TipoEstudioCita tipoestudiocita) {
-		this.tipoestudiocita = tipoestudiocita;
+	public void setStudy(Study study) {
+		this.study = study;
 	}
 	
 

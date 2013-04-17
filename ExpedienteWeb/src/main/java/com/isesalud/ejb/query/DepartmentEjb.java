@@ -10,7 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import com.isesalud.model.Tipocita;
+import com.isesalud.model.Department;
 import com.isesalud.support.components.BaseManagerEJB;
 
 /**
@@ -19,19 +19,19 @@ import com.isesalud.support.components.BaseManagerEJB;
  */
 @Stateless
 @LocalBean
-public class TipocitaEjb extends BaseManagerEJB<Tipocita>{
+public class DepartmentEjb extends BaseManagerEJB<Department>{
 
-	public List<Tipocita> getAllTipoCita(){
+	public List<Department> getAllDepartments(){
 		CriteriaBuilder builder = em.getCriteriaBuilder();
-		CriteriaQuery<Tipocita> query = builder.createQuery(getModelClass());
-		Root<Tipocita> root = query.from(getModelClass());
+		CriteriaQuery<Department> query = builder.createQuery(getModelClass());
+		Root<Department> root = query.from(getModelClass());
 		query.select(root);
 		return getList(query);
 	}
 	
 	@Override
-	public Class<Tipocita> getModelClass() {
-		return Tipocita.class;
+	public Class<Department> getModelClass() {
+		return Department.class;
 	}
 	
 

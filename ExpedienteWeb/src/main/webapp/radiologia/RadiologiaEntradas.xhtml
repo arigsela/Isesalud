@@ -31,10 +31,10 @@
 
 			</p:panel>
 			<p:panel header="Ingreso de Resultado">
-				<h:panelGrid columns="8" cellspacing="0" cellpadding="5">
-					<p:outputLabel value="Gabinete: " for="gabinete" />
+				<h:panelGrid columns="4" cellspacing="0" cellpadding="5">
+					<p:outputLabel value="Gabinete donde se realizao el estudio: " for="gabinete" />
 					<p:selectOneMenu id="gabinete"
-						value="#{radiologyPersistence.model.gabinete}"
+						value="#{radiologyPersistence.model.gabineterealizado}"
 						converter="#{gabineteConverter}">
 						<f:selectItems value="#{gabineteQuery.queryListDM}"
 							var="_gabinete" itemLabel="#{_gabinete.name}"
@@ -89,9 +89,9 @@
 							var="_motivoInadecuada" itemLabel="#{_motivoInadecuada.name}"
 							itemValue="#{_motivoInadecuada}"></f:selectItems>
 					</p:selectOneMenu>
-					<p:outputLabel value="Medico que interpreto estudio: " for="medico" />
-					<p:selectOneMenu id="medico"
-						value="#{radiologyPersistence.model.personal}"
+					<p:outputLabel value="Tecnico Radiologo: " for="tecnico" />
+					<p:selectOneMenu id="tecnico"
+						value="#{radiologyPersistence.model.personalrealizado}"
 						converter="#{personalConverter}">
 						<f:selectItems value="#{personalQuery.queryListDM}"
 							var="_personal" itemLabel="#{_personal.name}"

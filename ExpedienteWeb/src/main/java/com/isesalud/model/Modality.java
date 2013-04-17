@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -46,9 +48,12 @@ public class Modality extends BaseModel {
 	@Length(max = 300)
 	private String description;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "department", nullable = false)
+	private Department department;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "modality")
-	private List<TipoEstudioCita> tipoEstudioCitas = new ArrayList<TipoEstudioCita>(
-			0);
+	private List<Study> studies = new ArrayList<Study>(0);
 
 	public Modality() {
 		this.id = new Long(0L);
@@ -65,6 +70,14 @@ public class Modality extends BaseModel {
 		this.description = description;
 	}
 
+	public Department getDepartment() {
+		return department;
+	}
+	
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+	
 	@Override
 	public Long getId() {
 		return id;
@@ -73,6 +86,30 @@ public class Modality extends BaseModel {
 	@Override
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public List<Study> getStudies() {
+		return studies;
+	}
+	
+	public void setStudies(List<Study> studies) {
+		this.studies = studies;
 	}
 
 }

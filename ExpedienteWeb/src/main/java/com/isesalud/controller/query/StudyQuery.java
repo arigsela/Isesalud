@@ -11,9 +11,10 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.event.Reception;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
-import com.isesalud.ejb.query.TipoEstudioCitaEjb;
-import com.isesalud.model.TipoEstudioCita;
-import com.isesalud.model.Tipocita;
+
+import com.isesalud.ejb.query.StudyEjb;
+import com.isesalud.model.Modality;
+import com.isesalud.model.Study;
 import com.isesalud.support.components.BaseQueryController;
 import com.isesalud.support.exceptions.BaseException;
 
@@ -23,7 +24,7 @@ import com.isesalud.support.exceptions.BaseException;
  */
 @Named
 @ViewScoped
-public class TipoEstudioCitaQuery extends BaseQueryController<TipoEstudioCita> {
+public class StudyQuery extends BaseQueryController<Study> {
 
 	/**
 	 * 
@@ -31,21 +32,21 @@ public class TipoEstudioCitaQuery extends BaseQueryController<TipoEstudioCita> {
 	private static final long serialVersionUID = -8287350645840967475L;
 	
 	@EJB
-	private TipoEstudioCitaEjb manager;
+	private StudyEjb manager;
 	
-	private TipoEstudioCita tipoEstudioCita;
+	private Study study;
 
 	@Override
-	protected List<TipoEstudioCita> getQueryList() {
-		return manager.getTipoEstudioCitaByTipo(tipoEstudioCita);
+	protected List<Study> getQueryList() {
+		return manager.getStudiesbyModality(study);
 	}
 	
 	@Override
 	protected void initComponents() throws BaseException {
-		setTipoEstudioCita(new TipoEstudioCita());
-		Tipocita tipo = new Tipocita();
-		tipo.setId(1L);
-		getTipoEstudioCita().setTipocita(tipo);
+		setStudy(new Study());
+		Modality modality = new Modality();
+		modality.setId(1L);
+		getStudy().setModality(modality);
 		super.initComponents();
 	}
 	
@@ -59,17 +60,17 @@ public class TipoEstudioCitaQuery extends BaseQueryController<TipoEstudioCita> {
 		return 0;
 	}
 
-	public TipoEstudioCita getTipoEstudioCita() {
-		return tipoEstudioCita;
+	public Study getStudy() {
+		return study;
 	}
 	
-	public void setTipoEstudioCita(TipoEstudioCita tipoEstudioCita) {
-		this.tipoEstudioCita = tipoEstudioCita;
+	public void setStudy(Study study) {
+		this.study = study;
 	}
 	
 	@SuppressWarnings("cdi-observer")
-	public void updateSelectMenu(@Observes(notifyObserver=Reception.IF_EXISTS) Tipocita tc){
-		this.tipoEstudioCita.setTipocita(tc);
+	public void updateSelectMenu(@Observes(notifyObserver=Reception.IF_EXISTS) Modality modality){
+		this.study.setModality(modality);
 		loadData();
 	}
 }
