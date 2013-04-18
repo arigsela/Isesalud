@@ -44,12 +44,11 @@ public class ResultadoImagen extends BaseModel {
 	private Long id;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dateInterpreted", nullable = false)
-	@NotNull
+	@Column(name = "dateInterpreted")
 	private Date dateinterpreted;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dateNotified", nullable = true)
+	@Column(name = "dateNotified")
 	private Date dateNotified;
 
 	@Temporal(TemporalType.DATE)

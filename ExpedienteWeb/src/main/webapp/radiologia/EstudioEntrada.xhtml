@@ -7,7 +7,7 @@
 
 <ui:composition template="/templates/common.xhtml">
 	<ui:define name="pageTitle">Radiologia</ui:define>
-	<ui:define name="pageHeader">Ingreso de Resultados</ui:define>
+	<ui:define name="pageHeader">Ingreso de Estudio</ui:define>
 	<ui:define name="body">
 		<h:form id="frmCreateRadiologia" prependId="false">
 			<p:panel header="Datos del Paciente">
@@ -30,7 +30,7 @@
 				<p:separator />
 
 			</p:panel>
-			<p:panel header="Ingreso de Resultado">
+			<p:panel header="Ingreso de Estudio">
 				<h:panelGrid columns="4" cellspacing="0" cellpadding="5">
 					<p:outputLabel value="Gabinete donde se realizao el estudio: " for="gabinete" />
 					<p:selectOneMenu id="gabinete"
@@ -67,35 +67,21 @@
 								<f:selectItems value="#{studyQuery.queryListDM}" var="_study"
 									itemLabel="#{_study.name}" itemValue="#{_study}"></f:selectItems>
 							</p:selectOneMenu>
-					<p:outputLabel value="Tipo de resultado: " for="tiporesultado" />
-					<p:selectOneMenu id="tiporesultado"  
-						value="#{radiologyPersistence.model.tiporesultado}"
-						converter="#{tipoResultadoConverter}">
-						<f:selectItems value="#{tipoResultadoQuery.queryListDM}"
-							var="_tiporesultado" itemLabel="#{_tiporesultado.name}"
-							itemValue="#{_tiporesultado}"></f:selectItems>
-					</p:selectOneMenu>
+				
 					<p:outputLabel value="Fecha de Realizacion: "
 						for="popupButtonDateReal" />
-					<p:calendar value="#{radiologyPersistence.model.daterealized}" locale="es"
+					<p:calendar value="#{radiologyPersistence.model.daterealized}"
 						id="popupButtonDateReal" required="true" navigator="true" size="24">
 						<f:convertDateTime type="date" dateStyle="short" />
 					</p:calendar>
-					<p:outputLabel value="Fecha de Interpretacion: "
-						for="popupButtonDateInter" />
-					<p:calendar value="#{radiologyPersistence.model.dateinterpreted}" locale="es"
-						id="popupButtonDateInter" required="true" navigator="true" size="24">
-						<f:convertDateTime type="date" dateStyle="short" />
-					</p:calendar>
+				
 					<p:outputLabel value="Fecha de Notificacion:  "
 						for="popupButtonDateNoti" />
-					<p:calendar value="#{radiologyPersistence.model.dateNotified}" locale="es"
+					<p:calendar value="#{radiologyPersistence.model.dateNotified}" 
 						id="popupButtonDateNoti" required="true" navigator="true" size="10">
 						<f:convertDateTime type="date" dateStyle="short" />
 					</p:calendar>
-					<h:outputText value="Signos:"/>
-					<p:inputTextarea id="signos" 
-						value="#{radiologyPersistence.model.signs}" />
+				
 					<h:outputText value="Adecuado:"/>  
         			<p:selectBooleanCheckbox id="chkadecuada" value="#{radiologyPersistence.model.adequate}" 
         			immediate="true" />
@@ -118,45 +104,12 @@
 					</p:selectOneMenu>
 				</h:panelGrid>
 				<br></br>
-				<h:panelGroup>
-					<p:panelGrid columns="4">
-						<p:outputLabel id="lblHallazgo" for="hallazgo" value="Hallazgos"/>
-								<p:selectOneMenu id="hallazgo" value="#{radiologyPersistence.hallazgos.name}">
-									<f:selectItem itemLabel="Hallazgo1" itemValue = "Hallazgo 1"/>
-									<f:selectItem itemLabel="Hallazgo2" itemValue = "Hallazgo 2"/>
-									<f:selectItem itemLabel="Hallazgo3" itemValue = "Hallazgo 3"/>
-									<f:selectItem itemLabel="Hallazgo4" itemValue = "Hallazgo 4"/>
-								</p:selectOneMenu>
-								
-								<p:selectOneMenu id="slcHallazgo" value="#{radiologyPersistence.hallazgos.side}">
-									<f:selectItem itemLabel="IZQ" itemValue="IZQ"/>
-									<f:selectItem itemLabel="DER" itemValue="DER"/>
-								</p:selectOneMenu>
-								<p:commandButton id="btnHallazgo" value="+" actionListener="#{radiologyPersistence.addHallazgos}"
-									update="hallazgo dtaHallazgos" ajax="true" process="@this,hallazgo,slcHallazgo"/>
-					</p:panelGrid>
-					<h:panelGrid columns="4">
-						<p:dataList id="dtaHallazgos" value="#{radiologyPersistence.hallazgosList}"
-									var="_hall" type="definition" itemType="disc">
-									<f:facet name="header">Hallazgos</f:facet>
-									<p:commandButton id="btnHallazgoName" title="Borrar" icon="ui-icon-close"
-										actionListener="#{radiologyPersistence.eraseHallazgo}"
-										ajax="true" process="@this" update="@parent">
-										<f:attribute name="selectHallazgo" value="#{_hall}"/>
-									</p:commandButton>
-									<h:outputText value="* #{_hall.name}" />
-									<f:facet name="description">
-										<h:outputText value="Lado - #{_hall.side}" />
-									</f:facet>
-									<br />
-								</p:dataList>
-					</h:panelGrid>
-				</h:panelGroup>
+
 			</p:panel>
 		<p:commandButton id="btnSave" value="Salvar" actionListener="#{radiologyPersistence.save}"
 					ajax="true" action="/pacientes/busqueda?faces-redirect=true"/>
 				<p:commandButton dir="btnCancel" value="Cancelar" actionListener="#{radiologyPersistence.cancel}"
-					ajax="false" action="/radiologia/RadiologiaEntradas?faces-redirect=true" immediate="true"/>
+					ajax="false" action="/radiologia/EstudioEntrada?faces-redirect=true" immediate="true"/>
 		</h:form>
 	</ui:define>
 </ui:composition>
