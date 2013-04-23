@@ -88,7 +88,7 @@ public class RadiologyPersistence extends BaseManagedCrudController<ResultadoIma
 			conversation.begin();
 		getModel().setPaciente(this.patientSelection.getPaciente());
 		getModel().setAdequate(true);
-		setOutcome("/radiologia/RadiologiaEntradas?faces-redirect=true");
+		setOutcome("/radiologia/EstudioEntrada?faces-redirect=true");
 		super.doAfterAdd();
 	}
 	
