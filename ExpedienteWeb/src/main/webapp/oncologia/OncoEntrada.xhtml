@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/templates/common.xhtml">
+			<ui:define name="pageTitle">Oncologia</ui:define>
+			<ui:define name="pageHeader">Captura de resultados</ui:define>
+			<ui:define name="body">
+				<h:form id="frmOncoRes" prependId="false">
+					<p:panel header="Datos del paciente">
+						<h:panelGrid columns="8" cellspacing="10">
+							<p:outputLabel id="lblName" value="Nombre:" for="outName" />
+							<h:outputText id="outName"
+								value="#{oncologiaPersistence.model.paciente.name}" />
+							<p:outputLabel id="lblLast" value="Apellido Paterno:" for="outLast" />
+							<h:outputText id="outLast"
+								value="#{oncologiaPersistence.model.paciente.lastName}" />
+							<p:outputLabel id="lblMother" value="Apellido Materno:"
+								for="outMother" />
+							<h:outputText id="outMother"
+								value="#{oncologiaPersistence.model.paciente.maternalLastName}" />
+							<p:outputLabel id="lblAge" value="Edad:" for="outage" />
+							<h:outputText id="outage"
+								value="#{oncologiaPersistence.model.paciente.age}" />
+						</h:panelGrid>
+					</p:panel>
+					
+					<p:spacer height="30"/>
+					
+					<h:panelGrid columns="4">
+						<p:outputLabel for="cmbMotRev" value="Motivo de Referencia"/>
+						<p:selectOneMenu id="cmbMotRev" value="#{oncologiaPersistence.model.motivoreferencia}"
+							converter="#{motivoReferenciaConverter}">
+							<f:selectItems value="#{motivoReferenciaQuery.queryListDM}"
+								var="_motivos"
+								itemLabel="#{_motivos.name}"
+								itemValue="#{_motivos}"></f:selectItems>
+						</p:selectOneMenu>
+						<p:outputLabel for="calFechaToma" value="Fecha Toma de Muestra"/>
+						<p:calendar id="calFechaToma" value="#{oncologiaPersistence.model.dateSampleTaken}"
+							locale="es" pattern="MM/dd/yyyy">
+							<f:convertDateTime pattern="MM/dd/yyyy" />
+						</p:calendar>
+					</h:panelGrid>
+					
+					<p:spacer height="30"/>
+					
+					<h:panelGrid columns="2" style="width:100%" rowClasses="text-center">
+						<p:outputLabel value="Antecedentes Heredo Familiares"/>
+						<p:outputLabel value="Antecedentes Personales no Patologicos"/>
+						<p:inputTextarea value="#{oncologiaPersistence.model.antHeredoFam}"
+							autoResize="true" cols="50"/>
+						<p:inputTextarea value="#{oncologiaPersistence.model.antPerNoPat}"
+							autoResize="true" cols="50"/>
+						
+						<p:outputLabel value="Antecedentes Personales Patologicos"/>
+						<p:outputLabel value="Padecimiento Actual"/>
+						<p:inputTextarea value="#{oncologiaPersistence.model.antPerPat}"
+							autoResize="true" cols="50"/>
+						<p:inputTextarea value="#{oncologiaPersistence.model.padActual}"
+							autoResize="true" cols="50"/>
+							
+						<p:outputLabel value="Exploracion Fisica"/>
+						<p:outputLabel value="Impresion Diagnostica"/>
+						<p:inputTextarea value="#{oncologiaPersistence.model.expFisica}"
+							autoResize="true" cols="50"/>
+						<p:inputTextarea value="#{oncologiaPersistence.model.impDiag}"
+							autoResize="true" cols="50"/>
+							
+						<p:outputLabel value="Plan y manejo de tratamiento primario y secundario"/>
+						<p:outputLabel value="Tipo de tratamiento"/>
+						<p:inputTextarea value="#{oncologiaPersistence.model.planTratamiento}"
+							autoResize="true" cols="50"/>
+						<p:inputTextarea value="#{oncologiaPersistence.model.tipoTratamiento}"
+							autoResize="true" cols="50"/>
+					</h:panelGrid>
+					
+					<br />
+					
+					<p:commandButton id="btnSave" value="Salvar" actionListener="#{oncologiaPersistence.save}"
+						ajax="false" action="#{oncologiaPersistence.navigate}"/>
+					<p:commandButton id="btnCancel" value="Cancelar" actionListener="#{oncologiaPersistence.cancel}"
+						ajax="false" action="#{oncologiaPersistence.navigate}"/>
+				</h:form>
+			</ui:define>
+	</ui:composition>
+
+</html>

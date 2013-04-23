@@ -43,28 +43,28 @@ public class ResultadoOncologia extends BaseModel {
 	@Column(name = "dateSampleTaken")
 	private Date dateSampleTaken;
 	
-	@Column(name = "AntHeredoFam", nullable = true)
+	@Column(name = "AntHeredoFam", nullable = true, length = 65535)
 	private String antHeredoFam;
 
-	@Column(name = "AntPerNoPat", nullable = true)
+	@Column(name = "AntPerNoPat", nullable = true, length = 65535)
 	private String antPerNoPat;
 	
-	@Column(name = "AntPerPat", nullable = true)
+	@Column(name = "AntPerPat", nullable = true, length = 65535)
 	private String antPerPat;
 
-	@Column(name = "PadActual", nullable = true)
+	@Column(name = "PadActual", nullable = true, length = 65535)
 	private String padActual;
 	
-	@Column(name = "ExpFisica", nullable = true)
+	@Column(name = "ExpFisica", nullable = true, length = 65535)
 	private String expFisica;
 	
-	@Column(name = "ImpDiag", nullable = true)
+	@Column(name = "ImpDiag", nullable = true, length = 65535)
 	private String impDiag;
 	
-	@Column(name = "PlanTratamiento", nullable = true)
+	@Column(name = "PlanTratamiento", nullable = true, length = 65535)
 	private String planTratamiento;
 	
-	@Column(name = "TipoTratamiento", nullable = true)
+	@Column(name = "TipoTratamiento", nullable = true, length = 65535)
 	private String tipoTratamiento;
 	
 	

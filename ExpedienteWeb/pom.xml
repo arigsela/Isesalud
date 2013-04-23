@@ -37,7 +37,7 @@
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
         <seam.version>3.1.0.Final</seam.version>
-        <primefaces.themes.version>1.0.9</primefaces.themes.version>
+        <primefaces.themes.version>1.0.10</primefaces.themes.version>
     </properties>
     
     <repositories>

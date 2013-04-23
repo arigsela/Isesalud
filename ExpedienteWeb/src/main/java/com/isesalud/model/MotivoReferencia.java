@@ -19,8 +19,7 @@ import com.isesalud.support.components.BaseModel;
  */
 
 @Entity
-@Table(name="MotivoReferencia")
-
+@Table(name="motivoReferencia")
 public class MotivoReferencia extends BaseModel{
 
 	/**
@@ -73,10 +72,5 @@ public class MotivoReferencia extends BaseModel{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
-	
-	
-	
-	
+
 }

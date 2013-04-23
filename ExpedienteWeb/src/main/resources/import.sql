@@ -37,3 +37,5 @@ insert into tiporesultado (id,description,name) values (1,'BIRADS 0 INSEGURO','B
 insert into motivoInadecuada (id,description,name) values (1,'TOMADA ADECUADAMENTE','ADECUADA');
 insert into resultadoImagen (id,adequate,dateNotified,dateInterpreted,daterealized,signs,gabineterealizado,gabineteinter,MotivoInadecuada,paciente,personalrealizado,personalinter,study,TipoResultado) values (1,1,'2013-03-31','2013-03-31','2013-03-29','Ninguna',1,1,1,1,1,1,1,1);
 insert into hallazgos (id,name,side,resultadoImagen) values (1,'nada','IZQ',1);
+insert into motivoReferencia (id, name, description) values (1, 'mot1', 'motivo 1');
+insert into motivoReferencia (id, name, description) values (2, 'mot2', 'motivo 2');

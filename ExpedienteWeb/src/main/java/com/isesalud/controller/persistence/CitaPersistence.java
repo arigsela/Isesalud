@@ -159,7 +159,7 @@ public class CitaPersistence extends
 	public void add(ActionEvent actionEvent) {
 		if (patientSelection.getPaciente() == null) {
 			JSFUtil.warn("Seleccione a un paciente primero");
-			setOutcome(null);
+			setOutcome("/pacientes/busqueda?faces-redirect=true");
 			return;
 		}
 
