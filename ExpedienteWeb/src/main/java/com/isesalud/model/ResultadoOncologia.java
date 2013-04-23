@@ -186,5 +186,13 @@ public class ResultadoOncologia extends BaseModel {
 	public void setTipoTratamiento(String tipoTratamiento) {
 		this.tipoTratamiento = tipoTratamiento;
 	}
+	
+	public Paciente getPaciente() {
+		return paciente;
+	}
+	
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
 }
 
