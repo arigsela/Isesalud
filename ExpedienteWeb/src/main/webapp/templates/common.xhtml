@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -44,8 +44,9 @@
 				<p:outputPanel autoUpdate="true" layout="block">
 					<h:panelGrid columns="2">
 						<p:outputLabel for="lblSelPatient" value="Paciente seleccionado: " rendered="#{securityComponent.logged}"/>
-						<h:outputText id="lblSelPatient" value="#{patientSelection.paciente.name} #{patientSelection.paciente.lastName} #{patientSelection.paciente.maternalLastName}"
-							rendered="#{securityComponent.logged}"/>
+							<h:outputText id="lblSelPatient" style="font-weight:bold"
+								value="#{patientSelection.paciente.name} #{patientSelection.paciente.lastName} #{patientSelection.paciente.maternalLastName}"
+								rendered="#{securityComponent.logged}"/>
 					</h:panelGrid>
 				</p:outputPanel>
 				

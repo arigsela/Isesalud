@@ -66,6 +66,12 @@ public class OncologiaPersistence extends BaseManagedCrudController<ResultadoOnc
 	}
 	
 	@Override
+	protected void doBeforeSave() throws BaseException {
+		super.doBeforeSave();
+		getModel().setTimeOfCreation(new Date());
+	}
+	
+	@Override
 	protected void doAfterSave() throws BaseException {
 		super.doAfterSave();
 		if(!conversation.isTransient()){

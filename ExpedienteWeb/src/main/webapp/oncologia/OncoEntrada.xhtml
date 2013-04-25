@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -11,7 +11,7 @@
 			<ui:define name="body">
 				<h:form id="frmOncoRes" prependId="false">
 					<p:panel header="Datos del paciente">
-						<h:panelGrid columns="8" cellspacing="10">
+						<h:panelGrid columns="8" width="100%">
 							<p:outputLabel id="lblName" value="Nombre:" for="outName" />
 							<h:outputText id="outName"
 								value="#{oncologiaPersistence.model.paciente.name}" />

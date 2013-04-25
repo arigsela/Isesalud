@@ -67,6 +67,11 @@ public class ResultadoOncologia extends BaseModel {
 	@Column(name = "TipoTratamiento", nullable = true, length = 65535)
 	private String tipoTratamiento;
 	
+	@Column(name = "TimeOfCreation", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@NotNull
+	private Date timeOfCreation;
+	
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "paciente", nullable = false)
@@ -193,6 +198,14 @@ public class ResultadoOncologia extends BaseModel {
 	
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
+	}
+	
+	public Date getTimeOfCreation() {
+		return timeOfCreation;
+	}
+	
+	public void setTimeOfCreation(Date timeOfCreation) {
+		this.timeOfCreation = timeOfCreation;
 	}
 }
 

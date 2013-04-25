@@ -78,3 +78,8 @@ font-size: 90% !important;
 .text-center {
   text-align: center;
 }
+
+.details {
+	text-align: center;
+	font-weight: bold;
+}
