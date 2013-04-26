@@ -36,13 +36,29 @@
 						<f:selectItems value="#{statusCitaQuery.queryListDM}" var="_status"
 							itemLabel="#{_status.description}" itemValue="#{_status}"></f:selectItems>
 					</p:selectOneMenu>
+					<p:outputLabel id="lblFecha" value="Fecha de la cita"/>
+					<p:calendar id="calFecha" value="#{citaQuery.initialDate}" validator="WorkHoursValidator"
+						pattern="MM/dd/yyyy hh:mm a" locale="es" showButtonPanel="true">
+						<f:convertDateTime pattern="MM/dd/yyyy hh:mm a"/>
+					</p:calendar>
 					<f:facet name="footer">
-						<p:commandButton id="btnSave" value="Cambiar Status" actionListener="#{citaQuery.onStatusChanged}"
-							oncomplete="cal.update();citaDiag.hide();"/>
+						<p:commandButton id="btnSave" value="Aceptar" actionListener="#{citaQuery.onCitaChanged}"
+							oncomplete="cal.update();citaDiag.hide();" global="false"/>
 					</f:facet>
 				</p:panelGrid>
 			</h:form>
 		</p:dialog>
+		
+		<p:confirmDialog id="dlgConfirmNew" message="Desea crear una cita para esta fecha?"
+			header="Pregunta" severity="alert" widgetVar="confirmNew">
+			<h:form id="frmConfirm" prependId="false">
+				<p:commandButton id="btnNewCita" actionListener="#{citaPersistence.add}"
+					action="#{citaPersistence.navigate}" ajax="false" value="Crear">
+					<f:attribute name="date" value="#{citaQuery.newCitaDate}"/>
+				</p:commandButton>
+				<p:commandButton id="btnCancel" type="button" onclick="confirmNew.hide()" value="Cancelar"/>
+			</h:form>
+		</p:confirmDialog>
 	</ui:define>
 
 	<ui:define name="body">
@@ -57,14 +73,15 @@
 			<p:spacer height="30" />
 
 			<p:schedule id="shlCal" value="#{citaQuery.model}" allDaySlot="false"
-				slotMinutes="10" view="agendaDay" draggable="true" resizable="false"
+				slotMinutes="10" view="agendaWeek" draggable="true" resizable="false"
 				locale="es" widgetVar="cal" initialDate="#{citaQuery.initialDate}" 
 				minTime="8:00" maxTime="17:00">
 				<p:ajax event="eventSelect" listener="#{citaQuery.onEventSelect}"
 					update=":diag" oncomplete="citaDiag.show()"/>
 				<p:ajax event="eventMove" listener="#{citaQuery.onEventMove}"
 					oncomplete="handleScheduleValidation(xhr, status, args)"/>
-
+				<p:ajax event="dateSelect" listener="#{citaQuery.onDateSelected}"
+					oncomplete="confirmNew.show()"/>
 			</p:schedule>
 		</h:form>
 

@@ -20,8 +20,8 @@
 							<p:outputLabel id="lblMother" value="Apellido Materno:" for="outMother"/>
 							<h:outputText id="outMother" value="#{citaPersistence.model.paciente.maternalLastName}" />
 							<p:outputLabel id="lblDate" value="Fecha programada:" for="dteFecha"/>
-							<p:calendar id="dteFecha" value="#{citaPersistence.citaDate}" pattern="MM/dd/yyyy hh:mm a"
-								validator="WorkHoursValidator" locale="es">
+							<p:calendar id="dteFecha" value="#{citaPersistence.citaDate}" pattern="MM/dd/yyyy hh:mm a" 
+								locale="es" readonly="true">
 								<f:convertDateTime pattern="MM/dd/yyyy hh:mm a"/>
 							</p:calendar>
 							<p:outputLabel id="lblStatus" value="Status:" for="cbxStatus"/>

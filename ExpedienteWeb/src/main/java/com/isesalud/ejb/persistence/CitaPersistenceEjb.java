@@ -34,7 +34,7 @@ public class CitaPersistenceEjb extends BasePersistenceManagerEJB<Cita> {
 		return Cita.class;
 	}
 	
-	public void onUpdateStatus(@Observes Cita c){
+	public void onUpdateCita(@Observes Cita c){
 		save(c);
 	}
 	

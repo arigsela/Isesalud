@@ -110,11 +110,8 @@ public class CitaPersistence extends
 		if (conversation.isTransient())
 			conversation.begin();
 
-		Date date = new Date();
-		this.citaDate = DateUtil.addMinutes(date, citaMinutesOffset);
+		this.citaDate = DateUtil.addMinutes(this.citaDate, citaMinutesOffset);
 		getModel().setEnviadosms(false);
-		getModel().setDate(new Date());
-		getModel().setTime(new Date());
 		getModel().setPaciente(this.patientSelection.getPaciente());
 		super.doAfterAdd();
 	}
@@ -162,6 +159,9 @@ public class CitaPersistence extends
 			setOutcome("/pacientes/busqueda?faces-redirect=true");
 			return;
 		}
+		
+		Date date = (Date)actionEvent.getComponent().getAttributes().get("date");
+		setCitaDate(date);
 
 		setOutcome("/citas/CapturaCita");
 		super.add(actionEvent);
