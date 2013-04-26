@@ -65,18 +65,28 @@
 						<p:outputLabel value="Seguro Popular" for="seguro" />
 						<p:inputText id="seguro"
 							value="#{patientPersistence.model.seguroPopular}" />
-						<p:outputLabel value="Observaciones" for="observations" />
-						<p:inputTextarea id="observations" style="width:96%"
-							value="#{patientPersistence.model.observations}" />
-						<p:outputLabel value="Ha amamantado a su hijo" for="amamantado" />
-						<p:selectBooleanCheckbox id="amamantado"
-							value="#{patientPersistence.model.breastFeedChild}" />
+						<p:outputLabel value="Edad de Primera menstruacion" for="menstruacion" />
+						<p:inputText id="menstruacion"
+							value="#{patientPersistence.model.ageMenstruation}">
+							<f:convertNumber type="number" />
+						</p:inputText>
 						<p:outputLabel value="Edad al tener su primer hijo(a)"
 							for="primerhijo" />
 						<p:inputText id="primerhijo"
 							value="#{patientPersistence.model.ageFirstChild}">
 							<f:convertNumber type="number" />
 						</p:inputText>
+						<p:outputLabel value="Ha amamantado a su hijo" for="amamantado" />
+						<p:selectBooleanCheckbox id="amamantado"
+							value="#{patientPersistence.model.breastFeedChild}" />
+						<p:outputLabel value="Años desde ultima Cirugia"
+							for="ultimacirugia" />
+						<p:inputText id="ultimacirugia"
+							value="#{patientPersistence.model.yearsSinceSurgery}">
+							<f:convertNumber type="number" />
+						</p:inputText>
+						
+
 						<p:outputLabel value="Edad de Menopausia" for="meno" />
 						<p:inputText id="meno"
 							value="#{patientPersistence.model.ageMenopause}">
@@ -89,20 +99,6 @@
 							value="#{patientPersistence.model.ageMenopauseHormones}">
 							<f:convertNumber type="number" />
 						</p:inputText>
-						<p:outputLabel value="Edad de Menstruacion" for="menstruacion" />
-						<p:inputText id="menstruacion"
-							value="#{patientPersistence.model.ageMenstruation}">
-							<f:convertNumber type="number" />
-						</p:inputText>
-						<p:outputLabel value="Años desde ultima Cirugia"
-							for="ultimacirugia" />
-						<p:inputText id="ultimacirugia"
-							value="#{patientPersistence.model.yearsSinceSurgery}">
-							<f:convertNumber type="number" />
-						</p:inputText>
-						<p:outputLabel value="Tipo de cirugia de mama" for="tipocirugia" />
-						<p:inputText id="tipocirugia"
-							value="#{patientPersistence.model.typeofsurgery}" />
 						<p:outputLabel value="Fecha de ultima Mastografia"
 							for="popupButtonDate" />
 						<p:calendar value="#{patientPersistence.model.dateLastMG}"
@@ -110,7 +106,14 @@
 
 							<f:convertDateTime type="date" dateStyle="short" />
 						</p:calendar>
-						<p:outputLabel value="Municipio" for="muni" />
+						<p:outputLabel value="Observaciones" for="observations" />
+						<p:inputTextarea id="observations" style="width:96%"
+							value="#{patientPersistence.model.observations}" />
+						
+						<p:outputLabel value="Tipo de cirugia de mama" for="tipocirugia" />
+						<p:inputText id="tipocirugia"
+							value="#{patientPersistence.model.typeofsurgery}" />
+												<p:outputLabel value="Municipio" for="muni" />
 						<h:outputText id="muni"
 							value="#{patientPersistence.model.municipio.name}" />
 						<p:outputLabel value="Entidad" for="entidad" />
@@ -120,13 +123,18 @@
 							<f:selectItems value="#{entidadQuery.queryListDM}" var="_entidad"
 								itemLabel="#{_entidad.name}" itemValue="#{_entidad}"></f:selectItems>
 						</p:selectOneMenu>
-						<p:outputLabel value="Unidad Medica" for="unidad" />
-						<p:selectOneMenu id="unidad"
-							value="#{patientPersistence.model.unidadmedica}"
-							converter="#{unidadMedicaConverter}" style="width:100%">
-							<f:selectItems value="#{unidadMedicaQuery.queryListDM}"
-								var="_unidad" itemLabel="#{_unidad.name}" itemValue="#{_unidad}"></f:selectItems>
-						</p:selectOneMenu>
+						<p:outputLabel value="Unidad medica:" for="sUnidadMedica" />
+							<p:autoComplete id="sUnidadMedica" 
+								value="#{patientPersistence.model.unidadmedica}"
+								converter="#{unidadMedicaConverter}"
+								var="_unidad"
+								maxResults="5"
+								global="false"
+								completeMethod="#{unidadMedicaAutoComplete.complete}"
+								itemLabel="#{_unidad.name}"
+								itemValue="#{_unidad}"
+								dropdown="true"
+								forceSelection="true"/>
 					</p:panelGrid>
 					<h:panelGroup>
 						<p:panelGrid columns="4">

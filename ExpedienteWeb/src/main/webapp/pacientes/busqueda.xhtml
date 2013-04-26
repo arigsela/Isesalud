@@ -23,14 +23,11 @@
 				<br />
 				<p:fieldset id="fldSearchOpts" toggleable="true" toggleSpeed="500"
 					legend="Opciones de busqueda">
-					<h:panelGrid columns="3">
-						<h:panelGrid columns="2">
+					<h:panelGrid columns="6">
 							<p:outputLabel value="Nombre:" for="sName" />
 							<p:inputText id="sName" value="#{patientQuery.searchParams.name}" />
 							<p:outputLabel value="Fecha de Nacimiento:" for="sDateofBirth" />
 							<p:calendar id="sDateofBirth" value="#{patientQuery.dateOfBirth}" />
-						</h:panelGrid>
-						<h:panelGrid columns="2">
 							<p:outputLabel value="Apellido Paterno:" for="sLastName" />
 							<p:inputText id="sLastName"
 								value="#{patientQuery.searchParams.lastName}" />
@@ -46,12 +43,21 @@
 								itemValue="#{_unidad}"
 								dropdown="true"
 								forceSelection="true"/>
-						</h:panelGrid>
-						<h:panelGrid columns="2">
+							<p:outputLabel value="Estado de Nacimiento:" for="sEstadoNacimiento" />
+							<p:autoComplete id="sEstadoNacimiento" 
+								value="#{patientQuery.searchParams.entidadNacimiento}"
+								converter="#{entidadConverter}"
+								var="_entidad"
+								maxResults="5"
+								global="false"
+								completeMethod="#{entidadAutoComplete.complete}"
+								itemLabel="#{_entidad.name}"
+								itemValue="#{_entidad}"
+								dropdown="true"
+								forceSelection="true"/>
 							<p:outputLabel value="Apellido Materno:" for="sMaternalName" />
 							<p:inputText id="sMaternalName"
 								value="#{patientQuery.searchParams.maternalLastName}" />
-						</h:panelGrid>
 						<f:facet name="footer">
 							<p:commandButton id="btnSearch" value="Buscar"
 								actionListener="#{patientQuery.query}" update="tblResults"
@@ -85,14 +91,12 @@
 							<f:convertDateTime type="date" dateStyle="medium" locale="es_ES" />
 						</h:outputText>
 					</p:column>
+					<p:column headerText="Lugar de Nacimiento">
+						<h:outputText value="#{_stuff.entidadNacimiento}" />
+					</p:column>
 					<p:column headerText="Fecha de creacion">
 						<h:outputText value="#{_stuff.dateCreated}">
 							<f:convertDateTime dateStyle="medium" type="date" locale="es_ES" />
-						</h:outputText>
-					</p:column>
-					<p:column headerText="Hora de creacion">
-						<h:outputText value="#{_stuff.timeCreated}">
-							<f:convertDateTime type="time" timeStyle="medium" locale="es_ES" />
 						</h:outputText>
 					</p:column>
 				</p:dataTable>
@@ -168,7 +172,6 @@
 									style="font-weight:bold" />
 								<h:outputText
 									value="#{patientQuery.detailsPaciente.ageMenopauseHormones}" />
-	
 								<h:outputLabel value="Edad de menstruacion:"
 									style="font-weight:bold" />
 								<h:outputText
