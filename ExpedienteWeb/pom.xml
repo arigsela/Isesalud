@@ -22,7 +22,7 @@
         
         <!-- Define the version of JBoss' Java EE 6 APIs and Tools we want 
             to import. -->
-        <jboss.bom.version>1.0.4.Final</jboss.bom.version>
+        <jboss.bom.version>1.0.6.Final</jboss.bom.version>
         <!-- Alternatively, comment out the above line, and un-comment the 
             line below to use version 1.0.4.Final-redhat-1 which is a release certified 
             to work with JBoss EAP 6. It requires you have access to the JBoss EAP 6 

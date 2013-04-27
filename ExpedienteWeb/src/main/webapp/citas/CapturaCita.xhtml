@@ -19,11 +19,10 @@
 							<h:outputText id="outLast" value="#{citaPersistence.model.paciente.lastName}" />
 							<p:outputLabel id="lblMother" value="Apellido Materno:" for="outMother"/>
 							<h:outputText id="outMother" value="#{citaPersistence.model.paciente.maternalLastName}" />
-							<p:outputLabel id="lblDate" value="Fecha programada:" for="dteFecha"/>
-							<p:calendar id="dteFecha" value="#{citaPersistence.citaDate}" pattern="MM/dd/yyyy hh:mm a" 
-								locale="es" readonly="true">
+							<p:outputLabel id="lblDate" value="Fecha programada:" for="txtFecha"/>
+							<p:inputText id="txtFecha" value="#{citaPersistence.citaDate}" readonly="true">
 								<f:convertDateTime pattern="MM/dd/yyyy hh:mm a"/>
-							</p:calendar>
+							</p:inputText>
 							<p:outputLabel id="lblStatus" value="Status:" for="cbxStatus"/>
 							<p:selectOneMenu id="cbxStatus" value="#{citaPersistence.model.statuscita}"
 								converter="#{statusCitaConverter}">

@@ -44,6 +44,9 @@ public class CitaQuery extends BaseQueryController<Cita> {
 	 */
 
 	private static final long serialVersionUID = 2720894923611511176L;
+	
+	private final static String VALID_DATE = "Desea crear una cita para esta fecha?";
+	private final static String INVALID_DATE = "No se puede agendar una cita en el pasado!";
 
 	private Cita searchParams;
 
@@ -56,6 +59,10 @@ public class CitaQuery extends BaseQueryController<Cita> {
 	private Date initialDate;
 
 	private Date newCitaDate;
+	
+	private boolean validDate;
+	
+	private String message;
 
 	@EJB
 	private CitaEjb citaEjb;
@@ -115,6 +122,22 @@ public class CitaQuery extends BaseQueryController<Cita> {
 	public void setEvent(ScheduleEvent event) {
 		this.event = event;
 	}
+	
+	public boolean isValidDate() {
+		return validDate;
+	}
+	
+	public void setValidDate(boolean validDate) {
+		this.validDate = validDate;
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+	
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	@PostConstruct
 	public void loadData() {
@@ -172,10 +195,16 @@ public class CitaQuery extends BaseQueryController<Cita> {
 	}
 
 	public void onDateSelected(SelectEvent e) {
-		//WARNING WARNING: Temporal bug fix
 		final Date date = (Date) e.getObject();
-		DateTime offset = new DateTime(date);
-		setNewCitaDate(offset.minusHours(1).toDate());
+		DateTime offset = new DateTime(date).minusHours(1); //WARNING WARNING: Temporal bug fix for primefaces schedule.
+		if(DateUtil.isDateInThePast(offset)){
+			setValidDate(false);
+			setMessage(INVALID_DATE);
+		} else {
+			setValidDate(true);
+			setMessage(VALID_DATE);
+			setNewCitaDate(offset.toDate());
+		}
 	}
 
 	public void onEventSelect(SelectEvent e) {
@@ -189,7 +218,7 @@ public class CitaQuery extends BaseQueryController<Cita> {
 		Cita cita = (Cita) e.getScheduleEvent().getData();
 		Date newDay = DateUtil.addDays(cita.getDate(), e.getDayDelta());
 		Date newTime = DateUtil.addMinutes(cita.getTime(), e.getMinuteDelta());
-		RequestContext ctx = RequestContext.getCurrentInstance();
+		final RequestContext ctx = RequestContext.getCurrentInstance();
 		if (DateUtil.isDateInThePast(new DateTime(DateUtil.combineDateTime(
 				newDay, newTime)))) {
 			ctx.addCallbackParam("isValid", false);

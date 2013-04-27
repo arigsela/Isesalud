@@ -16,6 +16,8 @@
 		     	if(!isValid)
 		     		cal.update();
 		    }
+
+		    
 		</script>
 	</ui:define>
 	<ui:define name="dialogs">
@@ -49,11 +51,13 @@
 			</h:form>
 		</p:dialog>
 		
-		<p:confirmDialog id="dlgConfirmNew" message="Desea crear una cita para esta fecha?"
-			header="Pregunta" severity="alert" widgetVar="confirmNew">
+		<p:confirmDialog id="dlgConfirmNew" header="Alerta" severity="alert" widgetVar="confirmNew">
+			<f:facet name="message">
+				<h:outputText id="lblMessage" value="#{citaQuery.message}" />
+			</f:facet>
 			<h:form id="frmConfirm" prependId="false">
 				<p:commandButton id="btnNewCita" actionListener="#{citaPersistence.add}"
-					action="#{citaPersistence.navigate}" ajax="false" value="Crear">
+					action="#{citaPersistence.navigate}" ajax="false" value="Crear" disabled="#{not citaQuery.validDate}">
 					<f:attribute name="date" value="#{citaQuery.newCitaDate}"/>
 				</p:commandButton>
 				<p:commandButton id="btnCancel" type="button" onclick="confirmNew.hide()" value="Cancelar"/>
@@ -81,7 +85,7 @@
 				<p:ajax event="eventMove" listener="#{citaQuery.onEventMove}"
 					oncomplete="handleScheduleValidation(xhr, status, args)"/>
 				<p:ajax event="dateSelect" listener="#{citaQuery.onDateSelected}"
-					oncomplete="confirmNew.show()"/>
+					oncomplete="confirmNew.show()" update=":lblMessage :frmConfirm:btnNewCita"/>
 			</p:schedule>
 		</h:form>
 

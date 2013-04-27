@@ -154,13 +154,13 @@ public class CitaPersistence extends
 
 	@Override
 	public void add(ActionEvent actionEvent) {
+		Date date = (Date)actionEvent.getComponent().getAttributes().get("date");
 		if (patientSelection.getPaciente() == null) {
 			JSFUtil.warn("Seleccione a un paciente primero");
 			setOutcome("/pacientes/busqueda?faces-redirect=true");
 			return;
 		}
 		
-		Date date = (Date)actionEvent.getComponent().getAttributes().get("date");
 		setCitaDate(date);
 
 		setOutcome("/citas/CapturaCita");
