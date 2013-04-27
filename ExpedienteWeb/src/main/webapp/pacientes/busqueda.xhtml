@@ -24,13 +24,29 @@
 				<p:fieldset id="fldSearchOpts" toggleable="true" toggleSpeed="500"
 					legend="Opciones de busqueda">
 					<h:panelGrid columns="6">
+							<p:outputLabel value="Apellido Paterno:" for="sLastName" />
+							<p:inputText id="sLastName"
+								value="#{patientQuery.searchParams.lastName}" />
+							<p:outputLabel value="Apellido Materno:" for="sMaternalName" />
+							<p:inputText id="sMaternalName"
+								value="#{patientQuery.searchParams.maternalLastName}" />
+					
 							<p:outputLabel value="Nombre:" for="sName" />
 							<p:inputText id="sName" value="#{patientQuery.searchParams.name}" />
 							<p:outputLabel value="Fecha de Nacimiento:" for="sDateofBirth" />
 							<p:calendar id="sDateofBirth" value="#{patientQuery.dateOfBirth}" />
-							<p:outputLabel value="Apellido Paterno:" for="sLastName" />
-							<p:inputText id="sLastName"
-								value="#{patientQuery.searchParams.lastName}" />
+							<p:outputLabel value="Estado de Nacimiento:" for="sEstadoNacimiento" />
+							<p:autoComplete id="sEstadoNacimiento" 
+								value="#{patientQuery.searchParams.entidadNacimiento}"
+								converter="#{entidadConverter}"
+								var="_entidad"
+								maxResults="5"
+								global="false"
+								completeMethod="#{entidadAutoComplete.complete}"
+								itemLabel="#{_entidad.name}"
+								itemValue="#{_entidad}"
+								dropdown="true"
+								forceSelection="true"/>			
 							<p:outputLabel value="Unidad medica:" for="sUnidadMedica" />
 							<p:autoComplete id="sUnidadMedica" 
 								value="#{patientQuery.searchParams.unidadmedica}"
@@ -43,21 +59,7 @@
 								itemValue="#{_unidad}"
 								dropdown="true"
 								forceSelection="true"/>
-							<p:outputLabel value="Estado de Nacimiento:" for="sEstadoNacimiento" />
-							<p:autoComplete id="sEstadoNacimiento" 
-								value="#{patientQuery.searchParams.entidadNacimiento}"
-								converter="#{entidadConverter}"
-								var="_entidad"
-								maxResults="5"
-								global="false"
-								completeMethod="#{entidadAutoComplete.complete}"
-								itemLabel="#{_entidad.name}"
-								itemValue="#{_entidad}"
-								dropdown="true"
-								forceSelection="true"/>
-							<p:outputLabel value="Apellido Materno:" for="sMaternalName" />
-							<p:inputText id="sMaternalName"
-								value="#{patientQuery.searchParams.maternalLastName}" />
+							
 						<f:facet name="footer">
 							<p:commandButton id="btnSearch" value="Buscar"
 								actionListener="#{patientQuery.query}" update="tblResults"
@@ -77,14 +79,14 @@
 					selectionMode="single" selection="#{patientQuery.selectedPatient}"
 					rowKey="#{_stuff.id}">
 					<p:ajax event="rowSelect" listener="#{patientQuery.onSelectedRow}" />
-					<p:column headerText="Nombre">
-						<h:outputText value="#{_stuff.name}" />
-					</p:column>
 					<p:column headerText="Apellido Paterno">
 						<h:outputText value="#{_stuff.lastName}" />
 					</p:column>
 					<p:column headerText="Apellido Materno">
 						<h:outputText value="#{_stuff.maternalLastName}" />
+					</p:column>
+					<p:column headerText="Nombre">
+						<h:outputText value="#{_stuff.name}" />
 					</p:column>
 					<p:column headerText="Fecha de Nacimiento">
 						<h:outputText value="#{_stuff.dateofBirth}">
@@ -93,6 +95,7 @@
 					</p:column>
 					<p:column headerText="Lugar de Nacimiento">
 						<h:outputText value="#{_stuff.entidadNacimiento}" />
+						
 					</p:column>
 					<p:column headerText="Fecha de creacion">
 						<h:outputText value="#{_stuff.dateCreated}">
@@ -100,7 +103,6 @@
 						</h:outputText>
 					</p:column>
 				</p:dataTable>
-	
 				<p:outputPanel id="details" autoUpdate="true">
 					<p:panel header="Detalles del paciente" id="patientDtls"
 						rendered="#{not empty patientQuery.detailsPaciente}">
