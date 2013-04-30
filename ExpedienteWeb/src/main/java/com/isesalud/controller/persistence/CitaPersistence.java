@@ -25,7 +25,7 @@ import com.isesalud.support.exceptions.BaseException;
 import com.isesalud.support.exceptions.OperationException;
 
 /**
- * @author ari, Jesus Espinoza Hernandez
+ * @author Ari, Jesus Espinoza Hernandez
  * 
  */
 @Named
