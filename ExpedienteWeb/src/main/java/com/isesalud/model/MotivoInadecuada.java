@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 import com.isesalud.support.components.BaseModel;
 
 /**
- * @author ari
+ * @author ari G. Sela M.
  *
  */
 @Entity

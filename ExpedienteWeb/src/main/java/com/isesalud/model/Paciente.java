@@ -75,6 +75,8 @@ public class Paciente extends BaseModel {
 	@Temporal(TemporalType.DATE)
 	private Date dateofBirth;
 	
+	
+	
 	@Column(name="phoneNumber", nullable = true, length = 20)
 	@Length(max=20)
 	private String phoneNumber;
@@ -112,35 +114,28 @@ public class Paciente extends BaseModel {
 	@Temporal(TemporalType.TIME)
 	private Date timeCreated;
 	
-	@Column(name="ageMenstruation", nullable = false)
-	@NotNull
+	@Column(name="ageMenstruation")
 	private Integer ageMenstruation;
 	
-	@Column(name="ageFirstChild", nullable = false)
-	@NotNull
+	@Column(name="ageFirstChild")
 	private Integer ageFirstChild;
 	
-	@Column(name="BreastFeedChild", nullable = false)
-	@NotNull
+	@Column(name="BreastFeedChild")
 	private Boolean BreastFeedChild;
 	
-	@Column (name="yearsSinceSurgery", nullable = false)
-	@NotNull
+	@Column (name="yearsSinceSurgery")
 	private Integer yearsSinceSurgery;
 	
 	@Column (name="typeofsurgery", nullable = true)
 	private String typeofsurgery;
 	
-	@Column (name = "ageMenopause",nullable = false)
-	@NotNull
+	@Column (name = "ageMenopause")
 	private Integer ageMenopause;
 	
-	@Column (name = "ageMenopauseHormones", nullable = false)
-	@NotNull
+	@Column (name = "ageMenopauseHormones")
 	private Integer ageMenopauseHormones;
 	
-	@Column(name = "DateLastMG", nullable = false)
-	@NotNull
+	@Column(name = "DateLastMG")
 	@Temporal(TemporalType.DATE)
 	private Date dateLastMG;
 	
@@ -155,6 +150,10 @@ public class Paciente extends BaseModel {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="entidad", nullable = false)
 	private Entidad entidad;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="entidadNacimiento", nullable = false)
+	private Entidad entidadNacimiento;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="unidadmedica", nullable = false)
@@ -181,7 +180,7 @@ public class Paciente extends BaseModel {
 	
 	public Paciente(String lastName, String maternalLastName, String name,
 			Date dateofBirth, String phoneNumber, String phoneNumberMovil,Boolean aceptarmensajes, String email, String address, char sex,
-			Personal personal, Municipio municipio, Entidad entidad,
+			Personal personal, Municipio municipio, Entidad entidad, Entidad entidadnacimiento,
 			Unidadmedica unidadmedica) {
 		this.id = new Long(0L);
 		this.lastName = lastName;
@@ -195,6 +194,7 @@ public class Paciente extends BaseModel {
 		this.sex = sex;
 		this.municipio = municipio;
 		this.entidad = entidad;
+		this.entidadNacimiento = entidadnacimiento;
 		this.unidadmedica = unidadmedica;
 		this.email = email;
 	}
@@ -236,6 +236,14 @@ public class Paciente extends BaseModel {
 	
 	public void setEntidad(Entidad entidad) {
 		this.entidad = entidad;
+	}
+	
+	public Entidad getEntidadNacimiento() {
+		return entidadNacimiento;
+	}
+	
+	public void setEntidadNacimiento(Entidad entidadNacimiento) {
+		this.entidadNacimiento = entidadNacimiento;
 	}
 	
 	public Unidadmedica getUnidadmedica() {
