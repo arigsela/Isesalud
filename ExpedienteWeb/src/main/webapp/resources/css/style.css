@@ -83,3 +83,24 @@ font-size: 90% !important;
 	text-align: center;
 	font-weight: bold;
 }
+
+.detailsCols{
+	width: 50%;
+}
+
+.pat1Col{
+	width:30%;
+}
+
+.pat2Col{
+	width:30%;
+}
+
+.pat3Col{
+	width:30%;
+}
+
+.pat4Col{
+	width:10%;
+}
+
