@@ -70,7 +70,8 @@ public class PatientQuery extends BaseQueryController<Paciente> {
 				   CompareUtil.isEmpty(getSearchParams().getLastName()) &&
 				   CompareUtil.isEmpty(getSearchParams().getMaternalLastName()) &&
 				   CompareUtil.isEmpty(getSearchParams().getUnidadmedica()) &&
-				   CompareUtil.isEmpty(getSearchParams().getDateofBirth())){
+				   CompareUtil.isEmpty(getSearchParams().getDateofBirth()) &&
+				   CompareUtil.isEmpty(getSearchParams().getEntidadNacimiento())){
 							
 					throw new OperationException("Seleccione por lo menos un campo de busqueda");
 				} else {
