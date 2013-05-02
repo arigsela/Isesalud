@@ -6,6 +6,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -121,7 +122,7 @@ public class Cita extends BaseModel{
 	}
 	
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "paciente", nullable = false)
 	public Paciente getPaciente() {
 		return this.paciente;
