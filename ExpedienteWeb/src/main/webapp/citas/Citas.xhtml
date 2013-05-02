@@ -38,6 +38,8 @@
 						<f:selectItems value="#{statusCitaQuery.queryListDM}" var="_status"
 							itemLabel="#{_status.description}" itemValue="#{_status}"></f:selectItems>
 					</p:selectOneMenu>
+					<p:outputLabel id="lblSeguroPop" value="Seguro Popular"/>
+					<p:inputText value="#{citaQuery.selectedCita.paciente.seguroPopular}" />
 					<p:outputLabel id="lblFecha" value="Fecha de la cita"/>
 					<p:calendar id="calFecha" value="#{citaQuery.initialDate}" validator="WorkHoursValidator"
 						pattern="MM/dd/yyyy hh:mm a" locale="es" showButtonPanel="true">
