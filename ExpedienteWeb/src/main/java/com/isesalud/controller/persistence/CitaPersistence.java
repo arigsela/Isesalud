@@ -127,8 +127,7 @@ public class CitaPersistence extends
 	protected void doBeforeSave() throws BaseException {
 		if (!isStudySelected()) {
 			setOutcome(null);
-			throw new OperationException(
-					"No se selecciono un estudio para la cita");
+			throw new OperationException("No se selecciono un estudio para la cita");
 		}
 
 		getModel().setDate(getCitaDate());

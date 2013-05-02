@@ -123,6 +123,14 @@ public class CitaQuery extends BaseQueryController<Cita> {
 		this.event = event;
 	}
 	
+	public Cita getSearchParams() {
+		return searchParams;
+	}
+
+	public void setSearchParams(Cita searchParams) {
+		this.searchParams = searchParams;
+	}
+	
 	public boolean isValidDate() {
 		return validDate;
 	}
@@ -230,25 +238,33 @@ public class CitaQuery extends BaseQueryController<Cita> {
 		cita.setTime(newTime);
 		citaChangedEvent.fire(cita);
 	}
-
-	public void onCitaChanged(ActionEvent e) {
+	
+	private void processCitaChanged(){
 		selectedCita.setDate(initialDate);
 		selectedCita.setTime(initialDate);
 		citaChangedEvent.fire(selectedCita);
 	}
 
+	public void onCitaChanged(ActionEvent e) {
+		processCitaChanged();
+	}
+	
+	public void onCitaChangedAndAddResults(ActionEvent e){
+		processCitaChanged();
+		
+	}
+
 	public void clearSelected() {
 		selectedCita = null;
 	}
-
-	public Cita getSearchParams() {
-		return searchParams;
+	
+	@Override
+	public String navigate() {
+		processCitaChanged();
+		setOutcome("/radiologia/EstudioEntrada?faces-redirect=true");
+		return super.navigate();
 	}
-
-	public void setSearchParams(Cita searchParams) {
-		this.searchParams = searchParams;
-	}
-
+	
 	@Override
 	protected List<Cita> getQueryList() {
 		return citaEjb.getCitasByDateRange(searchParams);

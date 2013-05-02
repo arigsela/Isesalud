@@ -48,6 +48,8 @@
 					<f:facet name="footer">
 						<p:commandButton id="btnSave" value="Aceptar" actionListener="#{citaQuery.onCitaChanged}"
 							oncomplete="cal.update();citaDiag.hide();" global="false"/>
+						<p:commandButton id="btnSaveReport" value="Aceptar y Reportar" actionListener="#{radiologyPersistence.add}"
+							 global="false" action="#{citaQuery.navigate}"/>
 					</f:facet>
 				</p:panelGrid>
 			</h:form>
