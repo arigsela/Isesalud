@@ -38,6 +38,10 @@ public class SystemSettings extends BaseModel{
 	@Column(name="messagesenabled", nullable=false)
 	@NotNull
 	private Boolean messagesenabled;
+	
+	@Column(name="confirmMessageEnabled", nullable=false)
+	@NotNull
+	private Boolean confirmMessageEnabled;
 
 	public SystemSettings() {
 		this.id = new Long(0L);
@@ -46,6 +50,12 @@ public class SystemSettings extends BaseModel{
 	public SystemSettings(Boolean messagesenabled) {
 		this.id = new Long(0L);
 		this.messagesenabled = messagesenabled;
+	}
+	
+	public SystemSettings(Boolean messagesenabled, Boolean confirmMessageEnabled) {
+		this.id = new Long(0L);
+		this.messagesenabled = messagesenabled;
+		this.confirmMessageEnabled = confirmMessageEnabled;
 	}
 	
 	@Override
@@ -65,4 +75,14 @@ public class SystemSettings extends BaseModel{
 	public void setMessagesenabled(Boolean messagesenabled) {
 		this.messagesenabled = messagesenabled;
 	}
+	
+	public Boolean getConfirmMessageEnabled() {
+		return confirmMessageEnabled;
+	}
+	
+	public void setConfirmMessageEnabled(Boolean confirmMessageEnabled) {
+		this.confirmMessageEnabled = confirmMessageEnabled;
+	}
+
+	
 }

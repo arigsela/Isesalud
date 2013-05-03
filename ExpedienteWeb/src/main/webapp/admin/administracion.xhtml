@@ -193,7 +193,13 @@
 							<p:panel header="Sistema de SMS">
 								<h:panelGrid columns="2">
 									<p:outputLabel for="chkSMSEnable" value="Habilitar? "/>
-									<p:selectBooleanCheckbox id="chkSMSEnable" value="#{applicationSettings.model.messagesenabled}"/>
+									<p:selectBooleanCheckbox id="chkSMSEnable" value="#{applicationSettings.model.messagesenabled}">
+										<p:ajax event="change" update="chkConfirmEnable" process="@this" global="false"/>
+									</p:selectBooleanCheckbox>
+									<p:outputLabel for="chkConfirmEnable" value="Enviar mensaje de confirmacion?"/>
+									<p:selectBooleanCheckbox id="chkConfirmEnable" 
+										value="#{applicationSettings.model.confirmMessageEnabled}"
+										disabled="#{not applicationSettings.model.messagesenabled}"/>
 								</h:panelGrid>
 							</p:panel>
 							

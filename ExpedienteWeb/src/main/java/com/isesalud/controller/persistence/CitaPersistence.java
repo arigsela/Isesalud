@@ -30,8 +30,7 @@ import com.isesalud.support.exceptions.OperationException;
  */
 @Named
 @ConversationScoped
-public class CitaPersistence extends
-		BaseManagedCrudController<Cita, CitaPersistenceEjb> {
+public class CitaPersistence extends BaseManagedCrudController<Cita, CitaPersistenceEjb> {
 
 	/**
 	 * 
