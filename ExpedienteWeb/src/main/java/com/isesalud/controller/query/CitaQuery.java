@@ -10,7 +10,6 @@ import java.util.TimeZone;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.event.Event;
-import javax.enterprise.inject.Any;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
@@ -26,6 +25,8 @@ import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 import com.isesalud.ejb.query.CitaEjb;
+import com.isesalud.events.qualifiers.DeleteCita;
+import com.isesalud.events.qualifiers.UpdateCita;
 import com.isesalud.model.Cita;
 import com.isesalud.support.DateUtil;
 import com.isesalud.support.components.BaseQueryController;
@@ -68,8 +69,12 @@ public class CitaQuery extends BaseQueryController<Cita> {
 	private CitaEjb citaEjb;
 
 	@Inject
-	@Any
+	@UpdateCita
 	private Event<Cita> citaChangedEvent;
+	
+	@Inject
+	@DeleteCita
+	private Event<Cita> citaDeleteEvent;
 
 	@Override
 	protected void init() throws BaseException {
@@ -251,7 +256,10 @@ public class CitaQuery extends BaseQueryController<Cita> {
 	
 	public void onCitaChangedAndAddResults(ActionEvent e){
 		processCitaChanged();
-		
+	}
+	
+	public void onCitaDelete(ActionEvent e){
+		citaDeleteEvent.fire(selectedCita);
 	}
 
 	public void clearSelected() {

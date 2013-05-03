@@ -10,6 +10,8 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
 import com.isesalud.controller.application.ApplicationSettings;
+import com.isesalud.events.qualifiers.DeleteCita;
+import com.isesalud.events.qualifiers.UpdateCita;
 import com.isesalud.model.Cita;
 import com.isesalud.service.dispatchers.SMSRequest;
 import com.isesalud.service.support.SMSParams;
@@ -34,8 +36,12 @@ public class CitaPersistenceEjb extends BasePersistenceManagerEJB<Cita> {
 		return Cita.class;
 	}
 	
-	public void onUpdateCita(@Observes Cita c){
+	public void onUpdateCita(@Observes @UpdateCita Cita c){
 		save(c);
+	}
+	
+	public void onDeletecita(@Observes @DeleteCita Cita c){
+		delete(c.getId());
 	}
 	
 	@Override

@@ -50,6 +50,8 @@
 							oncomplete="cal.update();citaDiag.hide();" global="false"/>
 						<p:commandButton id="btnSaveReport" value="Aceptar y Reportar" actionListener="#{radiologyPersistence.add}"
 							 global="false" action="#{citaQuery.navigate}"/>
+						<p:commandButton id="btnDeleteCita" value="Borrar Cita" actionListener="#{citaQuery.onCitaDelete}"
+							oncomplete="cal.update();citaDiag.hide()" global="false"/>
 					</f:facet>
 				</p:panelGrid>
 			</h:form>
