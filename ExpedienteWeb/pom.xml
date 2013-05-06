@@ -39,6 +39,7 @@
         <seam.version>3.1.0.Final</seam.version>
         <primefaces.version>4.0-SNAPSHOT</primefaces.version>
         <primefaces.themes.version>1.0.10</primefaces.themes.version>
+        <jasperreports.version>5.1.0</jasperreports.version>
     </properties>
     
     <repositories>
@@ -317,6 +318,17 @@
         	<version>1.4</version>
         	<scope>provided</scope>
         </dependency>
+        <dependency>
+        	<groupId>net.sf.jasperreports</groupId>
+        	<artifactId>jasperreports</artifactId>
+        	<version>${jasperreports.version}</version>
+        	<exclusions>
+        		<exclusion>
+        			<groupId>com.lowagie</groupId>
+        			<artifactId>itext</artifactId>
+        		</exclusion>
+        	</exclusions>
+        </dependency>
         
     </dependencies>
 
@@ -344,7 +356,7 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <archive>
                     	<manifestEntries>
-                    		<Dependencies>com.nexmo.sdk</Dependencies>
+                    		<Dependencies>com.nexmo.sdk, com.mysql</Dependencies>
                     	</manifestEntries>
                     </archive>
                 </configuration>
@@ -356,6 +368,32 @@
                 <groupId>org.jboss.as.plugins</groupId>
                 <artifactId>jboss-as-maven-plugin</artifactId>
                 <version>${jboss.as.plugin.version}</version>
+            </plugin>
+            <plugin>
+            	<groupId>org.codehaus.mojo</groupId>
+            	<artifactId>jasperreports-maven-plugin</artifactId>
+            	<version>1.0-beta-2</version>
+            	<executions>
+            		<execution>
+            			<phase>compile</phase>
+            			<goals>
+            				<goal>compile-reports</goal>
+            			</goals>
+            		</execution>
+            	</executions>
+            	<dependencies>
+            		<dependency>
+			        	<groupId>net.sf.jasperreports</groupId>
+			        	<artifactId>jasperreports</artifactId>
+			        	<version>${jasperreports.version}</version>
+			        	<exclusions>
+			        		<exclusion>
+			        			<groupId>com.lowagie</groupId>
+			        			<artifactId>itext</artifactId>
+			        		</exclusion>
+			        	</exclusions>
+			        </dependency>
+            	</dependencies>
             </plugin>
         </plugins>
     </build>
