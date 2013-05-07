@@ -159,16 +159,16 @@ public class Paciente extends BaseModel {
 	@JoinColumn(name="unidadmedica", nullable = false)
 	private Unidadmedica unidadmedica;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="paciente")
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY, mappedBy="paciente")
 	private List<ParienteCancerMama> parientescancermama = new ArrayList<ParienteCancerMama>();
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="paciente")
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY, mappedBy="paciente")
 	private List<CancerOtrasPartes> canceresOtraPartes = new ArrayList<CancerOtrasPartes>();
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="paciente")
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY, mappedBy="paciente")
 	private List<PreviaEnfermedad> previasenfermedades = new ArrayList<PreviaEnfermedad>();
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="paciente")
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY, mappedBy="paciente")
 	private List<SintomaCancerMama> SintomasCancerMama = new ArrayList<SintomaCancerMama>();
 	 
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy="paciente")

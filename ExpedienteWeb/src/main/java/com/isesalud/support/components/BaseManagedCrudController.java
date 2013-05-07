@@ -97,14 +97,10 @@ public abstract class BaseManagedCrudController<T extends BaseModel, M extends B
 		Iterator<C> iter = list.iterator();
 		while(iter.hasNext()){
 			C i = iter.next();
-			if(entity.equals(i))
-				if(getEditMode() == EditModeEnum.EDITING){
-					if(!i.isEmpty())
-						manager.delete(i.getId());
-					iter.remove();
-				} else {
-					iter.remove();
-				}
+			if(entity.equals(i)){
+				iter.remove();
+			}
+				
 		}
 	}
 
