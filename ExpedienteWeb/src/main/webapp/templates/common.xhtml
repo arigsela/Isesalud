@@ -42,11 +42,16 @@
 					width="70%" height="35%"/>
 					
 				<p:outputPanel autoUpdate="true" layout="block">
-					<h:panelGrid columns="2">
+					<h:panelGrid columns="3">
 						<p:outputLabel for="lblSelPatient" value="Paciente seleccionado: " rendered="#{securityComponent.logged}"/>
-							<h:outputText id="lblSelPatient" style="font-weight:bold"
-								value="#{patientSelection.paciente.name} #{patientSelection.paciente.lastName} #{patientSelection.paciente.maternalLastName}"
-								rendered="#{securityComponent.logged}"/>
+						<h:outputText id="lblSelPatient" style="font-weight:bold"
+							value="#{patientSelection.paciente.name} #{patientSelection.paciente.lastName} #{patientSelection.paciente.maternalLastName}"
+							rendered="#{securityComponent.logged}"/>
+						<h:form id="frmPrintPat" prependId="false" target="_blank">
+							<p:commandButton id="btnPrintPat" ajax="false" actionListener="#{patientRecordReport.jasperTest}"
+								rendered="#{patientSelection.paciente != null}"
+								value="Imprimir"/>
+						</h:form>
 					</h:panelGrid>
 				</p:outputPanel>
 				
