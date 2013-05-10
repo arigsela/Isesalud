@@ -29,8 +29,6 @@
 	<h:body>
 	
 	<ui:insert name="dialogs"></ui:insert>
-	
-	
 
 	<p:layout fullPage="true" id="layout">
 		
@@ -48,9 +46,10 @@
 							value="#{patientSelection.paciente.name} #{patientSelection.paciente.lastName} #{patientSelection.paciente.maternalLastName}"
 							rendered="#{securityComponent.logged}"/>
 						<h:form id="frmPrintPat" prependId="false" target="_blank">
-							<p:commandButton id="btnPrintPat" ajax="false" actionListener="#{patientRecordReport.jasperTest}"
-								rendered="#{patientSelection.paciente != null}"
-								value="Imprimir"/>
+							<p:commandButton id="btnPrintPatient" value="Imprimir"
+								actionListener="#{patientRecord.loadReport}" ajax="false"
+								rendered="#{patientSelection.paciente != null}">
+							</p:commandButton>
 						</h:form>
 					</h:panelGrid>
 				</p:outputPanel>
