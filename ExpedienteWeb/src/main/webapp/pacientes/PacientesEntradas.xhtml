@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/templates/common.xhtml">
-	<ui:define name="pageTitle">Crear Pacient</ui:define>
+	<ui:define name="pageTitle">Crear Paciente</ui:define>
 	<ui:define name="pageHeader">Crear Paciente</ui:define>
 	<ui:define name="body">
 		<h:form id="frmPaciente" prependId="false">
@@ -22,7 +22,7 @@
 					<p:outputLabel value="Nombre" for="name" />
 					<p:inputText id="name" value="#{patientPersistence.model.name}"
 						required="true" />
-					<p:outputLabel value="Estado de Nacimiento:" for="entidadNac" />
+					<p:outputLabel value="Entidad de Nacimiento:" for="entidadNac" />
 					<p:selectOneMenu id="entidadNac"
 						value="#{patientPersistence.model.entidadNacimiento}"
 						converter="#{entidadConverter}" style="width:100%">
@@ -113,12 +113,8 @@
 					<h:outputText id="muni" style="width:96%"
 						value="#{patientPersistence.model.municipio.name}" />
 					<h:outputLabel value="Entidad" for="entidad" />
-					<p:selectOneMenu id="entidad"
-						value="#{patientPersistence.model.entidad}"
-						converter="#{entidadConverter}">
-						<f:selectItems value="#{entidadQuery.queryListDM}" var="_entidad"
-							itemLabel="#{_entidad.name}" itemValue="#{_entidad}"></f:selectItems>
-					</p:selectOneMenu>
+					<h:outputText id="enti" style="width:96%"
+						value="#{patientPersistence.model.entidad.name}" />
 					<h:outputLabel value="Unidad medica:" for="sUnidadMedica" />
 					<p:autoComplete id="sUnidadMedica" 
 						value="#{patientPersistence.model.unidadmedica}"
