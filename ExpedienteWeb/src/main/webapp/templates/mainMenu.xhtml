@@ -31,13 +31,13 @@
 						ajax="false" icon="ui-icon-note" process="@this"/>
 				</p:submenu>
 				<p:submenu label="Radiologia">
-					<p:menuitem value="Agregar Resultado" 
+					<p:menuitem value="Agregar Estudio" 
 						action="#{radiologyPersistence.navigate}"
 						actionListener="#{radiologyPersistence.add}"
 						ajax="false" process="@this"
 						icon="ui-icon-document">
 					</p:menuitem>
-					<p:menuitem value="Consulta de Resultados" action="/radiologia/Consulta?faces-redirect=true"
+					<p:menuitem value="Agregar Interpretacion" action="/radiologia/Consulta?faces-redirect=true"
 						ajax="false" icon="ui-icon-search" process="@this"/>
 				</p:submenu>
 				<p:submenu label="Oncologia">
