@@ -113,12 +113,8 @@
 					<h:outputText id="muni" style="width:96%"
 						value="#{patientPersistence.model.municipio.name}" />
 					<h:outputLabel value="Entidad" for="entidad" />
-					<p:selectOneMenu id="entidad"
-						value="#{patientPersistence.model.entidad}"
-						converter="#{entidadConverter}">
-						<f:selectItems value="#{entidadQuery.queryListDM}" var="_entidad"
-							itemLabel="#{_entidad.name}" itemValue="#{_entidad}"></f:selectItems>
-					</p:selectOneMenu>
+					<h:outputText id="enti" style="width:96%"
+						value="#{patientPersistence.model.entidad.name}" />
 					<h:outputLabel value="Unidad medica:" for="sUnidadMedica" />
 					<p:autoComplete id="sUnidadMedica" 
 						value="#{patientPersistence.model.unidadmedica}"

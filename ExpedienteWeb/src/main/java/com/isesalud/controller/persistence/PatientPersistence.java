@@ -165,6 +165,7 @@ public class PatientPersistence extends BaseManagedCrudController<Paciente, Pati
 		if(conversation.isTransient())
 			conversation.begin();
 		getModel().setMunicipio(securityComponent.getCurrentUser().getMunicipio());
+		getModel().setEntidad(securityComponent.getCurrentUser().getEntidad());
 		setOutcome("/pacientes/PacientesEntradas");
 		super.doAfterAdd();
 	}
