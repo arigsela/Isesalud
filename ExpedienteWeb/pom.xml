@@ -18,7 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
         <!-- JBoss dependency versions -->
-        <jboss.as.plugin.version>7.3.Final</jboss.as.plugin.version>
+        <jboss.as.plugin.version>7.4.Final</jboss.as.plugin.version>
         
         <!-- Define the version of JBoss' Java EE 6 APIs and Tools we want 
             to import. -->
