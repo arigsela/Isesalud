@@ -27,7 +27,7 @@ insert into study (id,name,notes,modality) value (8,'oncologia tipo B','favor de
 insert into statuscita (id,description) values (1,'Pendiente');
 insert into statuscita (id,description) values (2,'Atendida');
 insert into systemsettings (id,messagesenabled,confirmMessageEnabled) values (1,0,0);
-insert into user (username, password, name, fName, mName, municipio, enabled, gabinete) values ('admin', 'YEr9AHbeWymox3oz/OKqOhjkzOr75H2sQz/ZQ2OwhRc=', 'admin', 'admin', '', 1, 1,1);
+insert into user (username, password, name, fName, mName, municipio,entidad, enabled, gabinete) values ('admin', 'YEr9AHbeWymox3oz/OKqOhjkzOr75H2sQz/ZQ2OwhRc=', 'admin', 'admin', '', 1,1, 1,1);
 insert into role (role, description) values ('Admin', 'Administrador');
 insert into role (role, description) values ('Tech', 'Tecnico');
 insert into role (role, description) values ('Doctor', 'Doctor');

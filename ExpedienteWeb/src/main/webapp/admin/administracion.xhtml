@@ -27,6 +27,13 @@
 								<p:inputText id="txtMName" value="#{userPersistence.model.mName}"/>
 								<p:outputLabel id="lblUserName" for="txtUserName" value="Usuario"/>
 								<p:inputText id="txtUserName" value="#{userPersistence.model.username}" required="true"/>
+								<p:outputLabel id="lblEntidad" for="cmbEntidad" value="Entidad"/>
+								<p:selectOneMenu id="cmbEntidad" value="#{userPersistence.model.entidad}"
+									converter="#{entidadConverter}">
+									<f:selectItems value="#{entidadQuery.queryListDM}" var="_enti"
+										itemLabel="#{_enti.name}"
+										itemValue="#{_enti}"></f:selectItems>
+								</p:selectOneMenu>
 								<p:outputLabel id="lblMunicipio" for="cmbMunicipio" value="Municipio"/>
 								<p:selectOneMenu id="cmbMunicipio" value="#{userPersistence.model.municipio}"
 									converter="#{municipioConverter}">

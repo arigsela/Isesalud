@@ -64,6 +64,10 @@ public class User extends BaseModel {
 	private Municipio municipio;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="entidad",nullable=false)
+	private Entidad entidad;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="gabinete", nullable=false)
 	private Gabinete gabinete;
 	
@@ -144,6 +148,14 @@ public class User extends BaseModel {
 	
 	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
+	}
+	
+	public Entidad getEntidad() {
+		return entidad;
+	}
+	
+	public void setEntidad(Entidad entidad) {
+		this.entidad = entidad;
 	}
 	
 	public Gabinete getGabinete() {
