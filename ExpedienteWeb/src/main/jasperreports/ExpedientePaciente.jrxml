@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ExpedientePaciente" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="20" uuid="00d0dc78-34af-49a1-bbe8-00ed01e5ff42">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="288"/>
+	<property name="ireport.y" value="194"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -152,7 +152,6 @@ WHERE sintomacancermama.`paciente` = $P{patId}]]>
      paciente.`phoneNumberMovil` AS paciente_phoneNumberMovil,
      paciente.`phoneNumber` AS paciente_phoneNumber,
      paciente.`email` AS paciente_email,
-     paciente.`unidadmedica` AS paciente_unidadmedica,
      unidadmedica.`name` AS unidadmedica_name,
      municipio.`name` AS municipio_name,
      paciente.`address` AS paciente_address,
@@ -166,16 +165,15 @@ WHERE sintomacancermama.`paciente` = $P{patId}]]>
      paciente.`yearsSinceSurgery` AS paciente_yearsSinceSurgery,
      paciente.`typeofsurgery` AS paciente_typeofsurgery,
      paciente.`DateLastMG` AS paciente_DateLastMG,
-     paciente.`entidadNacimiento` AS paciente_entidadNacimiento
+     entidadNacimiento.`name` AS paciente_entidadNacimiento
 FROM
      `unidadmedica` unidadmedica INNER JOIN `paciente` paciente ON unidadmedica.`id` = paciente.`unidadmedica`
      INNER JOIN `municipio` municipio ON paciente.`municipio` = municipio.`id`
-     AND municipio.`id` = unidadmedica.`municipio`
-     INNER JOIN `entidad` entidad ON paciente.`entidadNacimiento` = entidad.`id`
-     AND entidad.`id` = paciente.`entidad`
+     INNER JOIN `entidad` entidadNacimiento ON paciente.`entidadNacimiento` = entidadNacimiento.`id`
+     INNER JOIN `entidad` entidad ON entidad.`id` = paciente.`entidad`
 
 WHERE
-     paciente.`id` = $P{patientId}]]>
+     paciente.`id` = 1]]>
 	</queryString>
 	<field name="paciente_name" class="java.lang.String"/>
 	<field name="paciente_lastName" class="java.lang.String"/>
@@ -184,7 +182,6 @@ WHERE
 	<field name="paciente_phoneNumberMovil" class="java.lang.String"/>
 	<field name="paciente_phoneNumber" class="java.lang.String"/>
 	<field name="paciente_email" class="java.lang.String"/>
-	<field name="paciente_unidadmedica" class="java.lang.Long"/>
 	<field name="unidadmedica_name" class="java.lang.String"/>
 	<field name="municipio_name" class="java.lang.String"/>
 	<field name="paciente_address" class="java.lang.String"/>
@@ -198,7 +195,7 @@ WHERE
 	<field name="paciente_yearsSinceSurgery" class="java.lang.Integer"/>
 	<field name="paciente_typeofsurgery" class="java.lang.String"/>
 	<field name="paciente_DateLastMG" class="java.sql.Date"/>
-	<field name="paciente_entidadNacimiento" class="java.lang.Long"/>
+	<field name="paciente_entidadNacimiento" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
