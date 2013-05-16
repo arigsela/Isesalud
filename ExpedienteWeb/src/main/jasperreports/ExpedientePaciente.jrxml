@@ -173,7 +173,7 @@ FROM
      INNER JOIN `entidad` entidad ON entidad.`id` = paciente.`entidad`
 
 WHERE
-     paciente.`id` = 1]]>
+     paciente.`id` = $P{patientId}]]>
 	</queryString>
 	<field name="paciente_name" class="java.lang.String"/>
 	<field name="paciente_lastName" class="java.lang.String"/>

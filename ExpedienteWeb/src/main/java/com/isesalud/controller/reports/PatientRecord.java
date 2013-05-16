@@ -44,15 +44,22 @@ public class PatientRecord extends BaseController {
 	private PatientSelection patientSelection;
 	
 	public void loadReport(ActionEvent e){
+		Long patId = (Long)e.getComponent().getAttributes().get("patientId");
+		boolean attach;
 		
-		if(this.reportTemplate == null)
-			return;
-		
+		if(patId == null){
+			patId = patientSelection.getPaciente().getId();
+			attach = false;
+		} else {
+			attach = true;
+		}
+	
 		try {
+			
 			final Map<String, Object> params = new HashMap<String, Object>();
-			params.put("patientId", this.patientSelection.getPaciente().getId());
+			params.put("patientId", patId);
 			final byte[] pdf = generator.generateReport(this.reportTemplate, params);
-			Faces.sendFile(pdf, "ExpedientePaciente.pdf", false);
+			Faces.sendFile(pdf, "ExpedientePaciente.pdf", attach);
 		} catch (IOException ex) {
 			log.error(ex.getMessage());
 		}

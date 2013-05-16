@@ -52,6 +52,11 @@
 							 global="false" action="#{citaQuery.navigate}"/>
 						<p:commandButton id="btnDeleteCita" value="Borrar Cita" actionListener="#{citaQuery.onCitaDelete}"
 							oncomplete="cal.update();citaDiag.hide()" global="false"/>
+						<p:commandButton id="btnPatientReport" value="Expediente" 
+							actionListener="#{patientRecord.loadReport}"
+							ajax="false">
+							<f:attribute name="patientId" value="#{citaQuery.selectedCita.paciente.id}"/>
+						</p:commandButton>
 					</f:facet>
 				</p:panelGrid>
 			</h:form>
