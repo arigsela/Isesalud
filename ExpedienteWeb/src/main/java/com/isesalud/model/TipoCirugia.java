@@ -12,7 +12,13 @@ import com.isesalud.support.components.BaseModel;
 
 @Entity
 @Table(name="TipoCirugia")
-public class TipoCirugia extends BaseModel{
+public class TipoCirugia extends BaseModel {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 521898936217544533L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotNull
