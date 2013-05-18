@@ -76,7 +76,7 @@ public class ResultadoImagen extends BaseModel {
 	private Personal personalrealizado;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "personalinter", nullable = false)
+	@JoinColumn(name = "personalinter")
 	private Personal personalinter;
 
 	@ManyToOne(fetch = FetchType.EAGER)
