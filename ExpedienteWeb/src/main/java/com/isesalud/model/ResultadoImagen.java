@@ -84,7 +84,7 @@ public class ResultadoImagen extends BaseModel {
 	private Gabinete gabineteinter;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "TipoResultado", nullable = false)
+	@JoinColumn(name = "TipoResultado")
 	private TipoResultado tiporesultado;
 
 	@ManyToOne(fetch = FetchType.EAGER)

@@ -69,7 +69,7 @@
 					</p:selectOneMenu>
 					<p:outputLabel id="lblStudy" value="Estudio" for="cbxStudy" />
 					<p:selectOneMenu id="cbxStudy"
-						value="#{citaPersistence.selectedStudy}"
+						value="#{radiologyPersistence.model.study}"
 						converter="#{studyConverter}">
 						<f:selectItems value="#{studyQuery.queryListDM}" var="_study"
 							itemLabel="#{_study.name}" itemValue="#{_study}"></f:selectItems>
