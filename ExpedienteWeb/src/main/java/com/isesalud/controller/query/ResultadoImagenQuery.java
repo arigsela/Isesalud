@@ -1,6 +1,5 @@
 package com.isesalud.controller.query;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +14,6 @@ import com.isesalud.controller.support.PatientSelection;
 import com.isesalud.ejb.query.ResultadoImagenEjb;
 import com.isesalud.model.ResultadoImagen;
 import com.isesalud.support.components.BaseQueryController;
-import com.isesalud.support.exceptions.BaseException;
 
 @Named
 @ViewScoped
