@@ -76,11 +76,7 @@ public class ResultadoImagen extends BaseModel {
 	private Personal personalrealizado;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "gabineterealizado", nullable = false)
-	private Gabinete gabineterealizado;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "personalinter", nullable = false)
+	@JoinColumn(name = "personalinter")
 	private Personal personalinter;
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -88,7 +84,7 @@ public class ResultadoImagen extends BaseModel {
 	private Gabinete gabineteinter;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "TipoResultado", nullable = false)
+	@JoinColumn(name = "TipoResultado")
 	private TipoResultado tiporesultado;
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -105,8 +101,7 @@ public class ResultadoImagen extends BaseModel {
 	public ResultadoImagen(Date dateinterpreted, Date dateNotified,
 			Date daterealized, String signs, Boolean adequate,
 			Paciente paciente, Study study, Personal personalrealizado,
-			Personal personalinter, Gabinete gabineterealizado,
-			Gabinete gabineteinter, TipoResultado tiporesultado,
+			Personal personalinter, Gabinete gabineteinter, TipoResultado tiporesultado,
 			MotivoInadecuada motivoinadecuada, List<Hallazgos> hallazgos) {
 		this.id = new Long(0L);
 		this.dateinterpreted = dateinterpreted;
@@ -117,7 +112,6 @@ public class ResultadoImagen extends BaseModel {
 		this.paciente = paciente;
 		this.study = study;
 		this.personalrealizado = personalrealizado;
-		this.gabineterealizado = gabineterealizado;
 		this.personalinter = personalinter;
 		this.gabineteinter = gabineteinter;
 		this.tiporesultado = tiporesultado;
@@ -171,14 +165,6 @@ public class ResultadoImagen extends BaseModel {
 
 	public void setGabineteinter(Gabinete gabineteinter) {
 		this.gabineteinter = gabineteinter;
-	}
-
-	public Gabinete getGabineterealizado() {
-		return gabineterealizado;
-	}
-
-	public void setGabineterealizado(Gabinete gabineterealizado) {
-		this.gabineterealizado = gabineterealizado;
 	}
 
 	public List<Hallazgos> getHallazgos() {

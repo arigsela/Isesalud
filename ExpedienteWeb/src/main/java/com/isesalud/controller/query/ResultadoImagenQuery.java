@@ -1,5 +1,6 @@
 package com.isesalud.controller.query;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -36,11 +37,7 @@ public class ResultadoImagenQuery extends BaseQueryController<ResultadoImagen> {
 	@EJB
 	private ResultadoImagenEjb resultadoImagenEjb;
 
-	@Override
-	protected void init() throws BaseException {
-		searchParams = new ResultadoImagen();
-	}
-
+	
 	@PostConstruct
 	public void loadData() {
 		setQueryListDM(getQueryList());
@@ -86,5 +83,6 @@ public class ResultadoImagenQuery extends BaseQueryController<ResultadoImagen> {
 	public void setDetallesresultado(ResultadoImagen detallesresultado) {
 		this.detallesresultado = detallesresultado;
 	}
+
 
 }

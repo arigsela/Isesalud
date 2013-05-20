@@ -32,10 +32,10 @@
 			</p:panel>
 			<p:panel header="Ingreso de Estudio">
 				<h:panelGrid columns="4" cellspacing="0" cellpadding="5">
-					<p:outputLabel value="Gabinete donde se realizao el estudio: "
+					<p:outputLabel value="Gabinete donde se interpretara el estudio: "
 						for="gabinete" />
 					<p:selectOneMenu id="gabinete"
-						value="#{radiologyPersistence.model.gabineterealizado}"
+						value="#{radiologyPersistence.model.gabineteinter}"
 						converter="#{gabineteConverter}">
 						<f:selectItems value="#{gabineteQuery.queryListDM}"
 							var="_gabinete" itemLabel="#{_gabinete.name}"
@@ -69,7 +69,7 @@
 					</p:selectOneMenu>
 					<p:outputLabel id="lblStudy" value="Estudio" for="cbxStudy" />
 					<p:selectOneMenu id="cbxStudy"
-						value="#{citaPersistence.selectedStudy}"
+						value="#{radiologyPersistence.model.study}"
 						converter="#{studyConverter}">
 						<f:selectItems value="#{studyQuery.queryListDM}" var="_study"
 							itemLabel="#{_study.name}" itemValue="#{_study}"></f:selectItems>
@@ -86,7 +86,7 @@
 					<p:outputLabel value="Fecha de Notificacion:  "
 						for="popupButtonDateNoti" />
 					<p:calendar value="#{radiologyPersistence.model.dateNotified}"
-						id="popupButtonDateNoti" required="true" navigator="true"
+						id="popupButtonDateNoti" navigator="true"
 						size="10">
 						<f:convertDateTime type="date" dateStyle="short" />
 					</p:calendar>

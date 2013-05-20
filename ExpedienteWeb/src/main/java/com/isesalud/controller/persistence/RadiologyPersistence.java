@@ -4,6 +4,7 @@
 package com.isesalud.controller.persistence;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -82,12 +83,14 @@ public class RadiologyPersistence extends BaseManagedCrudController<ResultadoIma
 	return this.manager;
 	}
 
+	
 	@Override
 	protected void doAfterAdd() throws BaseException {
 		if(conversation.isTransient())
 			conversation.begin();
 		getModel().setPaciente(this.patientSelection.getPaciente());
 		getModel().setAdequate(true);
+		getModel().setDaterealized(new Date());
 		setOutcome("/radiologia/EstudioEntrada?faces-redirect=true");
 		super.doAfterAdd();
 	}
