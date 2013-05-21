@@ -15,67 +15,53 @@ import com.isesalud.support.components.BaseModel;
 
 /**
  * @author ari
- * 
+ *
  */
 @Entity
-@Table(name = "typeoftipotratamiento")
-public class TypeOfTipoTratamiento extends BaseModel {
+@Table(name="tipoestadoactualpacienteonco")
+public class TipoEstadoActualPacienteOnco extends BaseModel{
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5844390438163320335L;
+	private static final long serialVersionUID = -6109890858043622162L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotNull
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name="id", nullable=false,unique=true)
 	private Long id;
-
-	@NotNull
-	@Column(name = "name", nullable = false, length = 300)
-	private String name;
-
-	@Column(name = "description", nullable = true, length = 300)
+	
+	@Column(name="description")
 	private String description;
-
-	public TypeOfTipoTratamiento() {
+	
+	public TipoEstadoActualPacienteOnco() 
+	{
 		this.id = new Long(0L);
-
 	}
-
-	public TypeOfTipoTratamiento(String name) {
+	
+	public TipoEstadoActualPacienteOnco(String description)
+	{
 		this.id = new Long(0L);
-		this.name = name;
-	}
-
-	public TypeOfTipoTratamiento(String name, String description) {
-		this.id = new Long(0L);
-		this.name = name;
 		this.description = description;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	
 	public String getDescription() {
 		return description;
 	}
-
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	
 
 }

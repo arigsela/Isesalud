@@ -3,8 +3,6 @@
  */
 package com.isesalud.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.isesalud.support.components.BaseModel;
@@ -27,11 +23,11 @@ import com.isesalud.support.components.BaseModel;
 @Entity
 @Table(name="tratamiento")
 public class Tratamiento extends BaseModel{
-	
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1952296675274530137L;
+	private static final long serialVersionUID = 8297651842699247735L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,62 +35,24 @@ public class Tratamiento extends BaseModel{
 	@Column(name="id",nullable = false, unique = true)
 	private Long id;
 	
-	@NotNull
-	@Column(name="numcita", nullable = false)
-	private Integer numcita;
-	
-	@NotNull
-	@Column(name="tipoplanmanejo", nullable = false)
-	private Integer tipoplanmanejo;
-	
-	@Temporal(TemporalType.DATE)
-	@Column(name="fechaingresotratamiento")
-	private Date fechaingresotratamiento;
-	
-	@Column(name="refapoyopsicologico")
-	private Boolean refapoyopsicologico;
-	
-	@Column(name="refrehabilitacion")
-	private Boolean refrehabilitacion;
-	
-	@Column(name="tnmclasificado")
-	private Boolean tnmclasificado;
-	
-	@Column(name="rfcmedicotratante", nullable = false, length = 20)
-	private String rfcmedicotratante;
-	
-	@Column(name="observaciones", nullable = true, length = 65535)
-	private String observaciones;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="seguimiento")
+	private SeguimientoOnco seguimiento;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="TipoCirugia")
-	private TipoCirugia tipocirugia;
+	@JoinColumn(name="tipotratamiento")
+	private TipoTratamiento tipotratamiento;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="TipoTratamientoQuimio")
-	private TipoTratamientoQuimio tipotratamientoquimio;
-	
-	public Tratamiento()
-	{
+
+	public Tratamiento() {
 		this.id = new Long(0L);
 	}
-	
-	public Tratamiento(Integer numcita, Integer tipoplanmanejo,
-			Date fechaingresotratamiento, Boolean refapoyopsicologico,
-			Boolean refrehabilitacion, Boolean tnmclasificado,
-			String rfcmedicotratante, String observaciones, TipoCirugia tipocirugia,
-			TipoTratamientoQuimio tipotratamientoquimio) {
+
+	public Tratamiento(SeguimientoOnco seguimiento,
+			TipoTratamiento tipotratamiento) {
 		this.id = new Long(0L);
-		this.numcita = numcita;
-		this.tipoplanmanejo = tipoplanmanejo;
-		this.fechaingresotratamiento = fechaingresotratamiento;
-		this.refapoyopsicologico = refapoyopsicologico;
-		this.refrehabilitacion = refrehabilitacion;
-		this.tnmclasificado = tnmclasificado;
-		this.rfcmedicotratante = rfcmedicotratante;
-		this.observaciones = observaciones;
-		this.tipocirugia = tipocirugia;
-		this.tipotratamientoquimio = tipotratamientoquimio;
+		this.tipotratamiento = tipotratamiento;
+		this.seguimiento = seguimiento;
 	}
 
 	public Long getId() {
@@ -105,85 +63,20 @@ public class Tratamiento extends BaseModel{
 		this.id = id;
 	}
 	
-	public Date getFechaingresotratamiento() {
-		return fechaingresotratamiento;
+	public SeguimientoOnco getSeguimiento() {
+		return seguimiento;
 	}
 	
-	public void setFechaingresotratamiento(Date fechaingresotratamiento) {
-		this.fechaingresotratamiento = fechaingresotratamiento;
+	public void setSeguimiento(SeguimientoOnco seguimiento) {
+		this.seguimiento = seguimiento;
 	}
 	
-	public Integer getNumcita() {
-		return numcita;
+	public TipoTratamiento getTipoTratamiento() {
+		return tipotratamiento;
 	}
 	
-	public void setNumcita(Integer numcita) {
-		this.numcita = numcita;
+	public void setTipoTratamiento(
+			TipoTratamiento tipotratamiento) {
+		this.tipotratamiento = tipotratamiento;
 	}
-	
-	public String getObservaciones() {
-		return observaciones;
-	}
-	
-	public void setObservaciones(String observaciones) {
-		this.observaciones = observaciones;
-	}
-	
-	public Boolean getRefapoyopsicologico() {
-		return refapoyopsicologico;
-	}
-	
-	public void setRefapoyopsicologico(Boolean refapoyopsicologico) {
-		this.refapoyopsicologico = refapoyopsicologico;
-	}
-	
-	public Boolean getRefrehabilitacion() {
-		return refrehabilitacion;
-	}
-	
-	public void setRefrehabilitacion(Boolean refrehabilitacion) {
-		this.refrehabilitacion = refrehabilitacion;
-	}
-	
-	public String getRfcmedicotratante() {
-		return rfcmedicotratante;
-	}
-	
-	public void setRfcmedicotratante(String rfcmedicotratante) {
-		this.rfcmedicotratante = rfcmedicotratante;
-	}
-	
-	public Integer getTipoplanmanejo() {
-		return tipoplanmanejo;
-	}
-	
-	public void setTipoplanmanejo(Integer tipoplanmanejo) {
-		this.tipoplanmanejo = tipoplanmanejo;
-	}
-	
-	public Boolean getTnmclasificado() {
-		return tnmclasificado;
-	}
-	
-	public void setTnmclasificado(Boolean tnmclasificado) {
-		this.tnmclasificado = tnmclasificado;
-	}
-	
-	public TipoCirugia getTipocirugia() {
-		return tipocirugia;
-	}
-	
-	public void setTipocirugia(TipoCirugia tipocirugia) {
-		this.tipocirugia = tipocirugia;
-	}
-	
-	public TipoTratamientoQuimio getTipotratamientoquimio() {
-		return tipotratamientoquimio;
-	}
-	
-	public void setTipotratamientoquimio(
-			TipoTratamientoQuimio tipotratamientoquimio) {
-		this.tipotratamientoquimio = tipotratamientoquimio;
-	}
-	
 }
