@@ -25,7 +25,7 @@ import com.isesalud.support.components.BaseModel;
  *
  */
 @Entity
-@Table(name="resultadoOncologia")
+@Table(name="HistoriaClinicaOnco")
 public class HistoriaClinicaOnco extends BaseModel {
 
 	/**
