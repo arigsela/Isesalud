@@ -78,6 +78,9 @@ public class SeguimientoOnco extends BaseModel{
 	@JoinColumn(name="TipoTratamientoQuimio")
 	private TipoTratamientoQuimio tipotratamientoquimio;
 	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="notaevoluciononco")
+	private NotaEvolucionOnco notaevoluciononco;
 
 	
 	public SeguimientoOnco()
@@ -90,7 +93,8 @@ public class SeguimientoOnco extends BaseModel{
 			Boolean refrehabilitacion, Boolean tnmclasificado,
 			String rfcmedicotratante, String observaciones, TipoCirugia tipocirugia,
 			TipoTratamientoQuimio tipotratamientoquimio, 
-			TipoEstadoActualPacienteOnco tipoestadoactualpacienteonco) {
+			TipoEstadoActualPacienteOnco tipoestadoactualpacienteonco,
+			NotaEvolucionOnco notaevoluciononco) {
 		this.id = new Long(0L);
 		this.numcita = numcita;
 		this.tipoplanmanejo = tipoplanmanejo;
@@ -103,6 +107,7 @@ public class SeguimientoOnco extends BaseModel{
 		this.tipocirugia = tipocirugia;
 		this.tipotratamientoquimio = tipotratamientoquimio;
 		this.tipoestadoactualpacienteonco = tipoestadoactualpacienteonco;
+		this.notaevoluciononco = notaevoluciononco;
 	}
 
 	public Long getId() {
@@ -203,4 +208,11 @@ public class SeguimientoOnco extends BaseModel{
 		this.tipoestadoactualpacienteonco = tipoestadoactualpacienteonco;
 	}
 	
+	public NotaEvolucionOnco getNotaevoluciononco() {
+		return notaevoluciononco;
+	}
+	
+	public void setNotaevoluciononco(NotaEvolucionOnco notaevoluciononco) {
+		this.notaevoluciononco = notaevoluciononco;
+	}
 }
