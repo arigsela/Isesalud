@@ -15,7 +15,7 @@ import com.isesalud.support.components.BasePersistenceManagerEJB;
  */
 @Stateless
 @LocalBean
-public class ResultadoOncologiaPersistenceEjb extends BasePersistenceManagerEJB<HistoriaClinicaOnco>{
+public class HistoriaClinicaOncoPersistenceEjb extends BasePersistenceManagerEJB<HistoriaClinicaOnco>{
 
 	@Override
 	public Class<HistoriaClinicaOnco> getModelClass() {

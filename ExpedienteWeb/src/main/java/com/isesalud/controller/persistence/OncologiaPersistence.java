@@ -14,7 +14,7 @@ import javax.inject.Named;
 
 import com.isesalud.controller.support.PatientSelection;
 import com.isesalud.ejb.persistence.ResultadoOncologiaPersistenceEjb;
-import com.isesalud.model.ResultadoOncologia;
+import com.isesalud.model.HistoriaClinicaOnco;
 import com.isesalud.support.JSFUtil;
 import com.isesalud.support.components.BaseManagedCrudController;
 import com.isesalud.support.exceptions.BaseException;
@@ -25,7 +25,7 @@ import com.isesalud.support.exceptions.BaseException;
  */
 @Named
 @ConversationScoped
-public class OncologiaPersistence extends BaseManagedCrudController<ResultadoOncologia, ResultadoOncologiaPersistenceEjb> {
+public class OncologiaPersistence extends BaseManagedCrudController<HistoriaClinicaOnco, ResultadoOncologiaPersistenceEjb> {
 
 	/**
 	 * 
@@ -92,8 +92,8 @@ public class OncologiaPersistence extends BaseManagedCrudController<ResultadoOnc
 	}
 
 	@Override
-	protected ResultadoOncologia getNewModel() {
-		return new ResultadoOncologia();
+	protected HistoriaClinicaOnco getNewModel() {
+		return new HistoriaClinicaOnco();
 	}
 
 	@Override

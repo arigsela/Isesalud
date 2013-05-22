@@ -25,8 +25,8 @@ import com.isesalud.support.components.BaseModel;
  *
  */
 @Entity
-@Table(name="resultadoOncologia")
-public class ResultadoOncologia extends BaseModel {
+@Table(name="HistoriaClinicaOnco")
+public class HistoriaClinicaOnco extends BaseModel {
 
 	/**
 	 * 
@@ -60,12 +60,9 @@ public class ResultadoOncologia extends BaseModel {
 	
 	@Column(name = "ImpDiag", nullable = true, length = 65535)
 	private String impDiag;
-	
-	@Column(name = "PlanTratamiento", nullable = true, length = 65535)
-	private String planTratamiento;
-	
-	@Column(name = "TipoTratamiento", nullable = true, length = 65535)
-	private String tipoTratamiento;
+
+	@Column(name="Observaciones", nullable = true, length = 65535)
+	private String observaciones;
 	
 	@Column(name = "TimeOfCreation", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
@@ -83,14 +80,14 @@ public class ResultadoOncologia extends BaseModel {
 
 	
 	
-	public ResultadoOncologia() {
+	public HistoriaClinicaOnco() {
 		this.id = new Long(0L);
 	}
 
-	public ResultadoOncologia(Date dateSampleTaken, String antHeredoFam,
+	public HistoriaClinicaOnco(Date dateSampleTaken, String antHeredoFam,
 			String antPerNoPat, String antPerPat, String padActual,
-			String expFisica, String impDiag, String planTratamiento,
-			String tipoTratamiento, MotivoReferencia motivoreferencia) {
+			String expFisica, String impDiag, String observaciones, 
+			MotivoReferencia motivoreferencia) {
 		this.id = new Long(0L);
 		this.dateSampleTaken = dateSampleTaken;
 		this.antHeredoFam = antHeredoFam;
@@ -99,8 +96,7 @@ public class ResultadoOncologia extends BaseModel {
 		this.padActual = padActual;
 		this.expFisica = expFisica;
 		this.impDiag = impDiag;
-		this.planTratamiento = planTratamiento;
-		this.tipoTratamiento = tipoTratamiento;
+		this.observaciones = observaciones;
 		this.motivoreferencia = motivoreferencia;
 	}
 
@@ -176,20 +172,12 @@ public class ResultadoOncologia extends BaseModel {
 		this.padActual = padActual;
 	}
 	
-	public String getPlanTratamiento() {
-		return planTratamiento;
+	public String getObservaciones() {
+		return observaciones;
 	}
 	
-	public void setPlanTratamiento(String planTratamiento) {
-		this.planTratamiento = planTratamiento;
-	}
-	
-	public String getTipoTratamiento() {
-		return tipoTratamiento;
-	}
-	
-	public void setTipoTratamiento(String tipoTratamiento) {
-		this.tipoTratamiento = tipoTratamiento;
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
 	}
 	
 	public Paciente getPaciente() {

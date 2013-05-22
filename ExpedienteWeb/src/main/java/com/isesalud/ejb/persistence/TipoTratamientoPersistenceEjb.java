@@ -6,7 +6,7 @@ package com.isesalud.ejb.persistence;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import com.isesalud.model.HistoriaClinicaOnco;
+import com.isesalud.model.TipoTratamiento;
 import com.isesalud.support.components.BasePersistenceManagerEJB;
 
 /**
@@ -15,11 +15,12 @@ import com.isesalud.support.components.BasePersistenceManagerEJB;
  */
 @Stateless
 @LocalBean
-public class ResultadoOncologiaPersistenceEjb extends BasePersistenceManagerEJB<HistoriaClinicaOnco>{
+public class TipoTratamientoPersistenceEjb extends BasePersistenceManagerEJB<TipoTratamiento>{
 
 	@Override
-	public Class<HistoriaClinicaOnco> getModelClass() {
-		return HistoriaClinicaOnco.class;
+	public Class<TipoTratamiento> getModelClass() {
+		return TipoTratamiento.class;
 	}
-
+	
+	
 }
