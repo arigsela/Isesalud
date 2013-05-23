@@ -1,9 +1,11 @@
 -- You can use this file to load seed data into the database using SQL statements
 CREATE OR REPLACE VIEW v_user_role AS select user.username as username, user.password as password, role.role as role from ((user_has_role join user on ((user_has_role.User_id = user.id))) join role on ((role.id = user_has_role.Role_id)));
 insert into entidad (id, name, description) values (1, 'Baja California', 'Entidad de B.C.');
-insert into gabinete (id,description,name) values (1,'ATRAS DEL HOSPITAL EXCEL','RDD');
 insert into municipio (id, name, description) values (1, 'Tijuana', 'Municipio de Tijuana');
 insert into municipio (id, name, description) values (2, 'Mexicali', 'Municipio de Mexicali');
+insert into gabinete (name, description) values ('RDD', 'Tijuana');
+insert into gabinete (name, description) values ('IDDT', 'Tecate');
+insert into gabinete (name, description) values ('IDD', 'Mexicali');
 insert into puesto (id, name, description) values (1, 'Capturista', 'El lacky');
 insert into personal (id, lastname, maternallastname, name, puesto,gabinete) values (1, 'Sela', 'Muñoz', 'Ari', 1,1);
 insert into unidadmedica (id, name, description, municipio, code) values (1, 'Hospital General', 'Hospital General de Tijuana',1, 0);
@@ -31,9 +33,6 @@ insert into user (username, password, name, fName, mName, municipio,entidad, ena
 insert into role (role, description) values ('Admin', 'Administrador');
 insert into role (role, description) values ('Tech', 'Tecnico');
 insert into role (role, description) values ('Doctor', 'Doctor');
-insert into gabinete (name, description) values ('RDD', 'Tijuana');
-insert into gabinete (name, description) values ('IDDT', 'Tecate');
-insert into gabinete (name, description) values ('IDD', 'Mexicali');
 insert into user_has_role (User_id, Role_id) values (1,1);
 insert into tiporesultado (id,description,name) values (1,'BIRADS 0 INSEGURO','B0');
 insert into motivoInadecuada (id,description,name) values (1,'TOMADA ADECUADAMENTE','ADECUADA');
