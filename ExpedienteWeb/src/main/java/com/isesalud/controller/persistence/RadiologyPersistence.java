@@ -80,10 +80,9 @@ public class RadiologyPersistence extends BaseManagedCrudController<ResultadoIma
 	
 	@Override
 	protected ResultadoImagenPersistenceEjb getCrudManager() {
-	return this.manager;
+		return this.manager;
 	}
 
-	
 	@Override
 	protected void doAfterAdd() throws BaseException {
 		if(conversation.isTransient())
@@ -109,7 +108,15 @@ public class RadiologyPersistence extends BaseManagedCrudController<ResultadoIma
 		super.doAfterSave();
 		if(!conversation.isTransient())
 			conversation.end();
-		setOutcome("/radiologia/RadiologiaEntradas?faces-redirect=true");	
+		setOutcome("/citas/Citas?faces-redirect=true");
+	}
+	
+	@Override
+	protected void doAfterCancel() throws BaseException {
+		super.doAfterCancel();
+		if(!conversation.isTransient())
+			conversation.end();
+		setOutcome("/citas/Citas?faces-redirect=true");
 	}
 
 	@Override

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/common.xhtml">
+	<ui:define name="pageTitle">Radiologia</ui:define>
+	<ui:define name="pageHeader">Interpretaciones pendientes</ui:define>
+	<ui:define name="body">
+		<h:form id="frmCreateRadiologia" prependId="false">
+			<p:fieldset legend="Busqueda">
+				<h:panelGrid columns="3">
+					<h:panelGroup layout="block">
+						<p:outputLabel value="Fecha inicial:" for="initDate"/>
+						<p:calendar id="initDate" value="#{resultadoImagenQuery.initDate}"/>
+					</h:panelGroup>
+					<h:panelGroup layout="block">
+						<p:outputLabel value="Fecha final:" for="finalDate"/>
+						<p:calendar id="finalDate" value="#{resultadoImagenQuery.finalDate}"/>
+					</h:panelGroup>
+				</h:panelGrid>
+				
+				<p:commandButton id="btnSearch" value="Buscar" actionListener="#{resultadoImagenQuery.query}"
+					ajax="true" update="tblInterpretations"/>
+			</p:fieldset>
+			
+			<br />
+			
+			<p:dataTable id="tblInterpretations" value="#{resultadoImagenQuery.queryListDM}"
+				 emptyMessage="No hay interpretaciones pendientes"
+				 var="_inter"
+				 rowKey="#{_inter.id}"
+				 selectionMode="single"
+				 selection="#{resultadoImagenQuery.selectedResultado}">
+				 
+				 <p:column headerText="Nombre">
+				 	<h:outputText value="#{_inter.paciente.name} #{_inter.paciente.lastName} #{_inter.paciente.maternalLastName}" />
+				 </p:column>
+				 
+				 <p:column headerText="Tipo de resultado">
+				 	<h:outputText value="#{_inter.tiporesultado.name}" />
+				 </p:column>
+				 
+				 <p:column headerText="Fecha realizado">
+				 	<h:outputText value="#{_inter.daterealized}">
+				 		<f:convertDateTime type="date" dateStyle="medium" locale="es_MX"/>
+				 	</h:outputText>
+				 </p:column>
+				 
+				 <p:column headerText="Personal que realizo estudio">
+				 	<h:outputText value="#{_inter.personalrealizado.name} #{_inter.personalrealizado.lastname} #{_inter.personalrealizado.maternallastname}" />
+				 </p:column>
+				 
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+
+
+
+
+

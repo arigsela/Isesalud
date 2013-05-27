@@ -118,11 +118,11 @@
 
 			</p:panel>
 			<p:commandButton id="btnSave" value="Salvar"
-				actionListener="#{radiologyPersistence.save}" ajax="true"
-				action="/pacientes/busqueda?faces-redirect=true" />
+				actionListener="#{radiologyPersistence.save}" ajax="false"
+				action="#{radiologyPersistence.navigate}" />
 			<p:commandButton dir="btnCancel" value="Cancelar"
 				actionListener="#{radiologyPersistence.cancel}" ajax="false"
-				action="/radiologia/EstudioEntrada?faces-redirect=true"
+				action="#{radiologyPersistence.navigate}"
 				immediate="true" />
 		</h:form>
 	</ui:define>
