@@ -57,7 +57,8 @@ public class ResultadoImagenEjb extends BaseManagerEJB<ResultadoImagen>{
 		final CriteriaQuery<ResultadoImagen> query = builder.createQuery(getModelClass());
 		final Root<ResultadoImagen> root = query.from(getModelClass());
 		final Predicate between = builder.between(root.get(ResultadoImagen_.daterealized), initialDate, finalDate);
-		final Predicate inter = builder.equal(root.get(ResultadoImagen_.dateinterpreted), null);
+		//Predicate inter = builder.equal(root.get(ResultadoImagen_.dateinterpreted), builder.nullLiteral(Date.class));
+		final Predicate inter = builder.isNull(root.get(ResultadoImagen_.dateinterpreted));
 		query.select(root).where(builder.and(between, inter));
 		
 		model = getList(query);
